@@ -1,0 +1,59 @@
+# =============================================================================
+# public_html/.htaccess — Corporate Academy SPA + Laravel API
+# =============================================================================
+# Place this file at ~/public_html/.htaccess on your BigRock cPanel server.
+#
+# Layout assumed:
+#   ~/public_html/          ← React SPA (this file lives here)
+#   ~/public_html/api/      ← symlink to ~/laravel-backend/public/
+# =============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # ── 1. Pass /api/* requests through to Laravel (symlinked directory) ──────
+    #       These are handled by laravel-backend/public/.htaccess (front controller)
+    RewriteCond %{REQUEST_URI} ^/api/
+    RewriteRule ^ - [L]
+
+    # ── 2. Serve real static files and directories as-is ─────────────────────
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # ── 3. All other routes → React SPA index.html ───────────────────────────
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# ── Security headers ─────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ── Cache static assets aggressively ─────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    # Vite-hashed assets (assets/*.js, assets/*.css) — 1 year
+    <FilesMatch "\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|ico|webp)$">
+        ExpiresDefault "access plus 1 year"
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # index.html — no cache (always fresh)
+    <FilesMatch "index\.html$">
+        ExpiresDefault "access plus 0 seconds"
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+    </FilesMatch>
+</IfModule>
+
+# ── Gzip compression ─────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE application/x-font-ttf font/opentype
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>

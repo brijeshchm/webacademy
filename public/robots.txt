@@ -1,0 +1,87 @@
+# Corporate Academy — robots.txt
+# https://corporateacademy.com
+
+# ── Standard crawlers ──────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# ── OpenAI / ChatGPT ───────────────────────────────────────────
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# ── Anthropic / Claude ─────────────────────────────────────────
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ── Google / Gemini ────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# ── Microsoft / Copilot / Bing ─────────────────────────────────
+User-agent: bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# ── Perplexity AI ──────────────────────────────────────────────
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ── Meta AI ────────────────────────────────────────────────────
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# ── Cohere ─────────────────────────────────────────────────────
+User-agent: cohere-ai
+Allow: /
+
+# ── You.com ────────────────────────────────────────────────────
+User-agent: YouBot
+Allow: /
+
+# ── Common Crawl (used by many AI training pipelines) ──────────
+User-agent: CCBot
+Allow: /
+
+# ── Apple ──────────────────────────────────────────────────────
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ── Bytedance / Grok ───────────────────────────────────────────
+User-agent: Bytespider
+Allow: /
+
+# ── Sitemaps ───────────────────────────────────────────────────
+# Static pages and course categories
+Sitemap: https://corporateacademy.com/sitemap.xml
+# Dynamic course URLs — auto-updated from the database
+Sitemap: https://corporateacademy.com/api/sitemap.xml

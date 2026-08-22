@@ -1,0 +1,1513 @@
+{
+  "nav": {
+    "courses": "Alle Kurse",
+    "categories": "Kategorien",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "enterprise": "Unternehmen",
+    "enquire": "Jetzt anfragen",
+    "explorePrograms": "Programme entdecken",
+    "enterpriseTraining": "Unternehmenstraining"
+  },
+  "footer": {
+    "empowering": "Wir stärken Fachkräfte mit den Tech-Kompetenzen von morgen. Wir bauen Karrieren auf, nicht nur Kurse.",
+    "programs": "Programme",
+    "softwareEngineering": "Softwareentwicklung",
+    "dataScience": "Data Science",
+    "cloudArchitecture": "Cloud-Architektur",
+    "cybersecurity": "Cybersicherheit",
+    "viewAllCourses": "Alle Kurse ansehen →",
+    "company": "Unternehmen",
+    "aboutUs": "Über uns",
+    "learningPaths": "Lernpfade",
+    "contactSupport": "Support kontaktieren",
+    "enterpriseSolutions": "Unternehmenslösungen",
+    "systemStatus": "Systemstatus",
+    "contact": "Kontakt",
+    "address1": "100 Innovation Drive,",
+    "address2": "Tech District, SF 94105",
+    "rightsReserved": "Corporate Academy. Alle Rechte vorbehalten.",
+    "privacyPolicy": "Datenschutzerklärung",
+    "termsOfService": "Nutzungsbedingungen"
+  },
+  "chat": {
+    "greeting": "Hallo! Ich bin dein Corporate Academy-Berater. Wie kann ich dir heute helfen, deine Karriere zu beschleunigen?",
+    "error": "Sorry, ich habe gerade Verbindungsprobleme. Bitte versuche es erneut.",
+    "title": "Kursberater",
+    "online": "Online",
+    "placeholder": "Frage nach unseren Kursen...",
+    "suggestions": {
+      "courses": "Welche Kurse bietet ihr an?",
+      "certs": "Erzähl mir von Zertifizierungen",
+      "cost": "Wie viel kostet es?"
+    }
+  },
+  "home": {
+    "enrollmentOpen": "Anmeldung für Q3-Kohorten geöffnet",
+    "heroTitle": "Beschleunige deine Karriere mit",
+    "heroSubtitle": "Lerne die gefragtesten Tech-Skills. Lerne von Branchenexperten und erhalte Zertifikate, um deinen Traumjob in Tech zu bekommen.",
+    "explorePrograms": "Programme entdecken",
+    "viewLearningPaths": "Lernpfade ansehen",
+    "careersTransformed": "Karrieren verändert",
+    "industryExperts": "Branchenexperten",
+    "specializedPrograms": "Spezialisierte ERP-Programme",
+    "averageRating": "Durchschnittsbewertung",
+    "chooseYourPath": "Wähle deinen Weg",
+    "chooseYourPathDesc": "Umfassende Curricula, die dich von den Grundlagen bis zur Meisterschaft führen.",
+    "viewAllPaths": "Alle Pfade ansehen",
+    "courses": "Kurse",
+    "featuredPrograms": "Empfohlene Programme",
+    "featuredProgramsDesc": "Unsere bestbewerteten Kurse, aktualisiert für 2025.",
+    "viewAllPrograms": "Alle Programme ansehen",
+    "hearFromAlumni": "Höre von unseren Alumni",
+    "at": "bei",
+    "readyToTakeNextStep": "Bereit für den nächsten Schritt?",
+    "readyDesc": "Schließe dich Tausenden von Fachkräften an, die ihre Karriere mit unseren spezialisierten Tech-Programmen beschleunigt haben. Erhalte unser Syllabus und den Kursleitfaden.",
+    "emailPlaceholder": "Gib deine geschäftliche E-Mail ein",
+    "getInformation": "Informationen anfordern",
+    "sending": "Wird gesendet...",
+    "weRespectYourInbox": "Wir respektieren dein Postfach. Abmeldung jederzeit möglich.",
+    "subscribedSuccessfully": "Erfolgreich angemeldet!",
+    "allCourses": "Alle Kurse",
+    "viewCourse": "Kurs ansehen",
+    "curriculum": "Lehrplan",
+    "recommended": "Empfohlen",
+    "startFrom": "Ab",
+    "voiceSearch": "Per Sprache suchen",
+    "stopVoiceSearch": "Sprachsuche beenden",
+    "listening": "Höre zu...",
+    "voiceErrorPermission": "Der Mikrofonzugriff ist blockiert. Erlaube die Mikrofonberechtigung oder öffne die Website in einem neuen Browser-Tab, um die Sprachsuche zu nutzen.",
+    "voiceErrorGeneric": "Die Sprachsuche ist derzeit nicht verfügbar. Bitte versuche es erneut.",
+    "voiceEmbeddedHint": "Wenn die Sprachsuche hier nichts tut, öffne die Website in einem neuen Browser-Tab — die Vorschau blockiert den Mikrofonzugriff.",
+    "search": "Suchen",
+    "trustedBy": "Vertraut von Fachleuten führender Unternehmen weltweit",
+    "badgePromoted": "Zum Senior befördert",
+    "badgeHired": "In 60 Tagen eingestellt",
+    "badgeSalaryHike": "Gehalt +140%",
+    "whyEyebrow": "Warum wir",
+    "whyTitle": "Warum Corporate Academy",
+    "whySubtitle": "Alles, was Sie brauchen, um Ehrgeiz in eine Karriere zu verwandeln, auf die Sie stolz sind.",
+    "whyFeature1Title": "Training von Experten",
+    "whyFeature1Desc": "Lernen Sie von Praktikern mit Erfahrung im großen Maßstab, mit jedes Quartal aktualisierten Lehrplänen.",
+    "whyFeature2Title": "Praxisnahe Projekte",
+    "whyFeature2Desc": "Bauen Sie ein Portfolio mit praktischen Labs und Abschlussprojekten nach realer Branchenarbeit auf.",
+    "whyFeature3Title": "Karrierebeschleunigung",
+    "whyFeature3Desc": "Lebenslauf-Checks, Probegespräche und ein Recruiting-Netzwerk, das Sie schneller zum Job bringt.",
+    "whyFeature4Title": "Anerkannte Zertifizierung",
+    "whyFeature4Desc": "Erwerben Sie Nachweise, denen Arbeitgeber vertrauen und die Ihre Fähigkeiten bestätigen.",
+    "aboutEyebrow": "Über Corporate Academy",
+    "aboutTitle1": "Die Nummer eins —",
+    "aboutTitleAccent": "Tech-Skills-Akademie",
+    "aboutTitle2": "auf Ihre Einstellung ausgerichtet",
+    "aboutCategories": "Data Science · Cloud · Web · Agile · Workday",
+    "aboutParagraph": "Seit über einem Jahrzehnt verändert Corporate Academy Karrieren mit praxisnahem, mentorgeführtem Training auf den gefragtesten Plattformen — mit einem einzigen Ziel: Sie in den Job zu bringen.",
+    "aboutPoint1": "Live-Labs in echter Umgebung — keine Simulationen",
+    "aboutPoint2": "Mentoren mit über 10 Jahren echter Branchenerfahrung",
+    "aboutPoint3": "Karriereunterstützung — Lebenslauf, Probegespräche, Empfehlungen",
+    "aboutPoint4": "Weltweit anerkannte Zertifizierungen in jedem Track",
+    "aboutBookDemo": "Kostenlose Demo buchen",
+    "alumniWorkAt": "Unsere Absolventen arbeiten bei",
+    "journeyEyebrow": "Dein Weg zum Erfolg",
+    "journeyTitle": "Von der ersten Stunde zur",
+    "journeyTitleAccent": "Traumkarriere",
+    "journeySubtitle": "Jeder Lernende folgt einem bewährten, strukturierten Weg, der Fähigkeiten in Jobangebote verwandelt.",
+    "step1Title": "Live-Kurse mit Mentoren",
+    "step1Desc": "Erlerne gefragte Fähigkeiten in interaktiven Live-Sitzungen mit Branchenexperten.",
+    "step2Title": "Praktische Aufgaben",
+    "step2Desc": "Festige jedes Konzept mit wöchentlichen Aufgaben und Echtzeit-Feedback.",
+    "step3Title": "Praxisnahe Projekte",
+    "step3Desc": "Baue ein Portfolio mit Projekten auf Produktionsniveau auf, das Arbeitgeber schätzen.",
+    "step4Title": "Vorbereitung auf Vorstellungsgespräche",
+    "step4Desc": "Meistere Probeinterviews, Kommunikation und Problemlösung mit Mentoren.",
+    "step5Title": "Lebenslauf- und Profilerstellung",
+    "step5Desc": "Erstelle einen herausragenden Lebenslauf und ein professionelles Profil, das auffällt.",
+    "step6Title": "Vermittlungsunterstützung",
+    "step6Desc": "Werde mit Einstellungspartnern vermittelt und ergattere deine Traumstelle.",
+    "videoStories": "Video-Erfahrungen",
+    "successStoriesTitle": "Was unsere Studierenden sagen",
+    "successStoriesSubtitle": "Echte Lernende berichten, wie Corporate Academy ihre Karriere vorangebracht hat.",
+    "proofSection": "Praktikumsnachweise",
+    "proofTitle1": "Glauben Sie uns nicht?",
+    "proofTitle2": "Alles selbst prüfen.",
+    "proofSubtitle": "Echte Angebotsschreiben und Vermittlungs-E-Mails — klicken Sie auf ein Bild, um es anzuzeigen.",
+    "whatsappTitle1": "Studenten bedanken sich bei uns",
+    "whatsappTitle2": "auf WhatsApp",
+    "whatsappSubtitle": "Echte Gespräche. Echte Wertschätzung. Echtes Glück.",
+    "proudAssociations": "Unsere Verbände",
+    "verifiedPartnerships": "Verifizierte und akkreditierte Partnerschaften",
+    "featuredBadge": "Empfohlen",
+    "popularCourses": "Beliebte Kurse",
+    "applicationsOpenNextCohort": "Bewerbungen für die nächste Kohorte sind offen"
+  },
+  "courses": {
+    "courseCatalog": "Kurskatalog",
+    "catalogDesc": "Durchsuche unsere umfassende Auswahl an professionellen Tech-Trainingsprogrammen.",
+    "searchPlaceholder": "Kurse suchen...",
+    "categories": "Kategorien",
+    "allCategories": "Alle Kategorien",
+    "noCoursesFound": "Keine Kurse gefunden, die deinen Kriterien entsprechen.",
+    "clearFilters": "Filter löschen"
+  },
+  "courseDetail": {
+    "courseNotFound": "Kurs nicht gefunden",
+    "courseNotFoundDesc": "Der gesuchte Kurs existiert nicht oder wurde entfernt.",
+    "reviews": "Bewertungen",
+    "enrolled": "Eingeschrieben",
+    "hours": "Stunden",
+    "enrollNow": "Jetzt anmelden",
+    "requestInfo": "Infos anfordern",
+    "aboutCourse": "Über diesen Kurs",
+    "skillsMaster": "Fähigkeiten, die du beherrschen wirst",
+    "courseDetails": "Kursdetails",
+    "format": "Format",
+    "level": "Niveau",
+    "duration": "Dauer",
+    "hoursOfContent": "Stunden Inhalt",
+    "access": "Zugriff",
+    "lifetimeAccess": "Lebenslanger Zugriff",
+    "enterpriseTeam": "Enterprise-Team? Erhalte Sonderpreise.",
+    "contactSales": "Vertrieb kontaktieren",
+    "curriculum": "Kursinhalt",
+    "curriculumModules": "Module",
+    "curriculumTopics": "Themen",
+    "faq": "Häufig gestellte Fragen",
+    "certificate": "Zertifikat",
+    "includedOnCompletion": "Nach Abschluss enthalten"
+  },
+  "categories": {
+    "learningPaths": "Lernpfade",
+    "learningPathsDesc": "Egal, ob du Enterprise-Plattformen beherrschen, KI-Lösungen entwickeln oder deine Data-Science-Kenntnisse vertiefen möchtest – wir haben einen spezialisierten Pfad für dich."
+  },
+  "categoryDetail": {
+    "categoryNotFound": "Kategorie nicht gefunden",
+    "categoryNotFoundDesc": "Dieser Lernpfad existiert nicht.",
+    "browseAllPaths": "Alle Pfade durchsuchen",
+    "courses": "Kurse",
+    "enrolled": "Eingeschrieben",
+    "averageRating": "Durchschnittsbewertung",
+    "availablePrograms": "Verfügbare Programme",
+    "noCourses": "In dieser Kategorie sind noch keine Kurse verfügbar."
+  },
+  "about": {
+    "heroTitle": "Wir bauen die Tech-Arbeitskräfte von morgen auf.",
+    "heroDesc": "Corporate Academy schließt die Lücke zwischen traditioneller Bildung und der Realität der Branche. Wir glauben, dass ambitionierte Fachkräfte eine Ausbildung verdienen, die ihre Zeit respektiert und sich sofort in Karrierevorteile umsetzt.",
+    "careersTransformed": "Karrieren verändert",
+    "expertTrainers": "Expertentrainer",
+    "countriesReached": "Erreichte Länder",
+    "activePrograms": "Aktive Programme",
+    "ourPhilosophy": "Unsere Philosophie",
+    "ourPhilosophyDesc": "Die Technologielandschaft entwickelt sich zu schnell für veraltete Curricula. Unsere Programme werden von aktiven Praktikern entwickelt – Senior Engineers, Cloud-Architekten und Data Scientists aus führenden Tech-Unternehmen. Wir lehren nicht nur Theorie; wir zeigen, wie man produktionsreife Systeme liefert.",
+    "whyCorporateAcademy": "Warum Corporate Academy?",
+    "zeroFluff": "Ohne Ballast",
+    "zeroFluffDesc": "Jedes Modul ist an eine sofort anwendbare Fähigkeit gekoppelt.",
+    "industryRecognized": "Branchenanerkannt",
+    "industryRecognizedDesc": "Unsere Zertifizierungen bedeuten Personalverantwortlichen etwas.",
+    "enterpriseGrade": "Enterprise-Niveau",
+    "enterpriseGradeDesc": "Wir schulen Engineering-Teams von Fortune 500-Unternehmen.",
+    "exploreOurPrograms": "Unsere Programme entdecken"
+  },
+  "contact": {
+    "success": "Nachricht erfolgreich gesendet!",
+    "successDesc": "Ein Berater wird sich in Kürze bei dir melden.",
+    "error": "Senden der Nachricht fehlgeschlagen",
+    "errorDesc": "Bitte versuche es erneut oder kontaktiere uns direkt.",
+    "contactTeam": "Kontaktiere unser Team",
+    "contactTeamDesc": "Ob du dich selbst weiterbilden oder deine gesamte Engineering-Organisation schulen möchtest – wir sind für dich da.",
+    "getInTouch": "Kontakt aufnehmen",
+    "emailUs": "Schreib uns",
+    "emailUsDesc": "Unser freundliches Team hilft dir gern weiter.",
+    "visitUs": "Besuche uns",
+    "visitUsDesc": "Komm vorbei in unserem SF-Hauptsitz.",
+    "callUs": "Ruf uns an",
+    "callUsDesc": "Mo-Fr von 8 bis 17 Uhr PT.",
+    "enterpriseTraining": "Unternehmenstraining",
+    "enterpriseTrainingDesc": "Musst du ein Team von 10 oder mehr Personen weiterbilden? Unsere Unternehmenslösungen bieten individuelle Lernpfade und dedizierten Support.",
+    "contactEnterpriseSales": "Enterprise-Vertrieb kontaktieren",
+    "sendMessage": "Nachricht senden",
+    "fullName": "Vollständiger Name",
+    "fullNamePlaceholder": "John Doe",
+    "workEmail": "Geschäftliche E-Mail",
+    "workEmailPlaceholder": "john@company.com",
+    "phone": "Telefonnummer (Optional)",
+    "phonePlaceholder": "+1 (555) 000-0000",
+    "howCanWeHelp": "Wie können wir helfen?",
+    "howCanWeHelpPlaceholder": "Erzähl uns von deinen Lernzielen...",
+    "sending": "Wird gesendet...",
+    "sendMessageBtn": "Nachricht senden"
+  },
+  "notFound": {
+    "title": "404 Seite nicht gefunden",
+    "desc": "Hast du vergessen, die Seite zum Router hinzuzufügen?"
+  },
+  "catalog": {
+    "level": {
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Experte",
+      "beginnerToIntermediate": "Anfänger bis Fortgeschritten",
+      "intermediateToAdvanced": "Fortgeschritten bis Experte",
+      "beginnerToAdvanced": "Anfänger bis Fortgeschrittene"
+    },
+    "category": {
+      "dataScience": "Data Science",
+      "artificialIntelligence": "Künstliche Intelligenz",
+      "machineLearning": "Maschinelles Lernen",
+      "workday": "Workday",
+      "serviceNow": "ServiceNow",
+      "salesforce": "Salesforce",
+      "microsoftDynamics": "Microsoft Dynamics 365",
+      "oracleCloud": "Oracle Cloud",
+      "sixSigmaLean": "Six Sigma & Lean",
+      "pmpProjectManagement": "PMP & Projektmanagement",
+      "cloudComputingDevOps": "Cloud Computing & DevOps",
+      "agileScrum": "Agile & Scrum",
+      "blockchain": "Blockchain",
+      "businessManagement": "Unternehmensführung",
+      "compTIA": "CompTIA",
+      "database": "Datenbank",
+      "devOps": "DevOps",
+      "digitalMarketing": "Digitales Marketing",
+      "finance": "Finanzen",
+      "itSecurity": "IT-Sicherheit",
+      "itServiceManagement": "IT-Service-Management",
+      "medicalCoding": "Medizinische Kodierung",
+      "otherProfessionalSkills": "Weitere berufliche Fähigkeiten",
+      "programming": "Programmierung",
+      "qualityManagement": "Qualitätsmanagement",
+      "riskManagement": "Risikomanagement",
+      "softSkillsTraining": "Soft-Skills-Training",
+      "softwareDevelopment": "Softwareentwicklung",
+      "softwareTesting": "Softwaretests",
+      "biVisualization": "BI & Visualisierung"
+    },
+    "mode": {
+      "liveOnline": "Live Online",
+      "liveOnlineSelfPaced": "Live Online + Selbststudium",
+      "selfPaced": "Selbststudium"
+    }
+  },
+  "faq": {
+    "home": {
+      "title": "Häufig gestellte Fragen",
+      "subtitle": "Schnelle Antworten zu Kursen, Zertifizierungen und Stipendien der Corporate Academy.",
+      "q1": "Welche Kurse bietet Corporate Academy an?",
+      "a1": "Corporate Academy bietet über 490 professionelle Technologiekurse in den Bereichen Data Science, KI, Machine Learning, Cloud Computing, DevOps, Cybersicherheit, Salesforce, Workday, ServiceNow, Oracle, Microsoft Dynamics und Projektmanagement (PMP). Die Kurse finden im Live-Online-Format, im Selbststudium und in hybriden Formaten statt, sodass du berufsbegleitend lernen kannst.",
+      "q2": "Wie viele Fachkräfte hat Corporate Academy ausgebildet?",
+      "a2": "Corporate Academy hat seit 2018 über 63.000 Fachkräfte ausgebildet, deren Absolventen bei Unternehmen wie Google, Accenture, Infosys, TCS und SAP arbeiten. Die Zufriedenheit der Lernenden liegt im Durchschnitt bei 4,8 von 5.",
+      "q3": "Sind die Kurse von Corporate Academy live oder im Selbststudium?",
+      "a3": "Beides. Die meisten Programme sind als Live-Online-Kurse unter Leitung von Branchenexperten verfügbar, und viele bieten zusätzlich Optionen im Selbststudium und in hybriden Formaten. Bei der Anmeldung wählst du das Format passend zu deinem Zeitplan.",
+      "q4": "Erhalte ich nach Abschluss eines Kurses eine Zertifizierung?",
+      "a4": "Ja. Jeder Kurs führt zu einer weltweit anerkannten Zertifizierung von Corporate Academy, und viele Programme bereiten dich direkt auf Anbieterzertifizierungen wie Salesforce-, ServiceNow-, AWS- und PMP-Prüfungen vor.",
+      "q5": "Bietet Corporate Academy Stipendien oder Rabatte an?",
+      "a5": "Ja. Sechs Stipendienarten decken bis zu 50 % deiner Kursgebühr ab, darunter Leistungs-, Finanzhilfe-, Women-in-Tech-, Frühbucher- und Empfehlungsstipendien. Die Bewerbung ist kostenlos, und Entscheidungen treffen innerhalb von 48 Geschäftsstunden ein.",
+      "q6": "Kann ich einen Kurs ohne IT-Hintergrund beginnen?",
+      "a6": "Ja. Corporate Academy bietet in jeder wichtigen Kategorie Einsteiger-Tracks an, und Karriereberater helfen dir, einen Startpunkt zu wählen. Berufstätige aus nicht-technischen Rollen wechseln über diese Programme regelmäßig in Karrieren in den Bereichen Daten, Cloud und ERP.",
+      "q7": "Wie kontaktiere ich Corporate Academy für eine Kursberatung?",
+      "a7": "Ruf +91-88001-82225 an (Support auf Englisch und Hindi) oder sende eine Anfrage über die Website. Ein Berater antwortet mit Kursempfehlungen, Startterminen und Gebührendetails, in der Regel innerhalb eines Geschäftstags."
+    },
+    "courses": {
+      "title": "FAQ zum Kurskatalog",
+      "subtitle": "Antworten zu Gebühren, Dauer, Formaten und Zertifizierungen im gesamten Katalog.",
+      "q1": "Wie viele Kurse hat Corporate Academy?",
+      "a1": "Der Katalog von Corporate Academy umfasst über 490 professionelle Technologiekurse in den Bereichen Data Science, KI, Machine Learning, Cloud Computing, DevOps, Cybersicherheit, Salesforce, Workday, ServiceNow, Oracle, Microsoft Dynamics und PMP. Regelmäßig kommen neue Kurse hinzu, während sich Tools und Zertifizierungen weiterentwickeln.",
+      "q2": "Wie viel kostet ein Kurs bei Corporate Academy?",
+      "a2": "Die Gebühren variieren je nach Programmdauer und Technologie und werden bei deiner Anfrage in INR angegeben. Stipendien decken für berechtigte Lernende bis zu 50 % der Gebühr ab, mit Entscheidungen innerhalb von 48 Geschäftsstunden, sodass die meisten Studierenden deutlich weniger als den ausgewiesenen Preis zahlen.",
+      "q3": "Wie lange dauert ein typischer Kurs bis zum Abschluss?",
+      "a3": "Die meisten Kurse umfassen 20 bis 60 Unterrichtsstunden, was berufsbegleitend etwa 4 bis 10 Wochen entspricht. Auf jeder Kursseite sind die genaue Dauer in Stunden sowie das Niveau (Anfänger, Fortgeschritten oder Experte) angegeben.",
+      "q4": "Finden die Kurse live online oder im Selbststudium statt?",
+      "a4": "Beide Formate sind verfügbar. Live-Online-Kurse finden mit erfahrenen Dozenten zu festen Startterminen statt, während du bei Kursen im Selbststudium in deinem eigenen Tempo lernst; einige Programme bieten eine hybride Durchführung, die beides kombiniert.",
+      "q5": "Welchen Kurs sollte ich als kompletter Anfänger belegen?",
+      "a5": "Beginne mit einem Einsteigerkurs in dem Bereich, in dem du arbeiten möchtest – filtere den Katalog nach Kategorie und achte auf das Niveau-Abzeichen „Anfänger“. Data Science, Cloud Computing und Salesforce sind die beliebtesten Einstiegspunkte für Quereinsteiger ohne vorherige IT-Erfahrung.",
+      "q6": "Beinhalten die Kurse eine Zertifizierung?",
+      "a6": "Ja. Jeder Kurs endet mit einer weltweit anerkannten Zertifizierung von Corporate Academy, und viele bereiten dich direkt auf Anbieterprüfungen wie Salesforce, ServiceNow, Workday, AWS und PMP vor. Über 63.000 Fachkräfte wurden über diese Programme zertifiziert."
+    },
+    "corporate": {
+      "title": "FAQ zum Unternehmenstraining",
+      "subtitle": "Antworten zu Programmumfang, Durchführung, Erfolgsmessung und dem Erhalt eines Angebots.",
+      "q1": "Bietet Corporate Academy Unternehmenstraining für Firmen an?",
+      "a1": "Ja. Corporate Academy entwickelt maßgeschneiderte Trainingsprogramme für die Belegschaft von Unternehmen und arbeitet mit HR- und L&D-Teams zusammen – von der Ermittlung von Kompetenzlücken über die Durchführung bis zum Wirkungsbericht. Die Programme greifen auf einen Katalog von über 490 Kursen und die Erfahrung aus der Ausbildung von über 63.000 Fachkräften zurück.",
+      "q2": "Welche Themen kann das Unternehmenstraining abdecken?",
+      "a2": "Drei Programmfamilien: technologische Kompetenz (Cloud, Daten, KI, Cybersicherheit, DevOps und Plattformen wie Salesforce, Workday und ServiceNow), Führung in der Praxis für Manager und künftige Führungskräfte sowie grundlegende Kompetenzen der Belegschaft mit wirkungsvollen Business-Skills für jeden Bereich.",
+      "q3": "Kann das Training für Teams an mehreren Standorten durchgeführt werden?",
+      "a3": "Ja. Corporate Academy liefert konsistente Ergebnisse über mehrere Standorte, Regionen und Zeitzonen hinweg und kombiniert Live-Online-Sitzungen, Präsenz-Workshops und Vertiefung im Selbststudium unter einem verantwortlichen Partner.",
+      "q4": "Wie wird die Wirkung des Unternehmenstrainings gemessen?",
+      "a4": "Jede Zusammenarbeit beginnt mit einer Basis-Kompetenzkarte, die an den Geschäftsprioritäten ausgerichtet ist, und verfolgt anschließend die Entwicklung von der anfänglichen Sicherheit hin zur angewandten Leistung. Führungsteams erhalten einen Nachweispfad mit Erfolgskennzahlen, die vor Beginn der Durchführung vereinbart werden.",
+      "q5": "Gibt es eine Mindestteamgröße für Unternehmensprogramme?",
+      "a5": "Kein festes Minimum. Die Lernpfade sind rollenbasiert und skalieren von einem einzelnen Team bis zu einem unternehmensweiten Rollout; die Discovery-Phase dimensioniert das Programm passend zu deiner Kompetenzlücke und deinem Budget.",
+      "q6": "Wie erhalten wir ein Angebot für ein Unternehmenstraining?",
+      "a6": "Reiche das Anfrageformular auf dieser Seite mit deiner Teamgröße, deinen Zielen und deinem Zeitrahmen ein oder ruf +91-88001-82225 an. Ein Programmberater meldet sich mit einem Discovery-Gespräch und einem maßgeschneiderten Angebot, in der Regel innerhalb von zwei Geschäftstagen."
+    },
+    "category": {
+      "title": "FAQ zum {{category}}-Training",
+      "subtitle": "Antworten zu Kursoptionen, Dauer, Formaten und Zertifizierung im Bereich {{category}}.",
+      "q1": "Welche {{category}}-Kurse bietet Corporate Academy an?",
+      "a1One": "Corporate Academy bietet 1 {{category}}-Kurs{{titles}} an. Alle werden von Branchenexperten unterrichtet und führen zu einer weltweit anerkannten Zertifizierung.",
+      "a1Many": "Corporate Academy bietet {{count}} {{category}}-Kurse{{titles}} an. Alle werden von Branchenexperten unterrichtet und führen zu einer weltweit anerkannten Zertifizierung.",
+      "a1None": "Corporate Academy bietet ein wachsendes Angebot an {{category}}-Kursen. Alle werden von Branchenexperten unterrichtet und führen zu einer weltweit anerkannten Zertifizierung.",
+      "a1Including": ", darunter {{titles}}",
+      "q2": "Wie lange dauert ein {{category}}-Training?",
+      "a2Range": "{{category}}-Kurse bei Corporate Academy umfassen {{min}} bis {{max}} Unterrichtsstunden, die die meisten Berufstätigen berufsbegleitend in wenigen Wochen bis wenigen Monaten absolvieren. Auf jeder Kursseite sind die genaue Dauer und das Niveau angegeben.",
+      "a2Generic": "Die meisten {{category}}-Kurse dauern berufsbegleitend wenige Wochen bis wenige Monate. Auf jeder Kursseite sind die genaue Dauer in Stunden und das Niveau angegeben.",
+      "q3": "Kann ich {{category}} online lernen?",
+      "a3": "Ja. Corporate Academy bietet {{category}}-Training im Live-Online-Format, im Selbststudium und in hybriden Formaten an, sodass du von überall aus lernen und die Kurse berufsbegleitend absolvieren kannst.",
+      "q4": "Ist ein {{category}}-Training für Anfänger geeignet?",
+      "a4One": "Ja. 1 der {{category}}-Kurse ist auf Anfängerniveau und setzt keine Vorkenntnisse voraus, mit weiterführenden Tracks für Fortgeschrittene und Experten. Karriereberater helfen dir, den richtigen Startpunkt zu wählen.",
+      "a4Many": "Ja. {{count}} der {{category}}-Kurse sind auf Anfängerniveau und setzen keine Vorkenntnisse voraus, mit weiterführenden Tracks für Fortgeschrittene und Experten. Karriereberater helfen dir, den richtigen Startpunkt zu wählen.",
+      "a4Generic": "Die Kurse in diesem Pfad geben ihr Niveau (Anfänger, Fortgeschritten oder Experte) auf jeder Kursseite an, und Karriereberater unter +91-88001-82225 helfen dir, den richtigen Startpunkt für deinen Hintergrund zu wählen.",
+      "q5": "Erhalte ich nach Abschluss eines {{category}}-Kurses ein Zertifikat?",
+      "a5": "Ja. Jeder {{category}}-Kurs endet mit einer weltweit anerkannten Zertifizierung von Corporate Academy, und viele bereiten dich auf verwandte Anbieterzertifizierungsprüfungen vor. Über 63.000 Fachkräfte wurden über die Programme von Corporate Academy zertifiziert.",
+      "q6": "Wie viel kostet ein {{category}}-Training?",
+      "a6": "Die Gebühren variieren je nach Kursdauer und werden bei deiner Anfrage in INR angegeben. Stipendien decken für berechtigte Lernende bis zu 50 % der Gebühr ab, mit Entscheidungen innerhalb von 48 Geschäftsstunden."
+    }
+  },
+  "corporateTraining": {
+    "hero": {
+      "badge": "Enterprise-Kompetenzstudio",
+      "title1": "Machen Sie Kompetenz",
+      "title2": "zu Ihrem Vorteil.",
+      "subtitle": "Entwickeln Sie die Fähigkeiten, von denen Ihre Strategie abhängt. Corporate Academy arbeitet mit Führungskräften aus HR, L&D und Technologie zusammen, um Geschäftsprioritäten in selbstbewusste, messbare Leistung zu verwandeln.",
+      "ctaPrimary": "Programm entwerfen",
+      "ctaSecondary": "Eine Anfrage entdecken",
+      "trust1": "Live-Vermittlung durch Experten",
+      "trust2": "Bereit für mehrere Standorte",
+      "scroll": "Scrollen Sie, um den Unterschied zu sehen"
+    },
+    "card": {
+      "eyebrow": "Kompetenzkarte / 2025",
+      "title": "Von der Absicht zur Wirkung.",
+      "row1Label": "Geschäftspriorität",
+      "row1Value": "Kundenorientiertes Wachstum",
+      "row2Label": "Kompetenzfokus",
+      "row2Value": "Digitale Kompetenz",
+      "row3Label": "Angewandtes Selbstvertrauen",
+      "row3Value": "Bereit zu leisten",
+      "footer": "Eine gemeinsame Sprache für Veränderung",
+      "viewMethod": "Methode ansehen"
+    },
+    "proof": {
+      "1": {
+        "label": "Ein verantwortlicher Partner",
+        "copy": "Von der Analyse über die Durchführung bis zum Reporting."
+      },
+      "2": {
+        "label": "Mehrere Standorte",
+        "copy": "Gleichbleibende Qualität über Räume, Regionen und Zeitzonen hinweg."
+      },
+      "3": {
+        "label": "Sichtbare Ergebnisse",
+        "copy": "Kennzahlen, die Lernen mit der Geschäftsabsicht verbinden."
+      }
+    },
+    "method": {
+      "eyebrow": "Die Corporate-Academy-Methode",
+      "title": "Lernen, das seinen Platz im Geschäftsplan verdient.",
+      "subtitle": "Keine Standardlösung, die als Strategie verkleidet ist. Wir gestalten rund um die Arbeit, die Menschen und den Wandel, den Sie erreichen müssen."
+    },
+    "pillars": {
+      "1": {
+        "title": "Beginnen Sie mit der Kompetenzlücke",
+        "copy": "Wir übersetzen Geschäftsprioritäten in eine praxisnahe Kompetenzkarte – mit Erfolgskennzahlen, die Ihr Führungsteam sehen kann."
+      },
+      "2": {
+        "title": "Bauen Sie den richtigen Lernpfad",
+        "copy": "Rollenbasierte Lehrpläne, aufeinander abgestimmte Lernreisen und die richtige Balance aus Live-Praxis, Projekten und Vertiefung."
+      },
+      "3": {
+        "title": "Belegen Sie den Fortschritt",
+        "copy": "Vom anfänglichen Selbstvertrauen bis zur angewandten Leistung ist jedes Vorhaben darauf ausgelegt, eine Beweisspur zu hinterlassen."
+      }
+    },
+    "programsSection": {
+      "eyebrow": "Für die Arbeit von morgen konzipiert",
+      "title": "Ein Partner. Die gesamte Kompetenzagenda.",
+      "subtitle": "Beginnen Sie mit einem prioritären Team oder bauen Sie eine Lernarchitektur für die gesamte Organisation.",
+      "shape": "Dieses Programm gestalten"
+    },
+    "programs": {
+      "1": {
+        "eyebrow": "Für digitale Teams",
+        "title": "Technologiekompetenz",
+        "copy": "Moderne Programme für Engineering, Daten, Cloud, Cybersicherheit und KI, aufgebaut rund um die Tools, die Ihre Teams nutzen."
+      },
+      "2": {
+        "eyebrow": "Für künftige Führungskräfte",
+        "title": "Führung in der Praxis",
+        "copy": "Manager- und Führungsreisen, die Entscheidungen, Kommunikation, Coaching und Umsetzung im großen Maßstab stärken."
+      },
+      "3": {
+        "eyebrow": "Für jede Funktion",
+        "title": "Grundkompetenzen der Belegschaft",
+        "copy": "Wirkungsvolle Geschäftskompetenzen, die Teams helfen, besser zusammenzuarbeiten und selbstbewusster voranzukommen."
+      }
+    },
+    "quote": {
+      "text": "„Die stärksten Programme lehren mehr als eine Fähigkeit. Sie geben einem Team einen neuen Maßstab für die Arbeit.“",
+      "principle": "Grundsatz des Enterprise-Lernens",
+      "principleSub": "Machen Sie es relevant. Machen Sie es sichtbar. Machen Sie es nachhaltig."
+    },
+    "credibility": {
+      "eyebrow": "Glaubwürdigkeit in der Umsetzung",
+      "title": "Enterprise-ready ohne Enterprise-Theater.",
+      "body": "Ihre Mitarbeitenden brauchen keine weitere Content-Bibliothek. Sie brauchen erfahrene Trainer, die den Raum verstehen, Programmmanager, die den Schwung halten, und Reporting, das Führungskräften bei der nächsten Entscheidung hilft.",
+      "point1": "Erfahrene Live-Trainer",
+      "point2": "Maßgeschneiderte Pfade je Rolle",
+      "point3": "Kohorten- und Blended-Learning",
+      "point4": "Messung ab dem ersten Tag",
+      "cta": "Lernen Sie das Beraterteam kennen"
+    },
+    "enquiry": {
+      "eyebrow": "Nächster Schritt",
+      "title": "Bringen Sie uns das Briefing. Wir bringen die Perspektive.",
+      "subtitle": "Teilen Sie genug Kontext für ein sinnvolles erstes Gespräch. Ein Enterprise-Berater antwortet mit einem durchdachten nächsten Schritt, nicht mit einer Standardbroschüre.",
+      "location": "Durchführungsunterstützung über Standorte und Zeitzonen hinweg"
+    },
+    "form": {
+      "successTitle": "Briefing erhalten.",
+      "successBody": "Vielen Dank. Ein Enterprise-Berater prüft Ihren Kontext und kontaktiert Sie innerhalb eines Werktags.",
+      "sendAnother": "Weiteres Briefing senden",
+      "ariaLabel": "Anfrage zur Unternehmensschulung",
+      "step": "01 / Erzählen Sie uns mehr",
+      "heading": "Starten Sie das Gespräch.",
+      "name": "Ihr Name",
+      "namePlaceholder": "z. B. Priya Kapoor",
+      "company": "Unternehmen",
+      "companyPlaceholder": "Ihre Organisation",
+      "email": "Geschäftliche E-Mail",
+      "phone": "Telefon",
+      "teamSize": "Teamgröße",
+      "teamSizeSelect": "Wählen Sie einen Bereich",
+      "teamSize1": "5–20 Personen",
+      "teamSize2": "21–50 Personen",
+      "teamSize3": "51–200 Personen",
+      "teamSize4": "201–500 Personen",
+      "teamSize5": "500+ Personen",
+      "teamSizeNote": "Wir unterstützen eine fokussierte Kohorte oder einen globalen Rollout.",
+      "timeline": "Zeitplan",
+      "timelineSelect": "Wann möchten Sie beginnen?",
+      "timeline1": "Innerhalb von 4 Wochen",
+      "timeline2": "1–3 Monate",
+      "timeline3": "3–6 Monate",
+      "timeline4": "Für später in Prüfung",
+      "timelineNote": "Eine nützliche Antwort ist besser als eine perfekte.",
+      "program": "Programmkontext",
+      "programSelect": "Was möchten Sie aufbauen?",
+      "program1": "Technologie- und Digitalkompetenz",
+      "program2": "Führung und Managemententwicklung",
+      "program3": "Grundkompetenzen der Belegschaft",
+      "program4": "Eine umfassendere Kompetenzakademie",
+      "program5": "Noch unsicher",
+      "goals": "Was soll sich ändern?",
+      "goalsPlaceholder": "Erzählen Sie uns von dem Geschäftsziel, der Kompetenzlücke oder der Leistungsveränderung, die Sie erreichen möchten.",
+      "goalsNote": "Ihre Ziele, Ihr Zeitplan, Ihre Teamgröße und der Programmkontext werden unserem Berater als ein klares Briefing übermittelt.",
+      "error": "Wir konnten Ihr Briefing gerade nicht senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+      "sending": "Ihr Briefing wird gesendet…",
+      "submit": "Mein Unternehmens-Briefing senden",
+      "disclaimer": "Wir antworten innerhalb eines Werktags. Ihre Daten bleiben bei Corporate Academy."
+    }
+  },
+  "scholarshipPage": {
+    "hero": {
+      "badge": "Stipendienprogramm 2026 — Bewerbungen geöffnet",
+      "title1": "Ihre Traumkarriere",
+      "title2": "sollte kein Vermögen kosten.",
+      "subtitle": "Sechs Stipendienarten mit bis zu <strong>50 % Rabatt</strong> auf Ihren Kurs. Nach Leistung, Bedarf oder Engagement – für jeden ernsthaften Lernenden gibt es ein Stipendium.",
+      "stats": "2 Cr₹+ ausgezahlt · 4.200+ Stipendiaten · Entscheidungen in 48 Stunden",
+      "ctaApply": "Stipendium beantragen",
+      "ctaView": "Alle Stipendien ansehen"
+    },
+    "stats": {
+      "awarded": "Vergebene Stipendien",
+      "supported": "Geförderte Stipendiaten",
+      "maxDiscount": "Maximaler Rabatt",
+      "types": "Stipendienarten",
+      "decisionTime": "Entscheidungszeit"
+    },
+    "impact": {
+      "careers": "Verwandelte Karrieren",
+      "salary": "Ø Gehaltssteigerung",
+      "placement": "Vermittlungsquote",
+      "rating": "Kursbewertung"
+    },
+    "why": {
+      "eyebrow": "Warum bewerben",
+      "title": "Mehr als nur ein Rabatt",
+      "subtitle": "Jeder Stipendiat erhält Zugang zu erstklassiger Ausbildung, Karriereunterstützung und einer lebenslangen Alumni-Gemeinschaft."
+    },
+    "benefits": {
+      "career": {
+        "title": "Karrierebeschleunigung",
+        "desc": "Durchschnittlich 85 % Gehaltssteigerung innerhalb von 12 Monaten nach Abschluss."
+      },
+      "placement": {
+        "title": "Vermittlungsgarantie",
+        "desc": "Alle Programme umfassen Vermittlungshilfe und Branchenzertifizierung."
+      },
+      "faculty": {
+        "title": "Erfahrene Dozenten",
+        "desc": "Praktiker aus den Big Four, dem Fortune 500 und globalen Beratungshäusern."
+      },
+      "curriculum": {
+        "title": "Berufsfertiger Lehrplan",
+        "desc": "Vierteljährlich aktualisiert nach realen Einstellungsmustern und Arbeitgeberbedarfen."
+      },
+      "recognised": {
+        "title": "Weltweit anerkannt",
+        "desc": "Zertifizierungen, die von über 10.000 Unternehmen weltweit akzeptiert werden."
+      },
+      "alumni": {
+        "title": "Alumni-Netzwerk",
+        "desc": "Treten Sie über 63.000 Corporate-Academy-Alumni aus Branchen und Regionen bei."
+      }
+    },
+    "cardsSection": {
+      "eyebrow": "Sechs Wege",
+      "title": "Finden Sie Ihr Stipendium",
+      "subtitle": "Jeder Lernende hat eine andere Geschichte. Wir haben für jede ein Stipendium.",
+      "apply": "Bewerben"
+    },
+    "cards": {
+      "merit": {
+        "badge": "Am beliebtesten",
+        "title": "Leistungsexzellenz-Stipendium",
+        "discount": "Bis zu 50 % Rabatt",
+        "desc": "Wir belohnen akademische Brillanz. Wenn Sie durchgehend hohe Noten erzielt haben, würdigt dieses Stipendium Ihren Einsatz.",
+        "elig1": "CGPA ≥ 8,0 / Prozentsatz ≥ 80 %",
+        "elig2": "Jeder anerkannte Abschluss",
+        "elig3": "Keine offenen Rückstände",
+        "course1": "Data Science",
+        "course2": "KI & ML",
+        "course3": "Cloud Computing",
+        "course4": "Salesforce"
+      },
+      "aid": {
+        "badge": "Bedarfsorientiert",
+        "title": "Stipendium für finanzielle Unterstützung",
+        "discount": "Bis zu 40 % Rabatt",
+        "desc": "Finanzielle Zwänge sollten niemals zwischen Talent und Chance stehen. Wir unterstützen engagierte Lernende, die eine helfende Hand brauchen.",
+        "elig1": "CGPA ≥ 6,5 / Prozentsatz ≥ 65 %",
+        "elig2": "Nachweis des finanziellen Bedarfs",
+        "elig3": "Motivationsschreiben (200–300 Wörter)",
+        "course1": "Alle Kurse berechtigt",
+        "course2": "Workday",
+        "course3": "PMP",
+        "course4": "Six Sigma"
+      },
+      "women": {
+        "badge": "Vielfalt",
+        "title": "Women-in-Tech-Stipendium",
+        "discount": "Bis zu 45 % Rabatt",
+        "desc": "Wir stärken weibliche Führungskräfte in Technologie und Wirtschaft. Wir setzen uns dafür ein, die Geschlechterlücke in der Tech-Branche zu schließen.",
+        "elig1": "Offen für alle akademischen Ergebnisse",
+        "elig2": "Tech- oder Wirtschaftskurs",
+        "elig3": "Kurzer Essay zu Karrierezielen",
+        "course1": "Alle Technologiekurse",
+        "course2": "Business Management",
+        "course3": "DBA"
+      },
+      "early": {
+        "badge": "Frühbucher",
+        "title": "Frühbucher-Stipendium",
+        "discount": "Bis zu 30 % Rabatt",
+        "desc": "Bewerben Sie sich mindestens 30 Tage vor dem Kursstart und sichern Sie sich einen bedeutenden Rabatt, bevor die Plätze belegt sind.",
+        "elig1": "30+ Tage vor dem Kurs bewerben",
+        "elig2": "Kein Mindest-CGPA",
+        "elig3": "Wer zuerst kommt, mahlt zuerst",
+        "course1": "Alle Programme",
+        "course2": "Mit Empfehlung kombinierbar"
+      },
+      "referral": {
+        "badge": "Empfehlung",
+        "title": "Empfehlungs- und Gruppenstipendium",
+        "discount": "Bis zu 25 % Rabatt",
+        "desc": "Empfehlen Sie eine Kollegin oder einen Kollegen und Sie beide sparen. Teams ab 3 Personen schalten noch höhere Gruppenrabatte frei.",
+        "elig1": "1+ Freund/Kollegen empfehlen",
+        "elig2": "Empfohlene Person muss sich einschreiben",
+        "elig3": "Gruppe ab 5 erhält 5 % extra",
+        "course1": "Alle Kurse und Programme"
+      },
+      "doctoral": {
+        "badge": "Doktorat exklusiv",
+        "title": "Stipendium für Doktorforschung",
+        "discount": "Bis zu 35 % Rabatt",
+        "desc": "Für DBA-Bewerber mit außergewöhnlichem Forschungspotenzial, Branchenführung und einer klaren akademischen Vision.",
+        "elig1": "10+ Jahre Berufserfahrung",
+        "elig2": "Position auf Managementebene",
+        "elig3": "Einseitiger Forschungsvorschlag",
+        "course1": "Alle DBA-Programme",
+        "course2": "Führung & Strategie"
+      }
+    },
+    "stepsSection": {
+      "eyebrow": "4-Schritte-Prozess",
+      "title": "So erhalten Sie Ihr Stipendium"
+    },
+    "steps": {
+      "1": {
+        "title": "Bewerbung ausfüllen",
+        "desc": "Füllen Sie das folgende Formular mit Ihren Angaben und Ihrem akademischen Hintergrund aus. Dauert unter 5 Minuten."
+      },
+      "2": {
+        "title": "Prüfung der Berechtigung",
+        "desc": "Unser Komitee prüft Ihre Bewerbung innerhalb von 48 Werkstunden. Keine Interviews erforderlich."
+      },
+      "3": {
+        "title": "Ihr Angebot erhalten",
+        "desc": "Erhalten Sie ein persönliches Stipendienangebot per E-Mail mit Ihrem Rabattcode."
+      },
+      "4": {
+        "title": "Einschreiben & starten",
+        "desc": "Bestätigen Sie die Einschreibung mit Ihrem Code und beginnen Sie Ihre Lernreise."
+      }
+    },
+    "testimonialsSection": {
+      "eyebrow": "Stipendiaten-Geschichten",
+      "title": "Echte Lernende. Echte Ergebnisse.",
+      "subtitle": "Jeder Stipendiat hat einen einzigartigen Weg. Hier sind Geschichten, die uns jeden Tag inspirieren."
+    },
+    "testimonials": {
+      "1": {
+        "scholarship": "Leistungsexzellenz — 45 % Rabatt",
+        "text": "Das Leistungsstipendium ermöglichte mir die Einschreibung ins Data-Science-Programm. Innerhalb von 6 Monaten wurde ich bei Infosys vermittelt. Corporate Academy hat mein Leben verändert."
+      },
+      "2": {
+        "scholarship": "Frühbucher — 30 % Rabatt",
+        "text": "Das Frühbucher-Stipendium drängte mich zu einer schnellen Entscheidung, und das war die beste, die ich getroffen habe. Mein Gehalt verdoppelte sich binnen eines Jahres nach dem Workday-Kurs."
+      },
+      "3": {
+        "scholarship": "Women in Tech — 40 % Rabatt",
+        "text": "Nach einer Karrierepause zurückzukehren, war entmutigend. Das Women-in-Tech-Stipendium zeigte mir, dass Corporate Academy wirklich in vielfältige Talente investiert."
+      },
+      "4": {
+        "scholarship": "Finanzielle Unterstützung — 40 % Rabatt",
+        "text": "Aus einer kleinen Stadt mit begrenzten Mitteln kommend, war das Stipendium für finanzielle Unterstützung eine Rettungsleine. Ich bestand die AWS-Zertifizierung 4 Monate nach Kursende."
+      },
+      "5": {
+        "scholarship": "Doktorforschung — 35 % Rabatt",
+        "text": "Das Doktorstipendium signalisiert, dass Corporate Academy ernsthafte Forscher schätzt. Das Programm ist Weltklasse und die Dozenten sind echte Vordenker."
+      },
+      "6": {
+        "scholarship": "Empfehlung — 20 % Rabatt",
+        "text": "Ich habe meinen Kollegen empfohlen und wir erhielten beide das Empfehlungsstipendium. Das gemeinsame Lernen hielt uns motiviert — wir bestanden beide das PMP im ersten Versuch."
+      }
+    },
+    "eligible": {
+      "title": "Bin ich berechtigt?",
+      "subtitle": "Beantworten Sie eine der folgenden Fragen mit <strong>Ja</strong> und Sie qualifizieren sich für mindestens ein Stipendium. Bewerben Sie sich einfach – unser Team findet die beste Passung für Sie.",
+      "q1": "Haben Sie in Ihrem letzten Abschluss 65 % oder mehr erreicht?",
+      "q2": "Sind Sie eine Frau, die in die Tech-Branche einsteigen oder zurückkehren möchte?",
+      "q3": "Sind Sie Hochschulabsolvent oder Fachkraft der ersten Generation?",
+      "q4": "Standen finanzielle Herausforderungen Ihrer Ausbildung im Weg?",
+      "q5": "Sind Sie bereit, sich in den nächsten 30 Tagen einzuschreiben?",
+      "q6": "Haben Sie einen Freund oder Kollegen, der sich zusammen mit Ihnen einschreiben kann?",
+      "q7": "Sind Sie eine erfahrene Fachkraft mit dem Ziel Doktorat / DBA?",
+      "q8": "Brennen Sie dafür, eine bessere Karriere aufzubauen?",
+      "cta": "Ja, jetzt bewerben"
+    },
+    "faqSection": {
+      "eyebrow": "Haben Sie Fragen?",
+      "title": "Häufige Fragen zu Stipendien",
+      "stillQuestions": "Noch Fragen?",
+      "contactTeam": "Kontaktieren Sie unser Stipendienteam",
+      "orCall": "oder rufen Sie an"
+    },
+    "faqs": {
+      "1": {
+        "q": "Kann ich mich für mehr als ein Stipendium bewerben?",
+        "a": "Sie können sich für alle Stipendien bewerben, für die Sie berechtigt sind. Es gilt nur der höchste Einzelrabatt. Empfehlung und Frühbucher können für zusätzliche Ersparnisse obendrauf kombiniert werden."
+      },
+      "2": {
+        "q": "Gibt es eine Einkommensgrenze für das Stipendium für finanzielle Unterstützung?",
+        "a": "Keine strikte Einkommensgrenze. Wir bewerten Bewerbungen ganzheitlich – Ihre Umstände, Motivation und Ihr Engagement zählen mehr als eine Zahl."
+      },
+      "3": {
+        "q": "Wie lange dauert der Prozess?",
+        "a": "Sie erhalten eine Antwort innerhalb von 48 Werkstunden. Das Stipendium für Doktorforschung kann wegen der Prüfung des Vorschlags bis zu 5 Werktage dauern."
+      },
+      "4": {
+        "q": "Muss ich jetzt Dokumente einreichen?",
+        "a": "Nein. Das Online-Formular genügt für die erste Prüfung. Bei Vorauswahl kontaktieren wir Sie wegen Zeugnissen oder Zertifikaten. In dieser Phase sind keine Uploads erforderlich."
+      },
+      "5": {
+        "q": "Gilt das Stipendium für alle Kurse?",
+        "a": "Die meisten Stipendien gelten für alle vollständigen Programme. Das Doktorstipendium ist exklusiv für DBA-Programme. Die Anwendbarkeit wird in Ihrem Angebotsschreiben bestätigt."
+      },
+      "6": {
+        "q": "Können Berufstätige sich bewerben?",
+        "a": "Absolut – alle Stipendien stehen sowohl Berufseinsteigern als auch Berufstätigen offen. Das Doktorstipendium erfordert speziell 10+ Jahre Erfahrung."
+      },
+      "7": {
+        "q": "Was, wenn mein CGPA die Leistungsschwelle nicht erreicht?",
+        "a": "Sie können sich weiterhin für die Stipendien für finanzielle Unterstützung, Women in Tech, Frühbucher oder Empfehlung qualifizieren. Unser Komitee betrachtet das Gesamtbild."
+      },
+      "8": {
+        "q": "Wie wird der Rabatt angewendet?",
+        "a": "Nach Bestätigung erhalten Sie einen einmaligen Stipendiencode, der den Rabatt zum Zeitpunkt der Einschreibung direkt auf Ihre Programmkosten anwendet."
+      }
+    },
+    "applySection": {
+      "badge": "Kohorte 2026 — Bewerbungen geöffnet",
+      "title": "Bewerben Sie sich für Ihr Stipendium",
+      "subtitle": "Jede Bewerbung wird persönlich geprüft. Wir antworten innerhalb von 48 Stunden."
+    },
+    "applySuccess": {
+      "title": "Bewerbung erhalten!",
+      "body": "Unser Stipendienkomitee antwortet innerhalb von <strong>48 Werkstunden</strong>.",
+      "checkInbox": "Prüfen Sie bald Ihren Posteingang"
+    },
+    "form": {
+      "headerTitle": "Stipendien-Bewerbungsformular",
+      "headerSub": "Unter 5 Minuten · Jetzt keine Dokumente erforderlich",
+      "personalInfo": "Persönliche Informationen",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "z. B. Priya Sharma",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefonnummer",
+      "academicBackground": "Akademischer Hintergrund",
+      "qualification": "Letzter höchster Abschluss",
+      "qualificationSelect": "Wählen Sie Ihren Abschluss",
+      "percentage": "Prozentsatz",
+      "cgpa": "CGPA / GPA",
+      "courseStatement": "Kurs & Erklärung",
+      "courseInterest": "Kurs von Interesse",
+      "courseInterestSelect": "Wählen Sie einen Kurs oder ein Programm",
+      "whyDeserve": "Warum verdienen Sie dieses Stipendium?",
+      "whyDeservePlaceholder": "Teilen Sie Ihren Hintergrund, Ihre Ziele oder Umstände. Das hilft uns, Sie dem richtigen Stipendium zuzuordnen.",
+      "submitting": "Wird gesendet…",
+      "submit": "Stipendienbewerbung absenden",
+      "trustSecure": "100 % sicher",
+      "trustResponse": "Antwort in 48 h",
+      "trustNoDocs": "Jetzt keine Dokumente"
+    },
+    "education": {
+      "1": "10. Klasse (Sekundarstufe)",
+      "2": "12. Klasse (Oberstufe)",
+      "3": "Diplom",
+      "4": "Bachelor (B.A / B.Sc / B.Com)",
+      "5": "Bachelor (B.Tech / B.E)",
+      "6": "Bachelor (BBA / BCA)",
+      "7": "Master (M.A / M.Sc / M.Com)",
+      "8": "Master (M.Tech / M.E)",
+      "9": "MBA",
+      "10": "PhD / Doktortitel",
+      "11": "Sonstiges"
+    },
+    "toasts": {
+      "fillContact": "Bitte geben Sie Name, E-Mail und Telefon an.",
+      "selectQualification": "Bitte wählen Sie Ihren höchsten Abschluss.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    },
+    "finalCta": {
+      "title": "Noch unentschlossen? Sprechen Sie mit unserem Stipendienberater.",
+      "subtitle": "Erreichbar Mo–Sa, 9–19 Uhr IST. Wir helfen Ihnen, das passende Stipendium und Programm für Ihre Ziele zu finden.",
+      "call": "Anrufen +91 88001 82225",
+      "sendMessage": "Nachricht senden"
+    }
+  },
+  "doctoratePage": {
+    "hero": {
+      "eyebrow": "Promotionsprogramme",
+      "titleLine1": "Doctor of Business",
+      "titleLine2": "Administration",
+      "bullet1": "Ein promotionsäquivalenter Abschluss für Führungskräfte",
+      "bullet2": "Erwerben Sie den Titel „Dr.“, ohne Ihre aktuelle Position aufzugeben",
+      "bullet3": "Erproben, prototypisieren und monetarisieren Sie Ihre Forschung mit echten Organisationen",
+      "bullet4": "Spezialisieren Sie sich mit von PwC, KPMG und Deloitte zertifizierten Wahlfächern",
+      "explore": "Programme entdecken",
+      "talkCounsellor": "Mit Berater sprechen"
+    },
+    "stats": {
+      "batches": "Erfolgreiche Jahrgänge",
+      "candidates": "Promovierende",
+      "countries": "Vertretene Länder",
+      "promotion": "Beförderungsquote"
+    },
+    "form": {
+      "title": "Mit einem Berater sprechen",
+      "subtitle": "Erhalten Sie Ihren DBA-Fahrplan – kostenlos und unverbindlich.",
+      "fullName": "Vollständiger Name *",
+      "namePlaceholder": "Dr. / Herr / Frau",
+      "phone": "Telefon *",
+      "email": "E-Mail *",
+      "organisation": "Organisation",
+      "organisationPlaceholder": "Aktueller Arbeitgeber",
+      "programmeInterest": "Programm von Interesse",
+      "selectProgramme": "Programm auswählen",
+      "success": "✓ Wir rufen Sie innerhalb von 24 Stunden an!",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "submitting": "Wird gesendet…",
+      "submit": "Kostenlose Beratung erhalten →",
+      "terms": "Mit dem Absenden stimmen Sie unseren AGB und der Datenschutzrichtlinie zu."
+    },
+    "programmes": {
+      "titleAccent": "Online-DBA-Kurse",
+      "titleRest": "von Top-Institutionen",
+      "subtitle": "Wählen Sie aus 17 spezialisierten Promotionswegen – alle für berufstätige Führungskräfte konzipiert und von Branchenmentoren begleitet.",
+      "countLabel": "Promotionskurse"
+    },
+    "tags": {
+      "all": "Alle",
+      "generalManagement": "Allgemeines Management",
+      "technology": "Technologie",
+      "finance": "Finanzen",
+      "hrLeadership": "HR & Führung",
+      "operations": "Operations",
+      "entrepreneurship": "Unternehmertum",
+      "healthcare": "Gesundheitswesen",
+      "marketing": "Marketing",
+      "sustainability": "Nachhaltigkeit",
+      "internationalBusiness": "Internationales Geschäft",
+      "dataAnalytics": "Daten & Analytik",
+      "riskCompliance": "Risiko & Compliance",
+      "projectManagement": "Projektmanagement",
+      "publicPolicy": "Öffentliche Politik",
+      "hospitality": "Gastgewerbe"
+    },
+    "badges": {
+      "mostPopular": "Am beliebtesten",
+      "newBatch": "Neuer Jahrgang",
+      "trending": "Im Trend",
+      "highDemand": "Hohe Nachfrage"
+    },
+    "modes": {
+      "onlineResidency": "Online + Präsenz",
+      "blended": "Hybrid",
+      "online": "Online"
+    },
+    "duration": {
+      "years": "{{count}} Jahre"
+    },
+    "viewDetails": "Details ansehen",
+    "why": {
+      "titleStart": "Warum eine",
+      "titleAccent": "Promotion",
+      "titleEnd": "?",
+      "subtitle": "Ein DBA überbrückt die Lücke zwischen akademischer Strenge und Führungspraxis – und verschafft Ihnen den Abschluss, das Netzwerk und die Forschungskompetenzen, um auf höchster Ebene zu agieren.",
+      "drTitle": {
+        "title": "Erwerben Sie den Titel „Dr.“",
+        "desc": "Eine promotionsäquivalente Berufspromotion, anerkannt von führenden Unternehmen und akademischen Einrichtungen weltweit."
+      },
+      "stayWorkforce": {
+        "title": "Bleiben Sie im Beruf",
+        "desc": "Konzipiert für Führungskräfte – studieren Sie, ohne Ihre Leitungsrolle aufzugeben."
+      },
+      "appliedResearch": {
+        "title": "Angewandte Forschung",
+        "desc": "Betreiben Sie echte Forschung auf Promotionsniveau zu einer geschäftlichen Herausforderung, vor der Ihre Organisation gerade steht."
+      },
+      "globalCohorts": {
+        "title": "Globale Kohorten",
+        "desc": "Lernen Sie gemeinsam mit CXOs und Führungskräften aus über 25 Ländern in virtuellen Live-Sitzungen und Präsenzphasen."
+      },
+      "certifiedElectives": {
+        "title": "Branchenzertifizierte Wahlfächer",
+        "desc": "Spezialisieren Sie sich mit Wahlfächern, die gemeinsam mit Dozenten von PwC, KPMG und Deloitte konzipiert wurden."
+      },
+      "doctoralMentoring": {
+        "title": "Promotionsbetreuung",
+        "desc": "Jeder Kandidat wird einem erfahrenen wissenschaftlichen Betreuer und einem Praxismentor aus der Branche zugeteilt."
+      }
+    },
+    "curriculum": {
+      "titleStart": "Programm-",
+      "titleAccent": "Curriculum",
+      "subtitle": "Drei klar definierte Phasen führen Sie von den Forschungsgrundlagen bis zu einer vollständig verteidigten Dissertation.",
+      "phase1": {
+        "phase": "Phase 1",
+        "title": "Promotionsgrundlagen",
+        "duration": "Monate 1–6",
+        "modules": [
+          "Philosophie der Managementforschung",
+          "Fortgeschrittene quantitative Methoden",
+          "Qualitative & Mixed-Methods-Forschung",
+          "Wissenschaftliches Schreiben & Publizieren"
+        ]
+      },
+      "phase2": {
+        "phase": "Phase 2",
+        "title": "Spezialisierte Wahlfächer",
+        "duration": "Monate 7–18",
+        "modules": [
+          "Strategische Führung im digitalen Zeitalter",
+          "Globales Finanzmanagement",
+          "Innovation & unternehmerische Ökosysteme",
+          "Organisationsverhalten & Wandel"
+        ]
+      },
+      "phase3": {
+        "phase": "Phase 3",
+        "title": "Promotionsforschung",
+        "duration": "Monate 19–36",
+        "modules": [
+          "Forschungsantrag & Ethikprüfung",
+          "Datenerhebung im Feld",
+          "Dissertationserstellung & Betreuung",
+          "Mündliche Verteidigung"
+        ]
+      }
+    },
+    "eligibility": {
+      "titleStart": "Zulassung &",
+      "titleAccent": "Aufnahmekriterien",
+      "subtitle": "Unsere Promotionsprogramme sind selektiv. Die Zulassung wird Führungskräften angeboten, die sowohl akademische Reife als auch die Absicht nachweisen, ein bedeutendes geschäftliches Problem durch Forschung zu lösen.",
+      "items": {
+        "masters": "Master oder MBA einer anerkannten Universität",
+        "experience": "Mindestens 10 Jahre Berufserfahrung",
+        "seniorRole": "Mindestens 5 Jahre in einer leitenden Führungsposition",
+        "english": "Sehr gute Englischkenntnisse (schriftlich und mündlich)",
+        "statement": "Einreichung einer Interessenserklärung zur Forschung",
+        "interview": "Erfolgreiches Bestehen des Aufnahmegesprächs"
+      }
+    },
+    "applyNow": "Jetzt bewerben",
+    "enquireNow": "Jetzt anfragen",
+    "glance": {
+      "title": "Das Programm auf einen Blick",
+      "duration": {
+        "label": "Dauer",
+        "value": "2 – 3 Jahre"
+      },
+      "deliveryMode": {
+        "label": "Durchführungsform",
+        "value": "Online + Präsenz"
+      },
+      "cohortSize": {
+        "label": "Kohortengröße",
+        "value": "Bis zu 25 Führungskräfte"
+      },
+      "credential": {
+        "label": "Abschluss",
+        "value": "Doctor of Business Administration"
+      },
+      "industryPartners": {
+        "label": "Branchenpartner",
+        "value": "PwC, KPMG, Deloitte"
+      },
+      "careerImpact": {
+        "label": "Durchschn. Karriereeffekt",
+        "value": "2× Gehalt / Vorstandsberufung"
+      },
+      "nextIntake": {
+        "label": "Nächster Studienbeginn",
+        "value": "September 2026"
+      }
+    },
+    "partners": {
+      "eyebrow": "Globale Partnerschaften",
+      "titleStart": "Unsere Partner-",
+      "titleAccent": "Universitäten",
+      "subtitle": "Jeder DBA wird von einer akkreditierten internationalen Partneruniversität verliehen – erwerben Sie eine weltweit anerkannte Promotion, ohne Ihre Karriere zu unterbrechen.",
+      "viewUniversity": "Universität ansehen"
+    },
+    "cta": {
+      "titleStart": "Bereit,",
+      "titleAccent": "Dr. [Ihr Name]",
+      "titleEnd": " zu werden?",
+      "subtitle": "Die Bewerbungen für den Jahrgang September 2026 sind geöffnet. Die Plätze sind auf 25 Führungskräfte pro Jahrgang begrenzt.",
+      "applyButton": "Für September 2026 bewerben",
+      "enquiryButton": "Anfrage senden"
+    }
+  },
+  "doctorateDetail": {
+    "notFound": "Programm nicht gefunden",
+    "notFoundDesc": "Dieses Promotionsprogramm konnte nicht gefunden werden.",
+    "viewAllProgrammes": "Alle Programme ansehen",
+    "applyNow": "Jetzt bewerben",
+    "allProgrammesArrow": "← Alle DBA-Programme",
+    "breadcrumb": {
+      "home": "Startseite",
+      "doctorate": "Promotion"
+    },
+    "hero": {
+      "eyebrow": "Promotionsprogramm",
+      "reviews": "({{count}} Bewertungen)",
+      "enrolled": "eingeschrieben",
+      "bulletStructure": "{{phases}} Phasen · {{modules}} Module · Programm über {{duration}}",
+      "bulletTitle": "Erwerben Sie den international anerkannten Titel „Dr.“",
+      "bulletDissertation": "Dissertation zu einer realen geschäftlichen Herausforderung in Ihrer Organisation",
+      "bulletCohort": "Kohorte von bis zu {{count}} Führungskräften aus über 25 Ländern"
+    },
+    "trust": {
+      "phdEquivalent": "Promotionsäquivalenter Abschluss",
+      "industryRecognised": "Branchenanerkannt",
+      "globalCohort": "Globale Kohorte · über 25 Länder"
+    },
+    "card": {
+      "limited": "Begrenzt auf {{count}} Führungskräfte pro Kohorte",
+      "duration": "Dauer",
+      "mode": "Form",
+      "cohortSize": "Kohortengröße",
+      "upToExecutives": "Bis zu {{count}} Führungskräfte",
+      "credential": "Abschluss",
+      "credentialValue": "Doctor of Business Administration",
+      "nextIntake": "Nächster Studienbeginn",
+      "accreditation": "Akkreditierung",
+      "accreditationValue": "PwC / KPMG / Deloitte Partner",
+      "requestCounselling": "Kostenlose Beratung anfordern",
+      "downloadBrochure": "Broschüre herunterladen"
+    },
+    "upcomingIntakes": "Kommende Studienstarts",
+    "batches": {
+      "nextBatch": "Nächster Jahrgang",
+      "upcoming": "Demnächst",
+      "later": "Später"
+    },
+    "seatsLeft": "{{count}} Plätze frei",
+    "nav": {
+      "overview": "Überblick",
+      "curriculum": "Curriculum",
+      "career": "Karriere",
+      "faculty": "Dozenten",
+      "reviews": "Bewertungen",
+      "faq": "FAQ"
+    },
+    "strip": {
+      "duration": "Dauer",
+      "phases": "Phasen",
+      "modules": "Module",
+      "cohort": "Kohorte",
+      "upTo": "Bis zu {{count}}",
+      "credential": "Abschluss",
+      "delivery": "Durchführung"
+    },
+    "sections": {
+      "about": "Über dieses Programm",
+      "learningOutcomes": "Lernergebnisse",
+      "eligibility": "Zulassung & Aufnahme",
+      "structure": "Programmstruktur",
+      "career": "Karriereergebnisse",
+      "faculty": "Programmdozenten",
+      "reviews": "Bewertungen der Kandidaten",
+      "faq": "Häufig gestellte Fragen"
+    },
+    "structureMeta": "{{phases}} Phasen · {{modules}} Module · {{duration}}",
+    "careerSubtitle": "Wo unsere DBA-Absolventen führen",
+    "careerStats": {
+      "promotionRate": "Beförderungsquote von Führungskräften",
+      "salaryMultiplier": "Durchschn. Gehaltsmultiplikator",
+      "timeToRole": "Durchschn. Zeit bis zur nächsten Position"
+    },
+    "programmeRating": "Programmbewertung",
+    "totalReviews": "Bewertungen insgesamt",
+    "certificate": {
+      "credentialLabel": "Doctor of Business Administration",
+      "awarded": "Verliehen nach erfolgreicher Verteidigung",
+      "badge": "Promotionsäquivalenter Abschluss",
+      "heading": "Erwerben Sie den Titel „Dr.“",
+      "body": "Nach der erfolgreichen Verteidigung Ihrer Dissertation wird Ihnen der Doctor of Business Administration verliehen – ein Abschluss, der von führenden Unternehmen, akademischen Einrichtungen und Regulierungsbehörden weltweit anerkannt wird. Fügen Sie ihn Ihrem LinkedIn-Profil, Ihrer E-Mail-Signatur und Ihrem Vorstandsprofil hinzu.",
+      "point1": "Weltweit anerkannter Titel „Dr.“",
+      "point2": "Alumni-Netzwerk von über 5.000 Promovierten",
+      "point3": "Berechtigt für akademische Positionen an führenden Business Schools",
+      "point4": "Verifiziert durch Partner-Akkreditierungsstellen"
+    },
+    "enquiry": {
+      "title": "Mit einem DBA-Berater sprechen",
+      "subtitle": "Erhalten Sie einen persönlichen Zulassungsfahrplan – kostenlos.",
+      "success": "✓ Unser Berater kontaktiert Sie innerhalb von 2 Stunden.",
+      "namePlaceholder": "Ihr Name",
+      "emailPlaceholder": "E-Mail-Adresse",
+      "orgPlaceholder": "Organisation (optional)",
+      "sending": "Wird gesendet…",
+      "submit": "Rückruf anfordern →",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    },
+    "corporate": {
+      "title": "Führungskräfte sponsern?",
+      "desc": "Maßgeschneiderte Kohorten, Rechnungsstellung und Gruppenrabatte für 3+ gesponserte Kandidaten aus derselben Organisation.",
+      "button": "Unternehmenspartnerschaften entdecken"
+    },
+    "browseOther": "Weitere Programme durchsuchen",
+    "viewAll16": "Alle 16 DBA-Programme ansehen"
+  },
+  "universityDetail": {
+    "notFound": "Universität nicht gefunden",
+    "backToProgrammes": "Zurück zu den DBA-Programmen",
+    "established": "Gegr. {{year}}",
+    "aboutHeading": "Über",
+    "whyChoose": "Warum Führungskräfte {{name}} wählen",
+    "accreditationHeading": "Akkreditierung & Anerkennung",
+    "officialWebsite": "Offizielle Website",
+    "programmesHeading": "Promotionsprogramme mit",
+    "viewProgrammes": "DBA-Programme ansehen",
+    "enquireNow": "Jetzt anfragen",
+    "faqHeading": "Häufige Fragen zu",
+    "faq": {
+      "and": " und ",
+      "q1": "Ist {{name}} akkreditiert?",
+      "a1": "Ja. {{name}} verfügt über folgende Akkreditierungen und Anerkennungen: {{accreditations}}.",
+      "q2": "Welche Promotionsprogramme bietet {{name}} über Corporate Academy an?",
+      "a2": "{{name}} verleiht: {{programs}}.",
+      "q3": "Wo befindet sich {{name}}?",
+      "a3": "{{name}} ist eine {{type}} mit Sitz in {{location}}, {{country}}, gegründet {{founded}}. Das Studium ist für berufstätige Führungskräfte konzipiert und wird in der für jedes Programm angegebenen Form durchgeführt.",
+      "q4": "Kann ich eine Promotion an {{name}} berufsbegleitend abschließen?",
+      "a4Online": "Ja. Die über Corporate Academy angebotenen Promotionsprogramme von {{name}} sind für Berufstätige strukturiert, wobei das Studium online durchgeführt wird. Alle aufgeführten Programme sind vollständig online, ohne erforderliche Reisen.",
+      "a4ResidencyOne": "Ja. Die über Corporate Academy angebotenen Promotionsprogramme von {{name}} sind für Berufstätige strukturiert, wobei das Studium online durchgeführt wird. Bitte beachten Sie, dass {{programs}} eine Präsenzkomponente enthält.",
+      "a4ResidencyMany": "Ja. Die über Corporate Academy angebotenen Promotionsprogramme von {{name}} sind für Berufstätige strukturiert, wobei das Studium online durchgeführt wird. Bitte beachten Sie, dass {{programs}} eine Präsenzkomponente enthalten."
+    }
+  },
+  "courseDetailX": {
+    "breadcrumbHome": "Startseite",
+    "breadcrumbCourses": "Kurse",
+    "topRated": "Top bewertet",
+    "enrolledLabel": "angemeldet",
+    "contentLabel": "Inhalt",
+    "modulesTopicsContent": "{{modules}} Module · {{topics}} Themen · {{hours}} Std. Inhalt",
+    "benefitCertificate": "Branchenanerkanntes Zertifikat nach Abschluss",
+    "benefitLiveDoubt": "Live-Fragestunden mit erfahrenen Mentoren",
+    "benefitProjects": "Praxisprojekte und reale Fallstudien",
+    "requestFreeCounselling": "Kostenlose Beratung anfordern",
+    "trustMoneyBack": "7-Tage-Geld-zurück-Garantie",
+    "trustCertificate": "Branchenzertifikat",
+    "trustLifetime": "Lebenslanger Zugang",
+    "nextBatchStarts": "Nächster Kurs startet",
+    "seatsLeft": "Nur noch {{count}} Plätze frei",
+    "reserveSpot": "Sichern Sie sich jetzt Ihren Platz",
+    "navOverview": "Überblick",
+    "navLearn": "Was Sie lernen",
+    "navCurriculum": "Lehrplan",
+    "navInstructor": "Dozent",
+    "navReviews": "Bewertungen",
+    "navFaq": "FAQ",
+    "highlightDuration": "Dauer",
+    "highlightModules": "Module",
+    "highlightTopics": "Themen",
+    "highlightEnrolled": "Angemeldet",
+    "highlightCertificate": "Zertifikat",
+    "highlightAccess": "Zugang",
+    "included": "Inklusive",
+    "lifetime": "Lebenslang",
+    "aboutThisCourse": "Über diesen Kurs",
+    "whoIsThisFor": "Für wen ist dieser Kurs?",
+    "whatYoullLearn": "Was Sie lernen",
+    "toolsTechnologies": "Tools & Technologien",
+    "courseCurriculum": "Kurslehrplan",
+    "curriculumSummary": "{{modules}} Module · {{topics}} Themen · {{hours}} Std. insgesamt",
+    "topicsCount": "{{count}} Themen",
+    "careerOutcomes": "Karriereergebnisse",
+    "careerOutcomesDesc": "Positionen, die unsere Absolventen nach diesem Kurs erreichen",
+    "placementRate": "Vermittlungsquote",
+    "avgSalaryHike": "Durchschn. Gehaltssteigerung",
+    "avgTimeToHire": "Durchschn. Zeit bis zur Einstellung",
+    "yourInstructors": "Ihre Dozenten",
+    "instructorExperience": "{{years}} Erfahrung",
+    "studentsMentored": "Über 500 Studierende betreut",
+    "liveProjectReviewer": "Live-Projektgutachter",
+    "studentReviews": "Studierendenbewertungen",
+    "courseRatingLabel": "Kursbewertung",
+    "totalReviews": "Bewertungen insgesamt",
+    "certificateOfCompletion": "Abschlusszertifikat",
+    "awardedOnCompletion": "Verliehen nach erfolgreichem Abschluss",
+    "industryRecognisedCertificate": "Branchenanerkanntes Zertifikat",
+    "earnYourCertificate": "Erwerben Sie Ihr Zertifikat",
+    "earnYourCertificateDesc": "Schließen Sie alle Module und Projekte ab, um ein verifiziertes Corporate-Academy-Zertifikat zu erhalten – anerkannt von führenden Unternehmen in Indien und weltweit. Teilen Sie es direkt auf LinkedIn, fügen Sie es Ihrem Lebenslauf hinzu oder nutzen Sie unseren Verifizierungslink für Recruiter.",
+    "certPtLinkedIn": "Teilbar auf LinkedIn & im Lebenslauf",
+    "certPtVerified": "Von Personalverantwortlichen verifiziert",
+    "certPtCountries": "In über 100 Ländern anerkannt",
+    "certPtBadge": "Enthält digitales Abzeichen",
+    "enrolInProgramme": "Für dieses Programm anmelden",
+    "lifetimeAccessCert": "Lebenslanger Zugang · Branchenzertifikat",
+    "seatsLeftFor": "{{count}} Plätze für den {{date}}",
+    "sidebarFormat": "Format",
+    "sidebarDuration": "Dauer",
+    "sidebarDurationValue": "{{hours}} Std. Inhalt",
+    "sidebarAccess": "Zugang",
+    "sidebarCertificate": "Zertifikat",
+    "sidebarCertificateValue": "Nach Abschluss inbegriffen",
+    "sidebarLanguage": "Sprache",
+    "sidebarLanguageValue": "Englisch · Hindi-Untertitel",
+    "sidebarEnrolled": "Angemeldet",
+    "downloadBrochure": "Broschüre herunterladen",
+    "talkToCounsellor": "Mit einem Berater sprechen",
+    "personalisedRoadmap": "Erhalten Sie einen persönlichen Kursfahrplan – kostenlos.",
+    "callYouWithin": "Wir rufen Sie innerhalb von 2 Stunden an!",
+    "yourNamePlaceholder": "Ihr Name",
+    "emailAddressPlaceholder": "E-Mail-Adresse",
+    "requestCallback": "Rückruf anfordern",
+    "somethingWrong": "Etwas ist schiefgelaufen. Versuchen Sie es erneut.",
+    "trainingForTeams": "Schulung für Teams?",
+    "trainingForTeamsDesc": "Individuelle Preise für 5+ Lernende, dedizierter Support und Team-Dashboards.",
+    "exploreCorporatePlans": "Firmenpläne entdecken",
+    "batchNext": "Nächster Kurs",
+    "batchUpcoming": "Demnächst",
+    "batchLater": "Später",
+    "seatsWord": "Plätze",
+    "seatsLeftWord": "frei",
+    "audFreshGraduates": "Hochschulabsolventen",
+    "audFreshGraduatesDesc": "Die mit einsatzbereiten Fähigkeiten in die Tech-Branche einsteigen möchten",
+    "audCareerSwitchers": "Quereinsteiger",
+    "audCareerSwitchersDesc": "Fachkräfte aus nicht-technischen Bereichen",
+    "audCuriousLearners": "Wissbegierige Lernende",
+    "audCuriousLearnersDesc": "Alle, die dieses spannende Feld erkunden möchten",
+    "audWorkingProfessionals": "Berufstätige",
+    "audWorkingProfessionalsDesc": "Erfahrene Fachkräfte, die ihre aktuellen Fähigkeiten ausbauen",
+    "audTeamLeads": "Teamleiter & Manager",
+    "audTeamLeadsDesc": "Führungskräfte, die ihr technisches Verständnis vertiefen möchten",
+    "audEntrepreneurs": "Unternehmer",
+    "audEntrepreneursDesc": "Gründer, die intelligentere Produkte entwickeln möchten",
+    "insLeadInstructor": "Leitender Dozent",
+    "insIndustryMentor": "Branchenmentor",
+    "reviewAisha": "Absolut lebensverändernd. Innerhalb von 2 Monaten nach Abschluss dieses Kurses bei Flipkart eingestellt. Die Live-Sitzungen und Projektbewertungen waren unbezahlbar.",
+    "reviewMarcus": "Die beste Investition meiner Karriere. Der Lehrplan ist branchennah und die Mentoren kümmern sich wirklich um Ihre Entwicklung.",
+    "reviewSofia": "Sehr umfassend. Einige Module könnten tiefer gehen, aber insgesamt gab es mir das Selbstvertrauen, Interviews bei führenden Produktunternehmen zu bestehen.",
+    "upcomingBatches": "Kommende Kurse",
+    "sending": "Wird gesendet…"
+  },
+  "contactX": {
+    "eyebrow": "Corporate Academy · Beraterteam",
+    "heroTitle1": "Ihr nächstes Kapitel",
+    "heroTitle2": "beginnt mit einem Gespräch.",
+    "mapTheWay": "Sagen Sie uns, wohin Sie wollen. Wir helfen Ihnen, den Weg zu finden.",
+    "connectStep": "01 / verbinden",
+    "whatsappUs": "Schreiben Sie uns rund um die Uhr auf WhatsApp",
+    "officeHeadBranch": "Hauptniederlassung",
+    "officeInternational": "Internationale Büros",
+    "officeRegistration": "Registrierungsbüro",
+    "forTeams": "Für Teams",
+    "yourMessageStep": "02 / Ihre Nachricht",
+    "realAdvisorReads": "Ein echter Berater liest jede Anfrage. Teilen Sie etwas Kontext, und wir kommen vorbereitet.",
+    "privacyNote": "Wir antworten innerhalb von 24 Stunden, Montag bis Samstag. Ihre Daten bleiben bei Corporate Academy.",
+    "step1Title": "Nennen Sie uns Ihr Ziel",
+    "step1Desc": "Ein Kurs, ein Team oder ein Karrierewechsel.",
+    "step2Title": "Lernen Sie Ihren Berater kennen",
+    "step2Desc": "Wir antworten mit einem hilfreichen nächsten Schritt.",
+    "step3Title": "Mit Klarheit vorankommen",
+    "step3Desc": "Verwandeln Sie eine Frage in einen Plan."
+  },
+  "enquiryX": {
+    "fillRequired": "Bitte füllen Sie alle Pflichtfelder aus.",
+    "somethingWrong": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "benefitFastResponseTitle": "Schnelle Antwort",
+    "benefitFastResponseDesc": "Unser Team antwortet an Werktagen innerhalb von 24 Stunden.",
+    "benefitExpertTitle": "Expertenberatung",
+    "benefitExpertDesc": "Erhalten Sie persönliche Beratung von zertifizierten Schulungsberatern.",
+    "benefitGroupTitle": "Gruppenrabatte",
+    "benefitGroupDesc": "Sonderpreise für Teams ab 5 Personen.",
+    "benefitCustomTitle": "Individuelle Lernwege",
+    "benefitCustomDesc": "Wir passen die Lernreisen an Ihre spezifischen Ziele an.",
+    "getInTouch": "Kontakt aufnehmen",
+    "startYour": "Beginnen Sie Ihre",
+    "learningJourney": "Lernreise",
+    "heroDesc": "Sagen Sie uns, was Sie erreichen möchten, und unsere Schulungsberater gestalten das perfekte Programm für Sie.",
+    "whyEnquire": "Warum bei uns anfragen?",
+    "testimonialQuote": "Das Team verstand genau, was unsere Ingenieure brauchten. Das maßgeschneiderte Bootcamp wurde innerhalb von zwei Wochen nach unserer Anfrage geliefert.",
+    "testimonialRole": "L&D-Leiter, Fortune-500-Unternehmen",
+    "enquiryReceived": "Anfrage erhalten",
+    "enquiryReceivedDesc": "Vielen Dank für Ihre Kontaktaufnahme. Einer unserer Berater wird sich innerhalb von 24 Stunden bei Ihnen melden.",
+    "submitAnother": "Weitere Anfrage senden",
+    "sendAnEnquiry": "Anfrage senden",
+    "fieldsRequiredNote": "Mit <0>*</0> markierte Felder sind Pflichtfelder.",
+    "fullName": "Vollständiger Name",
+    "namePlaceholder": "z. B. Priya Kapoor",
+    "email": "E-Mail",
+    "emailPlaceholder": "sie@firma.com",
+    "phone": "Telefon",
+    "courseOfInterest": "Kurs von Interesse",
+    "selectCourse": "Kurs auswählen (optional)",
+    "message": "Nachricht",
+    "messagePlaceholder": "Erzählen Sie uns von Ihren Schulungszielen, Teamgröße, Zeitplan oder Fragen, die Sie haben…",
+    "sending": "Wird gesendet…",
+    "sendEnquiry": "Anfrage senden",
+    "privacyNote": "Wir respektieren Ihre Privatsphäre. Ihre Daten werden niemals an Dritte weitergegeben."
+  },
+  "aboutX": {
+    "faqSectionTitle": "Häufige Fragen zu Corporate Academy",
+    "faq1Q": "Was ist Corporate Academy?",
+    "faq1A": "Corporate Academy ist ein Technologie-Schulungsinstitut mit Hauptsitz in Noida, Indien, das weltweit über 63.000 Fachkräfte ausgebildet hat. Es bietet Online-Zertifizierungskurse in Data Science, KI, Cloud, Cybersicherheit, Softwareentwicklung und mehr sowie Doktoratsprogramme (DBA) mit akkreditierten internationalen Partneruniversitäten.",
+    "faq2Q": "Für wen sind die Kurse von Corporate Academy?",
+    "faq2A": "Für Berufstätige in jeder Phase – von Einzelmitarbeitern, die sich für Tech-Rollen weiterqualifizieren, bis zu Führungskräften, die ein Doktorat anstreben. Unternehmensteams können ebenfalls maßgeschneiderte Firmenschulungen nutzen.",
+    "faq3Q": "Werden die Zertifizierungen von Corporate Academy von Arbeitgebern anerkannt?",
+    "faq3A": "Ja. Die Kurse enden mit branchenanerkannten Zertifizierungen, werden von Branchenexperten unterrichtet und durch Karriereförderung unterstützt – Corporate Academy meldet eine Vermittlungsquote von 92 % über seine Programme hinweg.",
+    "faq4Q": "Wo befindet sich Corporate Academy und kann ich aus der Ferne lernen?",
+    "faq4A": "Corporate Academy hat seinen Sitz in Noida und Neu-Delhi, Indien, mit Büros in Essen (Deutschland) und Dubai (VAE). Alle Kurse werden vollständig online durchgeführt, sodass Sie von überall auf der Welt lernen können."
+  },
+  "homeX": {
+    "searchPlaceholder": "Kurse suchen...",
+    "trustedByAt": "Vertraut von Fachkräften bei",
+    "noSpam": "Niemals Spam",
+    "freeCourseGuide": "Kostenloser Kursleitfaden inklusive",
+    "learnerSatisfaction": "4,8 / 5 Lernzufriedenheit"
+  },
+  "categoriesX": {
+    "chooseYour": "Wählen Sie Ihren",
+    "learningPath": "Lernpfad",
+    "statSpecializations": "Spezialisierungen",
+    "statCourses": "Kurse",
+    "statLearners": "Lernende",
+    "statAvgRating": "Durchschn. Bewertung",
+    "coursesCount": "{{count}} Kurse",
+    "learnersEnrolled": "Lernende angemeldet",
+    "notSureTitle": "Nicht sicher, welchen Pfad Sie wählen sollen?",
+    "notSureDesc": "Unser KI-Berater hilft Ihnen, in Sekunden das richtige Programm zu finden.",
+    "exploreAllCourses": "Alle Kurse entdecken"
+  },
+  "categoryDetailX": {
+    "learningPaths": "Lernpfade",
+    "certified": "Zertifiziert",
+    "globallyRecognized": "Weltweit anerkannt",
+    "programsCount": "{{count}} {{category}}-Programme",
+    "allCourses": "Alle Kurse",
+    "durationOfContent": "{{hours}} Std. Inhalt",
+    "viewCourse": "Kurs ansehen",
+    "readyToStart": "Bereit, Ihre {{category}}-Reise zu beginnen?",
+    "readyToStartDesc": "Melden Sie sich für einen beliebigen Kurs an und zertifizieren Sie sich in Wochen, nicht in Jahren.",
+    "enquireNow": "Jetzt anfragen"
+  },
+  "common": {
+    "close": "Schließen",
+    "verified": "Verifiziert",
+    "student": "Teilnehmer",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "switchLanguage": "Sprache wechseln",
+    "countryCode": "Ländervorwahl",
+    "noCountryFound": "Kein Land gefunden."
+  },
+  "popup": {
+    "brandEyebrow": "Corporate Academy",
+    "title": "Kostenlosen Kursleitfaden erhalten",
+    "stepAboutYou": "Über Sie",
+    "stepBackground": "Hintergrund",
+    "stepGoals": "Ihre Ziele",
+    "stepLabel": "Schritt {{current}} von 3 — {{label}}",
+    "nameRequired": "Name ist erforderlich",
+    "emailRequired": "Gültige E-Mail erforderlich",
+    "fullName": "Vollständiger Name",
+    "namePlaceholder": "z. B. Priya Sharma",
+    "emailAddress": "E-Mail-Adresse",
+    "emailPlaceholder": "sie@firma.com",
+    "phoneNumber": "Telefonnummer",
+    "yourAge": "Ihr Alter",
+    "agePlaceholder": "z. B. 28",
+    "yearsExperience": "Jahre Erfahrung",
+    "selectExperience": "Erfahrungsstufe auswählen",
+    "expFresher": "Berufseinsteiger (0 Jahre)",
+    "exp01": "0–1 Jahre",
+    "exp13": "1–3 Jahre",
+    "exp35": "3–5 Jahre",
+    "exp510": "5–10 Jahre",
+    "exp10plus": "Über 10 Jahre",
+    "courseInterest": "Kursinteresse",
+    "selectCourse": "Kursbereich auswählen",
+    "courseDataScience": "Data Science & Machine Learning",
+    "courseCloud": "Cloud Computing & DevOps",
+    "courseWeb": "Web- & Softwareentwicklung",
+    "courseAgile": "Agile & Projektmanagement",
+    "courseWorkday": "Workday & Enterprise-Plattformen",
+    "courseCyber": "Cybersicherheit",
+    "courseAI": "Künstliche Intelligenz",
+    "courseOther": "Sonstiges",
+    "anythingElse": "Möchten Sie uns noch etwas mitteilen?",
+    "messagePlaceholder": "Ihre Lernziele, bevorzugter Zeitplan oder Fragen...",
+    "submitting": "Wird gesendet...",
+    "continue": "Weiter",
+    "submit": "Absenden",
+    "privacy": "Ihre Daten sind bei uns sicher.",
+    "successTitle": "Alles erledigt!",
+    "successBody": "Vielen Dank, {{name}}! Unser Karriereberater meldet sich innerhalb von 24 Stunden mit einer persönlichen Kursempfehlung nur für Sie.",
+    "checkInbox": "Prüfen Sie Ihren Posteingang unter {{email}}"
+  },
+  "chatX": {
+    "greeting": "Hallo! Ich bin Aria, Ihre Corporate-Academy-Beraterin. Ich helfe Ihnen, den passenden Kurs oder das richtige Programm für Ihre Karriereziele zu finden.\n\nWas möchten Sie erreichen?",
+    "replyUpskill": "Weiterbilden für eine Beförderung",
+    "replySwitch": "Beruflich neu orientieren",
+    "replyCertification": "Zertifizierung erwerben",
+    "replyDBA": "DBA-Programme entdecken",
+    "proactive": "Noch am Stöbern? Ich finde in 2 Minuten die beste Option für Sie — nennen Sie mir einfach Ihre aktuelle Position.",
+    "roleDeveloper": "Ich bin Softwareentwickler",
+    "roleManagement": "Ich bin im Management",
+    "roleFresher": "Ich bin Berufseinsteiger",
+    "errorMessage": "Entschuldigung, etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "leadSuccessTitle": "Alles erledigt!",
+    "leadSuccessBody": "Ein Berater kontaktiert Sie innerhalb von 24 Stunden.",
+    "getBrochure": "Kostenlose Broschüre erhalten",
+    "fullNamePlaceholder": "Vollständiger Name *",
+    "emailPlaceholder": "E-Mail-Adresse *",
+    "phonePlaceholder": "Telefon (optional)",
+    "sendBrochure": "Broschüre senden",
+    "noSpam": "Kein Spam. Berateranruf innerhalb von 24 Stunden.",
+    "role": "KI-Beraterin · Corporate Academy",
+    "callUs": "Rufen Sie uns an",
+    "inputPlaceholder": "Nachricht schreiben…",
+    "poweredBy": "Bereitgestellt von Corporate Academy AI",
+    "talkToHuman": "Mit einem Menschen sprechen",
+    "toastInTouch": "Wir melden uns innerhalb von 24 Stunden!"
+  },
+  "reviews": {
+    "title": "Das sagen unsere Teilnehmer",
+    "subtitle": "Echte Bewertungen von Fachkräften, die mit Corporate Academy ihre Karriere verändert haben.",
+    "allReviews": "Alle Bewertungen",
+    "showLess": "Weniger anzeigen",
+    "readMore": "Mehr lesen",
+    "reviewsCount": "{{count}} Bewertungen"
+  },
+  "socialProof": {
+    "verifiedReview": "Verifizierte Bewertung",
+    "offerLetter": "Angebotsschreiben",
+    "studentReviews": "Teilnehmerbewertungen",
+    "verifiedMessages": "{{count}} verifizierte Nachrichten",
+    "placementProofs": "Vermittlungsnachweise",
+    "offerLetters": "{{count}} Angebotsschreiben"
+  },
+  "whatsapp": {
+    "studentMessage": "Teilnehmernachricht",
+    "chat": "Chat"
+  },
+  "demoModal": {
+    "title": "Kostenlose Demo buchen",
+    "subtitle": "Live-Einzelsitzung mit einem Corporate-Academy-Experten",
+    "pill45min": "45-minütige Sitzung",
+    "pill1on1": "Einzelexperte",
+    "pillDays": "Mo – So",
+    "joinTitle": "An der Live-Demo-Sitzung teilnehmen",
+    "joinMeta": "Google Meet · Rund um die Uhr geöffnet",
+    "joinNow": "Jetzt beitreten",
+    "availableSlots": "Verfügbare Zeitfenster (IST)",
+    "selected": "Ausgewählt: {{slot}} IST",
+    "orScheduled": "Oder eine geplante Sitzung buchen",
+    "bookViaWhatsapp": "Per WhatsApp buchen",
+    "bookNow": "Jetzt buchen",
+    "footer": "Wählen Sie oben ein Zeitfenster und dann Ihre Plattform. Bestätigung innerhalb von 2 Stunden.",
+    "waMessage": "Hallo, ich möchte eine kostenlose Demo-Sitzung über {{platform}}{{slot}} buchen. Bitte bestätigen Sie mein Zeitfenster.",
+    "waSlotSuffix": " — Bevorzugtes Zeitfenster: {{slot}} IST"
+  },
+  "globalImpact": {
+    "learners": "Teilnehmer",
+    "professionalsTrained": "Ausgebildete Fachkräfte",
+    "enterpriseClients": "Unternehmenskunden",
+    "countriesAndCounting": "Länder und mehr"
+  },
+  "navX": {
+    "announcement": "🎓 Einschreibungen für September 2026 geöffnet — ",
+    "explorePrograms": "Programme entdecken",
+    "bookDemo": "Kostenlose Demo buchen",
+    "dismiss": "Schließen",
+    "popularCategories": "Beliebte Kategorien",
+    "programmesCount": "Über 45 Programme in allen Disziplinen",
+    "viewAll": "Alle ansehen",
+    "catData": "Data Science",
+    "catAI": "Künstliche Intelligenz",
+    "catML": "Machine Learning",
+    "catWorkday": "Workday",
+    "catServiceNow": "ServiceNow",
+    "catSalesforce": "Salesforce",
+    "catSixSigma": "Six Sigma & Lean",
+    "catSAP": "SAP",
+    "corpTeamTitle": "Team-Schulungsprogramme",
+    "corpTeamDesc": "Maßgeschneidertes Lernen für Ihre Belegschaft",
+    "corpLeadershipTitle": "Führungskräfteentwicklung",
+    "corpLeadershipDesc": "Programme für Führungsebene und leitende Manager",
+    "corpEnterpriseTitle": "Enterprise-Lizenzierung",
+    "corpEnterpriseDesc": "Unbegrenzter Zugang für große Teams",
+    "corporate": "Unternehmen",
+    "dba": "DBA",
+    "scholarship": "Stipendium",
+    "freeDemo": "Kostenlose Demo",
+    "enquire": "Anfragen",
+    "payNow": "Jetzt bezahlen",
+    "corporateTraining": "Unternehmensschulungen",
+    "doctorateDba": "Doktorat / DBA",
+    "freeLiveDemo": "Kostenlose Live-Demo",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "location": "Corporate Academy · Hyderabad, Indien"
+  }
+}

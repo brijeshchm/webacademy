@@ -1,0 +1,11 @@
+Heading,Level1,Level2,Level3
+Python Programming Fundamentals,,,
+,"Data types, variables, and operators",,
+,Control flow: loops and conditionals,,
+,"Functions, modules, and packages",,
+,File handling and exception management,,
+Data Wrangling with Pandas & NumPy,,,
+,Series and DataFrame operations,,
+,"Merging, reshaping, and pivoting data",,
+,Handling missing values and outliers,,
+,Data visualization with Matplotlib and Seaborn,,

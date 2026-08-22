@@ -1,0 +1,41 @@
+# Corporate Academy
+
+> Corporate Academy is a professional technology training and certification institute offering instructor-led online and self-paced courses across IT, business, and management disciplines. We serve working professionals, fresh graduates, and corporates across India and globally.
+
+## Live, always-current summary
+
+Course counts, category listings, and training stats change as our catalog grows.
+For the up-to-date, machine-generated version of this file (built from the live
+course database), fetch:
+
+https://corporateacademy.com/api/llms.txt
+
+The full course URL list is available at:
+
+https://corporateacademy.com/api/sitemap.xml
+
+## Non-changing brand facts
+
+- Founded as a professional training institute serving India and global learners
+- All courses taught by industry practitioners from Big Four consulting firms, Fortune 500 companies, and leading technology organizations
+- Certifications are globally recognized and accepted by 10,000+ companies worldwide
+- Live online classes + self-paced learning options
+- Scholarship programmes available (up to 50% off)
+- Corporate training packages for teams and enterprises
+- Doctorate / DBA programmes awarded by accredited international partner universities
+
+## Contact
+
+- Website: https://corporateacademy.com
+- Enquiry form: https://corporateacademy.com/enquiry
+- Contact page: https://corporateacademy.com/contact
+- Phone: +91 88001 82225
+
+## Key Pages
+
+- All Courses: https://corporateacademy.com/courses
+- Browse by Category: https://corporateacademy.com/categories
+- About Us: https://corporateacademy.com/about
+- Scholarships: https://corporateacademy.com/scholarship
+- Corporate Training: https://corporateacademy.com/corporate-training
+- Doctorate / DBA: https://corporateacademy.com/doctorate

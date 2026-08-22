@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="55px" height="55px" viewBox="0 0 55 55" style="enable-background:new 0 0 55 55;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{font-family:'Montserrat-SemiBoldItalic';}
+	.st3{font-size:4.8893px;}
+</style>
+<circle class="st0" cx="27.5" cy="27.5" r="27"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="8.7857" y1="27.5" x2="46.2143" y2="27.5">
+	<stop  offset="0" style="stop-color:#1f1f1d"/>
+	<stop  offset="1" style="stop-color:#89a3c8"/>
+</linearGradient>
+<path class="st1" d="M25.4,20.1c1-0.9,1.8-1.9,2.8-2.6c5.4-3.9,13.1-0.9,14.5,5.6c0.1,0.6,0.2,1.2,0.2,1.8c0,0.6,0.2,1,0.6,1.3
+	c2.4,2,3.2,4.7,2.4,7.7c-0.8,3-2.9,4.7-6,5.3c-0.7,0.1-1.3,0.1-2,0.1c-7.1,0-14.3,0-21.4,0c-3.6,0-6.6-2.3-7.5-5.5
+	c-1-3.7,0.9-7.4,4.4-8.8c0.6-0.2,0.9-0.5,0.9-1.2c0.2-2.4,2.4-4.6,5-5.1C21.7,18.1,23.7,18.7,25.4,20.1z"/>
+<text transform="matrix(1 0 0 1 14.4336 31.8574)" class="st0 st2 st3">Salesforce</text>
+</svg>

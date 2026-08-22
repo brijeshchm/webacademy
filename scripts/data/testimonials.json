@@ -1,0 +1,178 @@
+[
+  {
+    "id": 75,
+    "name": "Priya Nair",
+    "role": "Data Scientist",
+    "company": "Fintech Labs",
+    "quote": "The Data Science Bootcamp was the turning point in my career. The projects were real, the mentors pushed me, and I landed a data role within two months of finishing.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/priya-nair.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 76,
+    "name": "Marcus Lee",
+    "role": "ML Engineer",
+    "company": "Northwind Systems",
+    "quote": "The Machine Learning with Python course finally got me thinking like a practitioner. The feature engineering and model evaluation sections alone were worth every minute.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/marcus-lee.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 77,
+    "name": "Sofia Hernandez",
+    "role": "Workday HCM Consultant",
+    "company": "Vela Cloud",
+    "quote": "I passed my Workday HCM Core certification on the first attempt. The practice tenant access and module-by-module labs made the difference — this is the most hands-on training I have done.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/sofia-hernandez.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 78,
+    "name": "David Okoye",
+    "role": "ServiceNow System Administrator",
+    "company": "BrightPath Digital",
+    "quote": "The ITSM Fundamentals course was practical from day one. I earned my CSA two months later and used the Flow Designer skills the very next week in production.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/david-okoye.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 79,
+    "name": "Aisha Rahman",
+    "role": "Salesforce Solution Architect",
+    "company": "Orbit Health",
+    "quote": "We enrolled four consultants in the Salesforce Administrator track. All four passed on the first attempt, and the shared vocabulary genuinely changed how our team approaches client implementations.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/aisha-rahman.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 80,
+    "name": "Tom Becker",
+    "role": "Dynamics 365 F&O Functional Consultant",
+    "company": "Lumen Retail",
+    "quote": "The Finance & Operations course reframed how I think about ERP configuration. Clear, scenario-driven, and immediately applicable on my next project.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/tom-becker.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 81,
+    "name": "Neha Sharma",
+    "role": "Oracle Cloud HCM Specialist",
+    "company": "SecureAxis",
+    "quote": "The Oracle HCM course was genuinely challenging — real configuration scenarios, no hand-holding. I passed the Implementation Specialist exam and feel confident leading client workshops.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/neha-sharma.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 82,
+    "name": "James Whitfield",
+    "role": "AI Product Manager",
+    "company": "Apex Fintech",
+    "quote": "The Generative AI course gave me exactly what I needed to lead our LLM initiative. The RAG and LangChain sections were immediately applicable and saved our team weeks of research.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/james-whitfield.png",
+    "source": "linkedin",
+    "visible": true
+  },
+  {
+    "id": 83,
+    "name": "Ramya Shivaram",
+    "role": "Senior Manager – Operations",
+    "company": "TCS",
+    "quote": "Thanks for this great course. This course was very informative, a must for all managers. It helped me understand the inner workings of a well managed organization. The course was comprehensive and easy to understand.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/aisha-rahman.png",
+    "source": "google",
+    "visible": true
+  },
+  {
+    "id": 84,
+    "name": "Karthik Raj Manupatty Ponraj",
+    "role": "Lead Consultant",
+    "company": "Infosys",
+    "quote": "Well-organized event. The workshop was a well-organized event. The trainer was an expert which made it a valuable training.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/marcus-lee.png",
+    "source": "google",
+    "visible": true
+  },
+  {
+    "id": 85,
+    "name": "Nicanor Oguname",
+    "role": "IT & Cyber Security Consultant",
+    "company": "Baxter International",
+    "quote": "The perfect PMP course. Kevin Davis, thank you very much for all the useful study materials. I'm going to try and sort them out and get started on the exam preparation next week. I'm really grateful for the coaching and mentorship.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/david-okoye.png",
+    "source": "google",
+    "visible": true
+  },
+  {
+    "id": 86,
+    "name": "Ananya Krishnaswamy",
+    "role": "Business Analyst",
+    "company": "Wipro",
+    "quote": "Excellent DevOps training! The hands-on labs and real-world scenarios made all the difference. I passed my AWS certification the following month.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/sofia-hernandez.png",
+    "source": "google",
+    "visible": true
+  },
+  {
+    "id": 87,
+    "name": "Rahul Mehta",
+    "role": "Cloud Architect",
+    "company": "HCL Technologies",
+    "quote": "The cloud computing course exceeded my expectations. Detailed, practical, and the instructors were incredibly knowledgeable. Highly recommend to anyone serious about cloud.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/priya-nair.png",
+    "source": "google",
+    "visible": true
+  },
+  {
+    "id": 88,
+    "name": "Sara Al-Husseini",
+    "role": "Scrum Master",
+    "company": "Careem",
+    "quote": "Just completed the Agile & Scrum certification with Corporate Academy. The live sessions were engaging and the study materials were top-notch. Got my CSM on the first attempt! 🎉",
+    "rating": 5,
+    "avatar_url": "/images/avatars/aisha-rahman.png",
+    "source": "instagram",
+    "visible": true
+  },
+  {
+    "id": 89,
+    "name": "James Okello",
+    "role": "Data Engineer",
+    "company": "Andela",
+    "quote": "Corporate Academy's Data Science bootcamp is a game changer. The projects are real, the mentors are amazing, and the community keeps you accountable. 10/10 would recommend 🔥",
+    "rating": 5,
+    "avatar_url": "/images/avatars/tom-becker.png",
+    "source": "instagram",
+    "visible": true
+  },
+  {
+    "id": 90,
+    "name": "Neha Srivastava",
+    "role": "Workday Consultant",
+    "company": "Accenture",
+    "quote": "Cleared Workday HCM Core on first attempt thanks to Corporate Academy! The practice tenants and hands-on labs are unmatched. This is THE training for anyone entering the Workday ecosystem.",
+    "rating": 5,
+    "avatar_url": "/images/avatars/sofia-hernandez.png",
+    "source": "instagram",
+    "visible": true
+  }
+]

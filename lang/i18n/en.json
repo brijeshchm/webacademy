@@ -1,0 +1,1513 @@
+{
+  "nav": {
+    "courses": "All Courses",
+    "categories": "Categories",
+    "about": "About",
+    "contact": "Contact",
+    "enterprise": "Enterprise",
+    "enquire": "Enquire Now",
+    "explorePrograms": "Explore Programs",
+    "enterpriseTraining": "Enterprise Training"
+  },
+  "footer": {
+    "empowering": "Empowering professionals with the tech skills of tomorrow. We build careers, not just courses.",
+    "programs": "Programs",
+    "softwareEngineering": "Software Engineering",
+    "dataScience": "Data Science",
+    "cloudArchitecture": "Cloud Architecture",
+    "cybersecurity": "Cybersecurity",
+    "viewAllCourses": "View all courses →",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "learningPaths": "Learning Paths",
+    "contactSupport": "Contact Support",
+    "enterpriseSolutions": "Enterprise Solutions",
+    "systemStatus": "System Status",
+    "contact": "Contact",
+    "address1": "100 Innovation Drive,",
+    "address2": "Tech District, SF 94105",
+    "rightsReserved": "Corporate Academy. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "chat": {
+    "greeting": "Hi! I'm your Corporate Academy advisor. How can I help you accelerate your career today?",
+    "error": "Sorry, I'm having trouble connecting right now. Please try again.",
+    "title": "Course Advisor",
+    "online": "Online",
+    "placeholder": "Ask about our courses...",
+    "suggestions": {
+      "courses": "What courses do you offer?",
+      "certs": "Tell me about certifications",
+      "cost": "How much does it cost?"
+    }
+  },
+  "home": {
+    "enrollmentOpen": "Enrollment open for Q3 cohorts",
+    "heroTitle": "Accelerate Your Career with",
+    "heroSubtitle": "Master the most in-demand tech skills. Learn from industry experts and get certified to land your dream role in tech.",
+    "explorePrograms": "Explore Programs",
+    "viewLearningPaths": "View Learning Paths",
+    "careersTransformed": "Careers Transformed",
+    "industryExperts": "Industry Experts",
+    "specializedPrograms": "Specialised ERP Programs",
+    "averageRating": "Average Rating",
+    "chooseYourPath": "Choose Your Path",
+    "chooseYourPathDesc": "Comprehensive curriculums designed to take you from fundamentals to mastery.",
+    "viewAllPaths": "View all paths",
+    "courses": "courses",
+    "featuredPrograms": "Featured Programs",
+    "featuredProgramsDesc": "Our highest-rated courses, updated for 2025.",
+    "viewAllPrograms": "View all programs",
+    "hearFromAlumni": "Hear from our alumni",
+    "at": "at",
+    "readyToTakeNextStep": "Ready to take the next step?",
+    "readyDesc": "Join thousands of professionals who have accelerated their careers with our specialized tech programs. Get our syllabus and course guide.",
+    "emailPlaceholder": "Enter your work email",
+    "getInformation": "Get Information",
+    "sending": "Sending...",
+    "weRespectYourInbox": "We respect your inbox. Unsubscribe at any time.",
+    "subscribedSuccessfully": "Subscribed successfully!",
+    "allCourses": "All Courses",
+    "viewCourse": "View Course",
+    "curriculum": "Curriculum",
+    "recommended": "Recommended",
+    "startFrom": "Start from",
+    "search": "Search",
+    "voiceSearch": "Search by voice",
+    "stopVoiceSearch": "Stop voice search",
+    "listening": "Listening...",
+    "voiceErrorPermission": "Microphone access is blocked. Allow microphone permission, or open the site in a new browser tab to use voice search.",
+    "voiceErrorGeneric": "Voice search is unavailable right now. Please try again.",
+    "voiceEmbeddedHint": "If voice search does nothing here, open the site in a new browser tab — the preview blocks microphone access.",
+    "trustedBy": "Trusted by professionals at leading companies worldwide",
+    "badgePromoted": "Promoted to Senior",
+    "badgeHired": "Hired in 60 days",
+    "badgeSalaryHike": "Salary up 140%",
+    "whyEyebrow": "Why us",
+    "whyTitle": "Why Corporate Academy",
+    "whySubtitle": "Everything you need to turn ambition into a career you are proud of.",
+    "whyFeature1Title": "Expert-Led Training",
+    "whyFeature1Desc": "Learn from practitioners who have shipped at scale, with curricula refreshed every quarter.",
+    "whyFeature2Title": "Real-World Projects",
+    "whyFeature2Desc": "Build a portfolio with hands-on labs and capstone projects modeled on real industry work.",
+    "whyFeature3Title": "Career Acceleration",
+    "whyFeature3Desc": "Resume reviews, mock interviews, and a hiring network that helps you land the role faster.",
+    "whyFeature4Title": "Recognized Certification",
+    "whyFeature4Desc": "Earn credentials that employers trust and that validate the skills you have mastered.",
+    "aboutEyebrow": "About Corporate Academy",
+    "aboutTitle1": "The Number One",
+    "aboutTitleAccent": "Tech Skills Academy",
+    "aboutTitle2": "Built Around Getting You Hired",
+    "aboutCategories": "Data Science · Cloud · Web · Agile · Workday",
+    "aboutParagraph": "For over a decade, Corporate Academy has transformed careers with hands-on, mentor-led training across the most in-demand platforms — with a single focus: getting you hired.",
+    "aboutPoint1": "Live, real-environment labs — never simulations",
+    "aboutPoint2": "Mentors with 10+ years of real industry experience",
+    "aboutPoint3": "Career support — resume reviews, mock interviews, referrals",
+    "aboutPoint4": "Globally recognized certifications in every track",
+    "aboutBookDemo": "Book a Free Demo",
+    "alumniWorkAt": "Our Alumni Work At",
+    "journeyEyebrow": "Your Path to Success",
+    "journeyTitle": "From First Class to",
+    "journeyTitleAccent": "Dream Career",
+    "journeySubtitle": "Every learner follows a proven, structured journey designed to turn skills into offers.",
+    "step1Title": "Live Mentor-Led Classes",
+    "step1Desc": "Learn in-demand skills through interactive live sessions with industry experts.",
+    "step2Title": "Hands-On Assignments",
+    "step2Desc": "Reinforce every concept with weekly assignments and real-time feedback.",
+    "step3Title": "Real-World Projects",
+    "step3Desc": "Build a portfolio with production-grade projects that employers value.",
+    "step4Title": "Interview Preparation",
+    "step4Desc": "Master mock interviews, communication, and problem-solving with mentors.",
+    "step5Title": "Resume & Profile Building",
+    "step5Desc": "Craft a standout resume and professional profile that gets noticed.",
+    "step6Title": "Placement Support",
+    "step6Desc": "Get matched with hiring partners and land your dream role.",
+    "videoStories": "Video Stories",
+    "successStoriesTitle": "Hear From Our Students",
+    "successStoriesSubtitle": "Watch real learners share how Corporate Academy helped them advance their careers.",
+    "proofSection": "Placement Proofs",
+    "proofTitle1": "Don't Believe Us?",
+    "proofTitle2": "Verify Everything.",
+    "proofSubtitle": "Real offer letters and placement emails — click any image to view.",
+    "whatsappTitle1": "Students Thanking &",
+    "whatsappTitle2": "Appreciating Us on WhatsApp",
+    "whatsappSubtitle": "Real conversations. Real appreciation. Real happiness.",
+    "proudAssociations": "Proud Associations",
+    "verifiedPartnerships": "Verified & Accredited Partnerships",
+    "featuredBadge": "Featured",
+    "popularCourses": "Popular Courses",
+    "applicationsOpenNextCohort": "Applications open for the next cohort"
+  },
+  "courses": {
+    "courseCatalog": "Course Catalog",
+    "catalogDesc": "Browse our comprehensive selection of professional tech training programs.",
+    "searchPlaceholder": "Search courses...",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "noCoursesFound": "No courses found matching your criteria.",
+    "clearFilters": "Clear filters"
+  },
+  "courseDetail": {
+    "courseNotFound": "Course not found",
+    "courseNotFoundDesc": "The course you're looking for doesn't exist or has been removed.",
+    "reviews": "reviews",
+    "enrolled": "enrolled",
+    "hours": "hours",
+    "enrollNow": "Enroll Now",
+    "requestInfo": "Request Info",
+    "aboutCourse": "About this course",
+    "skillsMaster": "Skills you will master",
+    "courseDetails": "Course Details",
+    "format": "Format",
+    "level": "Level",
+    "duration": "Duration",
+    "hoursOfContent": "hours of content",
+    "access": "Access",
+    "lifetimeAccess": "Lifetime access",
+    "enterpriseTeam": "Enterprise team? Get special pricing.",
+    "contactSales": "Contact Sales",
+    "curriculum": "Course Curriculum",
+    "curriculumModules": "modules",
+    "curriculumTopics": "topics",
+    "faq": "Frequently Asked Questions",
+    "certificate": "Certificate",
+    "includedOnCompletion": "Included on completion"
+  },
+  "categories": {
+    "learningPaths": "Learning Paths",
+    "learningPathsDesc": "Whether you want to master enterprise platforms, build AI solutions, or advance your data science skills, we have a specialized path for you."
+  },
+  "categoryDetail": {
+    "categoryNotFound": "Category not found",
+    "categoryNotFoundDesc": "This learning path doesn't exist.",
+    "browseAllPaths": "Browse all paths",
+    "courses": "Courses",
+    "enrolled": "Enrolled",
+    "averageRating": "Average Rating",
+    "availablePrograms": "Available Programs",
+    "noCourses": "No courses available in this category yet."
+  },
+  "about": {
+    "heroTitle": "We build the tech workforce of tomorrow.",
+    "heroDesc": "Corporate Academy bridges the gap between traditional education and industry reality. We believe that ambitious professionals deserve training that respects their time and immediately translates to career leverage.",
+    "careersTransformed": "Careers Transformed",
+    "expertTrainers": "Expert Trainers",
+    "countriesReached": "Countries Reached",
+    "activePrograms": "Active Programs",
+    "ourPhilosophy": "Our Philosophy",
+    "ourPhilosophyDesc": "The technology landscape moves too fast for outdated curriculum. Our programs are designed by active practitioners—senior engineers, cloud architects, and data scientists from top-tier tech companies. We don't just teach theory; we teach how to ship production-grade systems.",
+    "whyCorporateAcademy": "Why Corporate Academy?",
+    "zeroFluff": "Zero fluff",
+    "zeroFluffDesc": "Every module is tied to an immediately applicable skill.",
+    "industryRecognized": "Industry recognized",
+    "industryRecognizedDesc": "Our certifications mean something to hiring managers.",
+    "enterpriseGrade": "Enterprise grade",
+    "enterpriseGradeDesc": "We train the engineering teams of Fortune 500 companies.",
+    "exploreOurPrograms": "Explore our programs"
+  },
+  "contact": {
+    "success": "Message sent successfully!",
+    "successDesc": "An advisor will reach out to you shortly.",
+    "error": "Failed to send message",
+    "errorDesc": "Please try again or contact us directly.",
+    "contactTeam": "Contact Our Team",
+    "contactTeamDesc": "Whether you're looking to upskill yourself or train your entire engineering organization, we're here to help.",
+    "getInTouch": "Get in touch",
+    "emailUs": "Email us",
+    "emailUsDesc": "Our friendly team is here to help.",
+    "visitUs": "Visit us",
+    "visitUsDesc": "Come say hello at our SF HQ.",
+    "callUs": "Call us",
+    "callUsDesc": "Mon-Fri from 8am to 5pm PT.",
+    "enterpriseTraining": "Enterprise Training",
+    "enterpriseTrainingDesc": "Need to upskill a team of 10 or more? Our enterprise solutions offer custom learning paths and dedicated support.",
+    "contactEnterpriseSales": "Contact Enterprise Sales",
+    "sendMessage": "Send a message",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "workEmail": "Work Email",
+    "workEmailPlaceholder": "john@company.com",
+    "phone": "Phone Number (Optional)",
+    "phonePlaceholder": "+1 (555) 000-0000",
+    "howCanWeHelp": "How can we help?",
+    "howCanWeHelpPlaceholder": "Tell us about your learning goals...",
+    "sending": "Sending...",
+    "sendMessageBtn": "Send Message"
+  },
+  "notFound": {
+    "title": "404 Page Not Found",
+    "desc": "Did you forget to add the page to the router?"
+  },
+  "catalog": {
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "beginnerToIntermediate": "Beginner to Intermediate",
+      "intermediateToAdvanced": "Intermediate to Advanced",
+      "beginnerToAdvanced": "Beginner to Advanced"
+    },
+    "category": {
+      "dataScience": "Data Science",
+      "artificialIntelligence": "Artificial Intelligence",
+      "machineLearning": "Machine Learning",
+      "workday": "Workday",
+      "serviceNow": "ServiceNow",
+      "salesforce": "Salesforce",
+      "microsoftDynamics": "Microsoft Dynamics 365",
+      "oracleCloud": "Oracle Cloud",
+      "sixSigmaLean": "Six Sigma & Lean",
+      "pmpProjectManagement": "PMP & Project Management",
+      "cloudComputingDevOps": "Cloud Computing & DevOps",
+      "agileScrum": "Agile & Scrum",
+      "blockchain": "Blockchain",
+      "businessManagement": "Business Management",
+      "compTIA": "CompTIA",
+      "database": "Database",
+      "devOps": "DevOps",
+      "digitalMarketing": "Digital Marketing",
+      "finance": "Finance",
+      "itSecurity": "IT Security",
+      "itServiceManagement": "IT Service Management",
+      "medicalCoding": "Medical Coding",
+      "otherProfessionalSkills": "Other Professional Skills",
+      "programming": "Programming",
+      "qualityManagement": "Quality Management",
+      "riskManagement": "Risk Management",
+      "softSkillsTraining": "Soft Skills Training",
+      "softwareDevelopment": "Software Development",
+      "softwareTesting": "Software Testing",
+      "biVisualization": "BI & Visualization"
+    },
+    "mode": {
+      "liveOnline": "Live Online",
+      "liveOnlineSelfPaced": "Live Online + Self-paced",
+      "selfPaced": "Self-paced"
+    }
+  },
+  "faq": {
+    "home": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Quick answers about Corporate Academy's courses, certifications, and scholarships.",
+      "q1": "What courses does Corporate Academy offer?",
+      "a1": "Corporate Academy offers 490+ professional technology courses across Data Science, AI, Machine Learning, Cloud Computing, DevOps, Cybersecurity, Salesforce, Workday, ServiceNow, Oracle, Microsoft Dynamics, and project management (PMP). Courses run in live online, self-paced, and hybrid formats, so you can learn around a full-time job.",
+      "q2": "How many professionals has Corporate Academy trained?",
+      "a2": "Corporate Academy has trained 63,000+ professionals since 2018, with alumni working at companies like Google, Accenture, Infosys, TCS, and SAP. Learner satisfaction averages 4.8 out of 5.",
+      "q3": "Are Corporate Academy courses live or self-paced?",
+      "a3": "Both. Most programmes are available as live online classes led by industry experts, and many also have self-paced and hybrid options. You choose the format at enrolment based on your schedule.",
+      "q4": "Do I get a certification after completing a course?",
+      "a4": "Yes. Every course leads to a globally recognized certification from Corporate Academy, and many programmes prepare you directly for vendor certifications such as Salesforce, ServiceNow, AWS, and PMP exams.",
+      "q5": "Does Corporate Academy offer scholarships or discounts?",
+      "a5": "Yes. Six scholarship types cover up to 50% of your course fee, including merit, financial-aid, women-in-tech, early-enrolment, and referral scholarships. Applications are free and decisions arrive within 48 business hours.",
+      "q6": "Can I join a course with no IT background?",
+      "a6": "Yes. Corporate Academy runs beginner-level tracks in every major category, and career counsellors help you pick a starting point. Working professionals from non-technical roles regularly transition into data, cloud, and ERP careers through these programmes.",
+      "q7": "How do I contact Corporate Academy for course advice?",
+      "a7": "Call +91-88001-82225 (English and Hindi support) or submit an enquiry on the website. A counsellor responds with course recommendations, batch dates, and fee details, typically within one business day."
+    },
+    "courses": {
+      "title": "Course Catalog FAQs",
+      "subtitle": "Answers about fees, duration, formats, and certifications across the catalog.",
+      "q1": "How many courses does Corporate Academy have?",
+      "a1": "Corporate Academy's catalog has 490+ professional technology courses across Data Science, AI, Machine Learning, Cloud Computing, DevOps, Cybersecurity, Salesforce, Workday, ServiceNow, Oracle, Microsoft Dynamics, and PMP. New Course are added regularly as tools and certifications evolve.",
+      "q2": "How much does a course at Corporate Academy cost?",
+      "a2": "Fees vary by programme length and technology, and are quoted in INR when you enquire. Scholarships cover up to 50% of the fee for eligible learners, with decisions in 48 business hours, so most students pay significantly less than the listed price.",
+      "q3": "How long does a typical course take to complete?",
+      "a3": "Most courses take 20 to 60 hours of instruction, which works out to 4-10 weeks part-time alongside a job. Each course page lists the exact duration in hours plus the level (beginner, intermediate, or advanced).",
+      "q4": "Are the courses live online or self-paced?",
+      "a4": "Both formats are available. Live online courses run with expert instructors on fixed batch schedules, while self-paced courses let you learn on your own timeline; some programmes offer hybrid delivery combining the two.",
+      "q5": "Which course should I take as a complete beginner?",
+      "a5": "Start with a beginner-level course in the field you want to work in — filter the catalog by category and look for the 'Beginner' level badge. Data Science, Cloud Computing, and Salesforce are the most popular starting points for career changers with no prior IT experience.",
+      "q6": "Do the courses include a certification?",
+      "a6": "Yes. Every course ends with a globally recognized Corporate Academy certification, and many prepare you directly for vendor exams such as Salesforce, ServiceNow, Workday, AWS, and PMP. 63,000+ professionals have been certified through these programmes."
+    },
+    "corporate": {
+      "title": "Corporate Training FAQs",
+      "subtitle": "Answers about programme scope, delivery, measurement, and getting a proposal.",
+      "q1": "Does Corporate Academy provide corporate training for companies?",
+      "a1": "Yes. Corporate Academy designs customized workforce training programmes for companies, partnering with HR and L&D teams from capability-gap discovery through delivery and impact reporting. Programmes draw on a catalog of 490+ courses and the experience of training 63,000+ professionals.",
+      "q2": "What topics can corporate training cover?",
+      "a2": "Three programme families: technology capability (cloud, data, AI, cybersecurity, DevOps, and platforms like Salesforce, Workday, and ServiceNow), leadership in practice for managers and future leaders, and workforce essentials covering high-impact business skills for every function.",
+      "q3": "Can training be delivered to teams in multiple locations?",
+      "a3": "Yes. Corporate Academy delivers consistently across multiple locations, regions, and time zones, combining live online sessions, in-person workshops, and self-paced reinforcement under one accountable partner.",
+      "q4": "How is the impact of corporate training measured?",
+      "a4": "Every engagement starts with a baseline skills map tied to business priorities, then tracks movement from baseline confidence to applied performance. Leadership teams receive an evidence trail with success measures agreed before delivery begins.",
+      "q5": "Is there a minimum team size for corporate programmes?",
+      "a5": "No fixed minimum. Learning paths are role-based and scale from a single team to an enterprise-wide rollout; the discovery phase sizes the programme to your capability gap and budget.",
+      "q6": "How do we get a corporate training proposal?",
+      "a6": "Submit the enquiry form on this page with your team size, goals, and timeline, or call +91-88001-82225. A programme consultant follows up with a discovery call and a tailored proposal, typically within two business days."
+    },
+    "category": {
+      "title": "{{category}} Training FAQs",
+      "subtitle": "Answers about {{category}} course options, duration, formats, and certification.",
+      "q1": "What {{category}} courses does Corporate Academy offer?",
+      "a1One": "Corporate Academy offers 1 {{category}} course{{titles}}. All are taught by industry experts and lead to a globally recognized certification.",
+      "a1Many": "Corporate Academy offers {{count}} {{category}} courses{{titles}}. All are taught by industry experts and lead to a globally recognized certification.",
+      "a1None": "Corporate Academy offers a growing range of {{category}} courses. All are taught by industry experts and lead to a globally recognized certification.",
+      "a1Including": ", including {{titles}}",
+      "q2": "How long does {{category}} training take?",
+      "a2Range": "{{category}} courses at Corporate Academy run from {{min}} to {{max}} hours of instruction, which most working professionals complete in a few weeks to a few months part-time. Each course page lists its exact duration and level.",
+      "a2Generic": "Most {{category}} courses take a few weeks to a few months to complete part-time. Each course page lists its exact duration in hours and its level.",
+      "q3": "Can I learn {{category}} online?",
+      "a3": "Yes. Corporate Academy delivers {{category}} training in live online, self-paced, and hybrid formats, so you can study from anywhere and fit classes around a full-time job.",
+      "q4": "Is {{category}} training suitable for beginners?",
+      "a4One": "Yes. 1 of the {{category}} courses is beginner-level and assumes no prior experience, with intermediate and advanced tracks to progress into. Career counsellors can help you pick the right starting point.",
+      "a4Many": "Yes. {{count}} of the {{category}} courses are beginner-level and assume no prior experience, with intermediate and advanced tracks to progress into. Career counsellors can help you pick the right starting point.",
+      "a4Generic": "Courses in this path list their level (beginner, intermediate, or advanced) on each course page, and career counsellors on +91-88001-82225 can help you pick the right starting point for your background.",
+      "q5": "Do I get a certificate after completing a {{category}} course?",
+      "a5": "Yes. Every {{category}} course ends with a globally recognized Corporate Academy certification, and many prepare you for related vendor certification exams. Over 63,000 professionals have been certified through Corporate Academy programmes.",
+      "q6": "How much does {{category}} training cost?",
+      "a6": "Fees vary by course length and are quoted in INR when you enquire. Scholarships cover up to 50% of the fee for eligible learners, with decisions within 48 business hours."
+    }
+  },
+  "corporateTraining": {
+    "hero": {
+      "badge": "Enterprise capability studio",
+      "title1": "Make capability",
+      "title2": "your advantage.",
+      "subtitle": "Build the skills your strategy depends on. Corporate Academy partners with HR, L&D, and technology leaders to turn business priorities into confident, measurable performance.",
+      "ctaPrimary": "Design your programme",
+      "ctaSecondary": "Explore an enquiry",
+      "trust1": "Live expert delivery",
+      "trust2": "Multi-location ready",
+      "scroll": "Scroll to see the difference"
+    },
+    "card": {
+      "eyebrow": "Capability map / 2025",
+      "title": "From intent to impact.",
+      "row1Label": "Business priority",
+      "row1Value": "Customer-led growth",
+      "row2Label": "Capability focus",
+      "row2Value": "Digital fluency",
+      "row3Label": "Applied confidence",
+      "row3Value": "Ready to perform",
+      "footer": "A shared language for change",
+      "viewMethod": "View the method"
+    },
+    "proof": {
+      "1": {
+        "label": "One accountable partner",
+        "copy": "From discovery through delivery and reporting."
+      },
+      "2": {
+        "label": "Multiple locations",
+        "copy": "Consistent quality across rooms, regions, and time zones."
+      },
+      "3": {
+        "label": "Visible outcomes",
+        "copy": "Measures that connect learning to business intent."
+      }
+    },
+    "method": {
+      "eyebrow": "The Corporate Academy method",
+      "title": "Learning that earns its place in the business plan.",
+      "subtitle": "No off-the-shelf answer dressed up as a strategy. We design around the work, the people, and the change you need to make."
+    },
+    "pillars": {
+      "1": {
+        "title": "Start with the capability gap",
+        "copy": "We translate business priorities into a practical skills map, with success measures your leadership team can see."
+      },
+      "2": {
+        "title": "Build the right learning path",
+        "copy": "Role-based curriculum, sequenced journeys, and the right balance of live practice, projects, and reinforcement."
+      },
+      "3": {
+        "title": "Prove the movement",
+        "copy": "From baseline confidence to applied performance, every engagement is designed to leave an evidence trail."
+      }
+    },
+    "programsSection": {
+      "eyebrow": "Designed for the work ahead",
+      "title": "One partner. The whole capability agenda.",
+      "subtitle": "Start with one high-priority team or build a learning architecture for the organization.",
+      "shape": "Shape this programme"
+    },
+    "programs": {
+      "1": {
+        "eyebrow": "For digital teams",
+        "title": "Technology capability",
+        "copy": "Modern engineering, data, cloud, cybersecurity, and AI programmes built around the tools your teams use."
+      },
+      "2": {
+        "eyebrow": "For future leaders",
+        "title": "Leadership in practice",
+        "copy": "Manager and leadership journeys that strengthen decisions, communication, coaching, and execution at scale."
+      },
+      "3": {
+        "eyebrow": "For every function",
+        "title": "Workforce essentials",
+        "copy": "High-impact business skills that help teams collaborate better and move with more confidence."
+      }
+    },
+    "quote": {
+      "text": "“The strongest programmes do more than teach a skill. They give a team a new standard for the work.”",
+      "principle": "Enterprise learning principle",
+      "principleSub": "Make it relevant. Make it visible. Make it last."
+    },
+    "credibility": {
+      "eyebrow": "Credibility in delivery",
+      "title": "Enterprise-ready without enterprise theatre.",
+      "body": "Your people do not need another content library. They need expert facilitators who understand the room, programme managers who keep momentum, and reporting that helps leaders make the next decision.",
+      "point1": "Experienced, live instructors",
+      "point2": "Custom pathways by role",
+      "point3": "Cohort and blended delivery",
+      "point4": "Measurement from day one",
+      "cta": "Meet the advisor team"
+    },
+    "enquiry": {
+      "eyebrow": "Next move",
+      "title": "Bring us the brief. We will bring the point of view.",
+      "subtitle": "Share enough context for a useful first conversation. An enterprise advisor will respond with a considered next step, not a generic brochure.",
+      "location": "Delivery support across locations and time zones"
+    },
+    "form": {
+      "successTitle": "Brief received.",
+      "successBody": "Thank you. An enterprise advisor will review your context and contact you within one business day.",
+      "sendAnother": "Send another brief",
+      "ariaLabel": "Corporate training enquiry",
+      "step": "01 / tell us more",
+      "heading": "Start the conversation.",
+      "name": "Your name",
+      "namePlaceholder": "e.g. Priya Kapoor",
+      "company": "Company",
+      "companyPlaceholder": "Your organization",
+      "email": "Work email",
+      "phone": "Phone",
+      "teamSize": "Team size",
+      "teamSizeSelect": "Select a range",
+      "teamSize1": "5–20 people",
+      "teamSize2": "21–50 people",
+      "teamSize3": "51–200 people",
+      "teamSize4": "201–500 people",
+      "teamSize5": "500+ people",
+      "teamSizeNote": "We can support a focused cohort or a global rollout.",
+      "timeline": "Timeline",
+      "timelineSelect": "When do you want to start?",
+      "timeline1": "Within 4 weeks",
+      "timeline2": "1–3 months",
+      "timeline3": "3–6 months",
+      "timeline4": "Exploring for later",
+      "timelineNote": "A useful answer is better than a perfect one.",
+      "program": "Programme context",
+      "programSelect": "What would you like to build?",
+      "program1": "Technology and digital capability",
+      "program2": "Leadership and manager development",
+      "program3": "Workforce essentials",
+      "program4": "A broader capability academy",
+      "program5": "Not sure yet",
+      "goals": "What should change?",
+      "goalsPlaceholder": "Tell us about the business goal, capability gap, or performance shift you want to create.",
+      "goalsNote": "Your goals, timeline, team size, and programme context are shared with our advisor as one clear brief.",
+      "error": "We could not send your brief just now. Please try again or contact us directly.",
+      "sending": "Sending your brief…",
+      "submit": "Send my corporate brief",
+      "disclaimer": "We respond within one business day. Your details stay with Corporate Academy."
+    }
+  },
+  "scholarshipPage": {
+    "hero": {
+      "badge": "Scholarship Programme 2026 — Applications Open",
+      "title1": "Your Dream Career",
+      "title2": "Shouldn't Cost a Fortune.",
+      "subtitle": "Six scholarship types covering up to <strong>50% off</strong> your course. Backed by merit, need, or commitment — there's a scholarship for every serious learner.",
+      "stats": "₹2Cr+ disbursed · 4,200+ scholars · Decisions in 48 hours",
+      "ctaApply": "Apply for Scholarship",
+      "ctaView": "View All Scholarships"
+    },
+    "stats": {
+      "awarded": "Scholarships Awarded",
+      "supported": "Scholars Supported",
+      "maxDiscount": "Maximum Discount",
+      "types": "Scholarship Types",
+      "decisionTime": "Decision Time"
+    },
+    "impact": {
+      "careers": "Careers Transformed",
+      "salary": "Avg. Salary Hike",
+      "placement": "Placement Rate",
+      "rating": "Course Rating"
+    },
+    "why": {
+      "eyebrow": "Why Apply",
+      "title": "More Than Just a Discount",
+      "subtitle": "Every scholar gets access to world-class education, career support, and a lifelong alumni community."
+    },
+    "benefits": {
+      "career": {
+        "title": "Career Acceleration",
+        "desc": "85% salary hike within 12 months of completion on average."
+      },
+      "placement": {
+        "title": "Placement Guarantee",
+        "desc": "All programmes include placement assistance and industry certification."
+      },
+      "faculty": {
+        "title": "Expert Faculty",
+        "desc": "Practitioners from Big Four, Fortune 500, and global consulting firms."
+      },
+      "curriculum": {
+        "title": "Job-Ready Curriculum",
+        "desc": "Updated quarterly based on real hiring patterns and employer needs."
+      },
+      "recognised": {
+        "title": "Recognised Globally",
+        "desc": "Certifications accepted by 10,000+ companies across the world."
+      },
+      "alumni": {
+        "title": "Alumni Network",
+        "desc": "Join 63,000+ Corporate Academy alumni across industries and geographies."
+      }
+    },
+    "cardsSection": {
+      "eyebrow": "Six Pathways",
+      "title": "Find Your Scholarship",
+      "subtitle": "Every learner has a different story. We have a scholarship for each one.",
+      "apply": "Apply"
+    },
+    "cards": {
+      "merit": {
+        "badge": "Most Popular",
+        "title": "Merit Excellence Scholarship",
+        "discount": "Up to 50% Off",
+        "desc": "Rewarding academic brilliance. If you have consistently scored high marks, this scholarship celebrates your hard work.",
+        "elig1": "CGPA ≥ 8.0 / Percentage ≥ 80%",
+        "elig2": "Any recognised degree",
+        "elig3": "No active backlogs",
+        "course1": "Data Science",
+        "course2": "AI & ML",
+        "course3": "Cloud Computing",
+        "course4": "Salesforce"
+      },
+      "aid": {
+        "badge": "Need-Based",
+        "title": "Financial Aid Scholarship",
+        "discount": "Up to 40% Off",
+        "desc": "Financial constraints should never stand between talent and opportunity. We support driven learners who need a helping hand.",
+        "elig1": "CGPA ≥ 6.5 / Percentage ≥ 65%",
+        "elig2": "Statement of financial need",
+        "elig3": "Motivation letter (200–300 words)",
+        "course1": "All courses eligible",
+        "course2": "Workday",
+        "course3": "PMP",
+        "course4": "Six Sigma"
+      },
+      "women": {
+        "badge": "Diversity",
+        "title": "Women in Tech Scholarship",
+        "discount": "Up to 45% Off",
+        "desc": "Empowering women leaders in technology and business. We're committed to closing the gender gap in tech.",
+        "elig1": "Open to all academic percentages",
+        "elig2": "Tech or business course",
+        "elig3": "Short essay on career goals",
+        "course1": "All Technology courses",
+        "course2": "Business Management",
+        "course3": "DBA"
+      },
+      "early": {
+        "badge": "Early Bird",
+        "title": "Early Enrolment Scholarship",
+        "discount": "Up to 30% Off",
+        "desc": "Apply at least 30 days before your batch start date and lock in a meaningful discount before seats fill up.",
+        "elig1": "Apply 30+ days before batch",
+        "elig2": "No minimum CGPA",
+        "elig3": "First-come basis",
+        "course1": "All programmes",
+        "course2": "Stackable with referral"
+      },
+      "referral": {
+        "badge": "Referral",
+        "title": "Referral & Group Scholarship",
+        "discount": "Up to 25% Off",
+        "desc": "Refer a colleague and both of you save. Teams of 3 or more unlock even greater group discounts.",
+        "elig1": "Refer 1+ friend/colleague",
+        "elig2": "Referee must enrol",
+        "elig3": "Group of 5+ gets extra 5%",
+        "course1": "All courses and programmes"
+      },
+      "doctoral": {
+        "badge": "Doctoral Exclusive",
+        "title": "Doctoral Research Scholarship",
+        "discount": "Up to 35% Off",
+        "desc": "For DBA applicants with exceptional research potential, industry leadership, and a clear academic vision.",
+        "elig1": "10+ years work experience",
+        "elig2": "Management-level role",
+        "elig3": "One-page research proposal",
+        "course1": "All DBA programmes",
+        "course2": "Leadership & Strategy"
+      }
+    },
+    "stepsSection": {
+      "eyebrow": "4-Step Process",
+      "title": "How to Get Your Scholarship"
+    },
+    "steps": {
+      "1": {
+        "title": "Fill the Application",
+        "desc": "Complete the form below with your details and academic background. Takes under 5 minutes."
+      },
+      "2": {
+        "title": "Eligibility Review",
+        "desc": "Our committee reviews your application within 48 business hours. No interviews required."
+      },
+      "3": {
+        "title": "Receive Your Offer",
+        "desc": "Get a personalised scholarship offer letter via email with your discount code."
+      },
+      "4": {
+        "title": "Enrol & Begin",
+        "desc": "Confirm enrolment with your code and begin your learning journey."
+      }
+    },
+    "testimonialsSection": {
+      "eyebrow": "Scholar Stories",
+      "title": "Real Learners. Real Results.",
+      "subtitle": "Every scholar has a unique journey. Here are stories that inspire us every day."
+    },
+    "testimonials": {
+      "1": {
+        "scholarship": "Merit Excellence — 45% Off",
+        "text": "The Merit Scholarship made it possible to enrol in the Data Science programme. Within 6 months I got placed at Infosys. Corporate Academy changed my life."
+      },
+      "2": {
+        "scholarship": "Early Enrolment — 30% Off",
+        "text": "The Early Enrolment Scholarship pushed me to commit quickly and it was the best decision I made. My salary doubled within a year of completing the Workday course."
+      },
+      "3": {
+        "scholarship": "Women in Tech — 40% Off",
+        "text": "Returning to work after a career break felt daunting. The Women in Tech Scholarship showed me Corporate Academy genuinely invests in diverse talent."
+      },
+      "4": {
+        "scholarship": "Financial Aid — 40% Off",
+        "text": "Coming from a small town with limited resources, the Financial Aid Scholarship was a lifeline. Cleared AWS certification within 4 months of completing the course."
+      },
+      "5": {
+        "scholarship": "Doctoral Research — 35% Off",
+        "text": "The Doctoral Scholarship signals that Corporate Academy values serious researchers. The programme is world-class and the faculty are genuine thought leaders."
+      },
+      "6": {
+        "scholarship": "Referral — 20% Off",
+        "text": "I referred my colleague and we both got the Referral Scholarship. Studying together kept us motivated — we both cleared PMP on our first attempt."
+      }
+    },
+    "eligible": {
+      "title": "Am I Eligible?",
+      "subtitle": "Answer <strong>yes</strong> to any question below and you qualify for at least one scholarship. Just apply — our team finds the best match for you.",
+      "q1": "Did you score 65% or above in your last qualification?",
+      "q2": "Are you a woman looking to enter or return to the tech industry?",
+      "q3": "Are you a first-generation college graduate or professional?",
+      "q4": "Have you faced financial challenges limiting your education?",
+      "q5": "Are you ready to enrol within the next 30 days?",
+      "q6": "Do you have a friend or colleague who can enrol alongside you?",
+      "q7": "Are you a senior professional pursuing a Doctorate / DBA?",
+      "q8": "Are you passionate about building a better career?",
+      "cta": "Yes, Apply Now"
+    },
+    "faqSection": {
+      "eyebrow": "Got Questions?",
+      "title": "Scholarship FAQs",
+      "stillQuestions": "Still have questions?",
+      "contactTeam": "Contact our scholarship team",
+      "orCall": "or call"
+    },
+    "faqs": {
+      "1": {
+        "q": "Can I apply for more than one scholarship?",
+        "a": "You can apply for all scholarships you are eligible for. Only the highest single discount applies. Referral and Early Enrolment can be stacked on top for additional savings."
+      },
+      "2": {
+        "q": "Is there an income limit for the Financial Aid Scholarship?",
+        "a": "No strict income cutoff. We assess applications holistically — your circumstances, motivation, and commitment matter more than a number."
+      },
+      "3": {
+        "q": "How long does the process take?",
+        "a": "You will receive a response within 48 business hours. Doctoral Research Scholarship may take up to 5 business days due to the proposal review."
+      },
+      "4": {
+        "q": "Do I need to submit documents now?",
+        "a": "No. The online form is sufficient for initial review. If shortlisted, we contact you for mark sheets or certificates. No uploads required at this stage."
+      },
+      "5": {
+        "q": "Is the scholarship applicable to all courses?",
+        "a": "Most scholarships apply to all full programmes. The Doctoral Scholarship is exclusive to DBA programmes. Applicability is confirmed in your offer letter."
+      },
+      "6": {
+        "q": "Can working professionals apply?",
+        "a": "Absolutely — all scholarships are open to both freshers and working professionals. The Doctoral Scholarship specifically requires 10+ years of experience."
+      },
+      "7": {
+        "q": "What if my CGPA doesn't meet the Merit threshold?",
+        "a": "You may still qualify for Financial Aid, Women in Tech, Early Enrolment, or Referral scholarships. Our committee looks at the full picture."
+      },
+      "8": {
+        "q": "How is the discount applied?",
+        "a": "Once confirmed, you receive a unique scholarship code that applies the discount directly to your programme cost at the time of enrolment."
+      }
+    },
+    "applySection": {
+      "badge": "2026 Cohort — Applications Open",
+      "title": "Apply for Your Scholarship",
+      "subtitle": "Every application is reviewed personally. We respond within 48 hours."
+    },
+    "applySuccess": {
+      "title": "Application Received!",
+      "body": "Our scholarship committee will respond within <strong>48 business hours</strong>.",
+      "checkInbox": "Check your inbox soon"
+    },
+    "form": {
+      "headerTitle": "Scholarship Application Form",
+      "headerSub": "Under 5 minutes · No documents required now",
+      "personalInfo": "Personal Information",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "e.g. Priya Sharma",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "academicBackground": "Academic Background",
+      "qualification": "Last Highest Qualification",
+      "qualificationSelect": "Select your qualification",
+      "percentage": "Percentage",
+      "cgpa": "CGPA / GPA",
+      "courseStatement": "Course & Statement",
+      "courseInterest": "Course of Interest",
+      "courseInterestSelect": "Select a course or programme",
+      "whyDeserve": "Why do you deserve this scholarship?",
+      "whyDeservePlaceholder": "Share your background, goals, or circumstances. Helps us match you to the right scholarship.",
+      "submitting": "Submitting…",
+      "submit": "Submit Scholarship Application",
+      "trustSecure": "100% Secure",
+      "trustResponse": "48h Response",
+      "trustNoDocs": "No Docs Now"
+    },
+    "education": {
+      "1": "10th (Secondary)",
+      "2": "12th (Higher Secondary)",
+      "3": "Diploma",
+      "4": "Bachelor's Degree (B.A / B.Sc / B.Com)",
+      "5": "Bachelor's Degree (B.Tech / B.E)",
+      "6": "Bachelor's Degree (BBA / BCA)",
+      "7": "Master's Degree (M.A / M.Sc / M.Com)",
+      "8": "Master's Degree (M.Tech / M.E)",
+      "9": "MBA",
+      "10": "PhD / Doctorate",
+      "11": "Other"
+    },
+    "toasts": {
+      "fillContact": "Please fill in name, email and phone.",
+      "selectQualification": "Please select your highest qualification.",
+      "error": "Something went wrong. Please try again."
+    },
+    "finalCta": {
+      "title": "Still Deciding? Talk to Our Scholarship Advisor.",
+      "subtitle": "Available Mon–Sat, 9 AM – 7 PM IST. We'll help find the right scholarship and programme for your goals.",
+      "call": "Call +91 88001 82225",
+      "sendMessage": "Send a Message"
+    }
+  },
+  "doctoratePage": {
+    "hero": {
+      "eyebrow": "Doctoral Programmes",
+      "titleLine1": "Doctor of Business",
+      "titleLine2": "Administration",
+      "bullet1": "A Ph.D.-equivalent credential built for senior leaders",
+      "bullet2": "Earn the \"Dr.\" title while staying in your current role",
+      "bullet3": "Pilot, prototype, and monetise your research with real organisations",
+      "bullet4": "Specialise with PwC, KPMG, and Deloitte-certified electives",
+      "explore": "Explore Programmes",
+      "talkCounsellor": "Talk to Counsellor"
+    },
+    "stats": {
+      "batches": "Successful Batches",
+      "candidates": "Doctoral Candidates",
+      "countries": "Countries Represented",
+      "promotion": "Promotion Rate"
+    },
+    "form": {
+      "title": "Talk to a Counsellor",
+      "subtitle": "Get your DBA roadmap — free, no commitment.",
+      "fullName": "Full Name *",
+      "namePlaceholder": "Dr. / Mr. / Ms.",
+      "phone": "Phone *",
+      "email": "Email *",
+      "organisation": "Organisation",
+      "organisationPlaceholder": "Current employer",
+      "programmeInterest": "Programme Interest",
+      "selectProgramme": "Select a programme",
+      "success": "✓ We'll call you within 24 hours!",
+      "error": "Something went wrong. Please try again.",
+      "submitting": "Submitting…",
+      "submit": "Get Free Counselling →",
+      "terms": "By submitting, you agree to our Terms & Privacy Policy."
+    },
+    "programmes": {
+      "titleAccent": "Online DBA Courses",
+      "titleRest": "from Top Institutions",
+      "subtitle": "Choose from 17 specialised doctoral pathways — all designed for working executives, all delivered with industry mentors.",
+      "countLabel": "Doctorate Courses"
+    },
+    "tags": {
+      "all": "All",
+      "generalManagement": "General Management",
+      "technology": "Technology",
+      "finance": "Finance",
+      "hrLeadership": "HR & Leadership",
+      "operations": "Operations",
+      "entrepreneurship": "Entrepreneurship",
+      "healthcare": "Healthcare",
+      "marketing": "Marketing",
+      "sustainability": "Sustainability",
+      "internationalBusiness": "International Business",
+      "dataAnalytics": "Data & Analytics",
+      "riskCompliance": "Risk & Compliance",
+      "projectManagement": "Project Management",
+      "publicPolicy": "Public Policy",
+      "hospitality": "Hospitality"
+    },
+    "badges": {
+      "mostPopular": "Most Popular",
+      "newBatch": "New Batch",
+      "trending": "Trending",
+      "highDemand": "High Demand"
+    },
+    "modes": {
+      "onlineResidency": "Online + Residency",
+      "blended": "Blended",
+      "online": "Online"
+    },
+    "duration": {
+      "years": "{{count}} Years"
+    },
+    "viewDetails": "View Details",
+    "why": {
+      "titleStart": "Why Pursue a",
+      "titleAccent": "Doctorate",
+      "titleEnd": "?",
+      "subtitle": "A DBA bridges the gap between academic rigour and executive practice — giving you the credential, network, and research skills to operate at the highest level.",
+      "drTitle": {
+        "title": "Earn the 'Dr.' Title",
+        "desc": "A Ph.D.-equivalent professional doctorate recognised by leading corporates and academic institutions worldwide."
+      },
+      "stayWorkforce": {
+        "title": "Stay in the Workforce",
+        "desc": "Designed for senior executives — study without stepping away from your leadership role."
+      },
+      "appliedResearch": {
+        "title": "Applied Research",
+        "desc": "Conduct real doctoral-level research on a business challenge your organisation faces right now."
+      },
+      "globalCohorts": {
+        "title": "Global Cohorts",
+        "desc": "Learn alongside CXOs and senior leaders from 25+ countries in live virtual and in-person residencies."
+      },
+      "certifiedElectives": {
+        "title": "Industry-Certified Electives",
+        "desc": "Specialise with electives co-designed with PwC, KPMG, and Deloitte faculty."
+      },
+      "doctoralMentoring": {
+        "title": "Doctoral Mentoring",
+        "desc": "Every candidate is paired with a senior academic supervisor and an industry practice mentor."
+      }
+    },
+    "curriculum": {
+      "titleStart": "Programme",
+      "titleAccent": "Curriculum",
+      "subtitle": "Three clearly-defined phases take you from research fundamentals to a fully-defended doctoral dissertation.",
+      "phase1": {
+        "phase": "Phase 1",
+        "title": "Doctoral Foundations",
+        "duration": "Months 1–6",
+        "modules": [
+          "Philosophy of Management Research",
+          "Advanced Quantitative Methods",
+          "Qualitative & Mixed-Methods Research",
+          "Academic Writing & Publication"
+        ]
+      },
+      "phase2": {
+        "phase": "Phase 2",
+        "title": "Specialist Electives",
+        "duration": "Months 7–18",
+        "modules": [
+          "Strategic Leadership in the Digital Age",
+          "Global Financial Management",
+          "Innovation & Entrepreneurial Ecosystems",
+          "Organisational Behaviour & Change"
+        ]
+      },
+      "phase3": {
+        "phase": "Phase 3",
+        "title": "Doctoral Research",
+        "duration": "Months 19–36",
+        "modules": [
+          "Research Proposal & Ethics Review",
+          "Field Data Collection",
+          "Dissertation Drafting & Supervision",
+          "Viva Voce & Defence"
+        ]
+      }
+    },
+    "eligibility": {
+      "titleStart": "Eligibility &",
+      "titleAccent": "Admission Criteria",
+      "subtitle": "Our doctoral programmes are selective. Admission is offered to senior executives who demonstrate both academic readiness and the intent to solve a significant business problem through research.",
+      "items": {
+        "masters": "Masters or MBA degree from a recognised university",
+        "experience": "Minimum 10 years of professional experience",
+        "seniorRole": "At least 5 years in a senior management / leadership role",
+        "english": "Strong command of English (written and spoken)",
+        "statement": "Submission of a research interest statement",
+        "interview": "Successful completion of interview with admissions panel"
+      }
+    },
+    "applyNow": "Apply Now",
+    "enquireNow": "Enquire Now",
+    "glance": {
+      "title": "Programme at a Glance",
+      "duration": {
+        "label": "Duration",
+        "value": "2 – 3 Years"
+      },
+      "deliveryMode": {
+        "label": "Delivery Mode",
+        "value": "Online + Residency"
+      },
+      "cohortSize": {
+        "label": "Cohort Size",
+        "value": "Up to 25 Executives"
+      },
+      "credential": {
+        "label": "Credential",
+        "value": "Doctor of Business Administration"
+      },
+      "industryPartners": {
+        "label": "Industry Partners",
+        "value": "PwC, KPMG, Deloitte"
+      },
+      "careerImpact": {
+        "label": "Avg. Career Impact",
+        "value": "2× Salary / Board Appointment"
+      },
+      "nextIntake": {
+        "label": "Next Intake",
+        "value": "September 2026"
+      }
+    },
+    "partners": {
+      "eyebrow": "Global Tie-Ups",
+      "titleStart": "Our Tied-Up",
+      "titleAccent": "Universities",
+      "subtitle": "Every DBA is awarded by an accredited international partner university — earn a globally recognised doctorate without leaving your career.",
+      "viewUniversity": "View university"
+    },
+    "cta": {
+      "titleStart": "Ready to Become",
+      "titleAccent": "Dr. [Your Name]",
+      "titleEnd": "?",
+      "subtitle": "Applications for the September 2026 cohort are open. Seats are limited to 25 executives per batch.",
+      "applyButton": "Apply for September 2026",
+      "enquiryButton": "Send an Enquiry"
+    }
+  },
+  "doctorateDetail": {
+    "notFound": "Programme Not Found",
+    "notFoundDesc": "This doctoral programme could not be found.",
+    "viewAllProgrammes": "View All Programmes",
+    "applyNow": "Apply Now",
+    "allProgrammesArrow": "← All DBA Programmes",
+    "breadcrumb": {
+      "home": "Home",
+      "doctorate": "Doctorate"
+    },
+    "hero": {
+      "eyebrow": "Doctoral Programme",
+      "reviews": "({{count}} reviews)",
+      "enrolled": "enrolled",
+      "bulletStructure": "{{phases}} phases · {{modules}} modules · {{duration}} programme",
+      "bulletTitle": "Earn the internationally recognised \"Dr.\" title",
+      "bulletDissertation": "Dissertation on a live business challenge in your organisation",
+      "bulletCohort": "Cohort of up to {{count}} senior executives from 25+ countries"
+    },
+    "trust": {
+      "phdEquivalent": "Ph.D.-Equivalent Credential",
+      "industryRecognised": "Industry-Recognised",
+      "globalCohort": "Global Cohort · 25+ Countries"
+    },
+    "card": {
+      "limited": "Limited to {{count}} executives per cohort",
+      "duration": "Duration",
+      "mode": "Mode",
+      "cohortSize": "Cohort Size",
+      "upToExecutives": "Up to {{count}} executives",
+      "credential": "Credential",
+      "credentialValue": "Doctor of Business Administration",
+      "nextIntake": "Next Intake",
+      "accreditation": "Accreditation",
+      "accreditationValue": "PwC / KPMG / Deloitte Partner",
+      "requestCounselling": "Request Free Counselling",
+      "downloadBrochure": "Download Brochure"
+    },
+    "upcomingIntakes": "Upcoming Intakes",
+    "batches": {
+      "nextBatch": "Next Batch",
+      "upcoming": "Upcoming",
+      "later": "Later"
+    },
+    "seatsLeft": "{{count}} seats left",
+    "nav": {
+      "overview": "Overview",
+      "curriculum": "Curriculum",
+      "career": "Career",
+      "faculty": "Faculty",
+      "reviews": "Reviews",
+      "faq": "FAQ"
+    },
+    "strip": {
+      "duration": "Duration",
+      "phases": "Phases",
+      "modules": "Modules",
+      "cohort": "Cohort",
+      "upTo": "Up to {{count}}",
+      "credential": "Credential",
+      "delivery": "Delivery"
+    },
+    "sections": {
+      "about": "About This Programme",
+      "learningOutcomes": "Learning Outcomes",
+      "eligibility": "Eligibility & Admission",
+      "structure": "Programme Structure",
+      "career": "Career Outcomes",
+      "faculty": "Programme Faculty",
+      "reviews": "Candidate Reviews",
+      "faq": "Frequently Asked Questions"
+    },
+    "structureMeta": "{{phases}} phases · {{modules}} modules · {{duration}}",
+    "careerSubtitle": "Where our DBA graduates lead",
+    "careerStats": {
+      "promotionRate": "Executive Promotion Rate",
+      "salaryMultiplier": "Avg. Salary Multiplier",
+      "timeToRole": "Avg. Time to Next Role"
+    },
+    "programmeRating": "Programme Rating",
+    "totalReviews": "Total reviews",
+    "certificate": {
+      "credentialLabel": "Doctor of Business Administration",
+      "awarded": "Awarded on successful defence",
+      "badge": "Ph.D.-Equivalent Credential",
+      "heading": "Earn the \"Dr.\" Title",
+      "body": "Upon successful defence of your dissertation, you are awarded the Doctor of Business Administration — a credential recognised by leading corporations, academic institutions, and regulatory bodies worldwide. Add it to your LinkedIn, email signature, and board profile.",
+      "point1": "Globally recognised 'Dr.' title",
+      "point2": "Alumni network of 5,000+ doctoral graduates",
+      "point3": "Eligible for academic appointments at leading B-schools",
+      "point4": "Verified by partner accreditation bodies"
+    },
+    "enquiry": {
+      "title": "Talk to a DBA Counsellor",
+      "subtitle": "Get a personalised admissions roadmap — free of charge.",
+      "success": "✓ Our counsellor will contact you within 2 hours.",
+      "namePlaceholder": "Your Name",
+      "emailPlaceholder": "Email Address",
+      "orgPlaceholder": "Organisation (optional)",
+      "sending": "Sending…",
+      "submit": "Request Callback →",
+      "error": "Something went wrong. Please try again."
+    },
+    "corporate": {
+      "title": "Sponsoring Executives?",
+      "desc": "Custom cohorts, invoiced billing, and group discounts for 3+ sponsored candidates from the same organisation.",
+      "button": "Explore Corporate Partnerships"
+    },
+    "browseOther": "Browse Other Programmes",
+    "viewAll16": "View All 16 DBA Programmes"
+  },
+  "universityDetail": {
+    "notFound": "University not found",
+    "backToProgrammes": "Back to DBA Programmes",
+    "established": "Est. {{year}}",
+    "aboutHeading": "About",
+    "whyChoose": "Why executives choose {{name}}",
+    "accreditationHeading": "Accreditation & Recognition",
+    "officialWebsite": "Official website",
+    "programmesHeading": "Doctoral Programmes with",
+    "viewProgrammes": "View DBA Programmes",
+    "enquireNow": "Enquire Now",
+    "faqHeading": "Common Questions About",
+    "faq": {
+      "and": " and ",
+      "q1": "Is {{name}} accredited?",
+      "a1": "Yes. {{name}} holds the following accreditations and recognitions: {{accreditations}}.",
+      "q2": "What doctoral programmes does {{name}} offer through Corporate Academy?",
+      "a2": "{{name}} awards: {{programs}}.",
+      "q3": "Where is {{name}} located?",
+      "a3": "{{name}} is a {{type}} based in {{location}}, {{country}}, established in {{founded}}. Coursework is designed for working executives and delivered in the mode listed for each programme.",
+      "q4": "Can I complete a {{name}} doctorate while working full-time?",
+      "a4Online": "Yes. {{name}} doctoral programmes offered through Corporate Academy are structured for working professionals, with coursework delivered online. All listed programmes are fully online, with no travel required.",
+      "a4ResidencyOne": "Yes. {{name}} doctoral programmes offered through Corporate Academy are structured for working professionals, with coursework delivered online. Note that {{programs}} includes an in-person residency component.",
+      "a4ResidencyMany": "Yes. {{name}} doctoral programmes offered through Corporate Academy are structured for working professionals, with coursework delivered online. Note that {{programs}} include an in-person residency component."
+    }
+  },
+  "courseDetailX": {
+    "breadcrumbHome": "Home",
+    "breadcrumbCourses": "Courses",
+    "topRated": "Top Rated",
+    "enrolledLabel": "Enrolled",
+    "contentLabel": "Content",
+    "modulesTopicsContent": "{{modules}} modules · {{topics}} topics · {{hours}}h of content",
+    "benefitCertificate": "Industry-recognized certificate on completion",
+    "benefitLiveDoubt": "Live doubt-clearing sessions with expert mentors",
+    "benefitProjects": "Hands-on projects & real-world case studies",
+    "requestFreeCounselling": "Request Free Counselling",
+    "trustMoneyBack": "7-Day Change Trainer Guarantee",
+    "trustCertificate": "Industry Certificate",
+    "trustLifetime": "Lifetime Access",
+    "nextBatchStarts": "Next batch starts",
+    "seatsLeft": "Only {{count}} seats left",
+    "reserveSpot": "Reserve your spot now",
+    "navOverview": "Overview",
+    "navLearn": "What You'll Learn",
+    "navCurriculum": "Curriculum",
+    "navInstructor": "Instructor",
+    "navReviews": "Reviews",
+    "navFaq": "FAQ",
+    "highlightDuration": "Duration",
+    "highlightModules": "Modules",
+    "highlightTopics": "Topics",
+    "highlightEnrolled": "Enrolled",
+    "highlightCertificate": "Certificate",
+    "highlightAccess": "Access",
+    "included": "Included",
+    "lifetime": "Lifetime",
+    "aboutThisCourse": "About This Course",
+    "whoIsThisFor": "Who Is This Course For?",
+    "whatYoullLearn": "What You'll Learn",
+    "toolsTechnologies": "Technologies Covered in This Course",
+    "courseCurriculum": "Course Curriculum",
+    "curriculumSummary": "{{modules}} modules · {{topics}} topics · {{hours}}h total",
+    "topicsCount": "{{count}} topics",
+    "careerOutcomes": "Career Outcomes",
+    "careerOutcomesDesc": "Roles our alumni land after this course",
+    "placementRate": "Placement Rate",
+    "avgSalaryHike": "Avg. Salary Hike",
+    "avgTimeToHire": "Avg. Time to Hire",
+    "yourInstructors": "Your Instructors",
+    "instructorExperience": "{{years}} experience",
+    "studentsMentored": "500+ students mentored",
+    "liveProjectReviewer": "Live project reviewer",
+    "studentReviews": "Student Reviews",
+    "courseRatingLabel": "Course Rating",
+    "totalReviews": "Total reviews",
+    "certificateOfCompletion": "Certificate of Completion",
+    "awardedOnCompletion": "Awarded upon successful completion",
+    "industryRecognisedCertificate": "Industry-Recognised Certificate",
+    "earnYourCertificate": "Earn Your Certificate",
+    "earnYourCertificateDesc": "Complete all modules and projects to receive a verified Corporate Academy certificate — recognised by leading companies across India and globally. Share it directly on LinkedIn, add to your resume, or use our verification link with recruiters.",
+    "certPtLinkedIn": "Shareable on LinkedIn & resume",
+    "certPtVerified": "Verified by hiring managers",
+    "certPtCountries": "Recognised across 100+ countries",
+    "certPtBadge": "Includes digital badge",
+    "enrolInProgramme": "Enrol in this Programme",
+    "lifetimeAccessCert": "Lifetime access · Industry certificate",
+    "seatsLeftFor": "{{count}} seats left for {{date}}",
+    "sidebarFormat": "Format",
+    "sidebarDuration": "Duration",
+    "sidebarDurationValue": "{{hours}}h of content",
+    "sidebarAccess": "Access",
+    "sidebarCertificate": "Certificate",
+    "sidebarCertificateValue": "Included on completion",
+    "sidebarLanguage": "Language",
+    "sidebarLanguageValue": "English · Hindi subtitles",
+    "sidebarEnrolled": "Enrolled",
+    "downloadBrochure": "Download Brochure",
+    "talkToCounsellor": "Talk to a Counsellor",
+    "personalisedRoadmap": "Get a personalised course roadmap — free.",
+    "callYouWithin": "We'll call you within 2 hours!",
+    "yourNamePlaceholder": "Your Name",
+    "emailAddressPlaceholder": "Email Address",
+    "requestCallback": "Request Callback",
+    "somethingWrong": "Something went wrong. Try again.",
+    "trainingForTeams": "Training for Teams?",
+    "trainingForTeamsDesc": "Custom pricing for 5+ learners, dedicated support, and team dashboards.",
+    "exploreCorporatePlans": "Explore Corporate Plans",
+    "batchNext": "Next Batch",
+    "batchUpcoming": "Upcoming",
+    "batchLater": "Later",
+    "seatsWord": "seats",
+    "seatsLeftWord": "left",
+    "audFreshGraduates": "Fresh Graduates",
+    "audFreshGraduatesDesc": "Looking to break into tech with job-ready skills",
+    "audCareerSwitchers": "Career Switchers",
+    "audCareerSwitchersDesc": "Professionals pivoting from non-tech backgrounds",
+    "audCuriousLearners": "Curious Learners",
+    "audCuriousLearnersDesc": "Anyone eager to explore this exciting field",
+    "audWorkingProfessionals": "Working Professionals",
+    "audWorkingProfessionalsDesc": "Experienced folks levelling up their current skills",
+    "audTeamLeads": "Team Leads & Managers",
+    "audTeamLeadsDesc": "Leaders looking to deepen technical fluency",
+    "audEntrepreneurs": "Entrepreneurs",
+    "audEntrepreneursDesc": "Founders who want to build smarter products",
+    "insLeadInstructor": "Lead Instructor",
+    "insIndustryMentor": "Industry Mentor",
+    "reviewAisha": "Absolutely life-changing. Got placed at Flipkart within 2 months of completing this course. The live sessions and project reviews were invaluable.",
+    "reviewMarcus": "Best investment I've made in my career. The curriculum is industry-aligned and the mentors actually care about your growth.",
+    "reviewSofia": "Very comprehensive. Some modules could go deeper, but overall it gave me the confidence to clear interviews at top product companies.",
+    "upcomingBatches": "Upcoming Batches",
+    "sending": "Sending…"
+  },
+  "contactX": {
+    "eyebrow": "Corporate Academy · Advisor desk",
+    "heroTitle1": "Your next chapter",
+    "heroTitle2": "starts with a conversation.",
+    "mapTheWay": "Tell us where you want to go. We will help map the way.",
+    "connectStep": "01 / connect",
+    "whatsappUs": "WhatsApp us 24/7",
+    "officeHeadBranch": "Head Branch",
+    "officeInternational": "International offices",
+    "officeRegistration": "Registration office",
+    "forTeams": "For teams",
+    "yourMessageStep": "02 / your message",
+    "realAdvisorReads": "A real advisor reads every enquiry. Share a little context and we will come prepared.",
+    "privacyNote": "We respond within 24 hours, Monday to Saturday. Your details stay with Corporate Academy.",
+    "step1Title": "Tell us your goal",
+    "step1Desc": "A course, a team, or a career pivot.",
+    "step2Title": "Meet your advisor",
+    "step2Desc": "We reply with a useful next step.",
+    "step3Title": "Move with clarity",
+    "step3Desc": "Turn a question into a plan."
+  },
+  "enquiryX": {
+    "fillRequired": "Please fill in all required fields.",
+    "somethingWrong": "Something went wrong. Please try again.",
+    "benefitFastResponseTitle": "Fast Response",
+    "benefitFastResponseDesc": "Our team responds within 24 hours on business days.",
+    "benefitExpertTitle": "Expert Guidance",
+    "benefitExpertDesc": "Get personalised advice from certified training consultants.",
+    "benefitGroupTitle": "Group Discounts",
+    "benefitGroupDesc": "Special pricing available for teams of 5 or more.",
+    "benefitCustomTitle": "Custom Paths",
+    "benefitCustomDesc": "We tailor learning journeys to your specific goals.",
+    "getInTouch": "Get in Touch",
+    "startYour": "Start Your",
+    "learningJourney": "Learning Journey",
+    "heroDesc": "Tell us what you want to achieve and our training consultants will craft the perfect programme for you.",
+    "whyEnquire": "Why enquire with us?",
+    "testimonialQuote": "The team understood exactly what our engineers needed. The customised bootcamp was delivered within two weeks of our enquiry.",
+    "testimonialRole": "L&D Head, Fortune 500 Company",
+    "enquiryReceived": "Enquiry Received",
+    "enquiryReceivedDesc": "Thank you for reaching out. One of our consultants will contact you within 24 hours.",
+    "submitAnother": "Submit another enquiry",
+    "sendAnEnquiry": "Send an Enquiry",
+    "fieldsRequiredNote": "Fields marked <0>*</0> are required.",
+    "fullName": "Full Name",
+    "namePlaceholder": "e.g. Priya Kapoor",
+    "email": "Email",
+    "emailPlaceholder": "you@company.com",
+    "phone": "Phone",
+    "courseOfInterest": "Course of Interest",
+    "selectCourse": "Select a course (optional)",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your training goals, team size, timeline, or any questions you have…",
+    "sending": "Sending…",
+    "sendEnquiry": "Send Enquiry",
+    "privacyNote": "We respect your privacy. Your details are never shared with third parties."
+  },
+  "aboutX": {
+    "faqSectionTitle": "Common Questions About Corporate Academy",
+    "faq1Q": "What is Corporate Academy?",
+    "faq1A": "Corporate Academy is a technology training institute headquartered in Noida, India, that has trained over 63,000 professionals worldwide. It offers online certification courses in data science, AI, cloud, cybersecurity, software engineering and more, plus doctorate (DBA) programmes with accredited international partner universities.",
+    "faq2Q": "Who are Corporate Academy's courses for?",
+    "faq2A": "Working professionals at every stage — from individual contributors upskilling into tech roles to senior executives pursuing a doctorate. Enterprise teams can also access tailored corporate training programmes.",
+    "faq3Q": "Are Corporate Academy certifications recognised by employers?",
+    "faq3A": "Yes. Courses end with industry-recognised certifications, are taught by industry-expert trainers, and are backed by career support — Corporate Academy reports a 92% placement rate across its programmes.",
+    "faq4Q": "Where is Corporate Academy located, and can I study remotely?",
+    "faq4A": "Corporate Academy is based in Noida and New Delhi, India, with offices in Essen (Germany) and Dubai (UAE). All courses are delivered fully online, so you can study from anywhere in the world."
+  },
+  "homeX": {
+    "searchPlaceholder": "Search courses...",
+    "trustedByAt": "Trusted by professionals at",
+    "noSpam": "No spam, ever",
+    "freeCourseGuide": "Free course guide included",
+    "learnerSatisfaction": "4.8 / 5 learner satisfaction"
+  },
+  "categoriesX": {
+    "chooseYour": "Choose Your",
+    "learningPath": "Learning Path",
+    "statSpecializations": "Specializations",
+    "statCourses": "Courses",
+    "statLearners": "Learners",
+    "statAvgRating": "Avg Rating",
+    "coursesCount": "{{count}} courses",
+    "learnersEnrolled": "learners enrolled",
+    "notSureTitle": "Not sure which path to take?",
+    "notSureDesc": "Our AI advisor helps you find the right program in seconds.",
+    "exploreAllCourses": "Explore All Courses"
+  },
+  "categoryDetailX": {
+    "learningPaths": "Learning Paths",
+    "certified": "Certified",
+    "globallyRecognized": "Globally recognized",
+    "programsCount": "{{count}} {{category}} Programs",
+    "allCourses": "All courses",
+    "durationOfContent": "{{hours}}h of content",
+    "viewCourse": "View Course",
+    "readyToStart": "Ready to start your {{category}} journey?",
+    "readyToStartDesc": "Enroll in any course and get certified in weeks, not years.",
+    "enquireNow": "Enquire Now"
+  },
+  "common": {
+    "close": "Close",
+    "verified": "Verified",
+    "student": "Student",
+    "previous": "Previous",
+    "next": "Next",
+    "switchLanguage": "Switch language",
+    "countryCode": "Country code",
+    "noCountryFound": "No country found."
+  },
+  "popup": {
+    "brandEyebrow": "Corporate Academy",
+    "title": "Get Your Free Course Guide",
+    "stepAboutYou": "About You",
+    "stepBackground": "Background",
+    "stepGoals": "Your Goals",
+    "stepLabel": "Step {{current}} of 3 — {{label}}",
+    "nameRequired": "Name is required",
+    "emailRequired": "Valid email required",
+    "fullName": "Full Name",
+    "namePlaceholder": "e.g. Priya Sharma",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "you@company.com",
+    "phoneNumber": "Phone Number",
+    "yourAge": "Your Age",
+    "agePlaceholder": "e.g. 28",
+    "yearsExperience": "Years of Experience",
+    "selectExperience": "Select experience level",
+    "expFresher": "Fresher (0 years)",
+    "exp01": "0–1 years",
+    "exp13": "1–3 years",
+    "exp35": "3–5 years",
+    "exp510": "5–10 years",
+    "exp10plus": "10+ years",
+    "courseInterest": "Course Interest",
+    "selectCourse": "Select a course area",
+    "courseDataScience": "Data Science & Machine Learning",
+    "courseCloud": "Cloud Computing & DevOps",
+    "courseWeb": "Web & Software Development",
+    "courseAgile": "Agile & Project Management",
+    "courseWorkday": "Workday & Enterprise Platforms",
+    "courseCyber": "Cybersecurity",
+    "courseAI": "Artificial Intelligence",
+    "courseOther": "Other",
+    "anythingElse": "Anything else you'd like us to know?",
+    "messagePlaceholder": "Your learning goals, preferred schedule, or questions...",
+    "submitting": "Submitting...",
+    "continue": "Continue",
+    "submit": "Submit",
+    "privacy": "Your information is safe with us.",
+    "successTitle": "You're all set!",
+    "successBody": "Thank you, {{name}}! Our career advisor will reach out within 24 hours with a personalized course recommendation just for you.",
+    "checkInbox": "Check your inbox at {{email}}"
+  },
+  "chatX": {
+    "greeting": "Hi! I'm Aria, your Corporate Academy advisor. I can help you find the right course or programme to reach your career goals.\n\nWhat are you looking to achieve?",
+    "replyUpskill": "Upskill for a promotion",
+    "replySwitch": "Switch careers",
+    "replyCertification": "Earn a certification",
+    "replyDBA": "Explore DBA programmes",
+    "proactive": "Still exploring? I can narrow down the best option for you in 2 minutes — just tell me your current role.",
+    "roleDeveloper": "I'm a software developer",
+    "roleManagement": "I'm in management",
+    "roleFresher": "I'm a fresher",
+    "errorMessage": "Sorry, something went wrong. Please try again.",
+    "leadSuccessTitle": "You're all set!",
+    "leadSuccessBody": "An advisor will contact you within 24 hours.",
+    "getBrochure": "Get Your Free Brochure",
+    "fullNamePlaceholder": "Full name *",
+    "emailPlaceholder": "Email address *",
+    "phonePlaceholder": "Phone (optional)",
+    "sendBrochure": "Send Brochure",
+    "noSpam": "No spam. Advisor call within 24 hours.",
+    "role": "AI Advisor · Corporate Academy",
+    "callUs": "Call us",
+    "inputPlaceholder": "Type a message…",
+    "poweredBy": "Powered by Corporate Academy AI",
+    "talkToHuman": "Talk to a human",
+    "toastInTouch": "We'll be in touch within 24 hours!"
+  },
+  "reviews": {
+    "title": "What Our Learners Say",
+    "subtitle": "Real reviews from professionals who transformed their careers with Corporate Academy.",
+    "allReviews": "All Reviews",
+    "showLess": "Show less",
+    "readMore": "Read More",
+    "reviewsCount": "{{count}} Reviews"
+  },
+  "socialProof": {
+    "verifiedReview": "Verified review",
+    "offerLetter": "Offer Letter",
+    "studentReviews": "Student Reviews",
+    "verifiedMessages": "{{count}} verified messages",
+    "placementProofs": "Placement Proofs",
+    "offerLetters": "{{count}} offer letters"
+  },
+  "whatsapp": {
+    "studentMessage": "Student Message",
+    "chat": "chat"
+  },
+  "demoModal": {
+    "title": "Book a Free Demo",
+    "subtitle": "Live 1-on-1 session with a Corporate Academy expert",
+    "pill45min": "45 min session",
+    "pill1on1": "1-on-1 expert",
+    "pillDays": "Mon – Sun",
+    "joinTitle": "Join Live Demo Session",
+    "joinMeta": "Google Meet · Open 24/7",
+    "joinNow": "Join Now",
+    "availableSlots": "Available Time Slots (IST)",
+    "selected": "Selected: {{slot}} IST",
+    "orScheduled": "Or Book a Scheduled Session",
+    "bookViaWhatsapp": "Book via WhatsApp",
+    "bookNow": "Book Now",
+    "footer": "Select a slot above, then choose your platform. Confirms within 2 hours.",
+    "waMessage": "Hi, I'd like to book a free demo session via {{platform}}{{slot}}. Please confirm my slot.",
+    "waSlotSuffix": " — Preferred slot: {{slot}} IST"
+  },
+  "globalImpact": {
+    "learners": "Learners",
+    "professionalsTrained": "Professionals Trained",
+    "enterpriseClients": "Enterprise Clients",
+    "countriesAndCounting": "Countries and Counting"
+  },
+  "navX": {
+    "announcement": "🎓 September 2026 enrolments open — ",
+    "explorePrograms": "Explore programmes",
+    "bookDemo": "Book a free demo",
+    "dismiss": "Dismiss",
+    "popularCategories": "Popular Categories",
+    "programmesCount": "45+ programmes across all disciplines",
+    "viewAll": "View all",
+    "catData": "Data Science",
+    "catAI": "Artificial Intelligence",
+    "catML": "Machine Learning",
+    "catWorkday": "Workday",
+    "catServiceNow": "ServiceNow",
+    "catSalesforce": "Salesforce",
+    "catSixSigma": "Six Sigma & Lean",
+    "catSAP": "SAP",
+    "corpTeamTitle": "Team Training Programmes",
+    "corpTeamDesc": "Custom learning for your workforce",
+    "corpLeadershipTitle": "Leadership Development",
+    "corpLeadershipDesc": "C-suite & senior manager tracks",
+    "corpEnterpriseTitle": "Enterprise Licensing",
+    "corpEnterpriseDesc": "Unlimited access for large teams",
+    "corporate": "Corporate",
+    "dba": "DBA",
+    "scholarship": "Scholarship",
+    "freeDemo": "Free Demo",
+    "enquire": "Enquire",
+    "payNow": "Pay Now",
+    "corporateTraining": "Corporate Training",
+    "doctorateDba": "Doctorate / DBA",
+    "freeLiveDemo": "Free Live Demo",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "location": "Corporate Academy · Hyderabad, India"
+  }
+}
