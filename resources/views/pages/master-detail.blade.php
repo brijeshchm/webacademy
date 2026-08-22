@@ -95,6 +95,9 @@
         ['bg' => 'from-pink-500 to-pink-600', 'light' => 'bg-pink-50', 'text' => 'text-pink-700', 'border' => 'border-pink-200'],
     ];
 @endphp
+@section('meta_robots')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
     {{-- ══ HERO ══════════════════════════════════════════════════ --}}
     <div class="relative overflow-hidden bg-gradient-to-br from-[#0b1437] via-[#14205c] to-[#0a0f2e]">

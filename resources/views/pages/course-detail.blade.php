@@ -230,6 +230,9 @@
     <script type="application/ld+json">{!! json_ld($ld) !!}</script>
     <script type="application/ld+json">{!! json_ld($faqPairs) !!}</script>
 @endpush
+@section('meta_robots')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <div class="pb-24 bg-gray-50">
     {{-- ═══ HERO ═══ --}}

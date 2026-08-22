@@ -20,6 +20,9 @@
 	India's No.1 IT Training Institute in Noida | Delhi | Gurgaon for Industrial Training. We conducts IT Software, Hardware, Network &amp; Security Courses training. Corporate Trainer commands all training program. Week Days, Weekend, 6 Week, 6 Months Industrial Training are available
 @endif
 @endsection
+@section('meta_robots')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <div class="main">
 			<div class="top-banner">

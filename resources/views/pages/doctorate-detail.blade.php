@@ -66,7 +66,9 @@
       
         @endif
 @endpush
-
+@section('meta_robots')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
     {{-- ══ HERO ══════════════════════════════════════════════════ --}}
     <div class="relative overflow-hidden bg-gradient-to-br from-[#0b1437] via-[#14205c] to-[#0a0f2e]">
