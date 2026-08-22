@@ -102,7 +102,7 @@ class UserController extends Controller
 				
 				$add_capbilities = array(
 					 'user_id'=>$user->id,
-					 'capabilities'=>serialize($request->input('capabilities')),					 
+					 'capabilities'=>json_encode($request->input('capabilities')),					 
 					 );
 				
 				$capability = DB::table('web_capabilities')->insert($add_capbilities);	 
@@ -133,17 +133,20 @@ class UserController extends Controller
     {	  
 		$edit_data= User::findOrFail(base64_decode($id)); 	
 
-//echo "<pre>";print_r($edit_data);		
+	
 		 $capabilities = Capability::where('user_id',$edit_data->id)->first(); 	
+		 
+		
 		$permissions = Permission::all();  
-		if(!!$capabilities){
+		if(!empty($capabilities)){
+			  
 			if(isset($capabilities->capabilities) && !is_null($capabilities->capabilities)){
-				$capabilities = json_decode($capabilities->capabilities);
+				$capabilities = unserialize($capabilities->capabilities);
 			}
 		}else{
 			$capabilities = [];
 		}
-		//echo "<pre>";print_r($capabilities);die;
+
         return view('admin.user.update-user',['edit_data'=>$edit_data,'permissions'=>$permissions,'userCaps'=>$capabilities,]);
     } 
 	
@@ -161,7 +164,7 @@ class UserController extends Controller
 		$permissions = Permission::all();  
 		if(!!$capabilities){
 			if(isset($capabilities->capabilities) && !is_null($capabilities->capabilities)){
-				$capabilities = json_decode($capabilities->capabilities);
+				$capabilities = unserialize($capabilities->capabilities);
 			}
 		}else{
 			$capabilities = [];

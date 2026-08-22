@@ -9,7 +9,7 @@ use Validator;
 
 //models
 use App\Models\Permission;
-use App\RolePermission;
+use App\Models\RolePermission;
 use Session;
 class RolesPermissionsController extends Controller
 {
@@ -280,7 +280,7 @@ return response()->json(['status'=>$status,'msg'=>$msg],200);
 	 
 			foreach($permissions as $permission){
 				$html = '';
-				$permissionss = json_decode($permission->permissions);
+				$permissionss = unserialize($permission->permissions);
 				$i=1;
 				if(!empty($permissionss)){
 				foreach($permissionss as $p){
@@ -322,7 +322,7 @@ return response()->json(['status'=>$status,'msg'=>$msg],200);
 			$sourcePermissions = "";
 			$destinationPermissions = "";
 			if(!is_null($edit_permission->permissions)){
-				$rolePermissions = json_decode($edit_permission->permissions);
+				$rolePermissions = unserialize($edit_permission->permissions);
 				 
 					foreach($permissions as $permission){
 						if(isset($rolePermissions) && in_array($permission->permission,$rolePermissions)){
@@ -423,7 +423,7 @@ return response()->json(['status'=>$status,'msg'=>$msg],200);
 			try{
 				$rolePermission = RolePermission::where('role',$id)->first();
 				$permissions = Permission::all();
-				$rolePermissions = json_decode($rolePermission->permissions);
+				$rolePermissions = unserialize($rolePermission->permissions);
 				$html = "";
 				foreach($permissions as $permission){
 					if(in_array($permission->permission,$rolePermissions)){

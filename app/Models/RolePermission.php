@@ -7,6 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class RolePermission extends Authenticatable
 {
-     protected $connection = 'mysql';
+   protected $connection = 'mysql';
    protected $table = 'web_roles_permissions';
 }
