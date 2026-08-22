@@ -67,7 +67,7 @@ class ToolsCoveredController extends Controller
   
 		  $validator = Validator::make($request->all(),[			 
 				'name' => 'required|unique:web_toolscovered,name|max:255',				 		
-				'covered_icons' => 'required|mimes:jpeg,png,jpg,svg|max:3|dimensions:min_width=25,min_height=25,max_width=200,max_height=100',				
+				// 'covered_icons' => 'required|mimes:jpeg,png,jpg,svg|max:3|dimensions:min_width=25,min_height=25,max_width=200,max_height=100',				
 			]);
 			
 			if($validator->fails()){
