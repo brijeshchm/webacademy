@@ -1,12 +1,12 @@
 # Corporate Academy — robots.txt
 # https://corporateacademy.com
 
-# ── Standard crawlers ──────────────────────────────────────────
+
 User-agent: *
 Allow: /
 Disallow: /admin
 
-# ── OpenAI / ChatGPT ───────────────────────────────────────────
+# ── OpenAI / ChatGPT 
 User-agent: GPTBot
 Allow: /
 
@@ -16,7 +16,7 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-# ── Anthropic / Claude ─────────────────────────────────────────
+# ── Anthropic / Claude
 User-agent: anthropic-ai
 Allow: /
 
@@ -26,7 +26,7 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-# ── Google / Gemini ────────────────────────────────────────────
+# ── Google / Gemini
 User-agent: Googlebot
 Allow: /
 
@@ -36,52 +36,51 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /
 
-# ── Microsoft / Copilot / Bing ─────────────────────────────────
+# ── Microsoft / Copilot / Bing
 User-agent: bingbot
 Allow: /
 
 User-agent: msnbot
 Allow: /
 
-# ── Perplexity AI ──────────────────────────────────────────────
+# ── Perplexity AI
 User-agent: PerplexityBot
 Allow: /
 
 User-agent: Perplexity-User
 Allow: /
 
-# ── Meta AI ────────────────────────────────────────────────────
+# ── Meta AI
 User-agent: meta-externalagent
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-# ── Cohere ─────────────────────────────────────────────────────
+# ── Cohere
 User-agent: cohere-ai
 Allow: /
 
-# ── You.com ────────────────────────────────────────────────────
+# ── You.com
 User-agent: YouBot
 Allow: /
 
-# ── Common Crawl (used by many AI training pipelines) ──────────
+# ── Common Crawl (used by many AI training pipelines)
 User-agent: CCBot
 Allow: /
 
-# ── Apple ──────────────────────────────────────────────────────
+# ── Apple
 User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
 
-# ── Bytedance / Grok ───────────────────────────────────────────
+# ── Bytedance / Grok
 User-agent: Bytespider
 Allow: /
 
-# ── Sitemaps ───────────────────────────────────────────────────
+# ── Sitemaps
 # Static pages and course categories
-Sitemap: https://corporateacademy.com/sitemap.xml
+Sitemap: https://www.corporatesacademy.com/sitemap.xml
 # Dynamic course URLs — auto-updated from the database
-Sitemap: https://corporateacademy.com/api/sitemap.xml
