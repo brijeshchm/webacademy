@@ -78,8 +78,9 @@ class ToolsCoveredController extends Controller
 				$toolsCovered = New ToolsCovered;
 				$toolsCovered->name = ucfirst(trim($request->input('name')));		
 				$alt= $request->input('name');	
+				$image = "";;
 				if ($request->hasFile('covered_icons')) {
-				$image = [];
+			
 				$filePath = $this->getToolCoveredFolderStructure();
 			//	$file = Input::file('course_image');
 				$file =  $request->file('covered_icons');
@@ -98,7 +99,7 @@ class ToolsCoveredController extends Controller
 				'src'=>$filePath."/".$iconsfilename
 				);	
 				} 			
-				$toolsCovered->covered_icons = serialize($image);
+				$toolsCovered->covered_icons = $image?serialize($image):"";
 				
 				$toolsCovered->status = '1';				 
 				$toolsCovered->created_by =1; 		
