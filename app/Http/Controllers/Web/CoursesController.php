@@ -136,7 +136,7 @@ class CoursesController extends Controller
         $related_courses     = $course->related_courses ? json_decode($course->related_courses) : [];
         $reviews     = $course->reviews ? json_decode($course->reviews) : [];
         $FAQs     = $course->FAQs ? json_decode($course->FAQs) : [];
-        
+    
         $aboutHeading =[];
         if($course){
         $aboutHeading     = CourseAbout::where('course_id',$course->id)->first();

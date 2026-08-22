@@ -883,15 +883,16 @@
                                    </section>
 
                 {{-- WHAT YOU'LL LEARN --}}
-                @if( $whyLearns)
+                @if($skills)
                 <section id="learn" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-6">
+              @if($whyLearns)
+                <div class="flex items-center gap-3 mb-6">
                         <div class="h-8 w-1 rounded-full bg-gradient-to-b from-emerald-500 to-cyan-500"></div>
                         <h2 class="text-2xl font-display font-bold text-gray-900">{{ t('courseDetailX.whatYoullLearn') }}</h2>
                     </div>
-
+                    @if($whyLearns)
                     <div class="grid sm:grid-cols-2 gap-3 mb-8">
-                        @if($whyLearns)
+                        
                         @foreach($whyLearns as $i => $whyLearn)
                             <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-emerald-200 hover:bg-emerald-50/30 transition-all duration-200">
                                 <div class="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
@@ -900,9 +901,10 @@
                                 <span class="text-sm font-medium text-gray-700">{{ $whyLearn ??'' }}</span>
                             </div>
                         @endforeach
-                        @endif
+                       
                     </div>
-
+                     @endif
+                    @endif
                     <div class="pt-6 border-t border-gray-100">
                         <h3 class="text-sm font-bold text-gray-700 uppercase tracking-widest mb-4 flex items-center gap-2">
                             <svg class="h-4 w-4 text-primary" {!! $iconStroke !!}><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -920,6 +922,7 @@
                             @endif
                         </div>
                     </div>
+
                 </section>
 
 @endif
