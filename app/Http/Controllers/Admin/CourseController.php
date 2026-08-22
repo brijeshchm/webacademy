@@ -204,7 +204,7 @@ class CourseController extends Controller implements HasMiddleware
 		  $validator = Validator::make($request->all(),[		 
 				
 				'title' => 'required|min:5|max:75|unique:web_courses,title,'.$id.',id',	
-				'description'=>'required|min:10|max:270',		
+				'description'=>'required|min:10|max:370',		
 				'slug' => 'required|unique:web_courses,slug,'.$id.',id',	
 				'course_name'=>'required|min:3|max:160',	
 				'rating'=>'required',
