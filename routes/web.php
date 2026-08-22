@@ -18,6 +18,22 @@ use Illuminate\Support\Facades\Route;
 | of truth for JSON behaviour.
 */
 
+
+
+ Route::get('/cache-clear/', function () {
+
+	$exitCode = Artisan::call('config:clear');
+	$exitCode = Artisan::call('cache:clear');
+	$exitCode = Artisan::call('cache:clear');
+	//$exitCode = Artisan::call('route:cache');
+	Artisan::call('optimize:clear');
+
+	// $exitCode = Artisan::call('optimize');
+
+	return '<h1>Cache cleared</h1>';
+});
+
+
 Route::get('/', HomeController::class)->name('home');
 Route::get('/privacy-policy', [PageController::class,'privacyPolicy'])->name('privacy.policy');
 Route::get('/terms-conditions', [PageController::class,'termsConditions'])->name('terms.conditions');
