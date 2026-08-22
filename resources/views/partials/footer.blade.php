@@ -30,7 +30,7 @@
                 <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{{ t('footer.programs') }}</p>
                 <ul class="space-y-3.5">
                     <li><a href="{{ route('courses.show','aws-certification-training')}}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">AWS Certification {!! $arrowUpRight !!}</a></li>
-                    <li><a href="{{ route('courses.show','servicenow-training') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">{{ t('footer.dataScience') }}{!! $arrowUpRight !!}</a></li>
+                    <li><a href="{{ route('courses.show','servicenow-training') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Servicenow Training{!! $arrowUpRight !!}</a></li>
                     <li><a href="{{ route('courses.show','cloud-computing-training')}}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Cloud Computing {!! $arrowUpRight !!}</a></li>
                     <li><a href="{{ route('courses.show','cybersecurity-training') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Cybersecurity Training{!! $arrowUpRight !!}</a></li>
                     <li><a href="{{ route('courses')}}" class="group inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary/75">{{ t('footer.viewAllCourses') }}{!! $arrowUpRight !!}<svg aria-hidden="true" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
@@ -95,7 +95,7 @@
 @if($noidas)
 @foreach($noidas as $noida)
 
- <a href="{{ route('courses.show',$noida->slug) }}" class="hover:text-primary transition-colors">Courses in {{ $noida->title }}</a> I
+ <a href="{{ route('courses.show',$noida->slug) }}" class="hover:text-primary transition-colors">{{ $noida->title }}</a> I
 @endforeach
 @endif
   
@@ -116,7 +116,7 @@
 @if($delhis)
 @foreach($delhis as $delhi)
 
- <a href="{{ route('courses.show',$delhi->slug) }}" class="hover:text-primary transition-colors">Courses in {{ $delhi->title }}</a> I
+ <a href="{{ route('courses.show',$delhi->slug) }}" class="hover:text-primary transition-colors">{{ $delhi->title }}</a> I
 @endforeach
 @endif
   
@@ -137,7 +137,7 @@
 @if($bangalores)
 @foreach($bangalores as $bangalore)
 
- <a href="{{ route('courses.show',$bangalore->slug) }}" class="hover:text-primary transition-colors">Courses in {{ $bangalore->title }}</a> I
+ <a href="{{ route('courses.show',$bangalore->slug) }}" class="hover:text-primary transition-colors">{{ $bangalore->title }}</a> I
 @endforeach
 @endif
   

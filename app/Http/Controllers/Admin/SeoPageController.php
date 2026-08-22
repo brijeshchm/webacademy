@@ -1684,21 +1684,51 @@ public function editSaveCourseSeoTopic(Request $request, $id)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getCourseCity(Request $request)
+
+	public function getCourseCity(Request $request)
+{
+    $id  = explode(',', $request->input('cid'));
+    $pid = $request->input('pid');
+
+    $courseCloneId = $id[0];
+    $categoryId    = $id[1] ?? null;
+
+    // Cities already used for this course clone
+    $usedCities = Course::where('category', $categoryId)
+        ->where('course_clone_id', $courseCloneId)
+        ->where('city', '<>', '')
+        ->pluck('city')
+        ->unique()
+        ->toArray();
+
+    // Master active city list
+    $allCities = CourseCity::where('status', '1')->pluck('city')->toArray();
+
+    // Remove already-used cities
+    $availableCities = array_diff($allCities, $usedCities);
+
+    if (!empty($availableCities)) {
+        echo '<option value="">Select City</option>';
+        foreach ($availableCities as $city) {
+            $selected = ($pid == $city) ? 'selected' : '';
+            echo '<option value="' . e($city) . '" ' . $selected . '>' . e($city) . '</option>';
+        }
+    } else {
+        echo '<option value="">No record found</option>';
+    }
+}
+    public function getCourseCity_oldd(Request $request)
     {        
 	$id = $request->input('cid'); 
-		//echo "<pre>";print_r($_POST);die;
+		
 	$id=explode(',',$id);
 	$pid = $request->input('pid'); 
-	
-	//$course=explode(',',$request->input('course'));
-	$courseslist = Course::findOrFail($id[0]);	 
-//	$category=explode(',',$request->input('category'));
-	//$subcategory=explode(',',$request->input('subcategory'));
-	//$checkdata = Course::where('category',$id[1])->where('subcategory',$id[2])->where('title',strtoupper($courseslist->title.' in '.$request->input('city')))->get();
 
-	$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('subcategory',$id[2])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();
-		//echo "<pre>";print_r($checkdataslug); 
+	$courseslist = Course::findOrFail($id[0]);	 
+
+
+	$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();
+		
 		$listcity=[];
 		if(!empty($checkdataslug)){
 			foreach($checkdataslug as $slug){
@@ -1714,12 +1744,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		$check_value = array(1,2,3,4,5);
 		
 		
-		/* if(!empty($listcity)){
-			foreach($listcity as $key=>$val){
-				
-				$new= array_push($newcity,$val);
-			}			
-		} */
+
 		
 		
 		$check_value =CourseCity::where('status','1')->get();
@@ -1809,8 +1834,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		
 		$subcategory_data= DB::table('web_coursepdf as pdf');	 		
 		$subcategory_data= $subcategory_data->select('pdf.*','pdf.id as pdfid');
-	//	$subcategory_data= $subcategory_data->groupby('pdf.subcategory');
-		$subcategory_data= $subcategory_data->where('pdf.subcategory',$id);
+ 
 		$subcategory_data= $subcategory_data->where('pdf.status',1)->get();
 
 
@@ -1881,13 +1905,50 @@ public function editSaveCourseSeoTopic(Request $request, $id)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getcourseCityOnline(Request $request)
-    {        
+public function getcourseCityOnline(Request $request)
+{
+    $id  = explode(',', $request->input('cid'));
+    $pid = $request->input('pid');
+
+    $courseCloneId = $id[0];
+    $categoryId    = $id[1] ?? null;
+
+    // Cities already used for this course clone (exclude these)
+    $usedCities = Course::where('category', $categoryId)
+        ->where('course_clone_id', $courseCloneId)
+        ->where('city', '<>', '')
+        ->pluck('city')
+        ->unique()
+        ->toArray();
+
+    // Full master city list — replace with your actual source
+    $allCities = ['Online'];
+    // or if it's a static list: $allCities = ['Online', 'Delhi', 'Mumbai', 'Pune', ...];
+
+    // Remove cities already used — this replaces your broken in_array loop
+    $availableCities = array_diff($allCities, $usedCities);
+
+    if (!empty($availableCities)) {
+        echo '<option value="">Select City</option>';
+        foreach ($availableCities as $city) {
+            $selected = ($pid == $city) ? 'selected' : '';
+            echo '<option value="' . e($city) . '" ' . $selected . '>' . e($city) . '</option>';
+        }
+    } else {
+        echo '<option value="">No record found</option>';
+    }
+}
+
+    public function getcourseCityOnline_oldd(Request $request)
+    {       
+		//dd($request); 
 		$id = $request->input('cid'); 		 
 		$id=explode(',',$id);
 		$pid = $request->input('pid'); 	 
 		$courseslist = Course::findOrFail($id[0]);	
-		$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('subcategory',$id[2])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();		 
+		$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();	
+		dd($checkdataslug);
+		
 		$listcity=[];
 		if(!empty($checkdataslug)){
 			foreach($checkdataslug as $slug){
@@ -1924,13 +1985,46 @@ public function editSaveCourseSeoTopic(Request $request, $id)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getcourseNCRCity(Request $request)
+
+	public function getcourseNCRCity(Request $request)
+{
+    $id  = explode(',', $request->input('cid'));
+    $pid = $request->input('pid');
+
+    $courseCloneId = $id[0];
+    $categoryId    = $id[1] ?? null;
+
+    // Cities already used for this course clone
+    $usedCities = Course::where('category', $categoryId)
+        ->where('course_clone_id', $courseCloneId)
+        ->where('city', '<>', '')
+        ->pluck('city')
+        ->unique()
+        ->toArray();
+
+    // Fixed NCR city list
+    $ncrCities = ['Delhi', 'Noida', 'Gurgaon'];
+
+    // Remove already-used cities
+    $availableCities = array_diff($ncrCities, $usedCities);
+
+    if (!empty($availableCities)) {
+        echo '<option value="">Select City</option>';
+        foreach ($availableCities as $city) {
+            $selected = ($pid == $city) ? 'selected' : '';
+            echo '<option value="' . e($city) . '" ' . $selected . '>' . e($city) . '</option>';
+        }
+    } else {
+        echo '<option value="">No record found</option>';
+    }
+}
+    public function getcourseNCRCity_ohh(Request $request)
     {        
 		$id = $request->input('cid'); 		 
 		$id=explode(',',$id);
 		$pid = $request->input('pid'); 	 
 		$courseslist = Course::findOrFail($id[0]);	
-		$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('subcategory',$id[2])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();		 
+		$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();		 
 		$listcity=[];
 		if(!empty($checkdataslug)){
 			foreach($checkdataslug as $slug){

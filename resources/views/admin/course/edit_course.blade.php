@@ -1064,12 +1064,12 @@ Edit Course
                     
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveTestimonial(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
 					 <?php if(!empty($edit_data->reviews)){
-					 $reviews =json_decode($edit_data->reviews);                    
-					 $name  = json_decode($reviews->name);
+					 $reviews = json_decode($reviews->reviews ?? '[]', true) ?? [];              
+					 $name  = json_decode($reviews->name ?? '[]', true) ?? []; 
 					 
-					 $comment  = json_decode($reviews->comment);
-					 $company  = json_decode($reviews->company);
-					 $rating  = json_decode($reviews->rating);
+					 $comment  = json_decode($reviews->comment ?? '[]', true) ?? [];
+					 $company  = json_decode($reviews->company ?? '[]', true) ?? [];
+					 $rating  = json_decode($reviews->rating ?? '[]', true) ?? []; 
 				 
  					 if(!empty($testimonials->linkedinurl)){
 					$linkedinurl  = json_decode($testimonials->linkedinurl);
