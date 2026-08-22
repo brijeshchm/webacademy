@@ -827,7 +827,7 @@
                     <div class="prose prose-neutral max-w-none prose-p:text-gray-500 prose-p:leading-relaxed">
 
                     @if($aboutHeading)
-                            <p class="mb-4 last:mb-0">{{ $aboutHeading->courseabout }}</p>
+                            <p class="mb-4 last:mb-0">{!!  $aboutHeading->courseabout  !! }}</p>
                         @endif
 
  @for ($i = 1; $i <= 6; $i++)
