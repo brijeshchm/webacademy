@@ -168,7 +168,7 @@
                     </ul>
 
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <a href="https://u.payu.in/PIwPV343Esho" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-[#e53935] hover:bg-[#c62828] text-white shadow-xl shadow-red-700/40 rounded-xl ring-2 ring-[#e53935]/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5">
+                        <a href="javascript:void(0)" data-lead-comman-popup rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-[#e53935] hover:bg-[#c62828] text-white shadow-xl shadow-red-700/40 rounded-xl ring-2 ring-[#e53935]/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5">
                             {{ t('doctorateDetail.applyNow') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'ml-2 h-4 w-4'])
                         </a>
                         <a href="{{ url('/doctorate') }}" class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">
@@ -191,77 +191,13 @@
                     <div class="bg-white rounded-2xl shadow-2xl p-7">
                         <div class="flex items-baseline justify-between mb-1"></div>
 
-<!-- Trigger buttons anywhere on the page -->
-<button data-open-enquery-popup>Enroll Now</button>
- 
-
-<!-- The popup itself -->
-<div data-lead-popup class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/60">
-  <div class="relative w-full max-w-md rounded-xl bg-white p-6" role="dialog" aria-modal="true">
-    <button data-close-lead-popup class="absolute right-3 top-3">&times;</button>
-    <form id="leadForm">
-      <!-- your form fields -->
-
-    </form>
-  </div>
-</div>
-
-<script>
-(function () {
-  const doc = document;
-  const overlay = doc.querySelector("[data-lead-popup]");
-
-  if (!overlay) return; // popup not on this page, bail safely
-
-  const openPopup = () => {
-    overlay.classList.remove("hidden");
-    overlay.classList.add("flex"); // needed if using Tailwind's hidden/flex toggle
-    doc.body.style.overflow = "hidden"; // stop background scroll
-    const firstInput = overlay.querySelector("input, select, textarea");
-    if (firstInput) firstInput.focus();
-  };
-
-  const closePopup = () => {
-    overlay.classList.add("hidden");
-    overlay.classList.remove("flex");
-    doc.body.style.overflow = "";
-  };
-
-  // Open on any trigger element
-  doc.querySelectorAll("[data-open-enquery-popup]").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      openPopup();
-    });
-  });
-
-  // Close on close button
-  overlay.querySelectorAll("[data-close-lead-popup]").forEach((btn) => {
-    btn.addEventListener("click", closePopup);
-  });
-
-  // Close on clicking the dark overlay (outside the modal box)
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closePopup();
-  });
-
-  // Close on Escape key
-  doc.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !overlay.classList.contains("hidden")) {
-      closePopup();
-    }
-  });
-
-  // Expose globally so you can trigger it from anywhere (e.g. after 10s, on exit-intent)
-  window.openLeadPopup = openPopup;
-  window.closeLeadPopup = closePopup;
-})();
-
-</script>
 
 
-                        <a href="#" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full h-12 rounded-xl bg-[#e53935] hover:bg-[#c62828] text-white font-bold shadow-lg shadow-red-500/30 ring-2 ring-red-500/20 transition-all hover:-translate-y-0.5"  data-open-enquery-popup>
-                            {{ t('doctorateDetail.applyNow') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'ml-2 h-4 w-4'])
+
+                        <a href="javascript:void(0)" data-lead-comman-popup rel="noopener noreferrer" class="inline-flex items-center justify-center w-full h-12 rounded-xl bg-[#e53935] hover:bg-[#c62828] text-white font-bold shadow-lg shadow-red-500/30 ring-2 ring-red-500/20 transition-all hover:-translate-y-0.5" >
+                            {{ t('doctorateDetail.applyNow') }} enquery
+                            
+                            @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'ml-2 h-4 w-4'])
                         </a>
 
                       
@@ -835,7 +771,7 @@ Interview with programme director
                     {{-- Mobile enrol card --}}
                     <div class="lg:hidden bg-white rounded-3xl border border-gray-100 shadow-xl p-6">
                         <div class="flex items-baseline gap-2 mb-4"></div>
-                        <a href="https://u.payu.in/PIwPV343Esho" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full h-12 rounded-xl bg-[#e53935] hover:bg-[#c62828] text-white font-bold">
+                        <a href="javascript:void(0)" data-lead-comman-popup target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full h-12 rounded-xl bg-[#e53935] hover:bg-[#c62828] text-white font-bold">
                             {{ t('doctorateDetail.applyNow') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'ml-2 h-4 w-4'])
                         </a>
                     </div>
@@ -898,4 +834,124 @@ Interview with programme director
             </div>
         </div>
     </div>
+  
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const overlay = document.querySelector('[data-open-enquery-popup]');
+
+    if (!overlay) {
+        console.error('Lead popup not found: [data-open-enquery-popup]');
+        return;
+    }
+
+
+    /**
+     * Open Popup
+     */
+    function openLeadPopup() {
+
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+
+        document.body.style.overflow = 'hidden';
+
+        // Focus first input after popup is visible
+        setTimeout(function () {
+
+            const firstInput = overlay.querySelector(
+                'input:not([type="hidden"]), select, textarea'
+            );
+
+            if (firstInput) {
+                firstInput.focus();
+            }
+
+        }, 100);
+    }
+
+
+    /**
+     * Close Popup
+     */
+    function closeLeadPopup() {
+
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+
+        document.body.style.overflow = '';
+    }
+
+
+    /**
+     * Handle all click events
+     */
+    document.addEventListener('click', function (event) {
+
+        /**
+         * OPEN BUTTON
+         */
+        const openButton = event.target.closest('[data-lead-comman-popup]');
+
+        if (openButton) {
+
+            event.preventDefault();
+
+            openLeadPopup();
+
+            return;
+        }
+
+
+        /**
+         * CLOSE BUTTON
+         */
+        const closeButton = event.target.closest('[data-lead-close]');
+
+        if (closeButton) {
+
+            event.preventDefault();
+
+            closeLeadPopup();
+
+            return;
+        }
+
+
+        /**
+         * CLICK OUTSIDE MODAL
+         */
+        if (event.target === overlay) {
+
+            closeLeadPopup();
+        }
+
+    });
+
+
+    /**
+     * Escape key close
+     */
+    document.addEventListener('keydown', function (event) {
+
+        if (
+            event.key === 'Escape' &&
+            !overlay.classList.contains('hidden')
+        ) {
+            closeLeadPopup();
+        }
+
+    });
+
+
+    /**
+     * Make functions globally available
+     */
+    window.openLeadPopup = openLeadPopup;
+    window.closeLeadPopup = closeLeadPopup;
+
+});
+</script>
+
+@include('partials.comman-lead-popup')
 @endsection

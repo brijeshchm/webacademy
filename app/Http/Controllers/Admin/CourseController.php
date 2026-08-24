@@ -198,7 +198,7 @@ class CourseController extends Controller implements HasMiddleware
      */
     public function editSaveCourseTitle(Request $request,$id)
     {	  
-	//echo "<pre>";print_r($_POST);die;
+	
         if($request->ajax()){ 			
   
 		  $validator = Validator::make($request->all(),[		 
@@ -245,7 +245,7 @@ class CourseController extends Controller implements HasMiddleware
 			'course_duration'=>trim($request->input('course_duration')),
 			'meta_title'=>trim($request->input('meta_title')),		 
 			'meta_description'=>trim($request->input('meta_description')),					 	
-			'course_defination'=>trim($request->input('meta_description')),					 	
+			'course_defination'=>trim($request->input('course_defination')),					 	
 			'updated_by'=>1,				 	
 			);
 		 

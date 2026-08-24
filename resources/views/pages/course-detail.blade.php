@@ -307,8 +307,8 @@
                     </ul>
 
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <a href="https://u.payu.in/PIwPV343Esho" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/40 rounded-xl ring-2 ring-primary/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5">
-                            {{ t('courseDetail.enrollNow') }}
+                        <a href="https://u.payu.in/PIwPV343Esho" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/40 rounded-xl ring-2 ring-primary/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5" data-open-enquery-popup>
+                            {{ t('courseDetail.enrollNow') }} nnn
                             <svg class="ml-2 h-4 w-4" {!! $iconStroke !!}><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
                         <a href="/enquiry" class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">{{ t('courseDetailX.requestFreeCounselling') }}</a>
@@ -1341,7 +1341,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
         @foreach($roadmap as $step)
 
-        <div class="relative w-[280px] bg-white rounded-[28px] shadow-[0_18px_35px_rgba(0,0,0,0.12)] pt-5 pb-8 px-6 flex items-center gap-3 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-[0_25px_45px_rgba(0,0,0,0.18)]">
+        <div class="relative w-[280px] bg-white rounded-[28px] shadow-[0_18px_35px_rgba(0,0,0,0.12)] pt-5 pb-8 px-2 flex items-center gap-3 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-[0_25px_45px_rgba(0,0,0,0.18)]">
 
             {{-- Number badge --}}
             <div class="absolute -top-8 left-1/2 -translate-x-1/2">
@@ -1952,4 +1952,125 @@
         </div>
     </div>
 </div>
+
+
+ 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const overlay = document.querySelector('[data-open-enquery-popup]');
+
+    if (!overlay) {
+        console.error('Lead popup not found: [data-open-enquery-popup]');
+        return;
+    }
+
+
+    /**
+     * Open Popup
+     */
+    function openLeadPopup() {
+
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+
+        document.body.style.overflow = 'hidden';
+
+        // Focus first input after popup is visible
+        setTimeout(function () {
+
+            const firstInput = overlay.querySelector(
+                'input:not([type="hidden"]), select, textarea'
+            );
+
+            if (firstInput) {
+                firstInput.focus();
+            }
+
+        }, 100);
+    }
+
+
+    /**
+     * Close Popup
+     */
+    function closeLeadPopup() {
+
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+
+        document.body.style.overflow = '';
+    }
+
+
+    /**
+     * Handle all click events
+     */
+    document.addEventListener('click', function (event) {
+
+        /**
+         * OPEN BUTTON
+         */
+        const openButton = event.target.closest('[data-lead-comman-popup]');
+
+        if (openButton) {
+
+            event.preventDefault();
+
+            openLeadPopup();
+
+            return;
+        }
+
+
+        /**
+         * CLOSE BUTTON
+         */
+        const closeButton = event.target.closest('[data-lead-close]');
+
+        if (closeButton) {
+
+            event.preventDefault();
+
+            closeLeadPopup();
+
+            return;
+        }
+
+
+        /**
+         * CLICK OUTSIDE MODAL
+         */
+        if (event.target === overlay) {
+
+            closeLeadPopup();
+        }
+
+    });
+
+
+    /**
+     * Escape key close
+     */
+    document.addEventListener('keydown', function (event) {
+
+        if (
+            event.key === 'Escape' &&
+            !overlay.classList.contains('hidden')
+        ) {
+            closeLeadPopup();
+        }
+
+    });
+
+
+    /**
+     * Make functions globally available
+     */
+    window.openLeadPopup = openLeadPopup;
+    window.closeLeadPopup = closeLeadPopup;
+
+});
+</script>
+@include('partials.comman-lead-popup')
 @endsection
