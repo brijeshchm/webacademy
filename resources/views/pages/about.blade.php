@@ -74,6 +74,7 @@
                 <p class="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                     {{ t('about.heroDesc') }}
                 </p>
+                    <p class="text-xl md:text-2xl text-muted-foreground leading-relaxed">Corporates Academy helps learners build practical, job-relevant skills through structured online training. Our programs cover enterprise applications, cloud computing, AI, data, programming and other technologies used by modern businesses.</p>
             </div>
         </div>
     </section>
@@ -135,6 +136,8 @@
                                 <div>
                                     <h4 class="font-bold mb-1 text-lg">{{ t('about.zeroFluff') }}</h4>
                                     <p class="text-muted-foreground">{{ t('about.zeroFluffDesc') }}</p>
+                                
+                                    
                                 </div>
                             </li>
                             <li class="flex gap-4 items-start bg-white/50 p-4 rounded-2xl border border-white/60 transition-all hover:bg-white/80 hover:shadow-md">
@@ -176,5 +179,97 @@
             </div>
         </div>
     </section>
+
+
+    <section id="faq" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="h-8 w-1 rounded-full bg-gradient-to-b from-orange-500 to-pink-500"></div>
+            <h2 class="text-2xl font-display font-bold text-gray-900">Frequently Asked Questions</h2>
+        </div>
+        <div class="space-y-3">
+
+
+
+
+                <details class="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow open:border-orange-200 open:bg-white">
+                    <summary class="px-5 py-4 cursor-pointer list-none text-left [&amp;::-webkit-details-marker]:hidden">
+                        <div class="flex items-start gap-3 w-full">
+                            <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">Who can join Corporates Academy courses?</span>
+                            <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-sm text-gray-500 leading-relaxed ml-9">It is Students, working professionals and people planning a career change can explore suitable programs.</p>
+                    </div>
+                </details>
+            
+                <details class="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow open:border-orange-200 open:bg-white">
+                    <summary class="px-5 py-4 cursor-pointer list-none text-left [&amp;::-webkit-details-marker]:hidden">
+                        <div class="flex items-start gap-3 w-full">
+                            <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">Are the courses online?</span>
+                            <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-sm text-gray-500 leading-relaxed ml-9">Many programs are designed for convenient online learning.</p>
+                    </div>
+                </details>
+            
+                <details class="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow open:border-orange-200 open:bg-white">
+                    <summary class="px-5 py-4 cursor-pointer list-none text-left [&amp;::-webkit-details-marker]:hidden">
+                        <div class="flex items-start gap-3 w-full">
+                            <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">Do courses include practical learning?</span>
+                            <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-sm text-gray-500 leading-relaxed ml-9">Yes, programs emphasize exercises, demonstrations and practical scenarios.</p>
+                    </div>
+                </details>
+            
+                <details class="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow open:border-orange-200 open:bg-white">
+                    <summary class="px-5 py-4 cursor-pointer list-none text-left [&amp;::-webkit-details-marker]:hidden">
+                        <div class="flex items-start gap-3 w-full">
+                            <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">Can working professionals join?</span>
+                            <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-sm text-gray-500 leading-relaxed ml-9">Yes. The programs are designed with working professionals in mind.</p>
+                    </div>
+                </details>
+            
+                <details class="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow open:border-orange-200 open:bg-white">
+                    <summary class="px-5 py-4 cursor-pointer list-none text-left [&amp;::-webkit-details-marker]:hidden">
+                        <div class="flex items-start gap-3 w-full">
+                            <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">How do I choose the right course?</span>
+                            <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-sm text-gray-500 leading-relaxed ml-9">Choose according to your current skills, career goal and the technology you want to learn..</p>
+                    </div>
+                </details>
+                                    </div>
+    </section>
+
+
+
+
 </div>
 @endsection

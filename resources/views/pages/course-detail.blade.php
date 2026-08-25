@@ -1270,7 +1270,7 @@
                                 $trainerPoints = json_decode($course->trainer_paragraph); 
                             
                             @endphp
-
+@if($trainerPoints)
                             @foreach($trainerPoints as $i => $point)
                             <li
                                 x-data="{ show: false }"
@@ -1288,6 +1288,7 @@
                                 </span>
                             </li>
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
