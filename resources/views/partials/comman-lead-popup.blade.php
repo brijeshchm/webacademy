@@ -70,7 +70,7 @@
                     </p>
                 @endforeach
 
-                <form data-lead-form method="POST" action="{{ route('leads.store') }}" novalidate>
+                <form data-lead-form method="POST"  novalidate>
                     @csrf
                     {{-- Step 1: About you --}}
                     <div data-lead-step="0" class="space-y-3">
