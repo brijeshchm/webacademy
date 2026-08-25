@@ -752,7 +752,7 @@ Edit Course
     $trainerParagraph = [];
 
     if (!empty($edit_data) && !empty($edit_data->trainer_paragraph)) {
-        $trainerParagraph = json_decode($edit_data->trainer_paragraph, true) ?? [];
+        $trainerParagraph = json_decode($edit_data->trainer_paragraph, true);
     }
 
     $trainerParagraph = old('trainer_paragraph', $trainerParagraph);
@@ -775,7 +775,7 @@ Edit Course
                 class="form-control col-md-7 col-xs-12"
                 name="trainer_paragraph[]"
                 placeholder="Enter Paragraph {{ $i + 1 }}"
-                value="{{ $trainerParagraph[$i] ?? '' }}"
+                value="{{ $trainerParagraph[$i] }}"
             >
 
         </div>
