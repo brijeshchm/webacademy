@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', ' About us |  Corporate Academy')
-@section('description', 'Corporate Academy trains professionals at every stage — from individual contributors to enterprise teams. 63,000+ professionals trained, 92% placement rate, industry-expert faculty.')
+@section('title', 'About Corporates Academy | Professional Training Platform')
+@section('description', 'Learn about Corporates Academy, our professional training approach, practical learning methodology and commitment to career-oriented technology education..')
 @section('content')
 @php
 

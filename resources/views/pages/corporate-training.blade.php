@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('title', 'Corporate Training Programs for Teams | Corporates Academy')
+@section('description', 'Upskill your workforce with customized corporate training in Workday, cloud, AI, data, Salesforce and other technologies for modern business teams.')
 @php
     $origin = rtrim(config('services.site.origin'), '/');
     $title = 'Corporate Training & Workforce Capability';

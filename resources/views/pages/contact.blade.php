@@ -33,8 +33,8 @@
         ],
     ];
 @endphp
-@section('title', ' Contact us |  Corporate Academy')
-@section('description', 'Corporate Academy trains professionals at every stage — from individual contributors to enterprise teams. 63,000+ professionals trained, 92% placement rate, industry-expert faculty.')
+@section('title', 'Contact Corporates Academy | Training & Course Support')
+@section('description', 'Contact Corporates Academy for course information, training schedules, enrollment assistance, corporate training and other learning-related queries.')
 @push('schema')
 <script type="application/ld+json">{!! json_ld($contactJsonLd) !!}</script>
 @endpush

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Professional Technology Training & Certification | Corporate Academy')
-@section('description', 'Corporate Academy delivers expert-led tech training in Cloud, Data Science, DevOps, Cybersecurity, Salesforce, Workday, ServiceNow and more. 490+ courses, 63,000+ professionals trained, globally recognized certifications')
+@section('title', 'Training Scholarship Programs | Corporates Academy')
+@section('description', 'Explore scholarship opportunities from Corporates Academy designed to make professional and technology training more accessible to eligible learners.')
 @php
 
     $origin = rtrim(config('services.site.origin'), '/');

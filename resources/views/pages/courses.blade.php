@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title','"Course Catalog Professional Technology Courses')
-@section('description', 'Browse 490+ professional technology courses across Data Science, AI, Cloud Computing, Workday, ServiceNow, Salesforce, DevOps, Cybersecurity, PMP and more. Live online and self-paced options')
+@section('title','Professional Training Courses & Certification Programs')
+@section('description', 'Explore professional courses in Workday, AWS, Artificial Intelligence, Data Science, Salesforce, Python, ServiceNow and other career-focused technologies.')
 @php
     use App\Support\JsonLd;
 

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-
-
   <url>
     <loc>https://www.corporatesacademy.com/</loc>
     <changefreq>daily</changefreq>
@@ -35,6 +33,143 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-finance-modules-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/aws-certification-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/six-sigma-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/salesforce-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-integration-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/aws-developer-taining</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-payroll-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-hcm-technical-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-hcm-techno-functional-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/servicenow-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-hr-case-management-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-studio-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-recruitment-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-customer-accounts-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-hcm-functional-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/artificial-intelligence-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/data-science-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/generative-ai-training-program</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/data-analytics-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/python-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/machine-learning-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+ <url>
+    <loc>https://www.corporatesacademy.com/courses/workday-prism-analytics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+
 
 
 </urlset>
