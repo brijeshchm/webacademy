@@ -749,7 +749,7 @@ Edit Course
 						</div> 
 									
 				@php
-    $trainerParagraph = [];
+    $trainerParagraph = "";
 
     if (!empty($edit_data) && !empty($edit_data->trainer_paragraph)) {
         $trainerParagraph = json_decode($edit_data->trainer_paragraph, true);
@@ -758,7 +758,7 @@ Edit Course
     $trainerParagraph = old('trainer_paragraph', $trainerParagraph);
 @endphp
 
-@if($trainerParagraph)
+
 @for($i = 0; $i < 6; $i++)
 
     <div class="form-group">
@@ -784,7 +784,7 @@ Edit Course
 
 @endfor
 		
-@endif
+
 					 
 						
 						<div class="form-group">
