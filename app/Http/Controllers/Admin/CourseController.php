@@ -390,11 +390,11 @@ class CourseController extends Controller implements HasMiddleware
     'trainer_about' => $request->input('trainer_about'),
 );
 
-if ($request->filled('trainer_paragraph')) {
-    $updatelearn['trainer_paragraph'] = json_encode(
-        $request->input('trainer_paragraph')
-    );
-}
+			if ($request->filled('trainer_paragraph')) {
+				$updatelearn['trainer_paragraph'] = json_encode(
+					$request->input('trainer_paragraph')
+				);
+			}
 			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
 			if($checkupdate){
 				$status=1;							 

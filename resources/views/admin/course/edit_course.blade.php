@@ -758,7 +758,7 @@ Edit Course
     $trainerParagraph = old('trainer_paragraph', $trainerParagraph);
 @endphp
 
-
+@if($trainerParagraph)
 @for($i = 0; $i < 6; $i++)
 
     <div class="form-group">
@@ -783,7 +783,8 @@ Edit Course
     </div>
 
 @endfor
-													
+		
+@endif
 					 
 						
 						<div class="form-group">
