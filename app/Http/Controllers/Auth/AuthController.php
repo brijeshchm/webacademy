@@ -213,12 +213,12 @@ class AuthController extends Controller
 	 
 	public function authenticate(Request $request)
 	{
-	//	echo "<pre>";print_r($_POST); die;
+	 
 		 
 		if(!empty(trim($request->input('email'))) && trim($request->input('password'))&& $request->input('lgn')){
-			// echo "inners";die; 
+		 
 		if($request->has('email')&& $request->has('password')&& $request->has('lgn')){	
- //echo "second";die;
+ 
 				//$email = Email::all();
 				//$mobile = Mobile::orderBy('id','DESC')->get();
 			$user = User::where('email',$request->input('email'))->select('email','password','name','role','id','remember_token')->first();

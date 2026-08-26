@@ -532,8 +532,8 @@ Route::get('/mobilebanner/del_icon/{id}',[App\Http\Controllers\Admin\HomesliderC
 // API exception handler (JSON), preserving existing API behaviour.
 Route::fallback(function (\Illuminate\Http\Request $request) {
     if ($request->is('api/*')) {
-        abort(404);
+        abort(410);
     }
 
-    return response()->view('errors.404', [], 404);
+    return response()->view('errors.410', [], 410);
 });
