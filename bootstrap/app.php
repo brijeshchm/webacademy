@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -28,26 +28,44 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin.web' => \App\Http\Middleware\AdminWebAuth::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        // Return JSON for all API exceptions
-        $exceptions->render(function (\Throwable $e, Request $request) {
-            if ($request->is('api/*') || $request->expectsJson()) {
-                if ($e instanceof \Illuminate\Validation\ValidationException) {
-                    return response()->json([
-                        'error'  => $e->getMessage(),
-                        'errors' => $e->errors(),
-                    ], 422);
-                }
-                if ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-                    return response()->json(['error' => 'Not found.'], 404);
-                }
-                if ($e instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
-                    return response()->json(['error' => 'Method not allowed.'], 405);
-                }
-                if ($e instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
-                    return response()->json(['error' => 'Too many requests. Please try again shortly.'], 429);
-                }
+      ->withExceptions(function (Exceptions $exceptions): void {
+        //
+
+             $exceptions->render(function (
+            NotFoundHttpException $exception,
+            Request $request
+        ) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'This page has been permanently removed.',
+                ], 410);
             }
-            return null;
+
+            return response()->view('errors.410', [], 410);
         });
     })->create();
+
+    // ->withExceptions(function (Exceptions $exceptions): void {
+    //     // Return JSON for all API exceptions
+    //     $exceptions->render(function (\Throwable $e, Request $request) {
+    //         if ($request->is('api/*') || $request->expectsJson()) {
+    //             if ($e instanceof \Illuminate\Validation\ValidationException) {
+    //                 return response()->json([
+    //                     'error'  => $e->getMessage(),
+    //                     'errors' => $e->errors(),
+    //                 ], 422);
+    //             }
+    //             if ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+    //                 return response()->json(['error' => 'Not found.'], 410);
+    //             }
+    //             if ($e instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+    //                 return response()->json(['error' => 'Method not allowed.'], 410);
+    //             }
+    //             if ($e instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
+    //                 return response()->json(['error' => 'Too many requests. Please try again shortly.'], 429);
+    //             }
+    //         }
+    //         return null;
+    //     });
+    // })->create();
