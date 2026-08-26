@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use App\Http\Middleware\RemoveUnwantedQuery;
+
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,12 +15,13 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+  
     ->withMiddleware(function (Middleware $middleware): void {
         // API stays stateless; the web group gets sessions + locale handling.
         $middleware->web(append: [
             \App\Http\Middleware\SetLocale::class,
         ]);
-
+$middleware->append(RemoveUnwantedQuery::class);
         // The `lng` locale cookie is a plain, non-sensitive value read by
         // SetLocale before decryption — keep it unencrypted.
         $middleware->encryptCookies(except: ['lng']);
