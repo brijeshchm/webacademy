@@ -124,7 +124,7 @@ class CoursesController extends Controller
         $slug = trim(urldecode($slug));
  
         $course = Course::where('slug',$slug)->firstOrFail();
-dd($course);
+
         if (!$course) {
             abort(410);
         }
