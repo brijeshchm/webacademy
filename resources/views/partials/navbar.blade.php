@@ -66,7 +66,7 @@
                             <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">{{ t('navX.popularCategories') }}</p>
                             <div class="grid grid-cols-2 gap-1.5">
                                 @foreach ([
-                                    ['navX.catData',route('courses.show','data-science-and-analytics')],
+                                    ['navX.catData',route('courses.show','data-science-training')],
                                     ['navX.catAI', route('courses.show','artificial-intelligence-training')],
                                     ['navX.catML', route('courses.show','machine-learning-training')],
                                     ['navX.catWorkday', route('courses.show','workday-training')],
