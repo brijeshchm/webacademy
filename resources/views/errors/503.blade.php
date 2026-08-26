@@ -4,7 +4,10 @@
 @section('meta_robots')
 <meta name="robots" content="noindex, nofollow">
 @endsection
- 
+@push('seo')
+    <title>{{ t('notFound.title') }} | Corporate Academy</title>
+    <meta name="robots" content="noindex">
+@endpush
 
 @section('content')
     <div class="min-h-[80vh] w-full flex items-center justify-center bg-background relative overflow-hidden">

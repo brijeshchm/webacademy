@@ -43,7 +43,7 @@ class CourseController extends Controller
         $course = Course::where('slug', $slug)->first();
 
         if (!$course) {
-            return response()->json(['error' => 'Course not found'], 404);
+            return response()->json(['error' => 'Course not found'], 410);
         }
 
         return response()->json($course);

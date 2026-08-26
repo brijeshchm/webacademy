@@ -120,12 +120,13 @@ class CoursesController extends Controller
 
     public function coursesDetails(string $slug)
     {
-       
+      
         $slug = trim(urldecode($slug));
+ 
         $course = Course::where('slug',$slug)->firstOrFail();
-
+dd($course);
         if (!$course) {
-            abort(404);
+            abort(410);
         }
 
 
