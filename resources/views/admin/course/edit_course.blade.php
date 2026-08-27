@@ -143,12 +143,7 @@ Edit Course
 							</div>
 							</div>
 
-                            <div class="form-group">
-							<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Short Description <span class="required">*(320 charactor max)</span></label>
-							<div class="col-md-8 col-sm-8 col-xs-12">
-							<textarea class="form-control col-md-7 col-xs-12" type="text" name="description" placeholder="Enter description">{{ old('description',(isset($edit_data)) ? $edit_data->description:"")}}</textarea>
-							</div>
-							</div>
+                           
 
 
                             <div class="form-group">

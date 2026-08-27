@@ -262,7 +262,7 @@
 
                     <h1 class="text-2xl md:text-2xl lg:text-2xl font-display font-extrabold tracking-tight mb-5 text-white leading-[1.1]">{{ $course->title }}</h1>
 
-                    <p class="text-base md:text-lg text-blue-100/70 mb-7 leading-relaxed">{{ $course->description }}</p>
+                    <p class="text-base md:text-lg text-blue-100/70 mb-7 leading-relaxed">{{ $course->course_defination }}</p>
 
                     {{-- Rating row --}}
                     <div class="flex flex-wrap items-center gap-5 mb-7">
@@ -806,7 +806,12 @@
 
 
 
-
+<style>
+#overview p{
+margin-top: .5rem !important;
+margin-bottom: .5rem !important;
+}
+</style>
 
     {{-- ═══ MAIN + SIDEBAR ═══ --}}
     <div class="container mx-auto px-4 md:px-6 pt-10">
@@ -1560,47 +1565,7 @@
                 </section>
 
 
-                @if($course->course_defination)
-<section  class="w-full bg-gradient-to-b from-slate-50 via-white to-slate-50 py-2 md:py-2 overflow-hidden bg-white rounded-xl border shadow-sm p-2">
-    <div class="max-w-7xl mx-auto px-2">
-        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-
-            {{-- Left: Trainer info card --}}
-            <div
-                x-data="{ shown: false }"
-                x-intersect.once="shown = true"
-                :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-                class="lg:w-7/12 w-full transition-all duration-700 ease-out relative"
-            >
-                {{-- Ambient glow blobs --}}
-                <div class="absolute -top-12 -left-12 w-48 h-48 bg-blue-400/25 rounded-full blur-3xl animate-pulse-slow pointer-events-none"></div>
-                <div class="absolute -bottom-12 right-4 w-40 h-40 bg-indigo-400/20 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style="animation-delay: 1.5s;"></div>
-
-                {{-- Gradient border wrapper (creates a soft glowing edge) --}}
-                <div class="relative rounded-[25px] p-[1.5px] bg-gradient-to-br from-blue-200 via-white to-indigo-200 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                    <div class="relative bg-white rounded-[25px] p-4 md:p-6
-                                shadow-[0_1px_2px_rgba(16,24,40,0.04),0_4px_12px_rgba(16,24,40,0.06),0_20px_40px_-8px_rgba(37,99,235,0.10)]
-                                hover:shadow-[0_2px_4px_rgba(16,24,40,0.05),0_12px_24px_rgba(16,24,40,0.08),0_32px_64px_-12px_rgba(37,99,235,0.22)]
-                                hover:-translate-y-1.5
-                                transition-all duration-500 ease-out">
-
-
-                        <h5 class="text-1xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight">
-                          Defination of  {{ $course->course_name??$course->title }}
-                        </h5>
-
-                        <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
-                            {!! $course->course_defination !!}
-                        </p>
-                      
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-@endif
+  
 
                @if($related_courses)
           <section id="related-course" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
@@ -1948,6 +1913,18 @@
     </div>
 </div>
 
+<style>
+#overview p{
+margin-top: .5rem !important;
+margin-bottom: .5rem !important;
+}
+#aboutTrainer p{
+margin-top: .5rem !important;
+margin-bottom: .5rem !important;
+}
+
+
+</style>
 
  
 <script>
@@ -2069,3 +2046,5 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 @include('partials.comman-lead-popup')
 @endsection
+
+8510002313

@@ -17,7 +17,7 @@ use App\Speciality;
 use App\Models\Reviews;
 use App\Models\Blog;
 use App\Models\Testimonial;
- 
+use DateTime;
 class BlogController extends Controller
 {
     /**
@@ -39,25 +39,136 @@ class BlogController extends Controller
     public function blog(Request $reques)
     {	 
 		$keyword="";
-		$blogs =DB::table('web_blog as blog'); 
-		$blogs  =$blogs->join('web_categories as category','blog.category','=','category.id','left');
-		$blogs =$blogs->select('blog.*','category.category as categoryname','category.id as categoryid');
-    	$blogs =$blogs->orderby('blog.id','desc');
-    	$blogs =$blogs->where('blog.status',1);
-		$blogs =$blogs->get();
-		 
-		$categoryes =DB::table('web_blog as blog'); 
-		$categoryes  =$categoryes->join('web_categories as category','blog.category','=','category.id','left');
-		$categoryes =$categoryes->select('category.*','blog.id as blogid','blog.title','blog.sub_title','blog.slug','category.category as categoryname','category.id as categoryid');
-		$categoryes =$categoryes->groupby('blog.category');
-		$categoryes =$categoryes->where('blog.status',1);
-	//	$categoryes =$categoryes->limit('6');
-		$categoryes =$categoryes->get();
-		 
-		//echo "<pre>";print_r($blogs);die;
-        return view('site.blog',['blogs'=>$blogs,'categoryes'=>$categoryes]);
+		$blogs = DB::table('web_blog as blog')
+		->leftJoin('web_categories as category', 'blog.category', '=', 'category.id')
+		->select(
+			'blog.*',
+			'category.category as categoryname',
+			'category.id as categoryid'
+		)
+		->where('blog.status', 1)
+		->orderBy('blog.id', 'desc')
+		->get();
+
+
+
+		 // Cache for 1 hour (matches Next.js revalidate: 3600)       
+       
+
+		$blogdetails = Blog::where('status', '1')
+			->orderBy('id', 'DESC')
+			->paginate(100);
+
+		foreach ($blogdetails as $key => $blog) {
+			$image = "";
+			$alt = "";
+
+			if (!empty($blog->image)) {
+				$imgData = unserialize($blog->image);
+				if (!empty($imgData['large']['src'])) {
+					$image = config('app.website') . $imgData['large']['src'];
+					$alt = $blog->name;
+				}
+			}
+
+			$blogPageList[$key] = [
+				'id' => $blog->id,
+				'name' => $blog->name,
+				'url' => $blog->slug,
+				'img' => $image,
+				'alt' => $alt,
+				'title' => $blog->title,
+				'ratingcount' => $blog->ratingcount,
+				'ratingvalue' => $blog->ratingvalue,
+				'created_at' => date('d, M Y',strtotime($blog->created_at)),
+				'updated_at' => $this->get_time(strtotime($blog->created_at)),
+				'description' => ucfirst(substr(strip_tags($blog->description), 0, 220)) . '...',
+
+			];
+		}
+
+
+        $featuredArticle     = $blogPageList ?? [];      
+    
+        $popularArticles = array_slice($featuredArticle, 1, 3);
+        $tickerArticles  = array_slice($featuredArticle, 4, 10);
+        $listArticles    = array_slice($featuredArticle, 1);   
+        $firstBlog    = $featuredArticle['0'];   
+        $categories = Blog::select('category_name as name', DB::raw('COUNT(*) as count'))
+        ->whereNotNull('category_name')
+        ->where('category_name', '!=', '')
+        ->groupBy('category_name')
+        ->orderBy('count', 'DESC')
+        ->get();
+ 
+   
+        $tags ="";
+
+        $city = "delhi";
+        $metaTitle = "QuickDials Blog | Local Business Tips, Guides & Updates";
+        $metaDescription = "Read QuickDials blogs for local business tips, service guides, market updates, and helpful information to find trusted businesses and services near you.";
+        $keyword = "Blog";
+        return view('pages.blog', compact(
+            'featuredArticle',
+            'firstBlog',
+            'popularArticles',
+            'tickerArticles',
+            'listArticles',
+            'categories',
+            'tags','city','metaTitle','metaDescription','keyword'
+        ));
+        
     } 
 	
+
+	
+function get_time($time)
+{
+
+	$start_date = date('Y-m-d H:i:s');
+
+	$diff = abs(strtotime($start_date) - $time);
+
+	$totalyear = floor($diff / (365 * 60 * 60 * 24));
+	$totalmonths = floor(($diff - $totalyear * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+	$days = floor(($diff - $totalyear * 365 * 60 * 60 * 24 - $totalmonths * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+
+
+
+	$create_time = $time;
+	$current_time = time();
+	$dtCurrent = DateTime::createFromFormat('U', $current_time);
+	$dtCreate = DateTime::createFromFormat('U', $create_time);
+	$diff = $dtCurrent->diff($dtCreate);
+
+	if ($days < 1 && $totalmonths == 0) {
+		$interval = $diff->format("%h hrs %i minutes");
+		$interval = preg_replace('/(^0| 0) (hrs|minutes)/', '', $interval);
+
+	} else if ($days > 0 && $totalmonths == 0) {
+		$interval = $diff->format("%d days %h hrs");
+		$interval = preg_replace('/(^0| 0) (days|hrs)/', '', $interval);
+	} else if ($totalmonths > 0 && $days > 1 && $totalyear == '0') {
+
+		$interval = $diff->format("%m months %d days");
+		$interval = preg_replace('/(^0| 0) (months|days)/', '', $interval);
+
+	} else if ($totalmonths >= 12 && $totalyear > 0) {
+		$interval = $diff->format("%y years %m months");
+		$interval = preg_replace('/(^0| 0) (years|months)/', '', $interval);
+	} else {
+
+		$interval = $diff->format("%h hours %i minutes");
+		$interval = preg_replace('/(^0| 0) (hours|minutes)/', '', $interval);
+	}
+
+	return $interval;
+
+
+
+}
+
+
  
  /**
      * Show the application dashboard.
