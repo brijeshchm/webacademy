@@ -80,12 +80,12 @@ class SeoPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveCourseTitle(Request $request)
+    public function saveCourseTitle_old(Request $request)
     {	  
 
         if($request->ajax()){   
 		
-	//echo "<pre>";print_r($_POST);die;
+	// echo "<pre>";print_r($_POST);die;
 			$course=explode(',',$request->input('course'));
 			$courseslist = Course::findOrFail($course[0]);	 
 			$category=explode(',',$request->input('category'));
@@ -106,8 +106,7 @@ class SeoPageController extends Controller
 			]);
 			}else{				
 				$validator = Validator::make($request->all(),[
-				'category'=>'required',
-				
+				'category'=>'required',				
 				'course'=>'required',				 
 				'city-'.$city_territory=>'required',					 
 				]);
@@ -168,6 +167,8 @@ class SeoPageController extends Controller
 				$courses->course_type = '3';				 
 				$courses->status = '0';				 
 				$courses->created_by =1;	
+
+				//dd($courses);
 				$courses->save();				
 				$add= 1;
 				}
@@ -232,69 +233,71 @@ class SeoPageController extends Controller
 		}
     } 
 	
-public function editSaveCourseSeoTopic(Request $request, $id)
-{
-    if (!$request->ajax()) {
-        return response()->json(['status' => 0, 'msg' => 'Invalid request'], 400);
-    }
+	public function editSaveCourseSeoTopic(Request $request, $id)
+	{
+		 
+		if (!$request->ajax()) {
+			return response()->json(['status' => 0, 'msg' => 'Invalid request'], 400);
+		}
 
-    $course = Course::find($id);
-    if (!$course) {
-        return response()->json(['status' => 0, 'msg' => 'Course not found'], 404);
-    }
+		$course = Course::find($id);
+		if (!$course) {
+			return response()->json(['status' => 0, 'msg' => 'Course not found'], 404);
+		}
 
-    $validator = Validator::make($request->all(), [
-        'enrolled'              => 'nullable|numeric',
-        'price'                 => 'nullable|numeric',
-        'offer'                 => 'required',
-        'duration_hours'        => 'required',
-        'certificate'           => 'required',
-        'level'                 => 'required',
-        'skills'                => 'required',
-        'mode'                  => 'required',
-        'live_project'          => 'required',
-        'professional_trained'  => 'required',
-        'batches_every_month'   => 'required|numeric',
-    ]);
+		$validator = Validator::make($request->all(), [
+			'enrolled'              => 'nullable|numeric',
+			'price'                 => 'nullable|numeric',
+			'offer'                 => 'required',
+			'duration_hours'        => 'required',
+			'certificate'           => 'required',
+			'level'                 => 'required',
+			'skills'                => 'required',
+			'mode'                  => 'required',
+			'live_project'          => 'required',
+			'professional_trained'  => 'required',
+			'batches_every_month'   => 'required|numeric',
+		]);
 
 
 
-		if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}	
-			   
+			if($validator->fails()){
+					$errorsBag = $validator->getMessageBag()->toArray();
+					return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+				}	
+				
 
-    try {
-        $course->enrolled              = $request->input('enrolled');
-        $course->price                 = $request->input('price');
-        $course->offer                 = $request->input('offer');
-        $course->duration_hours        = $request->input('duration_hours');
-        $course->certificate           = $request->input('certificate');
-        $course->level                 = $request->input('level');
-        $course->skills                = json_encode($request->input('skills'));
-        $course->mode                  = $request->input('mode');
-        $course->live_project          = $request->input('live_project');
-        $course->professional_trained  = $request->input('professional_trained');
-        $course->batches_every_month   = $request->input('batches_every_month');
-        $course->status                = '1';
-        $course->updated_by            = auth()->id() ?? 1;
-        $course->save();
+		try {
+			$course->enrolled              = $request->input('enrolled');
+			$course->price                 = $request->input('price');
+			$course->offer                 = $request->input('offer');
+			$course->duration_hours        = $request->input('duration_hours');
+			$course->certificate           = $request->input('certificate');
+			$course->level                 = $request->input('level');
+			$course->skills                = json_encode($request->input('skills'));
+			$course->mode                  = $request->input('mode');
+			$course->live_project          = $request->input('live_project');
+			$course->professional_trained  = $request->input('professional_trained');
+			$course->batches_every_month   = $request->input('batches_every_month');
+			$course->status                = '1';
+			$course->updated_by            = auth()->id() ?? 1;
+			$course->save();
 
-        return response()->json([
-            'status' => 1,
-            'msg'    => 'Course updated successfully!',
-        ], 200);
+			return response()->json([
+				'status' => 1,
+				'msg'    => 'Course updated successfully!',
+			], 200);
 
-    } catch (\Exception $e) {
-        \Log::error('editSaveCourseSeoTopic failed: ' . $e->getMessage());
+		} catch (\Exception $e) {
+			\Log::error('editSaveCourseSeoTopic failed: ' . $e->getMessage());
 
-        return response()->json([
-            'status' => 0,
-            'msg'    => $e->getMessage(),
-        ], 500);
-    }
-}
+			return response()->json([
+				'status' => 0,
+				'msg'    => $e->getMessage(),
+			], 500);
+		}
+	}
+
 	/**
 	 *add save Course Title with slug
      * Author: Brijesh Chauhan.
@@ -305,18 +308,17 @@ public function editSaveCourseSeoTopic(Request $request, $id)
     public function editSaveCourseTitle(Request $request,$id)
     {	 
 		
-	//echo "<pre>";print_r($_POST);die;
+ 
         if($request->ajax()){ 			
   
 		  $validator = Validator::make($request->all(),[		 
 				
 				'title' => 'required|min:5|max:75|unique:web_courses,title,'.$id.',id',	
-				'description'=>'required|min:10|max:68',		
+				'course_defination'=>'required|min:10|max:370',		
 				'slug' => 'required|unique:web_courses,slug,'.$id.',id',	
 				'course_name'=>'required|min:3|max:50',	
 				'rating'=>'required',
-				'total_rating'=>'required|numeric',	
-				'city'=>'required',	
+				'total_rating'=>'required|numeric',				 
 				'category'=>'required',	
 				'meta_title'=>'required|min:30|max:61',	
 				'meta_description'=>'required|min:70|max:161',
@@ -330,21 +332,18 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 			
 			 
 			$updatetitle =array(
-			'title'=>ucfirst($request->input('title')),	
-			'description'=>ucfirst($request->input('description')),			
+			'title'=>ucfirst($request->input('title')),			 	
 			'meta_title'=>ucfirst($request->input('meta_title')),			
 	    	'slug'=>$this->generate_slug(trim(str_replace('?','',$request->input('slug')))),	
-			'course_name'=>ucfirst($request->input('course_name')),	
-			'city'=>trim($request->input('city')),	
+			'course_name'=>ucfirst($request->input('course_name')),		 	
 			'category'=>trim($request->input('category')),	
 			'rating'=>trim($request->input('rating')),	
 			'total_rating'=>trim($request->input('total_rating')),		
 			'meta_description'=>trim($request->input('meta_description')),	
-			'course_defination'=>trim($request->input('course_defination')),	
-	
+			'course_defination'=>trim($request->input('course_defination')),		
 			'updated_by'=>1,				 	
 			);
-		// echo "<pre>";print_r($updatetitle);die;
+	  
 			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatetitle);	
 			if($checkupdate){
 				$status=1;							 
@@ -363,130 +362,10 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 	
  
 
-	 
-	/**
-	 *add save Course Title with slug
-     * Author: Brijesh Chauhan.
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSaveCourseLearn(Request $request,$id)
-    {	  
-	
+ 
 
-	//dd($request);
-        if($request->ajax()){   
-		  $validator = Validator::make($request->all(),[				 
-				'why_learn_heading'=>'required',
-				'why_learn'=>'required',					 				
-			]);
-			
-			if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-				  
-			$updatelearn =array(
-			'why_learn_heading'=>$request->input('why_learn_heading'),	
-			'why_learn'=>json_encode($request->input('why_learn')));	
-
-			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
-			if($checkupdate){
-				$status=1;							 
-				$msg="Course why learn submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course why learn could not be submitted!";	
-			}
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-		
-		}
-    } 
 	
-
-/*
-	 add save Course Title with slug
-     * Author: Brijesh Chauhan.
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSaveCourseSeoAbout(Request $request,$id)
-    {	  
- //dd($request);
-        if($request->ajax()){   
-		  $validator = Validator::make($request->all(),[				 
-				'courseabout'=>'required',
-				'paragraph1'=>'required',
-			 				 				
-			 				 				
-			]);
-			
-			if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-				  
-				  
-			$courseAbout = 	  CourseAbout::where('course_id',$id)->first();
-			if(!empty($courseAbout)){
-			$updatelearn =array(
-			'courseabout'=>$request->input('courseabout'),	
-			'heading'=>$request->input('heading'),	
-			'paragraph1'=>$request->input('paragraph1'),	
-			'paragraph2'=>$request->input('paragraph2'),	
-			'paragraph3'=>$request->input('paragraph3'),	
-			'paragraph4'=>$request->input('paragraph4'),	
-			'paragraph5'=>$request->input('paragraph5'),	
-			'paragraph6'=>$request->input('paragraph6'),	
-	 	
-                );
-			$checkupdate  =DB::table('web_courseabout')->where('course_id',$id)->update($updatelearn);	
-				if($checkupdate){
-				$status=1;							 
-				$msg="Course About submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course About could not be submitted!";	
-			}
-			
-			}else{
-			    	$courseAboutHeading  = New CourseAbout;
-			    	
-					$courseAboutHeading->course_id = $id;
-					$courseAboutHeading->courseabout = $request->input('courseabout');
-					$courseAboutHeading->heading = $request->input('heading');
-					$courseAboutHeading->paragraph1 = $request->input('paragraph1');
-					$courseAboutHeading->paragraph2 = $request->input('paragraph2');
-					$courseAboutHeading->paragraph3 = $request->input('paragraph3');
-					$courseAboutHeading->paragraph4 = $request->input('paragraph4');
-					$courseAboutHeading->paragraph5 = $request->input('paragraph5');
-					$courseAboutHeading->paragraph6 = $request->input('paragraph6');
-			    
-			    	if($courseAboutHeading->save()){
-				$status=1;							 
-				$msg="Course About submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course About could not be submitted!";	
-			}
-			}
-		
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-		
-		}
-    } 
-	
-    
-/*
+  /*
 	 add save Course Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
@@ -538,141 +417,201 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		
 		}
     } 
-	
-    
+
 
 	/**
-	 *add save Course Title with slug     
+	 *add save Course Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-      public function editSaveCourseAboutExcel(Request $request,$id)
-    {			
-		if($request->isMethod('post') )		
+    public function editSaveCourseLearn(Request $request,$id)
+    {	  
+	
 
-				$validator = Validator::make($request->all(),[				 
-				'course_about'=>'required',
-				]);
-				if($validator->fails()){
+ 
+        if($request->ajax()){   
+		  $validator = Validator::make($request->all(),[				 
+				'why_learn_heading'=>'required',
+				'why_learn'=>'required',					 				
+			]);
+			
+			if($validator->fails()){
 				$errorsBag = $validator->getMessageBag()->toArray();
 				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-				}
-					
-					
-			$allowedFileType = [			 
-			'text/csv',
-			'application/vnd.ms-excel'
-			];
-		 
-			if (in_array($_FILES["course_about"]["type"], $allowedFileType)) {
+			}
+				  
+			$updatelearn =array(
+			'why_learn_heading'=>$request->input('why_learn_heading'),	
+			'why_learn'=>json_encode($request->input('why_learn')));	
 
-			$coursesexcel = Course::findOrFail($id);		
-			if($request->hasFile('course_about')){
-				
-				$filePath = "excell";
-				$file =  $request->file('course_about');
-				$filename =str_replace(' ', '_', trim($file->getClientOriginalName()));			 
-				$destinationPath = public_path($filePath); 			
-				if(file_exists($destinationPath.'/'.$filename)){
-					$filename = $filename;
-				}
-				$file->move($destinationPath,$filename);	
-				$fileTextName= str_replace(' ', '_', trim($file->getClientOriginalName()));
-				$coursesexcel->courseaboutexcel = $fileTextName;	
-				$csvFile = fopen($destinationPath.'/'.$filename, 'r');
-				fgetcsv($csvFile);
-				$i=0;
-					while(($row = fgetcsv($csvFile)) !== FALSE){
-
-					$heading = trim(ltrim($row[0]));
-					if($heading !=""){				 
-					$courseAboutHeading  = New CourseAboutExcel;
-					$courseAboutHeading->course_id = $id;
-					$courseAboutHeading->heading = ltrim(str_replace('?','',$heading));
-					$courseAboutHeading->save();
-					$add= 1;
-					}else if($heading==""){
-					$level1 = trim(ltrim($row[1])); 
-					if($level1 !=""){
-
-					$courseAboutLevel1  = New CourseAboutExcel;	 
-					$courseAboutLevel1->heading_id = $courseAboutHeading->id;
-					$courseAboutLevel1->coursescontent = ltrim(str_replace('?','',$level1));
-					$courseAboutLevel1->save();
-					$add= 1;	
-					}else if($level1==""){
-					$level2 = trim(ltrim($row[2]));
-					if($level2 !=""){				
-					$courseAboutLevel2  = New CourseAboutExcel;	 
-					$courseAboutLevel2->content_id = $courseAboutLevel1->id;
-					$courseAboutLevel2->subcontent = ltrim(str_replace('?','',$level2));						
-					$courseAboutLevel2->save();
-					$add= 1;
-
-					}else if($level2==""){
-					$level3 = trim(ltrim($row[3]));
-					if($level3 !=""){					
-					$courseAboutLevel3  = New CourseAboutExcel;	 
-					$courseAboutLevel3->subcontent_id = $courseAboutLevel2->id;
-					$courseAboutLevel3->lastcontent = ltrim(str_replace('?','',$level3));						 
-					if($courseAboutLevel3->save()){
-					$add= 1;
-					}				 
-
-					}else if($level3==""){
-					$level4 = trim(ltrim($row[4]));
-					if($level4 !=""){					
-					$courseAboutLevel4  = New CourseAboutExcel;	 
-					$courseAboutLevel4->endcontent_id = $courseAboutLevel3->id;
-					$courseAboutLevel4->endcontent = ltrim(str_replace('?','',$level4));						 
-					if($courseAboutLevel4->save()){
-					$add= 1;
-					}				 
-
-					}
-					} 
-
-					}  
-					}
-					}	
-
-
-				}				
-			}else{
-			$coursesexcel->courseaboutexcel = $coursesexcel->courseaboutexcel;	
-			} 				 	 				 								
-			$coursesexcel->save(); 
-			 
-		} else{
-		    $status=0;							 
-				$msg="CSV file not formate!";
-		    
-		} 		
-			  
-			
-			if(!empty($add)){
+			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
+			if($checkupdate){
 				$status=1;							 
-				$msg="Course about submitted successfully!";		
+				$msg="Course why learn submitted successfully !";		
 				
 			}else{
 				$status=0;							 
-				$msg="Course about could not be submitted!";	
+				$msg="Course why learn could not be submitted!";	
 			}
 		
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
-				
+		
+		}
+    } 
+	/**
+	 *add save Course Title with slug
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editSaveTrainerAbout(Request $request,$id)
+    {	  
+	
+ 
+        if($request->ajax()){   
+		  $validator = Validator::make($request->all(),[				 
+				'trainer_about'=>'required',
+				'trainer_paragraph'=>'required',					 				
+			]);
 			
-		}	 
+			if($validator->fails()){
+				$errorsBag = $validator->getMessageBag()->toArray();
+				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+			}
+				  
+			
+			$updatelearn = array(
+    'trainer_about' => $request->input('trainer_about'),
+);
+
+			if ($request->filled('trainer_paragraph')) {
+				$updatelearn['trainer_paragraph'] = json_encode(
+					$request->input('trainer_paragraph')
+				);
+			}
+			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
+			if($checkupdate){
+				$status=1;							 
+				$msg="Trainer submitted successfully !";		
+				
+			}else{
+				$status=0;							 
+				$msg="Trainer could not be submitted!";	
+			}
+		
+			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
+		}
+    } 
+
+ 
+ 
+
+/*
+	 add save Course Title with slug
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editSaveCourseSeoAbout(Request $request,$id)
+    {	  
+ 
+        if($request->ajax()){   
+		  $validator = Validator::make($request->all(),[				 
+				'courseabout'=>'required',
+				'heading'=>'required',
+			 				 				
+			 				 				
+			]);
+			
+			if($validator->fails()){
+				$errorsBag = $validator->getMessageBag()->toArray();
+				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+			}
+				  
+				  
+			$courseAbout = 	  CourseAbout::where('course_id',$id)->first();
+
+			
+			if(!empty($courseAbout)){
+			$updatelearn =array(
+			'heading'=>$request->input('heading'),
+			'courseabout'=>$request->input('courseabout'),					
+			'heading1'=>$request->input('heading1'),	
+			'description1'=>$request->input('description1'),	
+			'heading2'=>$request->input('heading2'),	
+			'description2'=>$request->input('description2'),	
+			'heading3'=>$request->input('heading3'),	
+			'description3'=>$request->input('description3'),	
+			'heading4'=>$request->input('heading4'),	
+			'description4'=>$request->input('description4'),	
+			'heading5'=>$request->input('heading5'),	
+			'description5'=>$request->input('description5'),	
+			'heading6'=>$request->input('heading6'),	
+			'description6'=>$request->input('description6'),	
+	 	
+                );
+
+				 
+			$checkupdate  = CourseAbout::where('course_id',$id)->update($updatelearn);	
+				if($checkupdate){
+				$status=1;							 
+				$msg="Course About submitted successfully !";		
+				
+			}else{
+				$status=0;							 
+				$msg="Course About could not be submitted!";	
+			}
+			
+			}else{
+			    	$courseAboutHeading  = New CourseAbout;
+			    	
+					$courseAboutHeading->course_id = $id;
+					$courseAboutHeading->courseabout = $request->input('courseabout');
+					$courseAboutHeading->heading = $request->input('heading');
+					$courseAboutHeading->heading1 = $request->input('heading1');
+					$courseAboutHeading->description1 = $request->input('description1');
+					$courseAboutHeading->heading2 = $request->input('heading2');
+					$courseAboutHeading->description2 = $request->input('description2');
+					$courseAboutHeading->heading3 = $request->input('heading3');
+					$courseAboutHeading->description3 = $request->input('description3');
+					$courseAboutHeading->heading4 = $request->input('heading4');
+					$courseAboutHeading->description4 = $request->input('description4');
+					$courseAboutHeading->heading5 = $request->input('heading5');
+					$courseAboutHeading->description5 = $request->input('description5');
+					$courseAboutHeading->heading6 = $request->input('heading6');
+					$courseAboutHeading->description6 = $request->input('description6');
+
+ 
+			    
+			    	if($courseAboutHeading->save()){
+				$status=1;							 
+				$msg="Course About submitted successfully !";		
+				
+			}else{
+				$status=0;							 
+				$msg="Course About could not be submitted!";	
+			}
+			}
+		
+		
+			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
+			
+		
+		}
+    } 
+	
     
 	  
 
-	/**
-	 *add save Course Title with slug
+	/*
+	 add save Course Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
      *
@@ -714,199 +653,74 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		}
     } 
 	
+ 
 
-	 public function editSaveCurriculum(Request $request,$id)
-	{  
-	
-	
-		  
-		if($request->isMethod('post') )
-		{	
-			$validator = Validator::make($request->all(),[				 
-			'course_curriculum'=>'required',
-			]);
-			if($validator->fails()){
-			$errorsBag = $validator->getMessageBag()->toArray();
-			return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-			$allowedFileType = [
-			'application/vnd.ms-excel',
-			'text/xls',
-			'text/xlsx',
-			'text/csv',
-			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-			];		 
-			if (in_array($_FILES["course_curriculum"]["type"], $allowedFileType))
-				{			
-					$filePath = "excell";
-					$file =  $request->file('course_curriculum');
-					$filename =str_replace(' ', '_', trim($file->getClientOriginalName()));			 
-					$destinationPath = public_path($filePath); 			
-					if(file_exists($destinationPath.'/'.$filename)){
-						$filename = $filename;
-					}
-					$file->move($destinationPath,$filename);	
-					$fileTextName= str_replace(' ', '_', trim($file->getClientOriginalName()));
-					 
-					$csvFile = fopen($destinationPath.'/'.$filename, 'r');
-					fgetcsv($csvFile);
-					$i=0;
-						while(($row = fgetcsv($csvFile)) !== FALSE){
-										 
-							$heading = trim(ltrim($row[0]));	  	
-
-							if($heading !="")
-							{				 
-								$coursesHeading  = New CourseCurriculumExcel;
-								$coursesHeading->course_id = $id;
-								$coursesHeading->heading = trim(str_replace('?','',$heading));
-								$coursesHeading->save();
-								$add= 1;
-							}else 
-								if($heading=="")
-								{
-									$level1 = trim(ltrim($row[1])); 
-									if($level1 !="")
-									{
-
-										$coursesContent  = New CourseCurriculumExcel;	 
-										$coursesContent->heading_id = $coursesHeading->id;
-										$coursesContent->coursescontent = ltrim(str_replace('?','',$level1));
-										$coursesContent->save();
-										$add= 1;	
-									}else
-										if($level1=="")
-										{
-											$level2 = trim(ltrim($row[2]));
-											if($level2 !="")
-											{				
-											$coursesSubContent  = New CourseCurriculumExcel;	 
-											$coursesSubContent->content_id = $coursesContent->id;
-											$coursesSubContent->subcontent = ltrim(str_replace('?','',$level2));						
-											$coursesSubContent->save();
-											$add= 1;
-
-											}else 
-												if($level2=="")
-												{
-													$level3 = trim(ltrim($row[3]));
-													if($level3 !=""){					
-													$coursesLastcontent  = New CourseCurriculumExcel;	 
-													$coursesLastcontent->subcontent_id = $coursesSubContent->id;
-													$coursesLastcontent->lastcontent = ltrim(str_replace('?','',$level3));						 
-													if($coursesLastcontent->save()){
-													$add= 1;
-													}				 
-
-													}else if($level3=="")
-													{
-														$level4 = trim(ltrim($row[4]));
-														if($level4 !="")
-														{					
-															$courseEndContent  = New CourseCurriculumExcel;	 
-															$courseEndContent->endcontent_id = $coursesLastcontent->id;
-															$courseEndContent->endcontent = ltrim(str_replace('?','',$level4));						 
-															if($courseEndContent->save()){
-															$add= 1;
-															}				 
-														}
-													}
-												}	   
-										}
-								}	
-							
-						}
-				 
-
-
-
-					 			 
-				} 		
-			if(!empty($add)){
-			    
-			    $coursesexcel = Course::findOrFail($id);			 
-				if($request->hasFile('course_curriculum')){					 				
-					$coursesexcel->coursecurriculumexcel = $fileTextName;					
-				}else{
-					$coursesexcel->coursecurriculumexcel = $coursesexcel->coursecurriculumexcel;	
-				} 				 	 				 								
-				$coursesexcel->save(); 
-			    
-				$status=1;							 
-				$msg="Course curriculum updated successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course curriculum could not be updated!";	
-			}
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-				
-			
-		}	 
-		
-		 
-	}
+ 
 	
 	 
  
-	/**
-	* add save Course Title with slug
-     * Author: Brijesh Chauhan.
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSaveCourseRelated(Request $request,$id)
-    {	  
-	
-        if($request->ajax()){ 		
-  
-		  $validator = Validator::make($request->all(),[		 
-		
-				'show_on_footer'=>'required',				 				
-			]);
-			
-			if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-				 
-				 
-				if(!empty($request->input('related_courses'))){
-					 $related_courses=json_encode($request->input('related_courses'));					 
-				 }else{
-					 $related_courses="";
-				 }
-				
-			 
-				
-				$updaterelated =array(
-				'related_courses'=>trim($related_courses),				 		 	
-				 		 	
-				'show_on_footer'=>$request->input('show_on_footer'), 		 	
+ /**
+ * Add/save Course Title with related courses.
+ * Author: Brijesh Chauhan.
+ *
+ * @return \Illuminate\Http\Response
+ */
+public function editSaveCourseRelated(Request $request, $id)
+{
 
-				'updated_by'=>1,				 	
-				);
+    if (!$request->ajax()) {
+        return response()->json(['status' => 0, 'msg' => 'Invalid request.'], 400);
+    }
 
-				$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updaterelated);	
-				if($checkupdate){
-				$status=1;							 
-				$msg="Course related submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course related could not be updated !";	
-			}
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-		
-		}
-    } 
-	
-	/**
+    $validator = Validator::make($request->all(), [
+        'show_front_page'    => 'required',
+        'footer_certificate' => 'required',
+        'show_front_second'  => 'required',
+        // 'show_top_menu'   => 'required',
+        // 'show_on_footer'  => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        $errorsBag = $validator->getMessageBag()->toArray();
+        return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+    }
+
+    $course = DB::table('web_courses')->where('id', $id)->first();
+
+    if (!$course) {
+        return response()->json(['status' => 0, 'msg' => 'Course not found.'], 404);
+    }
+
+    $relatedCourses     = $request->filled('related_courses')
+        ? json_encode($request->input('related_courses'))
+        : json_encode([]);
+
+    $relatedCoursesSide = $request->filled('related_courses_side')
+        ? json_encode($request->input('related_courses_side'))
+        : json_encode([]);
+
+    $updateRelated = [
+        'related_courses'        => $relatedCourses,
+        'related_courses_side'   => $relatedCoursesSide,
+        'show_front_page'        => $request->input('show_front_page'),
+        'footer_certificate'     => $request->input('footer_certificate'),
+        'footer_top_course'      => $request->input('footer_top_course'),
+        'show_front_second'      => $request->input('show_front_second'),
+        'show_trending_courses'  => $request->input('show_trending_courses'),
+        // 'show_top_menu'      => $request->input('show_top_menu'),
+        // 'show_on_footer'     => $request->input('show_on_footer'),
+        // 'footer_city'        => $request->input('footer_city'),
+        'updated_by'              => auth()->id(),
+    ];
+
+    DB::table('web_courses')->where('id', $id)->update($updateRelated);
+
+    return response()->json([
+        'status' => 1,
+        'msg'    => 'Course related submitted successfully!',
+    ], 200);
+}
+	/*
 	 add save Course Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
@@ -969,7 +783,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		}
     } 
 	
-	/**
+	/*
 	 add save Course Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
@@ -978,7 +792,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
      */
     public function editSaveFAQ(Request $request,$id)
     {	  
-	//dd($request);
+	
         if($request->ajax()){ 		
 		 $validator = Validator::make($request->all(),[				 
 				'faqq'=>'required',
@@ -1008,7 +822,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 			'faqq'=>$faqq,
 			'faqa'=>$faqa
 			);
-			$courses->FAQs =json_encode($FAQs);				 
+			$courses->FAQs = json_encode($FAQs);				 
 			$courses->updated_by =1; 		 
 			if($courses->save()){
 				$status=1;							 
@@ -1026,8 +840,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
     } 
 	
 	
-	
-	/**
+	/*
 	 add save Course Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
@@ -1036,13 +849,12 @@ public function editSaveCourseSeoTopic(Request $request, $id)
      */
     public function editSaveTestimonial(Request $request,$id)
     {	  
-	
+
         if($request->ajax()){ 		
 		 $validator = Validator::make($request->all(),[				 
 				'name'=>'required',
-				'comment'=>'required',
-				'testimonial_visibility'=>'required',		
-				
+				'comment'=>'required',	
+				'reviews_visibility'=>'required',
 			]);
 			
 			if($validator->fails()){
@@ -1064,22 +876,34 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 				$comment="";
 			}
 			
+			if(!empty($request->input('company'))){
+				$company= json_encode($request->input('company'));
+			}else{
+				$company="";
+			}
 			
-				
+			if(!empty($request->input('rating'))){
+				$rating= json_encode($request->input('rating'));
+			}else{
+				$rating="";
+			}
+			
+			
 			if(!empty($request->input('linkedinurl'))){
 				$linkedinurl= json_encode($request->input('linkedinurl'));
 			}else{
 				$linkedinurl="";
 			}
-			
-			$testimonial= array(
+			$reviews= array(
 			'name'=>$name,
 			'comment'=>$comment,
+			'company'=>$company,
+			'rating'=>$rating,
 			'linkedinurl'=>$linkedinurl
 			);
-		 
-			$courses->testimonial = json_encode($testimonial);
-			$courses->testimonial_visibility = $request->input('testimonial_visibility');	
+
+			$courses->reviews = json_encode($reviews);
+			$courses->reviews_visibility = $request->input('reviews_visibility');	
 			$courses->updated_by =1; 		 
 			if($courses->save()){
 				$status=1;							 
@@ -1096,9 +920,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		}
     } 
 	
-	
- 
-   /**
+   /*
      * Get matches trainers based on ajax.
      *
      * @param  string
@@ -1117,7 +939,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 	}
 	
 	 
-   /**
+   /*
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
      *
@@ -1126,27 +948,74 @@ public function editSaveCourseSeoTopic(Request $request, $id)
     public function edit(Request $request,$id)
     {	  
 		$edit_data= Course::findOrFail(base64_decode($id));
-				
-	//echo "<pre>";print_r($edit_data);die;
-		$cetegories= Category::where('status',1)->get();	
-		// dd($cetegories);
-		$course_list= Course::select('id','title')->where('course_type','<>','3')->where('status',1)->get();
+		
+	 	$cetegories= Category::where('status',1)->get();	
+    	$course_module= Course::select('id','title')->where('course_type','1')->where('status',1)->get();
+		$course_list= Course::select('id','title','slug')->where('course_type','<>','3')->where('status',1)->get();	
+			
 		$speciality =Speciality::where('id',1)->first();
 		
-		$aboutHeading = CourseAbout::where('course_id',base64_decode($id))->first();		
-	
-		if(!empty($edit_data->course_curriculum)){			
-		$coursecurriculum =CourseCurriculumExcel::where('course_id',$edit_data->course_curriculum)->get();	
-		}else{
-		$coursecurriculum =CourseCurriculumExcel::where('course_id',base64_decode($id))->get();	
-
-		}
-	
-	 
+		$aboutHeading = CourseAbout::where('course_id',base64_decode($id))->first();	
+			
 	   $tools_list = ToolsCovered::get();
-	
+    	//$coursecurriculum =CourseCurriculumExcel::where('course_id',base64_decode($id))->get();	
+		
+		
+ 
+$rows = CourseCurriculumExcel::where('course_id', base64_decode($id))
+    ->orderBy('id', 'asc')
+    ->get();
+
+// Group children by their parent FK — done once, in memory, no extra queries
+$byHeadingId    = $rows->groupBy('heading_id');
+$byContentId    = $rows->groupBy('content_id');
+$bySubcontentId = $rows->groupBy('subcontent_id');
+$byEndcontentId = $rows->groupBy('endcontent_id');
+
+// Root-level rows: real headings, no parent
+$headings = $rows->filter(function ($row) {
+    return empty($row->heading_id) && !empty($row->heading);
+});
+
+$coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byContentId, $bySubcontentId, $byEndcontentId) {
+
+    $topics = $byHeadingId->get($heading->id, collect());
+
+    return [
+        'title'  => $heading->heading,
+        'topics' => $topics->map(function ($topic) use ($byContentId, $bySubcontentId, $byEndcontentId) {
+
+            $subcontents = $byContentId->get($topic->id, collect());
+
+            return [
+                'content'     => $topic->coursescontent,
+                'subcontents' => $subcontents->map(function ($sub) use ($bySubcontentId, $byEndcontentId) {
+
+                    $lastcontents = $bySubcontentId->get($sub->id, collect());
+
+                    return [
+                        'subcontent'   => $sub->subcontent,
+                        'lastcontents' => $lastcontents->map(function ($last) use ($byEndcontentId) {
+
+                            $endcontents = $byEndcontentId->get($last->id, collect());
+
+                            return [
+                                'lastcontent' => $last->lastcontent,
+                                'endcontents' => $endcontents->map(function ($end) {
+                                    return ['endcontent' => $end->endcontent];
+                                })->values()->toArray(),
+                            ];
+                        })->values()->toArray(),
+                    ];
+                })->values()->toArray(),
+            ];
+        })->values()->toArray(),
+    ];
+})->values()->toArray();
+ 
+
 		$citys= CourseCity::orderBy('city','asc')->where('status',1)->get();	
-        return view('admin.seopage.edit_seocourse',['edit_data'=>$edit_data,'course_list'=>$course_list,'cetegories'=>$cetegories,'speciality'=>$speciality,'coursecurriculum'=>$coursecurriculum,'citys'=>$citys,'aboutHeading'=>$aboutHeading,'tools_list'=>$tools_list]);
+        return view('admin.seopage.edit_seocourse',['edit_data'=>$edit_data,'course_list'=>$course_list,'course_module'=>$course_module,'cetegories'=>$cetegories,'speciality'=>$speciality,'coursecurriculum'=>$coursecurriculum,'citys'=>$citys,'aboutHeading'=>$aboutHeading,'tools_list'=>$tools_list]);
     } 
 	
  
@@ -1352,146 +1221,11 @@ public function editSaveCourseSeoTopic(Request $request, $id)
 		}
   
  
-	 /**
-     * Remove the specified resource from storage del_icon.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-		 public function courseContentDelete(Request $request,$id){
-		  
-		  
-		  
-			$coursesHeading = CourseCurriculumExcel::where('course_id',$id)->get();	
- //echo "<pre>";print_r($coursesHeading);die;
-			if(count($coursesHeading)>0){
-				 
-				foreach($coursesHeading as $heading){					 
-						$coursesContent = CourseCurriculumExcel::where('heading_id',$heading->id)->get();
-						if(count($coursesContent)>0){
-							foreach($coursesContent as $content){
-								$coursesSubContent = CourseCurriculumExcel::where('content_id',$content->id)->get();
-								if(count($coursesSubContent)>0){
-									foreach($coursesSubContent as $subcontent){										
-										$coursesLastContent = CourseCurriculumExcel::where('subcontent_id',$subcontent->id)->get();
-										if(count($coursesLastContent)>0){
-											foreach($coursesLastContent as $lastContent){
-												$deleteLastContent = CourseCurriculumExcel::where('id',$lastContent->id)->delete();
-												$deleteendContent = CourseCurriculumExcel::where('endcontent_id',$lastContent->id)->delete();
-												$delsubcontent  =CourseCurriculumExcel::where('id',$subcontent->id)->delete();
-												$delcontent  =CourseCurriculumExcel::where('id',$content->id)->delete();
-												$delheading  =CourseCurriculumExcel::where('id',$heading->id)->delete();
-												$status=1;
-												$error=200;
-												$msg="Course Content Deleted Successfully !";
-											}
-										}else{											
-											$delsubcontent  =CourseCurriculumExcel::where('id',$subcontent->id)->delete();
-											$delcontent  =CourseCurriculumExcel::where('id',$content->id)->delete();
-											$delheading  =CourseCurriculumExcel::where('id',$heading->id)->delete();
-											$status=1;
-											$error=200;
-											$msg="Course Content Deleted Successfully !";											
-										}										
-									}									
-								}else{
-									$delcontent  =CourseCurriculumExcel::where('id',$content->id)->delete();
-									$delheading  =CourseCurriculumExcel::where('id',$heading->id)->delete();	
-									$status=1;
-									$error=200;
-									$msg="Course Content Deleted Successfully !";
-								}								
-							}							
-						}else{
-							$delheading  =CourseCurriculumExcel::where('id',$heading->id)->delete();	
-							$status=1;
-							$error=200;
-							$msg="Course Content Deleted Successfully !";
-						}							
-				}
-				
-									 
-			
-			}else{	 		
-				$error=404;
-				$status=0;
-				$msg="Not Record found!";				
-			}
-		 return response()->json(['status'=>$status,'msg'=>$msg],200);
-	}
 	 
  
 	  
  
-	 /**
-     * Remove the specified resource from storage del_icon.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
- 
- 
-	 public function courseAboutExcelDelete(Request $request,$id){
-		  
-			$courseAboutHeading = CourseAboutExcel::where('course_id',$id)->get();	
-
-			if(count($courseAboutHeading)>0){
-				 
-				foreach($courseAboutHeading as $heading){					 
-						$courseAboutLevel1 = CourseAboutExcel::where('heading_id',$heading->id)->get();
-						if(count($courseAboutLevel1)>0){
-							foreach($courseAboutLevel1 as $content){
-								$courseAboutLevel2 = CourseAboutExcel::where('content_id',$content->id)->get();
-								if(count($courseAboutLevel2)>0){
-									foreach($courseAboutLevel2 as $subcontent){										
-										$courseAboutLevel3 = CourseAboutExcel::where('subcontent_id',$subcontent->id)->get();
-										if(count($courseAboutLevel3)>0){
-											foreach($courseAboutLevel3 as $lastContent){
-												$deleteLastContent = CourseAboutExcel::where('id',$lastContent->id)->delete();
-												$deleteendContent = CourseAboutExcel::where('endcontent_id',$lastContent->id)->delete();
-												$delsubcontent  =CourseAboutExcel::where('id',$subcontent->id)->delete();
-												$delcontent  =CourseAboutExcel::where('id',$content->id)->delete();
-												$delheading  =CourseAboutExcel::where('id',$heading->id)->delete();
-												$status=1;
-												$error=200;
-												$msg="Course About Deleted Successfully !";
-											}
-										}else{											
-											$delsubcontent  =CourseAboutExcel::where('id',$subcontent->id)->delete();
-											$delcontent  =CourseAboutExcel::where('id',$content->id)->delete();
-											$delheading  =CourseAboutExcel::where('id',$heading->id)->delete();
-											$status=1;
-											$error=200;
-											$msg="Course About Deleted Successfully!";											
-										}										
-									}									
-								}else{
-									$delcontent  =CourseAboutExcel::where('id',$content->id)->delete();
-									$delheading  =CourseAboutExcel::where('id',$heading->id)->delete();	
-									$status=1;
-									$error=200;
-									$msg="Course About Deleted Successfully!";
-								}								
-							}							
-						}else{
-							$delheading  =CourseAboutExcel::where('id',$heading->id)->delete();	
-							$status=1;
-							$error=200;
-							$msg="Course About Deleted Successfully!";
-						}							
-				}
-				
-									 
-			
-			}else{	 		
-				$error=404;
-				$status=0;
-				$msg="Not Record found!";				
-			}
-		 return response()->json(['status'=>$status,'msg'=>$msg],200);
-	}
 	 
-  
 	  
 	  
 	  
@@ -1717,70 +1451,7 @@ public function editSaveCourseSeoTopic(Request $request, $id)
         echo '<option value="">No record found</option>';
     }
 }
-    public function getCourseCity_oldd(Request $request)
-    {        
-	$id = $request->input('cid'); 
-		
-	$id=explode(',',$id);
-	$pid = $request->input('pid'); 
-
-	$courseslist = Course::findOrFail($id[0]);	 
-
-
-	$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();
-		
-		$listcity=[];
-		if(!empty($checkdataslug)){
-			foreach($checkdataslug as $slug){
-				array_push($listcity, $slug->city);				
-			}
-			
-		}
-
-
-		$inerarr =[];
-		$newcity =[];
-		$main_array = array(1,3);
-		$check_value = array(1,2,3,4,5);
-		
-		
-
-		
-		
-		$check_value =CourseCity::where('status','1')->get();
-		foreach ($check_value as $value) {
-		if (in_array($value->city, $listcity)) {
-		//$new= array_push($newcity,$value);
-		}
-		else{
-		 array_push($newcity,$value->city);
-		}
-		}
-		//echo "<pre>";print_r($newcity); 		
-		
-	//echo "<pre>";print_r($listcity);die;
-	  
-		
-		
-		//echo "<pre>";print_r($subcategory_data);die;
-		if($newcity){ 
-		echo '<option value="">Select City</option>';
-		foreach($newcity as $new=>$nval){ 
-		$selected = ($pid==$nval)?"selected":'';
-
-		echo'<option value="'.$nval.'" '.$selected.' >'.$nval.'</option>';
-
-		}
-		} else { 
-		echo'<option value="">No record found</option>';
-		}
-		
-		
-	 	
-		  
-    }
- 
- 
+     
  	
 	/**
      * the specified resource fetch from subcuisine according to cuisine id.
@@ -1939,46 +1610,7 @@ public function getcourseCityOnline(Request $request)
     }
 }
 
-    public function getcourseCityOnline_oldd(Request $request)
-    {       
-		//dd($request); 
-		$id = $request->input('cid'); 		 
-		$id=explode(',',$id);
-		$pid = $request->input('pid'); 	 
-		$courseslist = Course::findOrFail($id[0]);	
-		$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();	
-		dd($checkdataslug);
-		
-		$listcity=[];
-		if(!empty($checkdataslug)){
-			foreach($checkdataslug as $slug){
-				array_push($listcity, $slug->city);				
-			}			
-		}
-		$inerarr =[];
-		$newcity =[];	 
-		$check_value =array('Online');
-		foreach ($check_value as $key=>$vale) {
-		if (in_array($vale, $listcity)) {
-		//$new= array_push($newcity,$value);
-		}
-		else{
-		 array_push($newcity,$vale);
-		}
-		}	
-		 
-		if($newcity){ 
-		echo '<option value="">Select City</option>';
-		foreach($newcity as $new=>$nval){ 
-		$selected = ($pid==$nval)?"selected":'';
-		echo'<option value="'.$nval.'" '.$selected.' >'.$nval.'</option>';
-		}
-		} else { 
-		echo'<option value="">No record found</option>';
-		}		  
-    }
- 
- 
+    
 	/**
      * the specified resource fetch from subcuisine according to cuisine id.
      *
@@ -2018,43 +1650,7 @@ public function getcourseCityOnline(Request $request)
         echo '<option value="">No record found</option>';
     }
 }
-    public function getcourseNCRCity_ohh(Request $request)
-    {        
-		$id = $request->input('cid'); 		 
-		$id=explode(',',$id);
-		$pid = $request->input('pid'); 	 
-		$courseslist = Course::findOrFail($id[0]);	
-		$checkdataslug = Course::select('id','course_clone_id','title','course_name','city')->where('category',$id[1])->where('city','<>','')->where('course_clone_id',$id[0])->groupby('city')->get();		 
-		$listcity=[];
-		if(!empty($checkdataslug)){
-			foreach($checkdataslug as $slug){
-				array_push($listcity, $slug->city);				
-			}
-			
-		}
-		$inerarr =[];
-		$newcity =[];	 
-		$check_value =array('Delhi','Noida','Gurgaon');
-		foreach ($check_value as $key=>$vale) {
-		if (in_array($vale, $listcity)) {
-		//$new= array_push($newcity,$value);
-		}
-		else{
-		 array_push($newcity,$vale);
-		}
-		}	
-		 
-		if($newcity){ 
-		echo '<option value="">Select City</option>';
-		foreach($newcity as $new=>$nval){ 
-		$selected = ($pid==$nval)?"selected":'';
-		echo'<option value="'.$nval.'" '.$selected.' >'.$nval.'</option>';
-		}
-		} else { 
-		echo'<option value="">No record found</option>';
-		}		  
-    }
- 
+    
  
  function generate_slug($slug=null){
 	if(is_null($slug)){

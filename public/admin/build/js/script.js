@@ -3037,7 +3037,6 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 			saveCourseTitle:function(THIS){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);		
-		
  			mainSpinner.start();
 				$.ajax({
 					url:"/admin/seopage/saveCourseTitle",
@@ -3390,55 +3389,12 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 				 return false;	
 			},
 			
-			editSaveCurriculum:function(THIS,id){	
+			editSaveTrainerAbout:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	
 			 mainSpinner.start();
 				$.ajax({
-					url:"/admin/seopage/editSaveCurriculum/"+id,
-					type:"POST",					   
-					dataType:"json",	
-					data:form,
-					 cache: false,
-					contentType: false, 
-                    processData: false,                      
-					success:function(data){
-					    mainSpinner.stop();			
-						if(data.status){	
-												
-							$('#successMessageId .modal-title').text("Course Content");	
-							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");		
-							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
-							$('#successMessageId').css({'width':'100%'});	
-							 window.location.reload();
-							removeValidationErrors($this);	
-						}else{
-							$('#successMessageId .modal-title').text("Course Content");	
-							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
-							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
-							$('#successMessageId').css({'width':'100%'});	
-							
-						}
-					},
-					error:function(jqXHR, textStatus, errorThrown){
-					    mainSpinner.stop();			
-						var response = JSON.parse(jqXHR.responseText);
-						if(response.status){ 
-							showValidationErrors($this,response.errors);						 
-						}else{
-							alert('Something went wrong');
-						}
-						 
-					}
-				}); 
-				 return false;	
-			},
-			editSaveCourseCurriculum:function(THIS,id){	
-			  var $this = $(THIS);
-			var form = new FormData(THIS);	
-			 mainSpinner.start();
-				$.ajax({
-					url:"/admin/seopage/editSaveCourseCurriculum/"+id,
+					url:"/admin/seopage/editSaveTrainerAbout/"+id,
 					type:"POST",					   
 					dataType:"json",	
 					data:form,
@@ -3452,14 +3408,14 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
-							$('#successMessageId').css({'width':'100%'});	
-							window.location.reload();
+							$('#successMessageId').css({'width':'100%'});
+								 window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
-							$('#successMessageId').css({'width':'100%'});				 
+							$('#successMessageId').css({'width':'100%'});	
 							
 						}
 					},
@@ -3476,6 +3432,8 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 				}); 
 				 return false;	
 			},
+			
+			 
 			editSaveCourseRelated:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	
@@ -3776,39 +3734,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 				});
 				}
 			},
-			
-			courseAboutExcelDelete:function(id){
 		 
-			 	if( confirm("Are you sure you want to delete?") ) {
-				  mainSpinner.start();
-				$.ajax({
-					url:"/admin/seopage/courseAboutExcelDelete/"+id,
-					type:"GET",
-					//dataType:"json",	
-					success:function(response){	
-					    mainSpinner.stop();			
-					if(response.status){
-						$('#successMessageId .modal-title').text("Course Content Delete");	
-						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
-						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
-						$('#successMessageId').css({'width':'100%'});
-						 window.location.reload();
-						 
-					}else{
-							$('#successMessageId .modal-title').text("Course Content Delete");	
-							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
-							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
-							$('#successMessageId').css({'width':'100%'});
-					}						
-					},
-					error:function(response){
-					    mainSpinner.stop();			
-						 alert('some error');
-					}
-				});
-				}
-			},
-			 
 			
 		 
 			

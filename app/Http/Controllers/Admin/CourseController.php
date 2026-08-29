@@ -83,11 +83,7 @@ class CourseController extends Controller implements HasMiddleware
 		$course_module= Course::select('id','title')->where('course_type','1')->where('status',1)->get();
 		$course_list= Course::select('id','title')->where('course_type','<>','3')->where('status',1)->get();	
 		$cetegories= Category::where('status',1)->get();	
-			
-		 	
-	 
-		 
- 
+	
 		$citys= CourseCity::orderBy('city','asc')->where('status',1)->get();
 		 
         return view('admin.course.add_course',['course_list'=>$course_list,'course_module'=>$course_module,'citys'=>$citys,'cetegories'=>$cetegories]);
@@ -476,47 +472,7 @@ class CourseController extends Controller implements HasMiddleware
     }
 }
 	 
-	/*
-	 add save Course Title with slug
-     * Author: Brijesh Chauhan.
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSaveCourseAbout_old(Request $request,$id)
-    {	  
-	
-        if($request->ajax()){   
-		  $validator = Validator::make($request->all(),[				 
-				'why_learn_heading'=>'required',
-				'why_learn'=>'required',					 				
-			]);
-			
-			if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-				  
-			$updatelearn =array(
-			'why_learn_heading'=>$request->input('why_learn_heading'),	
-			'why_learn'=>json_encode($request->input('why_learn')));	
-
-			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
-			if($checkupdate){
-				$status=1;							 
-				$msg="Course why learn submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course why learn could not be submitted!";	
-			}
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-		
-		}
-    } 
-	
+ 
 
 /*
 	 add save Course Title with slug
@@ -853,134 +809,7 @@ class CourseController extends Controller implements HasMiddleware
 }
 	 
 
-	 public function editSaveCurriculum_old(Request $request,$id)
-	{  	
-		  
-		if($request->isMethod('post') )
-		{	
-			$validator = Validator::make($request->all(),[				 
-			'course_curriculum'=>'required',
-			]);
-			if($validator->fails()){
-			$errorsBag = $validator->getMessageBag()->toArray();
-			return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-			$allowedFileType = [			 
-			'text/csv',
-// 			'application/vnd.ms-excel'
-			];		 
-			if (in_array($_FILES["course_curriculum"]["type"], $allowedFileType))
-				{			
-					$filePath = "excell";
-					$file =  $request->file('course_curriculum');
-					$filename =str_replace(' ', '_', trim($file->getClientOriginalName()));			 
-					$destinationPath = public_path($filePath); 			
-					if(file_exists($destinationPath.'/'.$filename)){
-						$filename = $filename;
-					}
-					$file->move($destinationPath,$filename);	
-					$fileTextName= str_replace(' ', '_', trim($file->getClientOriginalName()));
-					 
-					$csvFile = fopen($destinationPath.'/'.$filename, 'r');
-					fgetcsv($csvFile);
-					$i=0;
-						while(($row = fgetcsv($csvFile)) !== FALSE){
-										 
-							$heading = trim(ltrim($row[0]));	  	
-
-							if($heading !="")
-							{				 
-								$coursesHeading  = New CourseCurriculumExcel;
-								$coursesHeading->course_id = $id;
-								$coursesHeading->heading = trim(str_replace('?','',$heading));
-								$coursesHeading->save();
-								$add= 1;
-							}else 
-								if($heading=="")
-								{
-									$level1 = trim(ltrim($row[1])); 
-									if($level1 !="")
-									{
-
-										$coursesContent  = New CourseCurriculumExcel;	 
-										$coursesContent->heading_id = $coursesHeading->id;
-										$coursesContent->coursescontent = ltrim(str_replace('?','',$level1));
-										$coursesContent->save();
-										$add= 1;	
-									}else
-										if($level1=="")
-										{
-											$level2 = trim(ltrim($row[2]));
-											if($level2 !="")
-											{				
-											$coursesSubContent  = New CourseCurriculumExcel;	 
-											$coursesSubContent->content_id = $coursesContent->id;
-											$coursesSubContent->subcontent = ltrim(str_replace('?','',$level2));						
-											$coursesSubContent->save();
-											$add= 1;
-
-											}else 
-												if($level2=="")
-												{
-													$level3 = trim(ltrim($row[3]));
-													if($level3 !=""){					
-													$coursesLastcontent  = New CourseCurriculumExcel;	 
-													$coursesLastcontent->subcontent_id = $coursesSubContent->id;
-													$coursesLastcontent->lastcontent = ltrim(str_replace('?','',$level3));						 
-													if($coursesLastcontent->save()){
-													$add= 1;
-													}				 
-
-													}else if($level3=="")
-													{
-														$level4 = trim(ltrim($row[4]));
-														if($level4 !="")
-														{					
-															$courseEndContent  = New CourseCurriculumExcel;	 
-															$courseEndContent->endcontent_id = $coursesLastcontent->id;
-															$courseEndContent->endcontent = ltrim(str_replace('?','',$level4));						 
-															if($courseEndContent->save()){
-															$add= 1;
-															}				 
-														}
-													}
-												}	   
-										}
-								}	
-							
-						}
-				 
-
-
-
-					 			 
-				} 		
-			if(!empty($add)){
-			    
-			    $coursesexcel = Course::findOrFail($id);			 
-				if($request->hasFile('course_curriculum')){					 				
-					$coursesexcel->coursecurriculumexcel = '.$fileTextName.';					
-				}else{
-					$coursesexcel->coursecurriculumexcel = $coursesexcel->coursecurriculumexcel;	
-				} 				 	 				 								
-				$coursesexcel->save(); 
-			    
-				$status=1;							 
-				$msg="Course curriculum updated successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course curriculum could not be updated!";	
-			}
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-				
-			
-		}	 
-		
-		 
-	}
+ 
 	
 	 
  

@@ -215,6 +215,7 @@ Route::post('seopage/editSaveCourseAboutExtra/{id}',[App\Http\Controllers\Admin\
 Route::post('seopage/editSaveCourseOverview/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseOverview'] );
 Route::post('seopage/editSaveCourseSeoAbout/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseSeoAbout']);
 Route::post('seopage/editSaveCourseSeoTopic/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseSeoTopic']);
+Route::post('seopage/editSaveTrainerAbout/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTrainerAbout']);
 Route::post('seopage/editSaveCourseLearn/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseLearn']);
 Route::post('seopage/editSaveCourseExtraContent/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseExtraContent']);
 Route::post('seopage/editSaveCourseAboutExcel/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseAboutExcel'] );

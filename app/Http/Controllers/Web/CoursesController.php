@@ -148,7 +148,7 @@ class CoursesController extends Controller
         if($course){
         $placementStories     = Placement::where('course',$course->id)->get();
         }
-        
+     
 
         // ── Batch-translate ALL dynamic strings in ONE query ────────────
         // Collect every dynamic string on the page (summary, description,
@@ -262,22 +262,40 @@ $coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byCon
         $faqQuestions = $faqQuestionSources;
         $faqAnswers   = $faqAnswerSources;
 //dd($reviews);
-        if($course->course_type =='2'){
-             
+        if($course->course_type =='2'){             
 
-$courses_module = $course->courses_module
-    ? json_decode($course->courses_module, true)
-    : [];
-
-$courseModules = Course::whereIn('slug', $courses_module)->get();
-
-
-      
+            $courses_module = $course->courses_module
+                ? json_decode($course->courses_module, true)
+                : [];
+            $courseModules = Course::whereIn('slug', $courses_module)->get();
+     
             return view('pages.master-detail', [
             'course'            => $course,
             'placementStories'            => $placementStories,
             'curriculum'        => $coursecurriculum,
             'courseModules'        => $courseModules,
+            'aboutHeading'        => $aboutHeading,
+            'faqs'               => $FAQs,
+            'skills'            => $skills,
+            'whyLearns'         => $whyLearns,
+            'related_courses'   => $related_courses,
+            'reviews'            => $reviews,
+            'summaryT'          => $summary,
+            'descriptionT'      => $description,
+            'skillsT'           => $skillsT,
+            'curriculumTitles'  => $curriculumTitles,
+            'curriculumTopics'  => $curriculumTopics,
+            'faqQuestions'      => $faqQuestions,
+            'faqAnswers'        => $faqAnswers,
+        ]);
+
+
+        }elseif($course->course_type =='3'){
+
+ return view('pages.seo-course-detail', [
+            'course'            => $course,
+            'curriculum'        => $coursecurriculum,
+            'placementStories'        => $placementStories,
             'aboutHeading'        => $aboutHeading,
             'faqs'               => $FAQs,
             'skills'            => $skills,
