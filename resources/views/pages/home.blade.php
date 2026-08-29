@@ -351,32 +351,40 @@
             {{-- Right: floating image collage --}}
             <div class="relative hidden lg:block h-[460px]">
                 <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-[#7c3aed]/20 rounded-[3rem] blur-3xl"></div>
+
                 <div class="absolute top-6 right-6 w-64 h-80 rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 border-4 border-white ca-float-slow">
-                    <img loading="lazy" decoding="async" width="256" height="320" src="/images/hero/learner-1.webp" alt="" aria-hidden="true" class="w-full h-full object-cover">
+                    <a href="{{route('courses.show','six-sigma-training')}}">
+                    <img loading="lazy" decoding="async" width="256" height="320" src="/images/courses/six-sigma.png" alt="" aria-hidden="true" class="w-full h-full object-cover">
                     <div class="absolute bottom-3 left-3 right-3 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-3 py-2 shadow-md">
                         <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/15 text-primary shrink-0">
                             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
                         </span>
-                        <span class="text-xs font-semibold text-foreground leading-tight">{{ t('home.badgeSalaryHike') }}</span>
+                        <span class="text-xs font-semibold text-foreground leading-tight">Six Sigma</span>
                     </div>
+                    </a>
                 </div>
+
                 <div class="absolute top-0 left-0 w-44 h-56 rounded-3xl overflow-hidden shadow-xl shadow-secondary/20 border-4 border-white ca-float">
-                    <img loading="lazy" decoding="async" width="176" height="224" src="/images/hero/learner-2.webp" alt="" aria-hidden="true" class="w-full h-full object-cover">
+                     <a href="{{route('courses.show','workday-hcm-functional-course')}}">
+                    <img loading="lazy" decoding="async" width="176" height="224" src="/images/courses/images-hcm.jpg" alt="" aria-hidden="true" class="w-full h-full object-cover">
                     <div class="absolute bottom-2 left-2 right-2 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-md">
                         <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-secondary/20 text-secondary shrink-0">
                             <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
                         </span>
-                        <span class="text-[11px] font-semibold text-foreground leading-tight">{{ t('home.badgePromoted') }}</span>
+                        <span class="text-[11px] font-semibold text-foreground leading-tight">Workday HCM</span>
                     </div>
+                        </a>
                 </div>
                 <div class="absolute bottom-0 left-10 w-48 h-60 rounded-3xl overflow-hidden shadow-xl shadow-primary/20 border-4 border-white ca-float-slow">
-                    <img loading="lazy" decoding="async" width="192" height="240" src="/images/hero/learner-3.webp" alt="" aria-hidden="true" class="w-full h-full object-cover">
+                     <a href="{{route('courses.show','data-science-training')}}">
+                    <img loading="lazy" decoding="async" width="192" height="240" src="/images/courses/data-science.png" alt="" aria-hidden="true" class="w-full h-full object-cover">
                     <div class="absolute bottom-2 left-2 right-2 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-md">
                         <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-primary/15 text-primary shrink-0">
                             <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
                         </span>
-                        <span class="text-[11px] font-semibold text-foreground leading-tight">{{ t('home.badgeHired') }}</span>
+                        <span class="text-[11px] font-semibold text-foreground leading-tight">Data Science</span>
                     </div>
+                        </a>
                 </div>
                 <div class="absolute top-1/2 right-0 flex items-center justify-center w-14 h-14 rounded-2xl bg-white/70 backdrop-blur-md border border-white/70 shadow-lg text-primary ca-float">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
