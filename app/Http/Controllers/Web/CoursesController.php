@@ -26,6 +26,7 @@ use Illuminate\View\View;
  */
 class CoursesController extends Controller
 {
+    
     public function index(Request $request): View
     {
         $category = (string) $request->query('category', '');
@@ -117,18 +118,17 @@ class CoursesController extends Controller
 
         return $map;
     }
-
+  
     public function coursesDetails(string $slug)
     {
       
         $slug = trim(urldecode($slug));
  
         $course = Course::where('slug',$slug)->firstOrFail();
-
+ 
         if (!$course) {
             abort(410);
         }
-
 
         $curriculum = [];
         $faq        = is_array($course->faq) ? $course->faq : [];
@@ -148,74 +148,120 @@ class CoursesController extends Controller
         if($course){
         $placementStories     = Placement::where('course',$course->id)->get();
         }
-     
-
-        // ── Batch-translate ALL dynamic strings in ONE query ────────────
-        // Collect every dynamic string on the page (summary, description,
-        // skills, curriculum titles + topics, FAQ q/a), resolve the whole
-        // deduped set through a single translateMany() call (one whereIn),
-        // then build the per-field arrays via an "original => translated"
-        // lookup map. The Blade template does array lookups only.
-        $curriculumTitleSources = array_map(fn ($m) => $m['title'] ?? '', $curriculum);
+        $allTopics = [];
+        $moduleTopicCount = [];
+        $curriculumTopics = [];
        
-
+        if(!empty($course->course_clone_id)){
  
-$rows = CourseCurriculumExcel::where('course_id', $course->id)
-    ->orderBy('id', 'asc')
-    ->get();
+            $curriculumTitleSources = array_map(fn ($m) => $m['title'] ?? '', $curriculum);
+            $rows = CourseCurriculumExcel::where('course_id', $course->course_clone_id)
+            ->orderBy('id', 'asc')
+            ->get();
 
-// Group children by their parent FK — done once, in memory, no extra queries
-$byHeadingId    = $rows->groupBy('heading_id');
-$byContentId    = $rows->groupBy('content_id');
-$bySubcontentId = $rows->groupBy('subcontent_id');
-$byEndcontentId = $rows->groupBy('endcontent_id');
+            // Group children by their parent FK — done once, in memory, no extra queries
+            $byHeadingId    = $rows->groupBy('heading_id');
+            $byContentId    = $rows->groupBy('content_id');
+            $bySubcontentId = $rows->groupBy('subcontent_id');
+            $byEndcontentId = $rows->groupBy('endcontent_id');
 
-// Root-level rows: real headings, no parent
-$headings = $rows->filter(function ($row) {
-    return empty($row->heading_id) && !empty($row->heading);
-});
+            // Root-level rows: real headings, no parent
+            $headings = $rows->filter(function ($row) {
+            return empty($row->heading_id) && !empty($row->heading);
+            });
 
-$coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byContentId, $bySubcontentId, $byEndcontentId) {
+            $coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byContentId, $bySubcontentId, $byEndcontentId) {
 
-    $topics = $byHeadingId->get($heading->id, collect());
+            $topics = $byHeadingId->get($heading->id, collect());
 
-    return [
-        'title'  => $heading->heading,
-        'topics' => $topics->map(function ($topic) use ($byContentId, $bySubcontentId, $byEndcontentId) {
+            return [
+            'title'  => $heading->heading,
+            'topics' => $topics->map(function ($topic) use ($byContentId, $bySubcontentId, $byEndcontentId) {
 
             $subcontents = $byContentId->get($topic->id, collect());
 
             return [
-                'content'     => $topic->coursescontent,
-                'subcontents' => $subcontents->map(function ($sub) use ($bySubcontentId, $byEndcontentId) {
+            'content'     => $topic->coursescontent,
+            'subcontents' => $subcontents->map(function ($sub) use ($bySubcontentId, $byEndcontentId) {
 
-                    $lastcontents = $bySubcontentId->get($sub->id, collect());
+            $lastcontents = $bySubcontentId->get($sub->id, collect());
+
+            return [
+                'subcontent'   => $sub->subcontent,
+                'lastcontents' => $lastcontents->map(function ($last) use ($byEndcontentId) {
+
+                    $endcontents = $byEndcontentId->get($last->id, collect());
 
                     return [
-                        'subcontent'   => $sub->subcontent,
-                        'lastcontents' => $lastcontents->map(function ($last) use ($byEndcontentId) {
-
-                            $endcontents = $byEndcontentId->get($last->id, collect());
-
-                            return [
-                                'lastcontent' => $last->lastcontent,
-                                'endcontents' => $endcontents->map(function ($end) {
-                                    return ['endcontent' => $end->endcontent];
-                                })->values()->toArray(),
-                            ];
+                        'lastcontent' => $last->lastcontent,
+                        'endcontents' => $endcontents->map(function ($end) {
+                            return ['endcontent' => $end->endcontent];
                         })->values()->toArray(),
                     ];
                 })->values()->toArray(),
             ];
-        })->values()->toArray(),
-    ];
-})->values()->toArray();
- 
+            })->values()->toArray(),
+            ];
+            })->values()->toArray(),
+            ];
+            })->values()->toArray();
+        }else{
 
+            $curriculumTitleSources = array_map(fn ($m) => $m['title'] ?? '', $curriculum);
+            $rows = CourseCurriculumExcel::where('course_id', $course->id)
+            ->orderBy('id', 'asc')
+            ->get();
 
+            // Group children by their parent FK — done once, in memory, no extra queries
+            $byHeadingId    = $rows->groupBy('heading_id');
+            $byContentId    = $rows->groupBy('content_id');
+            $bySubcontentId = $rows->groupBy('subcontent_id');
+            $byEndcontentId = $rows->groupBy('endcontent_id');
+
+            // Root-level rows: real headings, no parent
+            $headings = $rows->filter(function ($row) {
+            return empty($row->heading_id) && !empty($row->heading);
+            });
+
+            $coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byContentId, $bySubcontentId, $byEndcontentId) {
+
+            $topics = $byHeadingId->get($heading->id, collect());
+
+            return [
+            'title'  => $heading->heading,
+            'topics' => $topics->map(function ($topic) use ($byContentId, $bySubcontentId, $byEndcontentId) {
+
+            $subcontents = $byContentId->get($topic->id, collect());
+
+            return [
+            'content'     => $topic->coursescontent,
+            'subcontents' => $subcontents->map(function ($sub) use ($bySubcontentId, $byEndcontentId) {
+
+            $lastcontents = $bySubcontentId->get($sub->id, collect());
+
+            return [
+                'subcontent'   => $sub->subcontent,
+                'lastcontents' => $lastcontents->map(function ($last) use ($byEndcontentId) {
+
+                    $endcontents = $byEndcontentId->get($last->id, collect());
+
+                    return [
+                        'lastcontent' => $last->lastcontent,
+                        'endcontents' => $endcontents->map(function ($end) {
+                            return ['endcontent' => $end->endcontent];
+                        })->values()->toArray(),
+                    ];
+                })->values()->toArray(),
+            ];
+            })->values()->toArray(),
+            ];
+            })->values()->toArray(),
+            ];
+            })->values()->toArray();
+
+        }
  
-        $allTopics = [];
-        $moduleTopicCount = [];
+       if($coursecurriculum){
         foreach ($coursecurriculum as $m) {       
             $topics = is_array($m['topics'] ?? null) ? $m['topics'] : [];
             $moduleTopicCount[] = count($topics);
@@ -224,51 +270,36 @@ $coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byCon
             }
         }
 
-
+       }
      
         $faqQuestionSources = array_map(fn ($f) => $f['question'] ?? '', $faq);
         $faqAnswerSources   = array_map(fn ($f) => $f['answer'] ?? '', $faq);
 
-        $allStrings = array_merge(
-            [$course->summary, $course->description],
-            $skills,
-            $curriculumTitleSources,
-            $allTopics,
-            $faqQuestionSources,
-            $faqAnswerSources,
-        );
-
-        $translations = self::lookupMap(
-            $allStrings,
-            ServerTranslator::translateMany($allStrings)
-        );
-
-       //$tDyn = static fn (?string $v): ?string => (is_string($v) && $v !== '' && isset($translations[$v])) ? $translations[$v] : $v;
-
+        
         $summary     = $course->summary;
         $description = $course->description;
         $skillsT     = $skills;
         $curriculumTitles = $curriculumTitleSources;
 
         // Re-slice translated topics per module (preserving original order).
-        $curriculumTopics = [];
+      
         $offset = 0;
-        foreach ($moduleTopicCount as $mi => $count) {
-            $slice = array_slice($allTopics, $offset, $count);
-            $curriculumTopics[$mi] = $slice;
-            $offset += $count;
+        if($moduleTopicCount){
+            foreach ($moduleTopicCount as $mi => $count) {
+                $slice = array_slice($allTopics, $offset, $count);
+                $curriculumTopics[$mi] = $slice;
+                $offset += $count;
+            }
         }
-
         $faqQuestions = $faqQuestionSources;
         $faqAnswers   = $faqAnswerSources;
-//dd($reviews);
+ 
         if($course->course_type =='2'){             
 
             $courses_module = $course->courses_module
                 ? json_decode($course->courses_module, true)
                 : [];
             $courseModules = Course::whereIn('slug', $courses_module)->get();
-     
             return view('pages.master-detail', [
             'course'            => $course,
             'placementStories'            => $placementStories,
@@ -292,7 +323,7 @@ $coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byCon
 
         }elseif($course->course_type =='3'){
 
- return view('pages.seo-course-detail', [
+        return view('pages.seo-course-detail', [
             'course'            => $course,
             'curriculum'        => $coursecurriculum,
             'placementStories'        => $placementStories,
@@ -313,6 +344,7 @@ $coursecurriculum = $headings->map(function ($heading) use ($byHeadingId, $byCon
 
 
         }else{
+
         return view('pages.course-detail', [
             'course'            => $course,
             'curriculum'        => $coursecurriculum,

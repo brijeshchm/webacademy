@@ -1666,16 +1666,22 @@ margin-bottom: .5rem !important;
                     </div>
 
 <div class="space-y-4">
-@if($reviews)
+ @if($reviews)
     @php
-        $names    = json_decode($reviews->name) ?: [];
-        $companies = json_decode($reviews->company) ?: [];
-        $comments = json_decode($reviews->comment) ?: [];
-        $ratings  = json_decode($reviews->rating) ?: [];
-     
+        $names     = $reviews->name    ? (json_decode($reviews->name) ?: [])    : [];
+        $companies = $reviews->company ? (json_decode($reviews->company) ?: []) : [];
+        $comments  = $reviews->comment ? (json_decode($reviews->comment) ?: []) : [];
+        $ratings   = $reviews->rating  ? (json_decode($reviews->rating) ?: [])  : [];
     @endphp
 
     @foreach($names as $index => $revName)
+        @php
+            $revComment = $comments[$index] ?? '';
+        @endphp
+
+        {{-- Skip this review entirely if name or comment is empty --}}
+        @continue(empty(trim((string) $revName)) || empty(trim((string) $revComment)))
+
         <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all duration-300">
             <div class="flex items-start gap-4">
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
@@ -1684,7 +1690,6 @@ margin-bottom: .5rem !important;
                 <div class="flex-1">
                     <div class="flex items-center justify-between gap-2 mb-1">
                         <span class="font-semibold text-gray-900 text-sm">{{ $revName }}</span>
-           
                     </div>
 
                     @if(!empty($companies[$index]))
@@ -1697,7 +1702,7 @@ margin-bottom: .5rem !important;
                         @endfor
                     </div>
 
-                    <p class="text-sm text-gray-600 leading-relaxed">{{ $comments[$index] ?? '' }}</p>
+                    <p class="text-sm text-gray-600 leading-relaxed">{{ $revComment }}</p>
                 </div>
             </div>
         </div>
