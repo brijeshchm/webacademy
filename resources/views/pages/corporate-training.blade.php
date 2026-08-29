@@ -81,8 +81,6 @@
         [t('corporateTraining.card.row3Label'), t('corporateTraining.card.row3Value'), '48%'],
     ];
 @endphp
-
-
 @section('content')
 <main class="min-h-[100dvh] overflow-hidden bg-[#f7f9fc] text-foreground">
     <div class="pointer-events-none fixed inset-0 z-0 opacity-[0.28]" aria-hidden="true">

@@ -229,8 +229,7 @@
 @push('schema')
     <script type="application/ld+json">{!! json_ld($ld) !!}</script>
     <script type="application/ld+json">{!! json_ld($faqPairs) !!}</script>
-@endpush
- 
+@endpush 
 @section('content')
 <div class="pb-24 bg-gray-50">
     {{-- ═══ HERO ═══ --}}
@@ -2046,5 +2045,3 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 @include('partials.comman-lead-popup')
 @endsection
-
-8510002313

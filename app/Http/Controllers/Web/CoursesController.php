@@ -272,7 +272,7 @@ $courses_module = $course->courses_module
 $courseModules = Course::whereIn('slug', $courses_module)->get();
 
 
-       // dd($courseModules);
+      
             return view('pages.master-detail', [
             'course'            => $course,
             'placementStories'            => $placementStories,
