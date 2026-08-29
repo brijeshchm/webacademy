@@ -287,7 +287,7 @@
                     </span>
                     {{ t('home.enrollmentOpen') }}
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white mb-4 leading-[1.08]">
+                <h1 class="text-2xl md:text-3xl lg:text-3xl font-display font-extrabold tracking-tight text-white mb-4 leading-[1.08]">
                     {{ t('home.heroTitle') }}
                     <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#60a5fa] via-[#a78bfa] to-[#f472b6] ca-gradient-pan">Corporate Academy</span>
                 </h1>
@@ -366,7 +366,7 @@
 
                 <div class="absolute top-0 left-0 w-44 h-56 rounded-3xl overflow-hidden shadow-xl shadow-secondary/20 border-4 border-white ca-float">
                      <a href="{{route('courses.show','workday-hcm-functional-course')}}">
-                    <img loading="lazy" decoding="async" width="176" height="224" src="/images/courses/images-hcm.jpg" alt="" aria-hidden="true" class="w-full h-full object-cover">
+                    <img loading="lazy" decoding="async" width="176" height="224" src="/images/courses/images-hcm.png" alt="" aria-hidden="true" class="w-full h-full object-cover">
                     <div class="absolute bottom-2 left-2 right-2 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-md">
                         <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-secondary/20 text-secondary shrink-0">
                             <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
