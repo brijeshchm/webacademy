@@ -45,7 +45,7 @@ class HomeController extends Controller
         $whatsappChats = WhatsappChat::orderBy('id')->get();
         $proofs = Proof::orderBy('id')->get();
         $videoStories = VideoStory::orderBy('sort_order')->orderBy('id')->get();
-
+ 
         $featuredCourses = $allCourses->where('featured', true)->values();
 
         // Stats — mirrors StatsController@index (static marketing numbers).

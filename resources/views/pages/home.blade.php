@@ -829,7 +829,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 @include('partials.home.social-proof', ['hasWA' => $hasWA, 'hasProofs' => $hasProofs, 'whatsappChats' => $whatsappChats, 'proofs' => $proofs])
 
-@include('partials.home.video-stories', ['videos' => $videos, 'thumbGradients' => $thumbGradients])
+ 
 
 @include('partials.home.reviews', ['testimonials' => $testimonials, 'reviewAggregates' => $reviewAggregates, 'translations' => $translations])
 

@@ -93,7 +93,7 @@
         ['value' => '48h', 'labelKey' => 'scholarshipPage.stats.decisionTime', 'icon' => 'clock'],
     ];
     $impactNumbers = [
-        ['value' => '63K+', 'labelKey' => 'scholarshipPage.impact.careers'],
+        ['value' => '65K+', 'labelKey' => 'scholarshipPage.impact.careers'],
         ['value' => '85%', 'labelKey' => 'scholarshipPage.impact.salary'],
         ['value' => '92%', 'labelKey' => 'scholarshipPage.impact.placement'],
         ['value' => '4.8★', 'labelKey' => 'scholarshipPage.impact.rating'],
