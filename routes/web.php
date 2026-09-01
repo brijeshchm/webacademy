@@ -76,10 +76,13 @@ Route::get('/courses/{slug}', [CoursesController::class, 'coursesDetails'])->nam
 */
 
 Auth::routes();
+//  Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+//     Route::get('course', [App\Http\Controllers\Admin\CourseController::class, 'index'])
+//         ->name('course.index');
+// });
 
 Route::prefix('admin')->name('admin.')->group(function () {
 	
- 
 
 Route::get('login',function(){
 	if(Auth::user()){

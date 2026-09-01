@@ -11,8 +11,6 @@ use App\Models\CourseAbout;
 use App\Models\Placement;
 use App\Models\ToolsCovered;
 use App\Models\CourseCurriculumExcel;
-                   
-
 
 use App\Services\ServerTranslator;
 use Illuminate\Http\RedirectResponse;
@@ -121,13 +119,14 @@ class CoursesController extends Controller
   
     public function coursesDetails(string $slug)
     {
-      
+     
         $slug = trim(urldecode($slug));
  
-        $course = Course::where('slug',$slug)->firstOrFail();
+        $course = Course::where('slug',$slug)->first();
  
         if (!$course) {
-            abort(410);
+            //abort(410);			
+			return redirect()->route('home')->setStatusCode(301);
         }
 
         $curriculum = [];
