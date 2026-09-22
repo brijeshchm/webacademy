@@ -125,8 +125,8 @@ class CoursesController extends Controller
         $course = Course::where('slug',$slug)->first();
  
         if (!$course) {
-            //abort(410);			
-			return redirect()->route('home')->setStatusCode(301);
+            abort(410);			
+			//return redirect()->route('home')->setStatusCode(301);
         }
 
         $curriculum = [];
