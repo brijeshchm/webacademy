@@ -124,9 +124,9 @@
 				  @if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('add_lead') )
 				  <li><a><i class="fa fa-graduation-cap"></i>Lead <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      @if(Auth::user()->current_user_can('administrator') ||  Auth::user()->current_user_can('add_lead') )
+                      <!-- @if(Auth::user()->current_user_can('administrator') ||  Auth::user()->current_user_can('add_lead') )
                        <li><a href="{{url('admin/enterleads')}}">Add Lead</a></li>
-                       @endif
+                       @endif -->
                          @if(Auth::user()->current_user_can('administrator') ||  Auth::user()->current_user_can('show_lead') )
                       <li><a href="{{url('admin/lead')}}">All Lead</a></li>   
                       @endif

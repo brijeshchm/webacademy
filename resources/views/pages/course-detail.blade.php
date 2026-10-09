@@ -231,6 +231,8 @@
     <script type="application/ld+json">{!! json_ld($faqPairs) !!}</script>
 @endpush 
 @section('content')
+
+
 <div class="pb-24 bg-gray-50">
     {{-- ═══ HERO ═══ --}}
     <div class="relative overflow-hidden bg-gradient-to-br from-[#06102a] via-[#0c1f5c] to-[#0a0f2e]">
@@ -336,11 +338,23 @@
                         @if(session('success'))
                             <div class="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm text-green-700 font-semibold text-center">✓ {{ session('success') }}</div>
                         @else
-                            <form method="POST" action="/courses/{{ $course->slug }}/enquiry" class="space-y-2.5">
+                            <form method="POST" action="{{ route('leads.store') }}" class="ajax-lead-form space-y-2.5">
                                 @csrf
-                                <input required name="name" placeholder="{{ t('courseDetailX.yourNamePlaceholder') }}" value="{{ old('name') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+
+                                <div
+                                data-form-message
+                                role="status"
+                                aria-live="polite"
+                                class="hidden rounded-lg border p-3 text-sm"
+                            ></div>
+
+                                 <input type="hidden" name="course" value="{{ ($course->course_name ?? '') ?: 'course' }}" >
+                                <input type="hidden" name="from_name" value="{{ ($course->title ?? '') ?: 'course' }}" >
+                                <input type="hidden" name="category" value="send_enquiry_side" >
+                                
+                                <input name="name" placeholder="{{ t('courseDetailX.yourNamePlaceholder') }}" value="{{ old('name') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                                 @include('partials.phone-input', ['value' => old('phone'), 'inputClass' => 'flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary', 'selectClass' => 'border-gray-200 bg-white'])
-                                <input required name="email" type="email" placeholder="{{ t('courseDetailX.emailAddressPlaceholder') }}" value="{{ old('email') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                                <input name="email" type="email" placeholder="{{ t('courseDetailX.emailAddressPlaceholder') }}" value="{{ old('email') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                                 <button type="submit" class="w-full h-10 rounded-xl bg-primary text-white font-semibold text-sm">{{ t('courseDetailX.requestCallback') }} →</button>
                                 @error('email') <p class="text-xs text-red-500 text-center">{{ t('courseDetailX.somethingWrong') }}</p> @enderror
                             </form>
@@ -1885,11 +1899,17 @@ margin-bottom: .5rem !important;
                         @if(session('success'))
                             <div class="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm text-green-700 font-semibold text-center">✓ {{ session('success') }}</div>
                         @else
-                            <form method="POST" action="/courses/{{ $course->slug }}/enquiry" class="space-y-2.5">
+                            <form method="POST" action="{{ route('leads.store') }}" class="ajax-lead-form  space-y-2.5">
+                             
+
                                 @csrf
-                                <input required name="name" placeholder="{{ t('courseDetailX.yourNamePlaceholder') }}" value="{{ old('name') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                                  <input type="hidden" name="course" value="{{ ($course->course_name ?? '') ?: 'course' }}" >
+                                    <input type="hidden" name="from_name" value="{{ ($course->title ?? '') ?: 'course' }}" >
+                                <input type="hidden" name="category" value="send_enquiry_side" >
+                                <input name="name" placeholder="{{ t('courseDetailX.yourNamePlaceholder') }}" value="{{ old('name') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+
                                 @include('partials.phone-input', ['value' => old('phone'), 'inputClass' => 'flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary', 'selectClass' => 'border-gray-200 bg-white'])
-                                <input required name="email" type="email" placeholder="{{ t('courseDetailX.emailAddressPlaceholder') }}" value="{{ old('email') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                                <input name="email" type="email" placeholder="{{ t('courseDetailX.emailAddressPlaceholder') }}" value="{{ old('email') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                                 <button type="submit" class="w-full h-10 rounded-xl bg-primary text-white font-semibold text-sm">{{ t('courseDetailX.requestCallback') }} →</button>
                                 @error('email') <p class="text-xs text-red-500 text-center">{{ t('courseDetailX.somethingWrong') }}</p> @enderror
                             </form>
@@ -2049,4 +2069,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 @include('partials.comman-lead-popup')
+
+ 
 @endsection

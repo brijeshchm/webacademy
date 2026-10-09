@@ -430,9 +430,12 @@
                     </div>
                 </div>
             @else
-                <form method="POST" action="{{ route('leads.store') }}" class="bg-white rounded-2xl shadow-2xl shadow-black/30 overflow-hidden">
+                <form method="POST" action="{{ route('leads.store') }}" class="ajax-lead-form bg-white rounded-2xl shadow-2xl shadow-black/30 overflow-hidden">
                     @csrf
                     <input type="hidden" name="form_type" value="scholarship">
+                    <input type="hidden" name="course" value="scholarship" >
+                    <input type="hidden" name="from_name" value="scholarship" >
+                     <input type="hidden" name="category" value="send_enquiry_scholarship" >
                     {{-- Header bar --}}
                     <div class="bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-4 flex items-center gap-3">
                         {!! $icon('award', 'h-5 w-5 text-[#060e24]') !!}
@@ -452,13 +455,11 @@
                             <div class="grid sm:grid-cols-2 gap-3">
                                 <div class="space-y-1">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.fullName') }} <span class="text-red-400">*</span></label>
-                                    <input name="name" value="{{ old('name') }}" placeholder="{{ t('scholarshipPage.form.fullNamePlaceholder') }}" required
-                                        class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
+                                    <input name="name" value="{{ old('name') }}" placeholder="{{ t('scholarshipPage.form.fullNamePlaceholder') }}" class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.email') }} <span class="text-red-400">*</span></label>
-                                    <input type="email" name="email" value="{{ old('email') }}" placeholder="you@email.com" required
-                                        class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
+                                    <input type="email" name="email" value="{{ old('email') }}" placeholder="you@email.com" class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
                                 </div>
                                 <div class="space-y-1 sm:col-span-2">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.phone') }} <span class="text-red-400">*</span></label>
@@ -478,8 +479,7 @@
                             <div class="space-y-3">
                                 <div class="space-y-1">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.qualification') }} <span class="text-red-400">*</span></label>
-                                    <select name="lastEducation" required
-                                        class="w-full h-10 rounded-lg border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors">
+                                    <select name="lastEducation" class="w-full h-10 rounded-lg border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors">
                                         <option value="">{{ t('scholarshipPage.form.qualificationSelect') }}</option>
                                         @foreach ($educationOptions as $oi => $o)
                                             <option value="{{ $o }}">{{ t($educationLabelKeys[$oi]) }}</option>
@@ -573,4 +573,5 @@
         </div>
     </section>
 </div>
+@include('partials.comman-lead-popup')
 @endsection

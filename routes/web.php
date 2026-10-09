@@ -58,7 +58,7 @@ Route::get('/scholarship', [StaticPageController::class, 'scholarship'])->name('
 Route::get('/corporate-training', [StaticPageController::class, 'corporateTraining'])->name('corporate-training');
 
 // Public lead intake (contact / enquiry / scholarship / corporate-training forms).
-Route::post('/leads', [LeadController::class, 'store'])->middleware('throttle:leads')->name('leads.store');
+Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
 
 Route::get('/doctorate', [DoctorateController::class, 'index'])->name('doctorate');
 Route::get('/doctorate/{slug}', [DoctorateController::class, 'show'])->name('doctorate.show');

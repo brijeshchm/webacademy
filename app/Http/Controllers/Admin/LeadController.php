@@ -11,13 +11,14 @@ use Session;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Input;
 use Image;
-use App\Inquiry; 
-use App\LeadUser; 
-use App\LeadSource; 
-use App\LeadDemo;
-use App\Models\Courses; 
-use App\LeadStatus; 
-use App\Courseassignment; 
+use App\Models\Inquiry; 
+use App\Models\LeadUser; 
+use App\Models\LeadSource;  
+use App\Models\Lead;
+use App\Models\User;
+use App\Models\Course; 
+use App\Models\LeadStatus; 
+use App\Models\Courseassignment; 
  
 class LeadController extends Controller
 {
@@ -58,18 +59,18 @@ class LeadController extends Controller
 	public function getLeadPagination(Request $request)
 	{
 		    date_default_timezone_set('Asia/Kolkata');
-		    
+		     
 		if($request->ajax()){			 
 		$inquires = 	Inquiry::orderBy('id','DESC');		 
 		if($request->input('search.value')!==''){
 				$inquires = $inquires->where(function($query) use($request){
 					$query->orWhere('name','LIKE','%'.$request->input('search.value').'%')					     		   
-                                ->orWhere('form','LIKE','%'.$request->input('search.value').'%')
+                               
                                 ->orWhere('name','LIKE','%'.$request->input('search.value').'%')
                                 ->orWhere('course','LIKE','%'.$request->input('search.value').'%')
                                
                                 ->orWhere('mobile','LIKE','%'.$request->input('search.value').'%')
-                                ->orWhere('sub_category','LIKE','%'.$request->input('search.value').'%')
+                                
                                 ->orWhere('from_name','LIKE','%'.$request->input('search.value').'%');
 				});
 			}
@@ -81,16 +82,14 @@ class LeadController extends Controller
 				$inquires = $inquires->whereDate('created_at','<=',date_format(date_create($request->input('search.leaddt')),'Y-m-d'));
 			}
 			
-			if($request->input('search.user')!=''){
-				$inquires = $inquires->where('assigned_to',$request->input('search.user'));
-			}
+			 
 			
 			if($request->input('search.courses')!=''){
-				$inquires = $inquires->where('course_id',$request->input('search.courses'));
+				$inquires = $inquires->where('course',$request->input('search.courses'));
 			}
 			
 			// for duplicate value
-	    	$inquires = $inquires->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
+	    	// $inquires = $inquires->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"));
 	 
 			$inquires = $inquires->paginate($request->input('length'));
 			
@@ -223,70 +222,70 @@ class LeadController extends Controller
 			$oneday=  date('d-m-Y', strtotime($current));	
 			$onelead =Inquiry::whereDate('created_at','=',date_format(date_create($oneday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitonelead= LeadDemo::whereDate('created_at','=',date_format(date_create($oneday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitonelead= Lead::whereDate('created_at','=',date_format(date_create($oneday),'Y-m-d'))->where('source',11)->get()->count();
 			
 			
 			$firstday=  date('d-m-Y', strtotime($current. ' - 1 day'));	
 			$firstlead =Inquiry::whereDate('created_at','=',date_format(date_create($firstday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitfirstlead= LeadDemo::whereDate('created_at','=',date_format(date_create($firstday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitfirstlead= Lead::whereDate('created_at','=',date_format(date_create($firstday),'Y-m-d'))->where('source',11)->get()->count();
 			
 			
 			//echo $firstday; die;
 			$secongday=  date('d-m-Y', strtotime($current. ' - 2 day'));	
 			$secondlead =Inquiry::whereDate('created_at','=',date_format(date_create($secongday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitsecondlead= LeadDemo::whereDate('created_at','=',date_format(date_create($secongday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitsecondlead= Lead::whereDate('created_at','=',date_format(date_create($secongday),'Y-m-d'))->where('source',11)->get()->count();
 
 
 			$thirdday=  date('d-m-Y', strtotime($current. ' - 3 day'));	
 			$thirdlead = Inquiry::whereDate('created_at','=',date_format(date_create($thirdday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();							
 
-			$directvisitthirdlead= LeadDemo::whereDate('created_at','=',date_format(date_create($thirdday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitthirdlead= Lead::whereDate('created_at','=',date_format(date_create($thirdday),'Y-m-d'))->where('source',11)->get()->count();
 
 			$fourday=  date('d-m-Y', strtotime($current. ' - 4 day'));	
 			$fourlead = Inquiry::whereDate('created_at','=',date_format(date_create($fourday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitfourlead= LeadDemo::whereDate('created_at','=',date_format(date_create($fourday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitfourlead= Lead::whereDate('created_at','=',date_format(date_create($fourday),'Y-m-d'))->where('source',11)->get()->count();
 
 			$fiveday=  date('d-m-Y', strtotime($current. ' - 5 day'));	
 			$fivelead = Inquiry::whereDate('created_at','=',date_format(date_create($fiveday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitfivelead= LeadDemo::whereDate('created_at','=',date_format(date_create($fiveday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitfivelead= Lead::whereDate('created_at','=',date_format(date_create($fiveday),'Y-m-d'))->where('source',11)->get()->count();
 
 			$sixday=  date('d-m-Y', strtotime($current. ' - 6 day'));	
 			$sixlead = Inquiry::whereDate('created_at','=',date_format(date_create($sixday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();	
 
-			$directvisitsixlead= LeadDemo::whereDate('created_at','=',date_format(date_create($sixday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitsixlead= Lead::whereDate('created_at','=',date_format(date_create($sixday),'Y-m-d'))->where('source',11)->get()->count();
 
 
 			$sevenday=  date('d-m-Y', strtotime($current. ' - 7 day'));	
 			$sevenlead = Inquiry::whereDate('created_at','=',date_format(date_create($sevenday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 
-			$directvisitsevenlead= LeadDemo::whereDate('created_at','=',date_format(date_create($sevenday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitsevenlead= Lead::whereDate('created_at','=',date_format(date_create($sevenday),'Y-m-d'))->where('source',11)->get()->count();
 
 
 			$eightday=  date('d-m-Y', strtotime($current. ' - 8 day'));	
 			$eightlead = Inquiry::whereDate('created_at','=',date_format(date_create($eightday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 
-			$directvisiteightlead= LeadDemo::whereDate('created_at','=',date_format(date_create($eightday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisiteightlead= Lead::whereDate('created_at','=',date_format(date_create($eightday),'Y-m-d'))->where('source',11)->get()->count();
 
 
 			$nineday=  date('d-m-Y', strtotime($current. ' - 9 day'));	
 			$ninelead = Inquiry::whereDate('created_at','=',date_format(date_create($nineday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitninelead= LeadDemo::whereDate('created_at','=',date_format(date_create($nineday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitninelead= Lead::whereDate('created_at','=',date_format(date_create($nineday),'Y-m-d'))->where('source',11)->get()->count();
 			
 			
 			$tenday=  date('d-m-Y', strtotime($current. ' - 10 day'));	
 			$tenlead = Inquiry::whereDate('created_at','=',date_format(date_create($tenday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisittenlead= LeadDemo::whereDate('created_at','=',date_format(date_create($tenday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisittenlead= Lead::whereDate('created_at','=',date_format(date_create($tenday),'Y-m-d'))->where('source',11)->get()->count();
 			
 			$elevenday=  date('d-m-Y', strtotime($current. ' - 11 day'));	
 			$elevenlead = Inquiry::whereDate('created_at','=',date_format(date_create($elevenday),'Y-m-d'))->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 			
-			$directvisitelevenlead= LeadDemo::whereDate('created_at','=',date_format(date_create($elevenday),'Y-m-d'))->where('source',11)->get()->count();
+			$directvisitelevenlead= Lead::whereDate('created_at','=',date_format(date_create($elevenday),'Y-m-d'))->where('source',11)->get()->count();
 	
 	$dataPoints1 = array(
 		//array("label"=> date('d-M',strtotime($oneday)), "y"=> ($onelead+$directvisitonelead)),
@@ -448,7 +447,7 @@ class LeadController extends Controller
 				//Direct Visit 11
 				 
 				 $directvisit = Inquiry::whereDate('created_at','=',date_format(date_create($source->created_at),'Y-m-d'))->where('source_id',11)->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
-				$directvisitLead = LeadDemo::whereDate('created_at','=',date_format(date_create($source->created_at),'Y-m-d'))->where('source',11)->get()->count();
+				$directvisitLead = Lead::whereDate('created_at','=',date_format(date_create($source->created_at),'Y-m-d'))->where('source',11)->get()->count();
 				//FaceBook 16		    	 	
 		    	$faceBook = Inquiry::whereDate('created_at','=',date_format(date_create($source->created_at),'Y-m-d'))->where('source_id',16)->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();	
 			
@@ -580,7 +579,7 @@ class LeadController extends Controller
 				 
 				 $directvisit = Inquiry::whereMonth('created_at','=',date_format(date_create($source->created_at),'m'))->whereYear('created_at','=',date_format(date_create($source->created_at),'Y'))->where('source_id',11)->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();
 				 
-				$directvisitLead = LeadDemo::whereMonth('created_at','=',date_format(date_create($source->created_at),'m'))->whereYear('created_at','=',date_format(date_create($source->created_at),'Y'))->where('source',11)->get()->count();
+				$directvisitLead = Lead::whereMonth('created_at','=',date_format(date_create($source->created_at),'m'))->whereYear('created_at','=',date_format(date_create($source->created_at),'Y'))->where('source',11)->get()->count();
 				//FaceBook 16		    	 	
 		    	$faceBook = Inquiry::whereMonth('created_at','=',date_format(date_create($source->created_at),'m'))->whereYear('created_at','=',date_format(date_create($source->created_at),'Y'))->where('source_id',16)->groupBy('mobile','course',DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))->get()->count();	
 			
@@ -644,7 +643,7 @@ class LeadController extends Controller
     public function courseassignment(Request $request)
     {	 
 	//echo "test";die;
-	$leadUser = LeadUser::orderby('name','asc')->get();
+	$leadUser = User::orderby('name','asc')->get();
 	$leadSource = LeadSource::orderby('name','asc')->get();
 	$leadStatus = LeadStatus::orderby('name','asc')->where('id','!=','13')->where('id','!=','14')->get();
 	$courses = CatCourse::orderBy('name','asc')->get();

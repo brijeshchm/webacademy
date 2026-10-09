@@ -70,9 +70,14 @@
                     </p>
                 @endforeach
 
-                <form data-lead-form method="POST"  novalidate>
+                <form data-lead-form method="POST"  action="{{ route('leads.store') }}" class="ajax-lead-form" novalidate>
                     @csrf
                     {{-- Step 1: About you --}}
+
+                    <input type="hidden" name="course" value="{{ ($course->course_name ?? '') ?: 'course' }}" >
+                    <input type="hidden" name="from_name" value="{{ ($course->title ?? '') ?: 'course' }}" >
+                     <input type="hidden" name="category" value="send_enquiry_popup" >
+
                     <div data-lead-step="0" class="space-y-3">
                         <div>
                             <label class="text-xs font-semibold text-foreground/70 mb-1.5 flex gap-1">{{ t('popup.fullName') }}<span class="text-red-400">*</span></label>
@@ -155,3 +160,335 @@
         </div>
     </div>
 </div>
+
+
+ <dialog
+    id="lead-result-popup"
+    aria-labelledby="lead-popup-title"
+    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-slate-900/50"
+>
+    <div class="p-6 text-center">
+        <div
+            aria-hidden="true"
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-3xl font-bold text-green-600"
+        >
+            ✓
+        </div>
+
+        <h2
+            id="lead-popup-title"
+            class="text-xl font-bold text-slate-900"
+        >
+            Submitted successfully
+        </h2>
+
+        <p
+            id="lead-popup-message"
+            class="mt-2 break-words text-sm leading-6 text-slate-600"
+        ></p>
+
+        <button
+            id="lead-popup-close"
+            type="button"
+            autofocus
+            class="mt-6 w-full rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700"
+        >
+            OK
+        </button>
+    </div>
+</dialog>
+
+<style>
+    #lead-result-popup {
+        position: fixed;
+        inset: 50% auto auto 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        width: calc(100% - 2rem);
+        max-width: 28rem;
+        max-height: calc(100dvh - 2rem);
+        overflow-y: auto;
+    }
+</style>
+
+<script>
+(() => {
+    function initializeLeadForms() {
+        const popup = document.getElementById('lead-result-popup');
+        const popupMessage = document.getElementById('lead-popup-message');
+        const closeButton = document.getElementById('lead-popup-close');
+
+        let focusAfterClose = null;
+
+        function showSuccessPopup(text, focusTarget) {
+            focusAfterClose = focusTarget;
+
+            popupMessage.textContent = text;
+
+            if (!popup.open) {
+                popup.showModal();
+            }
+
+            closeButton.focus();
+        }
+
+        closeButton.addEventListener('click', () => {
+            popup.close();
+        });
+
+        popup.addEventListener('close', () => {
+            if (focusAfterClose?.isConnected) {
+                focusAfterClose.focus();
+            }
+
+            focusAfterClose = null;
+        });
+
+        document.querySelectorAll('.ajax-lead-form').forEach((form) => {
+            if (form.dataset.ajaxInitialized === 'true') return;
+
+            form.dataset.ajaxInitialized = 'true';
+
+            // Show inline validation instead of browser validation bubbles.
+            form.noValidate = true;
+
+            let submitting = false;
+
+            function getMessageBox() {
+                let box = form.querySelector('[data-form-message]');
+
+                if (!box) {
+                    box = document.createElement('div');
+                    box.setAttribute('data-form-message', '');
+                    box.setAttribute('role', 'alert');
+                    form.prepend(box);
+                }
+
+                return box;
+            }
+
+            function showFormError(text) {
+                const box = getMessageBox();
+
+                box.textContent = text;
+                box.className =
+                    'mb-4 whitespace-pre-line rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700';
+            }
+
+            function clearErrors() {
+                form.querySelectorAll('[data-field-error]').forEach(error => {
+                    error.remove();
+                });
+
+                form.querySelectorAll('[aria-invalid="true"]').forEach(field => {
+                    field.removeAttribute('aria-invalid');
+                    field.classList.remove('border-red-500');
+                });
+
+                const box = form.querySelector('[data-form-message]');
+
+                if (box) {
+                    box.textContent = '';
+                    box.classList.add('hidden');
+                }
+            }
+
+            function addFieldError(field, text) {
+                if (!field || field.type === 'hidden') return false;
+
+                field.setAttribute('aria-invalid', 'true');
+                field.classList.add('border-red-500');
+
+                const error = document.createElement('p');
+                error.dataset.fieldError = field.name;
+                error.className = 'mt-1 text-sm text-red-600';
+                error.textContent = text;
+
+                field.insertAdjacentElement('afterend', error);
+
+                return true;
+            }
+
+            function clearFieldError(event) {
+                const field = event.target;
+
+                if (!field.name) return;
+
+                field.removeAttribute('aria-invalid');
+                field.classList.remove('border-red-500');
+
+                form.querySelectorAll('[data-field-error]').forEach(error => {
+                    if (error.dataset.fieldError === field.name) {
+                        error.remove();
+                    }
+                });
+            }
+
+            form.addEventListener('input', clearFieldError);
+            form.addEventListener('change', clearFieldError);
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                if (submitting) return;
+
+                clearErrors();
+
+                // Client-side validation: inline errors only.
+                const invalidFields = [...form.elements].filter(
+                    field => field.willValidate && !field.validity.valid
+                );
+
+                if (invalidFields.length) {
+                    invalidFields.forEach(field => {
+                        addFieldError(field, field.validationMessage);
+                    });
+
+                    invalidFields[0].focus();
+                    return;
+                }
+
+                const token = form.querySelector('[name="_token"]')?.value
+                    || document.querySelector('meta[name="csrf-token"]')?.content;
+
+                if (!token) {
+                    showFormError('Session token missing. Please refresh the page.');
+                    return;
+                }
+
+                const submitter = event.submitter;
+                const formData = new FormData(form);
+
+                if (submitter?.name) {
+                    formData.append(submitter.name, submitter.value);
+                }
+
+                const buttons = [...form.elements].filter(
+                    field => field.type === 'submit'
+                );
+
+                const previousStates = buttons.map(button => button.disabled);
+                const button = submitter || buttons[0];
+
+                const originalHTML = button?.innerHTML;
+                const originalValue = button?.value;
+
+                submitting = true;
+                form.setAttribute('aria-busy', 'true');
+                buttons.forEach(button => button.disabled = true);
+
+                if (button?.tagName === 'BUTTON') {
+                    button.textContent = 'Submitting...';
+                } else if (button) {
+                    button.value = 'Submitting...';
+                }
+
+                let successMessage = null;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': token
+                        },
+                        body: formData
+                    });
+
+                    if (response.status === 419) {
+                        showFormError(
+                            'Your session expired. Please refresh the page.'
+                        );
+                        return;
+                    }
+
+                    const contentType = response.headers.get('content-type') || '';
+                    const data = contentType.includes('application/json')
+                        ? await response.json()
+                        : null;
+
+                    // Server-side validation: inline errors only.
+                    if (response.status === 422) {
+                        let firstInvalidField = null;
+                        const unmatchedErrors = [];
+
+                        Object.entries(data?.errors || {}).forEach(([name, errors]) => {
+                            const messages = Array.isArray(errors)
+                                ? errors
+                                : [errors];
+
+                            const field = [...form.elements].find(
+                                field => field.name === name
+                            );
+
+                            if (addFieldError(field, messages[0])) {
+                                firstInvalidField ??= field;
+                            } else {
+                                unmatchedErrors.push(...messages);
+                            }
+                        });
+
+                        if (unmatchedErrors.length) {
+                            showFormError(unmatchedErrors.join('\n'));
+                        } else if (!firstInvalidField) {
+                            showFormError(
+                                data?.message || 'Please correct the form errors.'
+                            );
+                        }
+
+                        firstInvalidField?.focus();
+                        return;
+                    }
+
+                    if (!response.ok || data?.status !== true) {
+                        showFormError(
+                            response.status >= 500 || !data
+                                ? 'Submission could not be confirmed. Please contact support before submitting again.'
+                                : data.message || 'Unable to submit. Please try again.'
+                        );
+                        return;
+                    }
+
+                    // Reset only after the server confirms success.
+                    form.reset();
+                    clearErrors();
+
+                    successMessage = data.message
+                        || 'Your enquiry has been submitted successfully.';
+
+                } catch (error) {
+                    showFormError(
+                        'Submission could not be confirmed. Please check your connection before trying again.'
+                    );
+                } finally {
+                    submitting = false;
+                    form.removeAttribute('aria-busy');
+
+                    buttons.forEach((button, index) => {
+                        button.disabled = previousStates[index];
+                    });
+
+                    if (button?.tagName === 'BUTTON') {
+                        button.innerHTML = originalHTML;
+                    } else if (button) {
+                        button.value = originalValue;
+                    }
+                }
+
+                // Popup only after successful submission.
+                if (successMessage) {
+                    showSuccessPopup(successMessage, button);
+                }
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeLeadForms);
+    } else {
+        initializeLeadForms();
+    }
+})();
+</script>

@@ -22,48 +22,69 @@ use Illuminate\Http\Request;
  */
 class LeadController extends Controller
 {
-    public function store(Request $request): RedirectResponse
+
+
+        
+    public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name'           => 'required|string|max:255',
-            'email'          => 'required|email|max:255',
-            'phone'          => 'nullable|string|max:50',
-            'courseSlug'     => 'nullable|string|max:255',
-            'course_slug'    => 'nullable|string|max:255',
-            'message'        => 'nullable|string|max:5000',
-            // Optional per-form fields folded into the message body.
-            'form_type'      => 'nullable|string|max:32',
-            'courseInterest' => 'nullable|string|max:255',
-            'lastEducation'  => 'nullable|string|max:255',
-            'percentage'     => 'nullable|string|max:20',
-            'cgpa'           => 'nullable|string|max:20',
-            'company'        => 'nullable|string|max:255',
-            'teamSize'       => 'nullable|string|max:255',
-            'goals'          => 'nullable|string|max:5000',
-            'timeline'       => 'nullable|string|max:255',
-            'program'        => 'nullable|string|max:255',
-        ]);
 
-        $courseSlug = $validated['courseSlug'] ?? $validated['course_slug'] ?? null;
-        $message = $this->composeMessage($validated);
+        //  dd($request->all());
+            $validated = $request->validate([
+                'name'           => 'required|string|max:255',
+                'email'          => 'required|email|max:255',
+                'phone'          => 'required|string|max:50',        
+                'code'          => 'nullable|string|max:50',        
+                'from_name'    => 'nullable|string|max:255',
+                'comment'        => 'nullable|string|max:5000',       
+                'course' => 'nullable|string|max:255',
+                'category' => 'nullable|string|max:255',
+                'lastEducation'  => 'nullable|string|max:255',
+                'percentage'     => 'nullable|string|max:20',
+                'cgpa'           => 'nullable|string|max:20',
+                'company'        => 'nullable|string|max:255',
+                'teamSize'       => 'nullable|string|max:255',
+                'goals'          => 'nullable|string|max:5000',
+                'timeline'       => 'nullable|string|max:255',
+                'program'        => 'nullable|string|max:255',
+            ], [
+                'name.required'  => 'Please enter your name.',
+                'email.required' => 'Please enter your email address.',
+                'email.email'    => 'Please enter a valid email address.',
+            ]);
 
-        $lead = Lead::create([
-            'name'        => $validated['name'],
-            'email'       => $validated['email'],
-            'phone'       => $validated['phone'] ?? null,
-            'course_slug' => $courseSlug,
-            'message'     => $message,
-        ]);
+        
 
-        // Reuse the API controller's source detection + notification pipeline.
-        app(ApiLeadController::class)->notifyForLead($lead);
+            $lead = Lead::create([
+                'name'        => $validated['name'],
+                'email'       => $validated['email'],
+                'mobile'       => $validated['phone'] ?? null,
+                'from_name' => $validated['from_name'],
+                'from' => $validated['from_name'],
+                'code' => $validated['code'],
+                'category' => $validated['category'],
+                'source' => '1',
+                'course' => $validated['course'],
+                'comment'     => $this->composeMessage($validated),
+            ]);
+        if($lead){
+        return response()->json([
+            'status' => true,
+            'message' => 'Your enquiry has been submitted successfully.',
+        ], 201);
 
-        $fragment = $request->input('form_type') === 'scholarship' ? 'apply' : null;
+        }else{
+        return response()->json([
+            'status' => false,
+            'message' => 'Your enquiry not submitted successfully.',
+        ], 201);
+        }
 
-        $redirect = redirect()->back()->with('success', true);
-
-        return $fragment ? $redirect->withFragment($fragment) : $redirect;
     }
+            // Notification failure must not prevent confirmation of a saved lead.
+            
+
+        
+     
 
     /**
      * Build the stored message body identically to the React pages.

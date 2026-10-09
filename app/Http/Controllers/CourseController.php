@@ -30,7 +30,7 @@ class CourseController extends Controller
                 $q->where('title', 'like', $term)
                   ->orWhere('summary', 'like', $term)
                   ->orWhere('category_name', 'like', $term)
-                  ->orWhere('skills', 'like', $term); // JSON column stored as text; LIKE works on both SQLite and MySQL
+                  ->orWhere('skills', 'like', $term); 
             });
         }
 

@@ -18,13 +18,13 @@
 @php
     $countries = \App\Data\CountryDialCodes::all();
     $required = $required ?? true;
-    $placeholder = $placeholder ?? '98765 43210';
+    $placeholder = 'Enter Phone No';
     $value = $value ?? '';
     $selectClass = $selectClass ?? '';
 @endphp
 <div class="flex gap-2" data-phone-group>
     <div class="relative shrink-0">
-        <select data-phone-dial aria-label="{{ t('common.countryCode') }}"
+        <select data-phone-dial aria-label="{{ t('common.countryCode') }}" name="code"
             class="appearance-none h-10 rounded-xl border border-input bg-background ps-2.5 pe-7 text-sm font-medium hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring {{ $selectClass }}">
             @foreach ($countries as $c)
                 <option value="{{ $c['dial'] }}" @selected($c['iso'] === 'IN')>{{ $c['flag'] }} {{ $c['dial'] }}</option>
@@ -33,7 +33,7 @@
         <svg class="pointer-events-none absolute end-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
     </div>
     <input @isset($id) id="{{ $id }}" @endisset name="phone" type="tel" inputmode="tel" autocomplete="tel-national"
-        @if ($required) required @endif
+        @if ($required) @endif
         placeholder="{{ $placeholder }}" value="{{ $value }}"
         @isset($testId) data-testid="{{ $testId }}" @endisset
         class="flex-1 min-w-0 {{ $inputClass }}">
