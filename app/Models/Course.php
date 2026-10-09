@@ -9,28 +9,7 @@ class Course extends Model
     public $timestamps = false;
 
     protected $table = 'web_courses';
-
-    // protected $fillable = [
-    //     'slug',
-    //     'title',
-    //     'category_slug',
-    //     'category_name',
-    //     'level',
-    //     'summary',
-    //     'description',
-    //     'duration_hours',
-    //     'mode',
-    //     'price',
-    //     'rating',
-    //     'total_rating',
-    //     'enrolled',
-    //     'featured',
-    //     'skills',
-    //     'image_url',
-    //     'curriculum',
-    //     'faq',
-    // ];
-
+ 
     protected $fillable = [
     'course_clone_id',
     'title',

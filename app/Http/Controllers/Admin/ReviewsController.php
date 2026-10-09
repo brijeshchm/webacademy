@@ -15,8 +15,8 @@ use Image;
 use App\Models\City;
 use App\Models\FAQs;
 use App\Models\Blog;
-use App\Reviews;
-use App\Models\Courses;
+use App\Models\Reviews;
+use App\Models\Course;
 use App\Helpers;
 class ReviewsController extends Controller
 {
@@ -49,7 +49,17 @@ class ReviewsController extends Controller
      */
     public function create(Request $request)
     {		
-		$course_list= Course::select('id','title','course_name')->groupby('course_name')->get();	
+		 
+		
+		$course_list = Course::select('id', 'title', 'course_name')
+    ->whereIn('id', function ($query) {
+        $query->selectRaw('MIN(id)')
+            ->from((new Course)->getTable())
+            ->groupBy('course_name');
+    })
+    ->orderBy('course_name', 'asc')
+    ->get();
+
         return view('admin.reviews.add_reviews',['course_list'=>$course_list]);
     } 
 	 /**
@@ -68,11 +78,11 @@ class ReviewsController extends Controller
 				'course' => 'required',				
 				'rating' => 'required',				
 				'gender' => 'required',		
-				'alt' => 'required',				
+				// 'alt' => 'required',				
 				'comment' => 'required',				
 				//'company_name' => 'required',				
 				//'designation' => 'required',				
-				'review_image' => 'required',				
+				// 'review_image' => 'required',				
 			//	'related_courses' => 'required',				
 				 				
 			]);
@@ -83,10 +93,10 @@ class ReviewsController extends Controller
 			}	  
 			$alt= $request->input('alt');		
 				 
-
+$image = [];
 			if ($request->hasFile('review_image')) {
-				$image = [];
-				$filePath = getReviewsFolderStructure();
+				
+				$filePath = $this->getReviewsFolderStructure();
 			//	$file = Input::file('course_image');
 				$file =  $request->file('review_image');
 				$filename =str_replace(' ', '_', $file->getClientOriginalName());			 
@@ -117,9 +127,10 @@ class ReviewsController extends Controller
 				$reviews->comment = $request->input('comment');					 
 				$reviews->company_name = $request->input('company_name');					 
 				$reviews->designation = $request->input('designation');	
-				$reviews->related_courses = serialize($request->input('related_courses'));									
-				$reviews->review_image = serialize($image);									
+				$reviews->related_courses = json_encode($request->input('related_courses'));									
+				$reviews->review_image = json_encode($image);									
 				$reviews->created_by = '1';				 
+				$reviews->updated_by = '1';				 
 				$reviews->status = '1';		
 				
 				$course= Course::findOrFail($request->input('course'));
@@ -153,7 +164,14 @@ class ReviewsController extends Controller
     public function edit(Request $request,$id)
     {	  
 		$edit_data= Reviews::findOrFail(base64_decode($id)); 
-		$course_list= Course::select('id','title','course_name')->groupby('course_name')->get();
+			$course_list = Course::select('id', 'title', 'course_name')
+    ->whereIn('id', function ($query) {
+        $query->selectRaw('MIN(id)')
+            ->from((new Course)->getTable())
+            ->groupBy('course_name');
+    })
+    ->orderBy('course_name', 'asc')
+    ->get();
         return view('admin.reviews.edit_reviews',['edit_data'=>$edit_data,'course_list'=>$course_list]);
     } 
 	
@@ -173,11 +191,11 @@ class ReviewsController extends Controller
 				'course' => 'required',				
 				'rating' => 'required',				
 				'gender' => 'required',	
-				'alt' => 'required',				
+				// 'alt' => 'required',				
 				'comment' => 'required',				
 			//	'company_name' => 'required',				
 			//	'designation' => 'required',				
-				'review_image' => 'required',				
+				// 'review_image' => 'required',				
 			//	'related_courses' => 'required',				
 			]);
 			
@@ -197,12 +215,12 @@ class ReviewsController extends Controller
 				$reviews->comment = $request->input('comment');					 
 				$reviews->company_name = $request->input('company_name');					 
 				$reviews->designation = $request->input('designation');	
-				$reviews->related_courses = serialize($request->input('related_courses'));				 			 
+				$reviews->related_courses = json_encode($request->input('related_courses'));				 			 
 			 
-				
-				if ($request->hasFile('review_image')) {
 				$image = [];
-				$filePath = getReviewsFolderStructure();
+				if ($request->hasFile('review_image')) {
+				
+				$filePath = $this->getReviewsFolderStructure();
 				//	$file = Input::file('course_image');
 				$file =  $request->file('review_image');
 				$filename =str_replace(' ', '_', $file->getClientOriginalName());			 
@@ -219,10 +237,8 @@ class ReviewsController extends Controller
 				'alt'=>$alt,						
 				'src'=>$filePath."/".$filename
 				);	
-				$reviews->review_image = serialize($image);		
-				}else{
-				$reviews->review_image = $reviews->review_image;	
-				}				
+				$reviews->review_image = json_encode($image);		
+				} 				
 			 	$reviews->updated_by = '1';			
 			if($reviews->save()){
 				$status=1;							 
@@ -272,7 +288,7 @@ class ReviewsController extends Controller
 				if(!empty($review->review_image)){
 				 $vimage= json_decode($review->review_image); 
 				 if(!empty($vimage)){
-					$image ='<img src="'.asset($vimage['review_image']['src']).'" type="'.$vimage['review_image']['alt'].'" width="100">'; 
+					$image ='<img src="'.asset($vimage->review_image->src).'" type="'.$vimage->review_image->alt.'" width="100">'; 
 				 }					
 				}else{
 					$image="";
@@ -321,9 +337,9 @@ class ReviewsController extends Controller
 		if($reviews->review_image!='')
 		{
 			$image = json_decode($reviews->review_image);
-			$large = $image['review_image']['src'];
-			if(!empty($image['review_image']['src'])){
-			$thumbnail = $image['review_image']['src'];
+			$large = $image->review_image->src;
+			if(!empty($image->review_image->src)){
+			$thumbnail = $image->review_image->src;
 			if (file_exists($thumbnail))
 			{
 				unlink($thumbnail);
@@ -358,13 +374,11 @@ class ReviewsController extends Controller
 		$delet_data = Reviews::findOrFail($id);	
  	
 		if($delet_data->review_image!='')
-		{		
-			 
-			$image = json_decode($delet_data->review_image);
-			
-			$large = $image['review_image']['src'];
-			if(!empty($image['review_image']['src'])){
-			$thumbnail = $image['review_image']['src'];
+		{					 
+			$image = json_decode($delet_data->review_image);			
+			$large = $image->review_image->src;
+			if(!empty($image->review_image->src)){
+			$thumbnail = $image->review_image->src;
 			if (file_exists($thumbnail))
 			{
 			unlink($thumbnail);
@@ -408,6 +422,39 @@ class ReviewsController extends Controller
     }
  
  
+      
+    // FOLDER STRUCTURE GENERATOR
+    // **************************
+    function getReviewsFolderStructure(){
+    	try{
+    		$partial_str = '';
+    		$day = date('j');
+    		$week = '';
+    		if($day<11){
+    			$week = 'week_1';
+    		}
+    		else if($day>=11&&$day<21){
+    			$week = 'week_2';
+    		}
+    		else if($day>=21){
+    			$week = 'week_3';
+    		}
+    		$partial_str = 'uploads/reviews/'.date('Y').'/'.date('m').'/'.$week;
+    		$structure = public_path($partial_str);
+    		if(file_exists($structure)){
+    			return $partial_str;
+    		}else{
+    			if(mkdir($structure, 0755, true)){
+    				return $partial_str;
+    			}else{
+    				throw new Exception("Folder structure not found.\nUnable to create folder structure.");
+    			}
+    		}
+    	}catch(Exception $e){
+    		return $e->getMessage();
+    	}
+    }
+
  
  
 }

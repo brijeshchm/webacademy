@@ -143,10 +143,12 @@ Edit Reviews
 					  <div class="form-group">
                         <label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Reviews Image<span class="required">*</span></label>
                         <div class="col-md-8 col-sm-8 col-xs-12">
+
+						
                          @if(isset($edit_data) && $edit_data->review_image !='')									 
 							<?php $vimage= json_decode($edit_data->review_image);  ?>
 							<div >
-							<img src="<?php echo asset('public/'.$vimage['review_image']['src']); ?>" style="max-width:100px;" height="100" width="100">	
+							<img src="<?php echo asset($vimage->review_image->src); ?>" style="max-width:100px;" height="100" width="100">	
 							<a href="/admin/reviews/del_icon/{{$edit_data->id}}" class="btn btn-inverse btn-circle m-b-5 deleteIcon"><i class="glyphicon glyphicon-trash"></i></a>
 							<input type="hidden" class="" name="review_image" value="{{ $edit_data->review_image }}" >
 							</div>
@@ -163,7 +165,7 @@ Edit Reviews
                          <?php 
 						if(isset($edit_data) && $edit_data->review_image !=''){	
 						$altname= json_decode($edit_data->review_image);   
-						$alt =$altname['review_image']['alt'];
+						$alt =$altname->review_image->alt;
 						}else{
 						$alt=""; 
 						}
