@@ -521,7 +521,8 @@ class BlogController extends Controller
 				$image ="";
 				if($blog->blog_image){
 				 $vimage= json_decode($blog->blog_image); 
-				$image='<img src="'.asset($vimage['blog_image']['src']).'" type="'.$vimage['blog_image']['alt'].'" width="100">'; 
+			 
+				$image='<img src="'.asset($vimage->blog_image->src).'" type="'.$vimage->blog_image->alt.'" width="100">'; 
 				}
 				if($blog->status=='1'){
 					$status .='<a href="javascript:blogController.status('.$blog->id.',0)" title="Course status" class="btn btn-success" >Active</a>';	
@@ -607,14 +608,14 @@ class BlogController extends Controller
     {
        	 
 		$delet_data = Blog::findOrFail($id); 	
-		if(!empty($delet_data->image_banner))
+		if(!empty($delet_data->blog_image))
 		{		
 			 
-			$image = json_decode($delet_data->image_banner);
+			$image = json_decode($delet_data->blog_image);
 			
 	 
-			if(!empty($image->image_banner->src)){
-			$thumbnail = $image->image_banner->src;
+			if(!empty($image->blog_image->src)){
+			$thumbnail = $image->blog_image->src;
 			if (file_exists($thumbnail))
 			{
 			unlink($thumbnail);
@@ -625,7 +626,7 @@ class BlogController extends Controller
 		 
 		}
  
-		$edit_data = array('image_banner'  =>"",);	 
+		$edit_data = array('blog_image'  =>"",);	 
 		$del = Blog::where('id',$id)->update($edit_data);			 		
 		return redirect('admin/blog/edit/'.base64_encode($id))->with("success","Blog Icons deleted successfully.");
 			
@@ -642,25 +643,23 @@ class BlogController extends Controller
     {
        	 
 		$delet_data = Blog::findOrFail($id); 	
-		if($delet_data->blog_image!='')
+		if($delet_data->image_banner!='')
 		{		
 			 
-			$image = json_decode($delet_data->blog_image);
-			
-			 
-			if(!empty($image->blog_image->src)){
-			$thumbnail = $image->blog_image->src;
-			if (file_exists($thumbnail))
-			{
-			unlink($thumbnail);
-			}  
+			$image = json_decode($delet_data->image_banner);
+			if(!empty($image->image_banner->src)){
+				$thumbnail = $image->image_banner->src;
+				if (file_exists($thumbnail))
+				{
+				unlink($thumbnail);
+				}  
 			}
 			 
 		 
 		 
 		}
  
-		$edit_data = array('blog_image'  =>"",);	 
+		$edit_data = array('image_banner'  =>"",);	 
 		$del = Blog::where('id',$id)->update($edit_data);			 		
 		return redirect('admin/blog/edit/'.base64_encode($id))->with("success","image deleted successfully.");
 			
@@ -736,69 +735,199 @@ class BlogController extends Controller
     	$slug = implode("-",$slug);
     	return $slug;
     }
- private function saveImageSmart($file, $destinationPath, $width = null, $height = null)
-	{
-		$ext = strtolower($file->getClientOriginalExtension());
-		$name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-		$name = str_replace(' ', '_', $name);
-		$filename =  time() . rand(1000,9999);
 
-		// ✅ SVG → Save directly
-		if ($ext === 'svg') {
-			$finalName = $filename . '.svg';
-			$file->move($destinationPath, $finalName);
-			return $finalName;
-		}
+	private function saveImageSmart(
+    $file,
+    $destinationPath,
+    $width = null,
+    $height = null
+) {
+    if (!$file || !$file->isValid()) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'image' => 'Image upload failed. Please upload again.',
+        ]);
+    }
 
-		// ✅ Raster → Convert to WEBP
-		$imagePath = $file->getPathname();
+    if (!is_dir($destinationPath)) {
+        if (
+            !@mkdir($destinationPath, 0755, true)
+            && !is_dir($destinationPath)
+        ) {
+            throw new \RuntimeException('Unable to create image directory.');
+        }
+    }
 
-		switch ($ext) {
-			case 'jpg':
-			case 'jpeg':
-				$src = imagecreatefromjpeg($imagePath);
-				break;
-			case 'png':
-				$src = imagecreatefrompng($imagePath);
-				imagepalettetotruecolor($src);
-				imagealphablending($src, true);
-				imagesavealpha($src, true);
-				break;
-			case 'webp':
-				$src = imagecreatefromwebp($imagePath);
-				break;
-			default:
-				throw new \Exception('Unsupported image type');
-		}
+    if (!is_writable($destinationPath)) {
+        throw new \RuntimeException('Image directory is not writable.');
+    }
 
-		$width = $width ?? imagesx($src);
-		$height = $height ?? imagesy($src);
+    $filename = bin2hex(random_bytes(16));
+    $extension = strtolower($file->getClientOriginalExtension());
+    $imagePath = $file->getPathname();
 
-		$dst = imagecreatetruecolor($width, $height);
-		imagealphablending($dst, false);
-		imagesavealpha($dst, true);
+    // Preserve your existing SVG upload behavior.
+    // SVG files must be validated/sanitized before calling this method.
+    if ($extension === 'svg') {
+        $finalName = $filename . '.svg';
+        $file->move($destinationPath, $finalName);
 
-		imagecopyresampled(
-			$dst,
-			$src,
-			0,
-			0,
-			0,
-			0,
-			$width,
-			$height,
-			imagesx($src),
-			imagesy($src)
-		);
+        return $finalName;
+    }
 
-		$finalName = $filename . '.webp';
-		imagewebp($dst, $destinationPath . '/' . $finalName, 80);
+    if (
+        !extension_loaded('gd')
+        || !function_exists('imagewebp')
+        || !(imagetypes() & IMG_WEBP)
+    ) {
+        throw new \RuntimeException(
+            'PHP GD with WebP support is required.'
+        );
+    }
 
-		imagedestroy($src);
-		imagedestroy($dst);
+    // Detect actual image type instead of relying on the extension.
+    $imageInfo = @getimagesize($imagePath);
 
-		return $finalName;
-	}
+    if ($imageInfo === false) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'image' => 'Invalid or corrupted image. Please upload a valid JPG, PNG or WebP.',
+        ]);
+    }
+
+    $src = false;
+    $dst = null;
+    $outputPath = null;
+
+    try {
+        switch ($imageInfo[2]) {
+            case IMAGETYPE_JPEG:
+                $src = @imagecreatefromjpeg($imagePath);
+                break;
+
+            case IMAGETYPE_PNG:
+                $src = @imagecreatefrompng($imagePath);
+                break;
+
+            case IMAGETYPE_WEBP:
+                $src = @imagecreatefromwebp($imagePath);
+                break;
+
+            default:
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'image' => 'Only JPG, PNG and WebP images are supported.',
+                ]);
+        }
+
+        // IMPORTANT: check before calling imagesx()/imagesy().
+        if ($src === false) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'image' => 'This image could not be decoded. It may be corrupted or unsupported by GD. Re-export it as JPG or PNG and try again.',
+            ]);
+        }
+
+        imagepalettetotruecolor($src);
+        imagesavealpha($src, true);
+
+        $originalWidth = imagesx($src);
+        $originalHeight = imagesy($src);
+
+        if ($width !== null) {
+            $width = filter_var(
+                $width,
+                FILTER_VALIDATE_INT,
+                ['options' => ['min_range' => 1]]
+            );
+
+            if ($width === false) {
+                throw new \InvalidArgumentException('Width must be a positive integer.');
+            }
+        }
+
+        if ($height !== null) {
+            $height = filter_var(
+                $height,
+                FILTER_VALIDATE_INT,
+                ['options' => ['min_range' => 1]]
+            );
+
+            if ($height === false) {
+                throw new \InvalidArgumentException('Height must be a positive integer.');
+            }
+        }
+
+        // Preserve aspect ratio when only one dimension is supplied.
+        if ($width === null && $height === null) {
+            $width = $originalWidth;
+            $height = $originalHeight;
+        } elseif ($height === null) {
+            $height = max(
+                1,
+                (int) round($originalHeight * $width / $originalWidth)
+            );
+        } elseif ($width === null) {
+            $width = max(
+                1,
+                (int) round($originalWidth * $height / $originalHeight)
+            );
+        }
+
+        $dst = imagecreatetruecolor($width, $height);
+
+        if ($dst === false) {
+            throw new \RuntimeException('Unable to create resized image.');
+        }
+
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+
+        $transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+        imagefill($dst, 0, 0, $transparent);
+
+        if (!imagecopyresampled(
+            $dst,
+            $src,
+            0,
+            0,
+            0,
+            0,
+            $width,
+            $height,
+            $originalWidth,
+            $originalHeight
+        )) {
+            throw new \RuntimeException('Unable to resize image.');
+        }
+
+        $finalName = $filename . '.webp';
+
+        $outputPath = rtrim($destinationPath, '/\\')
+            . DIRECTORY_SEPARATOR
+            . $finalName;
+
+        if (
+            !imagewebp($dst, $outputPath, 80)
+            || !is_file($outputPath)
+            || filesize($outputPath) === 0
+        ) {
+            throw new \RuntimeException('Unable to save WebP image.');
+        }
+
+        return $finalName;
+    } catch (\Throwable $exception) {
+        if ($outputPath && is_file($outputPath)) {
+            @unlink($outputPath);
+        }
+
+        throw $exception;
+    } finally {
+        if ($src instanceof \GdImage) {
+            imagedestroy($src);
+        }
+
+        if ($dst instanceof \GdImage) {
+            imagedestroy($dst);
+        }
+    }
+} 
 
  
 }

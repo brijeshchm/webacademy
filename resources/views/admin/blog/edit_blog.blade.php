@@ -47,8 +47,7 @@ Edit Blog
                 <div class="x_panel">
                    
                   <div class="x_content">                    
-                    <form  data-parsley-validate class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return blogController.editSaveBlog(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">	
-
+                    <form  data-parsley-validate class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return blogController.editSaveBlog(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
 
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Titile <span class="required">*</span>
@@ -162,7 +161,7 @@ Edit Blog
                         </div>
                     </div> 	
 					  	<div class="form-group">       
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Heading<span class="required">*</span></label>					
+					        <label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Heading<span class="required">*</span></label>					
                         <div class="col-md-10 col-sm-10 col-xs-12">
                           <input type="text" class="form-control col-md-7 col-xs-12" name="heading" value="{{ old('heading',(isset($edit_data)) ? $edit_data->heading:"")}}" placeholder="Enter heading"> 
                         </div>
@@ -281,7 +280,7 @@ Edit Blog
                          @if(isset($edit_data) && !empty($edit_data->blog_image))									 
 							<?php $vicons= json_decode($edit_data->blog_image);  ?>
 							<div >
-							<img src="<?php echo asset('public/'.$vicons->blog_image->src); ?>" style="max-width:100px;" height="100" width="100">	
+							<img src="<?php echo asset($vicons->blog_image->src); ?>" style="max-width:100px;" height="100" width="100">	
 							<a href="/admin/blog/del_icon/{{$edit_data->id}}" class="btn btn-inverse btn-circle m-b-5 deleteIcon"><i class="glyphicon glyphicon-trash"></i></a>
 							<input type="hidden" class="" name="blog_image" value="{{ $edit_data->blog_image }}" >
 							</div>
@@ -296,7 +295,7 @@ Edit Blog
                          @if(isset($edit_data) && !empty($edit_data->image_banner))									 
 							<?php $vimage= json_decode($edit_data->image_banner);  ?>
 							<div >
-							<img src="<?php echo asset('public/'.$vimage->image_banner->src); ?>" style="max-width:100px;" height="100" width="100">	
+							<img src="<?php echo asset($vimage->image_banner->src); ?>" style="max-width:100px;" height="100" width="100">	
 							<a href="/admin/blog/del_image/{{$edit_data->id}}" class="btn btn-inverse btn-circle m-b-5 deleteIcon"><i class="glyphicon glyphicon-trash"></i></a>
 							<input type="hidden" class="" name="image_banner" value="{{ $edit_data->image_banner }}" >
 							</div>
