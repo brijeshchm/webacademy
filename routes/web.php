@@ -100,7 +100,7 @@ Route::post('/login',[App\Http\Controllers\Auth\AuthController::class, 'authenti
 Route::post('/check/login',[App\Http\Controllers\Auth\AuthController::class, 'authenticate']);
 Route::get('/logout/',[App\Http\Controllers\Auth\AuthController::class, 'logout']);
 
-Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
 
 // *****************
 // ROLES PERMISSIONS	
@@ -502,7 +502,7 @@ Route::get('/mobilebanner/del_icon/{id}',[App\Http\Controllers\Admin\HomesliderC
 
     // Authenticated area
     Route::middleware('admin.web')->group(function () {
-        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
         Route::middleware('throttle:admin-auth')->post('/change-password', [AdminController::class, 'changePassword'])->name('change-password');
 
         // WhatsApp chats
