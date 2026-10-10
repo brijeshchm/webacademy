@@ -70,9 +70,8 @@ class BlogController extends Controller
 				'total_rating' => 'required',				
 				'category' => 'required',					 			
 				'meta_title'=>'required|min:20|max:300',	
-				'meta_keywords'=>'required|min:20|max:1160',	
-				'meta_description'=>'required|min:45|max:160',	
-				 				
+				 
+				'meta_description'=>'required|min:45|max:160',			 				
 				 				
 			]);
 			
@@ -118,7 +117,7 @@ class BlogController extends Controller
 				$blog->rating = trim($request->input('rating'));					 
 				$blog->total_rating = trim($request->input('total_rating'));					 
 				$blog->meta_title = $request->input('meta_title');					 
-				$blog->meta_keywords = $request->input('meta_keywords');					 
+				 					 
 				$blog->meta_description = $request->input('meta_description');					 
 				 
 				$blog->category = $request->input('category');	
@@ -177,7 +176,7 @@ class BlogController extends Controller
 				'category' => 'required',					 
 				'slug' => 'required',
 				'meta_title'=>'required|min:30|max:160',	
-				'meta_keywords'=>'required|min:20|max:1160',	
+			 
 				'meta_description'=>'required|min:70|max:155',	
 		 				 				
 				 			
@@ -195,24 +194,21 @@ class BlogController extends Controller
 				$blog->sub_title = ucfirst($request->input('sub_title'));					 
 				$blog->rating = trim($request->input('rating'));					 
 				$blog->total_rating = trim($request->input('total_rating'));	
-				$blog->category = trim($request->input('category'));
-			 			
-				$blog->meta_keywords = ucfirst($request->input('meta_keywords'));					 
+				$blog->category = trim($request->input('category'));				 				 
 				$blog->meta_description = ucfirst($request->input('meta_description'));					 
 				$blog->blog_defination = ucfirst($request->input('blog_defination'));				
 				$blog->heading = ucfirst($request->input('heading'));				
-				$blog->blog_about = ucfirst($request->input('blog_about'));				
-				
-				 
-			 	$blog->updated_by = '1';			
-			if($blog->save()){
-				$status=1;							 
-				$msg="Blog updated successfully!";		
-				
-			}else{
-				$status=0;							 
-				$msg="Blog could not be updated, Please try again!";	
-			}
+				$blog->blog_about = ucfirst($request->input('blog_about'));						 
+			 	$blog->updated_by = '1';	
+						
+				if($blog->save()){
+					$status=1;							 
+					$msg="Blog updated successfully!";		
+					
+				}else{
+					$status=0;							 
+					$msg="Blog could not be updated, Please try again!";	
+				}
 		
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
@@ -266,8 +262,8 @@ class BlogController extends Controller
         if ($request->hasFile('blog_image')) {
             if (!empty($blogdetails->blog_image)) {
                 $existing = json_decode($blogdetails->blog_image, true);
-                if (!empty($existing['blog_image']['src'])) {
-                    $oldLogoImages[] = $existing['blog_image'];
+                if (!empty($existing->blog_image->src)) {
+                    $oldLogoImages[] = $existing->blog_image;
                 }
             }
 
@@ -326,12 +322,12 @@ class BlogController extends Controller
             return response()->json(['status' => false, 'msg' => 'Blog could not be updated'], 500);
         }
 
-        foreach ($oldLogoImages as $oldImage) {
-            $oldPath = public_path($oldImage['src']);
-            if (file_exists($oldPath)) {
-                @unlink($oldPath);
-            }
-        }
+        // foreach ($oldLogoImages as $oldImage) {
+        //     $oldPath = public_path($oldImage['src']);
+        //     if (file_exists($oldPath)) {
+        //         @unlink($oldPath);
+        //     }
+        // }
 
         return response()->json([
             'status' => true,
@@ -611,9 +607,7 @@ class BlogController extends Controller
 		if(!empty($delet_data->blog_image))
 		{		
 			 
-			$image = json_decode($delet_data->blog_image);
-			
-	 
+			$image = json_decode($delet_data->blog_image);	 
 			if(!empty($image->blog_image->src)){
 			$thumbnail = $image->blog_image->src;
 			if (file_exists($thumbnail))

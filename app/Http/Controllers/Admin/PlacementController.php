@@ -87,28 +87,8 @@ class PlacementController extends Controller
 			}	  
 			
 				 
-	$image = "";
-			if ($request->hasFile('placement_image')) {
-					$alt= $request->input('alt');	
+			$image = "";
 			
-				$filePath = $this->getPlacementFolderStructure();			 
-				$file =  $request->file('placement_image');
-				$filename =str_replace(' ', '_', $file->getClientOriginalName());			 
-				$destinationPath = public_path($filePath);
-				$nameArr = explode('.',$filename);
-				$ext = array_pop($nameArr);
-				$name = implode('_',$nameArr);
-				if(file_exists($destinationPath.'/'.$filename)){
-				$filename = $name."_".time().'.'.$ext;
-				}
-				$file->move($destinationPath,$filename);				 
-				$image['placement_image'] = array(
-				'name'=>$filename,
-				'alt'=>$alt,						
-				'src'=>$filePath."/".$filename
-				);	
-				} 
-				
 				$placement = New Placement;
 				$placement->name = ucwords(trim($request->input('name')));		
 				$placement->email = $request->input('email');					 					
@@ -124,8 +104,42 @@ class PlacementController extends Controller
 				$placement->company_name = $request->input('company_name');					 
 				$placement->salary_hike = $request->input('salary_hike');					 
 				$placement->designation = $request->input('designation');	
-				$placement->related_courses = json_encode($request->input('related_courses'));									
-				$placement->placement_image = $image?json_encode($image):'';									
+
+				if ($request->hasFile('placement_image')) {
+						$filePath = $this->getPlacementFolderStructure();
+					if (!empty($placement->placement_image)) {
+						$existing = json_decode($placement->placement_image, true);
+						if (!empty($existing->placement_image->src)) {
+							$oldLogoImages[] = $existing->placement_image;
+						}
+					}
+
+					$destinationPath = public_path($filePath);
+					$filename = $this->saveImageSmart(
+						$request->file('placement_image'),
+						$destinationPath,
+						900,
+						400
+					);
+
+					$placementImageData = [
+						'placement_image' => [
+							'name'   => $filename,
+							'alt'    => $filename,
+							'width'  => '',
+							'height' => '',
+							'src'    => $filePath . '/' . $filename,
+						],
+					];
+
+					$placement->placement_image = json_encode($placementImageData);
+        		}
+
+				
+				if($request->input('related_courses')){
+					$placement->related_courses = json_encode($request->input('related_courses'));	
+				}				
+												
 				$placement->created_by = '1';				 
 				$placement->status = '1';				 
 				 	
@@ -204,32 +218,66 @@ class PlacementController extends Controller
 				$placement->salary_hike = $request->input('salary_hike');					 
 				$placement->designation = $request->input('designation');	
 				$placement->related_courses = json_encode($request->input('related_courses'));				 			 
-			 	$image = "";
-				
-				if ($request->hasFile('placement_image')) {
+			 	$image = "";				
+				// if ($request->hasFile('placement_image')) {
 			
-				$alt= $request->input('alt');
-				$filePath = $this->getPlacementFolderStructure();
+				// $alt= $request->input('alt');
+			
 				 
-				$file =  $request->file('placement_image');
-				$filename =str_replace(' ', '_', $file->getClientOriginalName());			 
-				$destinationPath = public_path($filePath);
-				$nameArr = explode('.',$filename);
-				$ext = array_pop($nameArr);
-				$name = implode('_',$nameArr);
-				if(file_exists($destinationPath.'/'.$filename)){
-				$filename = $name."_".time().'.'.$ext;
-				}
-				$file->move($destinationPath,$filename);				 
-				$image['placement_image'] = array(
-				'name'=>$filename,
-				'alt'=>$alt,						
-				'src'=>$filePath."/".$filename
-				);	
-				$placement->placement_image = json_encode($image);		
-				}else{
-				$placement->placement_image = $placement->placement_image;	
-				}				
+				// $file =  $request->file('placement_image');
+				// $filename = str_replace(' ', '_', $file->getClientOriginalName());			 
+				// $destinationPath = public_path($filePath);
+				// $nameArr = explode('.',$filename);
+				// $ext = array_pop($nameArr);
+				// $name = implode('_',$nameArr);
+				// if(file_exists($destinationPath.'/'.$filename)){
+				// 	$filename = $name."_".time().'.'.$ext;
+				// }
+				// //  dd($filePath);	
+				// $file->move($destinationPath,$filename);				 
+				// $image['placement_image'] = array(
+				// 	'name'=>$filename,
+				// 	'alt'=>$alt,						
+				// 	'src'=>$filePath."/".$filename
+				// 	);	
+				// 	dd($image);
+				// $placement->placement_image = json_encode($image);		
+				// } 				
+
+				 
+ 				$oldLogoImages = [];
+				if ($request->hasFile('placement_image')) {
+						$filePath = $this->getPlacementFolderStructure();
+					if (!empty($placement->placement_image)) {
+						$existing = json_decode($placement->placement_image, true);
+						if (!empty($existing->placement_image->src)) {
+							$oldLogoImages[] = $existing->placement_image;
+						}
+					}
+
+					$destinationPath = public_path($filePath);
+					$filename = $this->saveImageSmart(
+						$request->file('placement_image'),
+						$destinationPath,
+						900,
+						400
+					);
+
+					$placementImageData = [
+						'placement_image' => [
+							'name'   => $filename,
+							'alt'    => $filename,
+							'width'  => '',
+							'height' => '',
+							'src'    => $filePath . '/' . $filename,
+						],
+					];
+
+					$placement->placement_image = json_encode($placementImageData);
+        		}
+
+
+			
 			 	$placement->updated_by = '1';			
 			if($placement->save()){
 				$status=1;							 
@@ -261,8 +309,7 @@ class PlacementController extends Controller
 						  ->orWhere('company_name','LIKE','%'.$request->input('search.value').'%');
 				});
 			}
-			$placements = $placements->paginate($request->input('length'));
-			
+			$placements = $placements->paginate($request->input('length'));			
 			$returnLeads = [];
 			$data = [];
 			$returnLeads['draw'] = $request->input('draw');
@@ -280,7 +327,7 @@ class PlacementController extends Controller
 				}
 				if(!empty($placement->placement_image)){
 				 $vimage= json_decode($placement->placement_image); 
-					$image='<img src="'.asset($vimage['placement_image']['src']).'" type="'.$vimage['placement_image']['alt'].'" width="100">'; 	
+					$image='<img src="'.asset($vimage->placement_image->src).'" type="'.$vimage->placement_image->alt.'" width="100">'; 	
 				}else{
 					$image="";
 				}
@@ -298,16 +345,16 @@ class PlacementController extends Controller
 				}else{
 					$coursen="";
 				}
-					$data[] = [		 		 		 
-						$placement->name,					 			
-						$placement->coursename,	 		
-						$placement->company_name,					 			
-						$placement->designation,					 			
-						$image,	 				 			
-						$status,	 				 			
-						$action,					  
-						 
-					];
+				$data[] = [		 		 		 
+					$placement->name,					 			
+					$placement->coursename,	 		
+					$placement->company_name,					 			
+					$placement->designation,					 			
+					$image,	 				 			
+					$status,	 				 			
+					$action,					  
+						
+				];
 					$returnLeads['recordCollection'][] = $placement->id;				 
 			}			
 			$returnLeads['data'] = $data;
@@ -331,9 +378,9 @@ class PlacementController extends Controller
 		if($placement->placement_image!='')
 		{
 			$image = json_decode($placement->placement_image);
-			$large = $image['placement_image']['src'];
-			if(!empty($image['placement_image']['src'])){
-			$thumbnail = $image['placement_image']['src'];
+			$large = $image->placement_image->src;
+			if(!empty($image->placement_image->src)){
+			$thumbnail = $image->placement_image->src;
 			if (file_exists($thumbnail))
 			{
 				unlink($thumbnail);
@@ -370,11 +417,10 @@ class PlacementController extends Controller
 		if($delet_data->placement_image!='')
 		{		
 			 
-			$image = json_decode($delet_data->placement_image);
-			
-			$large = $image['placement_image']['src'];
-			if(!empty($image['placement_image']['src'])){
-			$thumbnail = $image['placement_image']['src'];
+			$image = json_decode($delet_data->placement_image);			
+			$large = $image->placement_image->src;
+			if(!empty($image->placement_image->src)){
+			$thumbnail = $image->placement_image->src;
 			if (file_exists($thumbnail))
 			{
 			unlink($thumbnail);
@@ -454,4 +500,201 @@ function getPlacementFolderStructure(){
 }
  
  
+
+
+
+
+	private function saveImageSmart(
+    $file,
+    $destinationPath,
+    $width = null,
+    $height = null
+	) {
+		if (!$file || !$file->isValid()) {
+			throw \Illuminate\Validation\ValidationException::withMessages([
+				'image' => 'Image upload failed. Please upload again.',
+			]);
+		}
+
+		if (!is_dir($destinationPath)) {
+			if (
+				!@mkdir($destinationPath, 0755, true)
+				&& !is_dir($destinationPath)
+			) {
+				throw new \RuntimeException('Unable to create image directory.');
+			}
+		}
+
+		if (!is_writable($destinationPath)) {
+			throw new \RuntimeException('Image directory is not writable.');
+		}
+
+		$filename = bin2hex(random_bytes(16));
+		$extension = strtolower($file->getClientOriginalExtension());
+		$imagePath = $file->getPathname();
+
+		// Preserve your existing SVG upload behavior.
+		// SVG files must be validated/sanitized before calling this method.
+		if ($extension === 'svg') {
+			$finalName = $filename . '.svg';
+			$file->move($destinationPath, $finalName);
+
+			return $finalName;
+		}
+
+		if (
+			!extension_loaded('gd')
+			|| !function_exists('imagewebp')
+			|| !(imagetypes() & IMG_WEBP)
+		) {
+			throw new \RuntimeException(
+				'PHP GD with WebP support is required.'
+			);
+		}
+
+		// Detect actual image type instead of relying on the extension.
+		$imageInfo = @getimagesize($imagePath);
+
+		if ($imageInfo === false) {
+			throw \Illuminate\Validation\ValidationException::withMessages([
+				'image' => 'Invalid or corrupted image. Please upload a valid JPG, PNG or WebP.',
+			]);
+		}
+
+		$src = false;
+		$dst = null;
+		$outputPath = null;
+
+		try {
+			switch ($imageInfo[2]) {
+				case IMAGETYPE_JPEG:
+					$src = @imagecreatefromjpeg($imagePath);
+					break;
+
+				case IMAGETYPE_PNG:
+					$src = @imagecreatefrompng($imagePath);
+					break;
+
+				case IMAGETYPE_WEBP:
+					$src = @imagecreatefromwebp($imagePath);
+					break;
+
+				default:
+					throw \Illuminate\Validation\ValidationException::withMessages([
+						'image' => 'Only JPG, PNG and WebP images are supported.',
+					]);
+			}
+
+			// IMPORTANT: check before calling imagesx()/imagesy().
+			if ($src === false) {
+				throw \Illuminate\Validation\ValidationException::withMessages([
+					'image' => 'This image could not be decoded. It may be corrupted or unsupported by GD. Re-export it as JPG or PNG and try again.',
+				]);
+			}
+
+			imagepalettetotruecolor($src);
+			imagesavealpha($src, true);
+
+			$originalWidth = imagesx($src);
+			$originalHeight = imagesy($src);
+
+			if ($width !== null) {
+				$width = filter_var(
+					$width,
+					FILTER_VALIDATE_INT,
+					['options' => ['min_range' => 1]]
+				);
+
+				if ($width === false) {
+					throw new \InvalidArgumentException('Width must be a positive integer.');
+				}
+			}
+
+			if ($height !== null) {
+				$height = filter_var(
+					$height,
+					FILTER_VALIDATE_INT,
+					['options' => ['min_range' => 1]]
+				);
+
+				if ($height === false) {
+					throw new \InvalidArgumentException('Height must be a positive integer.');
+				}
+			}
+
+			// Preserve aspect ratio when only one dimension is supplied.
+			if ($width === null && $height === null) {
+				$width = $originalWidth;
+				$height = $originalHeight;
+			} elseif ($height === null) {
+				$height = max(
+					1,
+					(int) round($originalHeight * $width / $originalWidth)
+				);
+			} elseif ($width === null) {
+				$width = max(
+					1,
+					(int) round($originalWidth * $height / $originalHeight)
+				);
+			}
+
+			$dst = imagecreatetruecolor($width, $height);
+
+			if ($dst === false) {
+				throw new \RuntimeException('Unable to create resized image.');
+			}
+
+			imagealphablending($dst, false);
+			imagesavealpha($dst, true);
+
+			$transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+			imagefill($dst, 0, 0, $transparent);
+
+			if (!imagecopyresampled(
+				$dst,
+				$src,
+				0,
+				0,
+				0,
+				0,
+				$width,
+				$height,
+				$originalWidth,
+				$originalHeight
+			)) {
+				throw new \RuntimeException('Unable to resize image.');
+			}
+
+			$finalName = $filename . '.webp';
+
+			$outputPath = rtrim($destinationPath, '/\\')
+				. DIRECTORY_SEPARATOR
+				. $finalName;
+
+			if (
+				!imagewebp($dst, $outputPath, 80)
+				|| !is_file($outputPath)
+				|| filesize($outputPath) === 0
+			) {
+				throw new \RuntimeException('Unable to save WebP image.');
+			}
+
+			return $finalName;
+		} catch (\Throwable $exception) {
+			if ($outputPath && is_file($outputPath)) {
+				@unlink($outputPath);
+			}
+
+			throw $exception;
+		} finally {
+			if ($src instanceof \GdImage) {
+				imagedestroy($src);
+			}
+
+			if ($dst instanceof \GdImage) {
+				imagedestroy($dst);
+			}
+		}
+	} 
+
 }

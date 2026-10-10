@@ -104,10 +104,10 @@ Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, '
 
 // *****************
 // ROLES PERMISSIONS	
-	Route::get('/permission',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'index']);
+	Route::get('/permission',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'index'])->middleware('auth');
 	Route::get('/permission/add',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'add']);
 	Route::post('/permission',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'permissionStore']);
-	Route::get('/permission/get-permission',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'getPaginatedPermissions']);
+	Route::get('/permission/get-permission',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'getPaginatedPermissions'])->middleware('auth');
 	Route::get('/permission/edit/{id}',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'editPermission']);
 	Route::post('/permission/saveEdit/{id}',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'updatePermission']);
 	Route::get('/permission/delete/{id}',[App\Http\Controllers\Admin\RolesPermissionsController::class, 'destroyPermission']);
@@ -125,21 +125,21 @@ Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, '
  
  
  	  //lead 
-    Route::get('lead',[App\Http\Controllers\Admin\LeadController::class, 'index']);
+    Route::get('lead',[App\Http\Controllers\Admin\LeadController::class, 'index'])->middleware('auth');
     Route::get('lead-analysis',[App\Http\Controllers\Admin\LeadController::class,'leadanalysis']);
-    Route::get('get-lead',[App\Http\Controllers\Admin\LeadController::class,'getLeadPagination']);
+    Route::get('get-lead',[App\Http\Controllers\Admin\LeadController::class,'getLeadPagination'])->middleware('auth');
     Route::post('lead/selectTodeleteLeads',[App\Http\Controllers\Admin\LeadController::class,'selectTodeleteLeads']);
     Route::get('getleadcount',[App\Http\Controllers\Admin\LeadController::class,'getleadcount']);
    
     Route::get('monthly-lead-analysis',[App\Http\Controllers\Admin\LeadController::class,'monthlyleadanalysis']);
-    Route::get('lead/get-monthly-lead-analysis',[App\Http\Controllers\Admin\LeadController::class,'getMonthlyPaginationLeadAnalysis']);
+    Route::get('lead/get-monthly-lead-analysis',[App\Http\Controllers\Admin\LeadController::class,'getMonthlyPaginationLeadAnalysis'])->middleware('auth');
     Route::get('course-assignment',[App\Http\Controllers\Admin\LeadController::class,'courseassignment']);  
     Route::get('get-assign-course',[App\Http\Controllers\Admin\LeadController::class,'getCourseAssignmentPagination']);
 
 
 
  //User Profile
-Route::get('/profile',[App\Http\Controllers\Admin\ProfileController::class, 'index']); 
+Route::get('/profile',[App\Http\Controllers\Admin\ProfileController::class, 'index'])->middleware('auth'); 
 Route::post('/profile',[App\Http\Controllers\Admin\ProfileController::class, 'edit']);
 Route::get('/profile/del_icon/{id}',[App\Http\Controllers\Admin\ProfileController::class, 'del_icon']);
 Route::get('/profile/view/{id}',[App\Http\Controllers\Admin\ProfileController::class, 'view']);
@@ -147,18 +147,18 @@ Route::get('/profile/delete/{id}',[App\Http\Controllers\Admin\ProfileController:
 Route::get('/profile/status/{id}/{val}',[App\Http\Controllers\Admin\ProfileController::class, 'status']);
 
 
-Route::get('/change-password/',[App\Http\Controllers\Admin\ChangepasswordController::class, 'index']);
+Route::get('/change-password/',[App\Http\Controllers\Admin\ChangepasswordController::class, 'index'])->middleware('auth');
 Route::post('/change-password/',[App\Http\Controllers\Admin\ChangepasswordController::class, 'edit']);
  
 // users
-Route::get('users',[App\Http\Controllers\Admin\UserController::class, 'index']);
+Route::get('users',[App\Http\Controllers\Admin\UserController::class, 'index'])->middleware('auth');
 Route::get('users/add',[App\Http\Controllers\Admin\UserController::class, 'create']);
 Route::post('users/save',[App\Http\Controllers\Admin\UserController::class, 'saveUser']); 
 Route::get('/users/edit/{id}',[App\Http\Controllers\Admin\UserController::class, 'edit']);
 Route::post('/users/editSaveUser/{id}',[App\Http\Controllers\Admin\UserController::class, 'editSaveUser']);
 Route::get('/users/status/{id}/{val}',[App\Http\Controllers\Admin\UserController::class, 'status']);
 Route::get('/users/delete/{id}',[App\Http\Controllers\Admin\UserController::class, 'delete']);
-Route::get('/users/get-user',[App\Http\Controllers\Admin\UserController::class, 'getUserPagination']);
+Route::get('/users/get-user',[App\Http\Controllers\Admin\UserController::class, 'getUserPagination'])->middleware('auth');
 Route::get('/users/del_icon/{id}',[App\Http\Controllers\Admin\UserController::class, 'del_icon']);
 
 
@@ -182,7 +182,7 @@ Route::post('course/editSaveCourseRelated/{id}', [App\Http\Controllers\Admin\Cou
 Route::post('course/editSaveCourseCertificate/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseCertificate']);
 Route::post('course/editSaveFAQ/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveFAQ']);
 Route::post('course/editSaveTestimonial/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveTestimonial']);
-Route::get('/course/get-course',[App\Http\Controllers\Admin\CourseController::class, 'getCoursePagination'] );
+Route::get('/course/get-course',[App\Http\Controllers\Admin\CourseController::class, 'getCoursePagination'])->middleware('auth');
 Route::get('/course/del_icon/{id}',[App\Http\Controllers\Admin\CourseController::class, 'del_icon']);
 Route::get('/course/del_image/{id}',[App\Http\Controllers\Admin\CourseController::class, 'del_image']);
 Route::get('/course/get_course_ajax',[App\Http\Controllers\Admin\CourseController::class, 'getCourseAjax']);
@@ -208,8 +208,7 @@ Route::get('seopage',[App\Http\Controllers\Admin\SeoPageController::class, 'inde
 
 //Route::get('seopage', 'Admin\SeoPageController@index')->middleware('auth');
 
-Route::get('/seopage/add',[App\Http\Controllers\Admin\SeoPageController::class, 'add']);
-
+Route::get('/seopage/add',[App\Http\Controllers\Admin\SeoPageController::class, 'add'])->middleware('auth');
 
 Route::get('seopage/edit/{id}', [App\Http\Controllers\Admin\SeoPageController::class, 'edit']);
 Route::post('seopage/saveCourseTitle',[App\Http\Controllers\Admin\SeoPageController::class, 'saveCourseTitle'] );
@@ -229,7 +228,7 @@ Route::post('seopage/editSaveCourseRelated/{id}',[App\Http\Controllers\Admin\Seo
 Route::post('seopage/editSaveCourseCertificate/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseCertificate'] );
 Route::post('seopage/editSaveFAQ/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveFAQ']);
 Route::post('seopage/editSaveTestimonial/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTestimonial']);
-Route::get('/seopage/get-seopage',[App\Http\Controllers\Admin\SeoPageController::class, 'getCoursePagination']);
+Route::get('/seopage/get-seopage',[App\Http\Controllers\Admin\SeoPageController::class, 'getCoursePagination'])->middleware('auth');
 Route::get('/seopage/del_icon/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'del_icon']);
 Route::get('/seopage/del_image/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'del_image']);
 Route::get('/seopage/get_course_ajax',[App\Http\Controllers\Admin\SeoPageController::class, 'getCourseAjax']);
@@ -239,7 +238,7 @@ Route::get('/seopage/courseAboutExcelDelete/{id}',[App\Http\Controllers\Admin\Se
 Route::post('/seopage/downloadExcelFormate',[App\Http\Controllers\Admin\SeoPageController::class, 'downloadExcelFormate']);
 Route::post('/seopage/status/{id}/{val}',[App\Http\Controllers\Admin\SeoPageController::class, 'status']);
 
-Route::post('/seopage/get_coursesubcategory',[App\Http\Controllers\Admin\SeoPageController::class, 'getCourseSubCategory']);
+Route::post('/seopage/get_coursesubcategory',[App\Http\Controllers\Admin\SeoPageController::class, 'getCourseSubCategory'])->middleware('auth');
 Route::post('/seopage/get_coursecategoryType',[App\Http\Controllers\Admin\SeoPageController::class, 'get_coursecategoryType']);
 Route::post('/seopage/get_category_course',[App\Http\Controllers\Admin\SeoPageController::class, 'getCourseName']);
 Route::post('/seopage/get_courseCity',[App\Http\Controllers\Admin\SeoPageController::class, 'getCourseCity']);
@@ -254,9 +253,9 @@ Route::get('/course/get_seo_course_releted_edit',[App\Http\Controllers\Admin\Seo
 
 // Course Master
 
-Route::get('coursemaster',[App\Http\Controllers\Admin\CourseMasterController::class, 'index']);
+Route::get('coursemaster',[App\Http\Controllers\Admin\CourseMasterController::class, 'index'])->middleware('auth');
  
-Route::get('coursemaster/add',[App\Http\Controllers\Admin\CourseMasterController::class, 'add']);
+Route::get('coursemaster/add',[App\Http\Controllers\Admin\CourseMasterController::class, 'add'])->middleware('auth');
 Route::get('coursemaster/edit/{id}',[App\Http\Controllers\Admin\CourseMasterController::class, 'edit']);
 Route::post('coursemaster/saveCourseMasterTitle',[App\Http\Controllers\Admin\CourseMasterController::class, 'saveCourseMasterTitle']);
 Route::post('coursemaster/editSaveCourseCurriculumExcel/{id}', [App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseCurriculumExcel']);
@@ -265,7 +264,7 @@ Route::post('coursemaster/editSaveCourseMasterTitle/{id}',[App\Http\Controllers\
 Route::post('coursemaster/editSaveCourseMasterAbout/{id}', [App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseMasterAbout']);
  
  
-Route::post('coursemaster/editSaveCourseToolsCovered/{id}',[App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseToolsCovered'] );
+Route::post('coursemaster/editSaveCourseToolsCovered/{id}',[App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseToolsCovered'] )->middleware('auth');
 Route::post('coursemaster/editSaveCourseClients/{id}',[App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseClients']);
 Route::post('coursemaster/editSaveCourseStructure/{id}',[App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseStructure']);
 Route::post('coursemaster/editSaveCourseMasterPlacement/{id}',[App\Http\Controllers\Admin\CourseMasterController::class, 'editSaveCourseMasterPlacement']);
@@ -282,7 +281,7 @@ Route::post('/coursemaster/status/{id}/{val}',[App\Http\Controllers\Admin\Course
 
 // certificate
  
-Route::get('certificate',[App\Http\Controllers\Admin\CertificateController::class, 'index']);
+Route::get('certificate',[App\Http\Controllers\Admin\CertificateController::class, 'index'])->middleware('auth');
 Route::get('certificate/add', [App\Http\Controllers\Admin\CertificateController::class, 'add']);
 Route::get('certificate/edit/{id}',[App\Http\Controllers\Admin\CertificateController::class, 'edit']);
 Route::post('certificate/saveCertificateTitle',[App\Http\Controllers\Admin\CertificateController::class, 'saveCertificateTitle'] );
@@ -298,7 +297,7 @@ Route::get('/certificate/delete/{id}',[App\Http\Controllers\Admin\CertificateCon
 
  
 // Category
-Route::get('category',[App\Http\Controllers\Admin\CategoryController::class, 'index']);
+Route::get('category',[App\Http\Controllers\Admin\CategoryController::class, 'index'])->middleware('auth');
 Route::get('category/add',[App\Http\Controllers\Admin\CategoryController::class, 'create']);
 Route::post('category/save',[App\Http\Controllers\Admin\CategoryController::class, 'saveCategory']); 
 Route::get('/category/edit/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'edit']);
@@ -310,7 +309,7 @@ Route::get('/category/del_icon/{id}',[App\Http\Controllers\Admin\CategoryControl
 Route::post('/getcategory/get_video_link',[App\Http\Controllers\Admin\CategoryController::class, 'getvideolink']);
 
 // Sub Category
-Route::get('subcategory',[App\Http\Controllers\Admin\SubCategoryController::class, 'index']);
+Route::get('subcategory',[App\Http\Controllers\Admin\SubCategoryController::class, 'index'])->middleware('auth');
 Route::get('subcategory/add',[App\Http\Controllers\Admin\SubCategoryController::class, 'create']);
 Route::post('subcategory/save',[App\Http\Controllers\Admin\SubCategoryController::class, 'saveSubCategory']); 
 Route::get('/subcategory/edit/{id}',[App\Http\Controllers\Admin\SubCategoryController::class, 'edit']);
@@ -328,7 +327,7 @@ Route::get('/subcategory/del_icon/{id}',[App\Http\Controllers\Admin\SubCategoryC
 Route::get('/subcategory/del_image/{id}',[App\Http\Controllers\Admin\SubCategoryController::class, 'del_image']);
 
 //course city
-Route::get('city',[App\Http\Controllers\Admin\CityController::class, 'index']);
+Route::get('city',[App\Http\Controllers\Admin\CityController::class, 'index'])->middleware('auth');
 Route::get('city/add',[App\Http\Controllers\Admin\CityController::class, 'create']);
 Route::post('city/save',[App\Http\Controllers\Admin\CityController::class, 'saveCity']); 
 Route::get('/city/edit/{id}',[App\Http\Controllers\Admin\CityController::class, 'edit']);
@@ -338,7 +337,7 @@ Route::get('/city/get-city',[App\Http\Controllers\Admin\CityController::class, '
 Route::get('/city/status/{id}/{val}',[App\Http\Controllers\Admin\CityController::class, 'status']);
 //
 //Payment Mode
-Route::get('payment-mode',[App\Http\Controllers\Admin\PaymentModeController::class, 'index']);
+Route::get('payment-mode',[App\Http\Controllers\Admin\PaymentModeController::class, 'index'])->middleware('auth');
 Route::get('payment-mode/add',[App\Http\Controllers\Admin\PaymentModeController::class, 'create']);
 Route::post('payment-mode/save',[App\Http\Controllers\Admin\PaymentModeController::class, 'savePayMode']); 
 Route::get('/payment-mode/edit/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'edit']);
@@ -350,7 +349,7 @@ Route::get('/payment-mode/del_icon/{id}',[App\Http\Controllers\Admin\PaymentMode
  
  
 // Tools Covered
-Route::get('toolscovered',[App\Http\Controllers\Admin\ToolsCoveredController::class, 'index']);
+Route::get('toolscovered',[App\Http\Controllers\Admin\ToolsCoveredController::class, 'index'])->middleware('auth');
 Route::get('toolscovered/add',[App\Http\Controllers\Admin\ToolsCoveredController::class, 'create']);
 Route::post('toolscovered/save',[App\Http\Controllers\Admin\ToolsCoveredController::class, 'saveToolsCovered']); 
 Route::get('/toolscovered/edit/{id}',[App\Http\Controllers\Admin\ToolsCoveredController::class, 'edit']);
@@ -363,7 +362,7 @@ Route::get('/toolscovered/del_icon/{id}',[App\Http\Controllers\Admin\ToolsCovere
 
 
 // Client
-Route::get('client',[App\Http\Controllers\Admin\ClientController::class, 'index']);
+Route::get('client',[App\Http\Controllers\Admin\ClientController::class, 'index'])->middleware('auth');
 Route::get('client/add',[App\Http\Controllers\Admin\ClientController::class, 'create']);
 Route::post('client/save',[App\Http\Controllers\Admin\ClientController::class, 'saveClient']); 
 Route::get('/client/edit/{id}',[App\Http\Controllers\Admin\ClientController::class, 'edit']);
@@ -375,7 +374,7 @@ Route::get('/client/del_icon/{id}',[App\Http\Controllers\Admin\ClientController:
 
  
 // Social
-Route::get('social',[App\Http\Controllers\Admin\SocialController::class, 'index']);
+Route::get('social',[App\Http\Controllers\Admin\SocialController::class, 'index'])->middleware('auth');
 Route::get('social/add',[App\Http\Controllers\Admin\SocialController::class, 'create']);
 Route::post('social/save',[App\Http\Controllers\Admin\SocialController::class, 'saveSocial']); 
 Route::get('/social/edit/{id}',[App\Http\Controllers\Admin\SocialController::class, 'edit']);
@@ -388,7 +387,7 @@ Route::get('/social/del_icon/{id}', [App\Http\Controllers\Admin\SocialController
  
  
  //FAQs
-Route::get('FAQs',[App\Http\Controllers\Admin\FAQsController::class, 'index']);
+Route::get('FAQs',[App\Http\Controllers\Admin\FAQsController::class, 'index'])->middleware('auth');
 Route::get('FAQs/add',[App\Http\Controllers\Admin\FAQsController::class, 'create']);
 Route::post('FAQs/save',[App\Http\Controllers\Admin\FAQsController::class, 'saveFAQs']); 
 Route::get('/FAQs/edit/{id}',[App\Http\Controllers\Admin\FAQsController::class, 'edit']);
@@ -398,7 +397,7 @@ Route::get('/FAQs/get-FAQs',[App\Http\Controllers\Admin\FAQsController::class, '
  
   
  //Blog
-Route::get('blog',[App\Http\Controllers\Admin\BlogController::class, 'index']);
+Route::get('blog',[App\Http\Controllers\Admin\BlogController::class, 'index'])->middleware('auth');
 Route::get('blog/add',[App\Http\Controllers\Admin\BlogController::class, 'create']);
 Route::post('blog/save',[App\Http\Controllers\Admin\BlogController::class, 'saveBlog']); 
 Route::get('/blog/edit/{id}',[App\Http\Controllers\Admin\BlogController::class, 'edit']);
@@ -413,7 +412,7 @@ Route::get('/blog/del_image/{id}', [App\Http\Controllers\Admin\BlogController::c
 Route::get('/blog/status/{id}/{val}',[App\Http\Controllers\Admin\BlogController::class, 'status']);
  
  //Reviews
-Route::get('reviews',[App\Http\Controllers\Admin\ReviewsController::class, 'index']);
+Route::get('reviews',[App\Http\Controllers\Admin\ReviewsController::class, 'index'])->middleware('auth');
 Route::get('reviews/add',[App\Http\Controllers\Admin\ReviewsController::class, 'create']);
 Route::post('reviews/save',[App\Http\Controllers\Admin\ReviewsController::class, 'saveReviews']); 
 Route::get('/reviews/edit/{id}',[App\Http\Controllers\Admin\ReviewsController::class, 'edit']);
@@ -426,7 +425,7 @@ Route::get('/reviews/del_icon/{id}',[App\Http\Controllers\Admin\ReviewsControlle
  
  
  //testimonial
-Route::get('testimonial',[App\Http\Controllers\Admin\TestimonialController::class, 'index']);
+Route::get('testimonial',[App\Http\Controllers\Admin\TestimonialController::class, 'index'])->middleware('auth');
 Route::get('testimonial/add',[App\Http\Controllers\Admin\TestimonialController::class, 'create']);
 Route::post('testimonial/save',[App\Http\Controllers\Admin\TestimonialController::class, 'saveTestimonial']); 
 Route::get('/testimonial/edit/{id}',[App\Http\Controllers\Admin\TestimonialController::class, 'edit']);
@@ -439,7 +438,7 @@ Route::get('/testimonial/status/{id}/{val}', [App\Http\Controllers\Admin\Testimo
  
  
  //placement
-Route::get('placement',[App\Http\Controllers\Admin\PlacementController::class, 'index']);
+Route::get('placement',[App\Http\Controllers\Admin\PlacementController::class, 'index'])->middleware('auth');
 Route::get('placement/add',[App\Http\Controllers\Admin\PlacementController::class, 'create']);
 Route::post('placement/save',[App\Http\Controllers\Admin\PlacementController::class, 'savePlacement']); 
 Route::get('/placement/edit/{id}',[App\Http\Controllers\Admin\PlacementController::class, 'edit']);
@@ -451,7 +450,7 @@ Route::get('/placement/status/{id}/{val}',[App\Http\Controllers\Admin\PlacementC
  
  
  //Careers
-Route::get('careers',[App\Http\Controllers\Admin\CareersController::class, 'index']);
+Route::get('careers',[App\Http\Controllers\Admin\CareersController::class, 'index'])->middleware('auth');
 Route::get('careers/add',[App\Http\Controllers\Admin\CareersController::class, 'create']);
 Route::post('careers/saveCareers',[App\Http\Controllers\Admin\CareersController::class, 'saveCareers']); 
 Route::get('/careers/edit/{id}',[App\Http\Controllers\Admin\CareersController::class, 'edit']);
@@ -462,7 +461,7 @@ Route::get('/careers/del_icon/{id}',[App\Http\Controllers\Admin\CareersControlle
 Route::get('/careers/status/{id}/{val}',[App\Http\Controllers\Admin\CareersController::class, 'status']);
  
 //Course PDF
-Route::get('coursepdf',[App\Http\Controllers\Admin\CoursePDFController::class, 'index']);
+Route::get('coursepdf',[App\Http\Controllers\Admin\CoursePDFController::class, 'index'])->middleware('auth');
 Route::get('coursepdf/add',[App\Http\Controllers\Admin\CoursePDFController::class, 'create']);
 Route::post('coursepdf/save',[App\Http\Controllers\Admin\CoursePDFController::class, 'saveCoursePDF']); 
 Route::get('/coursepdf/edit/{id}',[App\Http\Controllers\Admin\CoursePDFController::class, 'edit']);
@@ -475,7 +474,7 @@ Route::get('/coursepdf/coursepdfstatus/{id}/{val}',[App\Http\Controllers\Admin\C
  
  
 //Home Slider
-Route::get('homeslider',[App\Http\Controllers\Admin\HomesliderController::class, 'index']);
+Route::get('homeslider',[App\Http\Controllers\Admin\HomesliderController::class, 'index'])->middleware('auth');
 Route::get('homeslider/add',[App\Http\Controllers\Admin\HomesliderController::class, 'create']);
 Route::post('homeslider/save',[App\Http\Controllers\Admin\HomesliderController::class, 'saveHomeslider']); 
 Route::get('/homeslider/edit/{id}',[App\Http\Controllers\Admin\HomesliderController::class, 'edit']);

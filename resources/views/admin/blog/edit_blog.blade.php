@@ -138,12 +138,7 @@ Edit Blog
                         </div>
                       </div>
 					  
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Meta Keyword<span class="required">*</span></label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <textarea class="form-control col-md-7 col-xs-12" type="text" name="meta_keywords" placeholder="Enter Meta Keyword">{{ old('meta_keywords',(isset($edit_data)) ? $edit_data->meta_keywords:"")}}</textarea>
-                        </div>
-                      </div>
+                       
 					  <div class="form-group">
                         <label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Meta Description<span class="required">*</span></label>
                         <div class="col-md-8 col-sm-8 col-xs-12">
