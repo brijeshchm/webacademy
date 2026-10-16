@@ -26,7 +26,7 @@ class LeadController extends Controller
     public function store(Request $request)
     {
 
-        //  dd($request->all());
+    //   dd($request->all());
             $validated = $request->validate([
                 'name'           => 'required|string|max:255',
                 'email'          => 'required|email|max:255',
@@ -54,14 +54,15 @@ class LeadController extends Controller
 
             $lead = Lead::create([
                 'name'        => $validated['name'],
-                'email'       => $validated['email'],
+                'email'       => $validated['email']??'',
                 'mobile'       => $validated['phone'] ?? null,
-                'from_name' => $validated['from_name'],
-                'from' => $validated['from_name'],
-                'code' => $validated['code'],
-                'category' => $validated['category'],
+                'from_name' => $validated['from_name']??'',
+                'from' => $validated['from_name']??'',
+                'code' => $validated['code']??'',
+                'category' => $validated['category']??'',
+                'comp_name' => $validated['comp_name'] ?? "",
                 'source' => '1',
-                'course' => $validated['course'],
+                'course' => $validated['course']??'',
                 'comment'     => $this->composeMessage($validated),
             ]);
         if($lead){

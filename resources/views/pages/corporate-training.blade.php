@@ -183,29 +183,252 @@
                         <a href="/corporate-training#enquiry" class="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-primary/20 px-6 text-sm font-semibold">{{ t('corporateTraining.form.sendAnother') }}</a>
                     </div>
                 @else
-                    <form method="POST" action="{{ route('leads.store') }}" class="space-y-6" aria-label="{{ t('corporateTraining.form.ariaLabel') }}">
-                        @csrf
-                        <input type="hidden" name="form_type" value="corporate">
-                        <div class="flex items-start justify-between gap-5 border-b border-border pb-7"><div><p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">{{ t('corporateTraining.form.step') }}</p><h3 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-[#12223e]">{{ t('corporateTraining.form.heading') }}</h3></div><span class="hidden h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary sm:flex">{!! $icon('send', 'h-5 w-5 -rotate-12') !!}</span></div>
 
-                        <div class="grid gap-5 sm:grid-cols-2">
-                            <div class="space-y-2"><label for="corporate-name" class="text-sm font-bold">{{ t('corporateTraining.form.name') }} <span class="text-primary">*</span></label><input id="corporate-name" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="{{ t('corporateTraining.form.namePlaceholder') }}" class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"></div>
-                            <div class="space-y-2"><label for="corporate-company" class="text-sm font-bold">{{ t('corporateTraining.form.company') }} <span class="text-primary">*</span></label><input id="corporate-company" name="company" value="{{ old('company') }}" required autocomplete="organization" placeholder="{{ t('corporateTraining.form.companyPlaceholder') }}" class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"></div>
-                        </div>
-                        <div class="grid gap-5 sm:grid-cols-2">
-                            <div class="space-y-2"><label for="corporate-email" class="text-sm font-bold">{{ t('corporateTraining.form.email') }} <span class="text-primary">*</span></label><input id="corporate-email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="you@company.com" class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"></div>
-                            <div class="space-y-2"><label for="corporate-phone" class="text-sm font-bold">{{ t('corporateTraining.form.phone') }} <span class="text-primary">*</span></label>@include('partials.phone-input', ['id' => 'corporate-phone', 'value' => old('phone'), 'inputClass' => 'h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20', 'selectClass' => 'h-12 border-[#cfdbeb] bg-white/70'])</div>
-                        </div>
-                        <div class="grid gap-5 sm:grid-cols-2">
-                            <div class="space-y-2"><label for="corporate-team" class="text-sm font-bold">{{ t('corporateTraining.form.teamSize') }} <span class="text-primary">*</span></label><select id="corporate-team" name="teamSize" required class="flex h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"><option value="">{{ t('corporateTraining.form.teamSizeSelect') }}</option><option value="5–20 people">{{ t('corporateTraining.form.teamSize1') }}</option><option value="21–50 people">{{ t('corporateTraining.form.teamSize2') }}</option><option value="51–200 people">{{ t('corporateTraining.form.teamSize3') }}</option><option value="201–500 people">{{ t('corporateTraining.form.teamSize4') }}</option><option value="500+ people">{{ t('corporateTraining.form.teamSize5') }}</option></select><span class="text-xs font-medium leading-5 text-muted-foreground">{{ t('corporateTraining.form.teamSizeNote') }}</span></div>
-                            <div class="space-y-2"><label for="corporate-timeline" class="text-sm font-bold">{{ t('corporateTraining.form.timeline') }} <span class="text-primary">*</span></label><select id="corporate-timeline" name="timeline" required class="flex h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"><option value="">{{ t('corporateTraining.form.timelineSelect') }}</option><option value="Within 4 weeks">{{ t('corporateTraining.form.timeline1') }}</option><option value="1–3 months">{{ t('corporateTraining.form.timeline2') }}</option><option value="3–6 months">{{ t('corporateTraining.form.timeline3') }}</option><option value="Exploring for later">{{ t('corporateTraining.form.timeline4') }}</option></select><span class="text-xs font-medium leading-5 text-muted-foreground">{{ t('corporateTraining.form.timelineNote') }}</span></div>
-                        </div>
-                        <div class="space-y-2"><label for="corporate-program" class="text-sm font-bold">{{ t('corporateTraining.form.program') }} <span class="text-primary">*</span></label><select id="corporate-program" name="program" required class="flex h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"><option value="">{{ t('corporateTraining.form.programSelect') }}</option><option value="Technology and digital capability">{{ t('corporateTraining.form.program1') }}</option><option value="Leadership and manager development">{{ t('corporateTraining.form.program2') }}</option><option value="Workforce essentials">{{ t('corporateTraining.form.program3') }}</option><option value="A broader capability academy">{{ t('corporateTraining.form.program4') }}</option><option value="Not sure yet">{{ t('corporateTraining.form.program5') }}</option></select></div>
-                        <div class="space-y-2"><label for="corporate-goals" class="text-sm font-bold">{{ t('corporateTraining.form.goals') }} <span class="text-primary">*</span></label><textarea id="corporate-goals" name="goals" required placeholder="{{ t('corporateTraining.form.goalsPlaceholder') }}" class="min-h-[120px] w-full resize-y rounded-xl border border-[#cfdbeb] bg-white/70 px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-primary/20">{{ old('goals') }}</textarea><span class="text-xs font-medium leading-5 text-muted-foreground">{{ t('corporateTraining.form.goalsNote') }}</span></div>
-                        <button type="submit" class="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary text-base font-bold text-primary-foreground shadow-xl shadow-primary/20">{{ t('corporateTraining.form.submit') }} {!! $icon('arrow-right', 'h-5 w-5 rtl:rotate-180') !!}</button>
-                        <p class="text-center text-xs leading-5 text-muted-foreground">{{ t('corporateTraining.form.disclaimer') }}</p>
-                    </form>
-                @endif
+               
+
+<form
+    id="corporateEnquiryForm"
+    method="POST"
+    action="{{ route('leads.store') }}"
+    class="space-y-6"
+    novalidate
+>
+    @csrf
+
+    <input type="hidden" name="form_type" value="corporate">
+    <input type="hidden" name="from_name" value="corporate Training">
+    <input type="hidden" name="category" value="send_enquiry_corporate">
+
+    {{-- General error --}}
+    <div
+        id="corporateFormError"
+        class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+        role="alert"
+        hidden
+    ></div>
+
+    {{-- Heading --}}
+    <div class="flex items-start justify-between gap-5 border-b border-border pb-7">
+        <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                {{ t('corporateTraining.form.step') }}
+            </p>
+
+            <h3 class="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-[#12223e]">
+                {{ t('corporateTraining.form.heading') }}
+            </h3>
+        </div>
+
+        <span class="hidden h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary sm:flex">
+            {!! $icon('send', 'h-5 w-5 -rotate-12') !!}
+        </span>
+    </div>
+
+    {{-- Name and company --}}
+    <div class="grid gap-5 sm:grid-cols-2">
+        <div class="space-y-2" data-field="name">
+            <label for="corporate-name" class="text-sm font-bold">
+                {{ t('corporateTraining.form.name') }}
+                <span class="text-primary">*</span>
+            </label>
+
+            <input
+                id="corporate-name"
+                type="text"
+                name="name"
+                value="{{ old('name') }}"
+                autocomplete="name"
+                placeholder="Enter full name"
+                maxlength="255"
+                required
+                class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+            >
+        </div>
+
+        <div class="space-y-2" data-field="company">
+            <label for="corporate-company" class="text-sm font-bold">
+                {{ t('corporateTraining.form.company') }}
+                <span class="text-primary">*</span>
+            </label>
+
+            <input
+                id="corporate-company"
+                type="text"
+                name="company"
+                value="{{ old('company') }}"
+                autocomplete="organization"
+                placeholder="{{ t('corporateTraining.form.companyPlaceholder') }}"
+                maxlength="255"
+                required
+                class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+            >
+        </div>
+    </div>
+
+    {{-- Email and phone --}}
+    <div class="grid gap-5 sm:grid-cols-2">
+        <div class="space-y-2" data-field="email">
+            <label for="corporate-email" class="text-sm font-bold">
+                {{ t('corporateTraining.form.email') }}
+                <span class="text-primary">*</span>
+            </label>
+
+            <input
+                id="corporate-email"
+                type="email"
+                name="email"
+                value="{{ old('email') }}"
+                autocomplete="email"
+                placeholder="Enter email address"
+                maxlength="255"
+                required
+                class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+            >
+        </div>
+
+        <div class="space-y-2" data-field="phone">
+            <label for="corporate-phone" class="text-sm font-bold">
+                {{ t('corporateTraining.form.phone') }}
+                <span class="text-primary">*</span>
+            </label>
+
+            @include('partials.phone-input', [
+                'id' => 'corporate-phone',
+                'value' => old('phone'),
+                'inputClass' => 'h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 outline-none focus-visible:ring-2 focus-visible:ring-primary/20',
+                'selectClass' => 'h-12 border-[#cfdbeb] bg-white/70'
+            ])
+        </div>
+    </div>
+
+    {{-- Team size and timeline --}}
+    <div class="grid gap-5 sm:grid-cols-2">
+        <div class="space-y-2" data-field="teamSize">
+            <label for="corporate-team" class="text-sm font-bold">
+                {{ t('corporateTraining.form.teamSize') }}
+                <span class="text-primary">*</span>
+            </label>
+
+            <select
+                id="corporate-team"
+                name="teamSize"
+                required
+                class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            >
+                <option value="">
+                    {{ t('corporateTraining.form.teamSizeSelect') }}
+                </option>
+
+                @foreach([
+                    '1–5 people' => 'teamSize0',
+                    '5–20 people' => 'teamSize1',
+                    '21–50 people' => 'teamSize2',
+                    '51–200 people' => 'teamSize3',
+                    '201–500 people' => 'teamSize4',
+                    '500+ people' => 'teamSize5'
+                ] as $value => $translation)
+                    <option value="{{ $value }}" @selected(old('teamSize') === $value)>
+                        {{ t('corporateTraining.form.' . $translation) }}
+                    </option>
+                @endforeach
+            </select>
+
+            <span class="text-xs font-medium leading-5 text-muted-foreground">
+                {{ t('corporateTraining.form.teamSizeNote') }}
+            </span>
+        </div>
+
+        <div class="space-y-2" data-field="timeline">
+            <label for="corporate-timeline" class="text-sm font-bold">
+                {{ t('corporateTraining.form.timeline') }}
+                <span class="text-primary">*</span>
+            </label>
+
+            <select
+                id="corporate-timeline"
+                name="timeline"
+                required
+                class="h-12 w-full rounded-xl border border-[#cfdbeb] bg-white/70 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            >
+                <option value="">
+                    {{ t('corporateTraining.form.timelineSelect') }}
+                </option>
+
+                @foreach([
+                    'Within 4 weeks' => 'timeline1',
+                    '1–3 months' => 'timeline2',
+                    '3–6 months' => 'timeline3',
+                    'Exploring for later' => 'timeline4'
+                ] as $value => $translation)
+                    <option value="{{ $value }}" @selected(old('timeline') === $value)>
+                        {{ t('corporateTraining.form.' . $translation) }}
+                    </option>
+                @endforeach
+            </select>
+
+            <span class="text-xs font-medium leading-5 text-muted-foreground">
+                {{ t('corporateTraining.form.timelineNote') }}
+            </span>
+        </div>
+    </div>
+
+    {{-- Program --}}
+    <div class="space-y-2" data-field="program">
+        <label for="corporate-program" class="text-sm font-bold">
+            {{ t('corporateTraining.form.program') }}
+            <span class="text-primary">*</span>
+        </label>
+
+        <textarea
+            id="corporate-program"
+            name="program"
+            rows="3"
+            maxlength="5000"
+            required
+            placeholder="Enter training program"
+            class="min-h-[120px] w-full resize-y rounded-xl border border-[#cfdbeb] bg-white/70 px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+        >{{ old('program') }}</textarea>
+    </div>
+
+    {{-- Goals --}}
+    <div class="space-y-2" data-field="goals">
+        <label for="corporate-goals" class="text-sm font-bold">
+            {{ t('corporateTraining.form.goals') }}
+            <span class="text-primary">*</span>
+        </label>
+
+        <textarea
+            id="corporate-goals"
+            name="goals"
+            rows="3"
+            maxlength="5000"
+            required
+            placeholder="{{ t('corporateTraining.form.goalsPlaceholder') }}"
+            class="min-h-[120px] w-full resize-y rounded-xl border border-[#cfdbeb] bg-white/70 px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+        >{{ old('goals') }}</textarea>
+
+        <span class="text-xs font-medium leading-5 text-muted-foreground">
+            {{ t('corporateTraining.form.goalsNote') }}
+        </span>
+    </div>
+
+    {{-- Submit --}}
+    <button
+        id="corporateSubmitButton"
+        type="submit"
+        class="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary text-base font-bold text-primary-foreground shadow-xl shadow-primary/20 disabled:cursor-wait disabled:opacity-60"
+    >
+        {{ t('corporateTraining.form.submit') }}
+        {!! $icon('arrow-right', 'h-5 w-5 rtl:rotate-180') !!}
+    </button>
+
+    <p class="text-center text-xs leading-5 text-muted-foreground">
+        {{ t('corporateTraining.form.disclaimer') }}
+    </p>
+</form>
+
+
+                 @endif
             </div>
         </div>
     </section>
@@ -233,4 +456,413 @@
         </section>
     </div>
 </main>
+
+<dialog
+    id="corporateSuccessPopup"
+    aria-labelledby="corporateSuccessTitle"
+    aria-describedby="corporateSuccessMessage"
+    class="corporate-success-popup"
+>
+    <div class="p-7 text-center sm:p-9">
+        <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
+            <svg
+                class="h-10 w-10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="m5 12 4 4L19 6"/>
+            </svg>
+        </div>
+
+        <h3
+            id="corporateSuccessTitle"
+            class="mt-5 text-2xl font-bold text-gray-900"
+        >
+            {{ t('corporateTraining.form.successTitle') }}
+        </h3>
+
+        <p
+            id="corporateSuccessMessage"
+            class="mt-3 text-sm leading-7 text-gray-600"
+        ></p>
+
+        <button
+            id="corporateSuccessClose"
+            type="button"
+            autofocus
+            class="mt-7 w-full rounded-xl bg-green-600 px-6 py-3 font-bold text-white hover:bg-green-700"
+        >
+            Done
+        </button>
+    </div>
+</dialog>
+
+<style>
+    #corporateFormError[hidden] {
+        display: none !important;
+    }
+
+    #corporateEnquiryForm [aria-invalid="true"] {
+        border-color: #dc2626 !important;
+    }
+
+    #corporateEnquiryForm .corporate-field-error {
+        display: block;
+        margin-top: 6px;
+        color: #dc2626;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .corporate-success-popup {
+        width: calc(100% - 32px);
+        max-width: 440px;
+        max-height: 90dvh;
+        margin: auto;
+        padding: 0;
+        overflow-y: auto;
+        border: 0;
+        border-radius: 24px;
+        background: white;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, .25);
+    }
+
+    .corporate-success-popup::backdrop {
+        background: rgba(15, 23, 42, .7);
+        backdrop-filter: blur(5px);
+    }
+</style>
+<script>
+(function () {
+    'use strict';
+
+    function initCorporateForm() {
+        const form = document.getElementById('corporateEnquiryForm');
+
+        if (!form || form.dataset.ajaxReady === '1') return;
+        form.dataset.ajaxReady = '1';
+
+        const submitButton = document.getElementById('corporateSubmitButton');
+        const globalError = document.getElementById('corporateFormError');
+        const popup = document.getElementById('corporateSuccessPopup');
+        const popupMessage = document.getElementById('corporateSuccessMessage');
+        const closeButton = document.getElementById('corporateSuccessClose');
+
+        let submitting = false;
+        let previousOverflow = '';
+
+        function getField(name) {
+            return [...form.elements].find(element => element.name === name);
+        }
+
+        function getContainer(name) {
+            const direct = [...form.querySelectorAll('[data-field]')]
+                .find(element => element.dataset.field === name);
+
+            return direct || getField(name)?.closest('[data-field]');
+        }
+
+        function showGlobalError(message) {
+            globalError.textContent = message;
+            globalError.hidden = false;
+        }
+
+        function clearFieldError(name) {
+            form.querySelectorAll('[data-error-for]').forEach(error => {
+                if (error.dataset.errorFor === name) {
+                    const input = getField(name);
+                    if (input?.getAttribute('aria-describedby') === error.id) {
+                        input.removeAttribute('aria-describedby');
+                    }
+                    error.remove();
+                }
+            });
+
+            getField(name)?.removeAttribute('aria-invalid');
+        }
+
+        function showFieldError(name, message) {
+            clearFieldError(name);
+
+            const input = getField(name);
+            const container = getContainer(name);
+
+            if (!input || !container || input.type === 'hidden') {
+                showGlobalError(message);
+                return;
+            }
+
+            input.setAttribute('aria-invalid', 'true');
+
+            const error = document.createElement('p');
+            error.id = 'corporate-error-' + name.replace(/[^a-zA-Z0-9_-]/g, '-');
+            error.dataset.errorFor = name;
+            error.className = 'corporate-field-error';
+            error.textContent = message;
+
+            container.appendChild(error);
+            input.setAttribute('aria-describedby', error.id);
+        }
+
+        function clearErrors() {
+            globalError.hidden = true;
+            globalError.textContent = '';
+
+            form.querySelectorAll('[data-error-for]').forEach(error => {
+                clearFieldError(error.dataset.errorFor);
+            });
+
+            form.querySelectorAll('[aria-invalid]').forEach(input => {
+                input.removeAttribute('aria-invalid');
+            });
+        }
+
+        function validate() {
+            let valid = true;
+
+            const requiredFields = {
+                name: 'Enter your full name.',
+                company: 'Enter your company name.',
+                email: 'Enter your email address.',
+                phone: 'Enter your phone number.',
+                teamSize: 'Select your team size.',
+                timeline: 'Select your training timeline.',
+                program: 'Enter your training program.',
+                goals: 'Enter your training goals.'
+            };
+
+            Object.entries(requiredFields).forEach(([name, message]) => {
+                const input = getField(name);
+
+                if (!input || !input.value.trim()) {
+                    showFieldError(name, message);
+                    valid = false;
+                }
+            });
+
+            const name = getField('name');
+
+            if (name?.value.trim() && name.value.trim().length < 2) {
+                showFieldError('name', 'Name must contain at least 2 characters.');
+                valid = false;
+            }
+
+            const email = getField('email');
+
+            if (
+                email?.value.trim() &&
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())
+            ) {
+                showFieldError('email', 'Enter a valid email address.');
+                valid = false;
+            }
+
+            const phone = getField('phone');
+
+            if (phone?.value.trim()) {
+                const digits = phone.value.replace(/[\s()+-]/g, '');
+
+                if (!/^\d{7,15}$/.test(digits)) {
+                    showFieldError('phone', 'Enter a valid phone number.');
+                    valid = false;
+                }
+            }
+
+            form.querySelectorAll('[maxlength]').forEach(input => {
+                if (input.value.length > input.maxLength) {
+                    showFieldError(
+                        input.name,
+                        'Maximum ' + input.maxLength + ' characters allowed.'
+                    );
+                    valid = false;
+                }
+            });
+
+            return valid;
+        }
+
+        function focusFirstError() {
+            form.querySelector('[aria-invalid="true"]')?.focus();
+        }
+
+        function openSuccess(message) {
+            if (!popup || !popupMessage) {
+                showGlobalError('Success popup HTML is missing.');
+                return;
+            }
+
+            popupMessage.textContent = message;
+
+            // Keep the dialog directly under body.
+            if (popup.parentElement !== document.body) {
+                document.body.appendChild(popup);
+            }
+
+            if (!popup.open) {
+                previousOverflow = document.body.style.overflow;
+                popup.showModal();
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        closeButton.addEventListener('click', () => {
+            popup.close();
+        });
+
+        popup.addEventListener('close', () => {
+            document.body.style.overflow = previousOverflow;
+            submitButton.focus();
+        });
+
+        form.addEventListener('input', event => {
+            if (event.target.name) clearFieldError(event.target.name);
+        });
+
+        form.addEventListener('change', event => {
+            if (event.target.name) clearFieldError(event.target.name);
+        });
+
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
+
+            if (submitting) return;
+
+            clearErrors();
+
+            if (!validate()) {
+                focusFirstError();
+                return;
+            }
+
+            // Includes CSRF and fields from the existing phone partial.
+            const payload = new FormData(form);
+
+            [
+                'name', 'company', 'email',
+                'phone', 'program', 'goals'
+            ].forEach(name => {
+                const value = payload.get(name);
+
+                if (typeof value === 'string') {
+                    payload.set(name, value.trim());
+                }
+            });
+
+            const token = getField('_token')?.value || '';
+
+            const originalContent = [...submitButton.childNodes];
+            const originallyDisabled = submitButton.disabled;
+
+            submitting = true;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting…';
+            form.setAttribute('aria-busy', 'true');
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': token
+                    },
+                    body: payload
+                });
+
+                const data = await response.json().catch(() => null);
+
+                if (response.status === 422) {
+                    Object.entries(data?.errors || {}).forEach(([field, errors]) => {
+                        showFieldError(
+                            field,
+                            Array.isArray(errors) ? errors[0] : String(errors)
+                        );
+                    });
+
+                    showGlobalError(
+                        data?.message || 'Please fix the highlighted fields.'
+                    );
+
+                    focusFirstError();
+                    return;
+                }
+
+                if (response.status === 419) {
+                    throw new Error(
+                        'Session expired. Refresh the page and try again.'
+                    );
+                }
+
+                if (response.status === 429) {
+                    throw new Error(
+                        'Too many attempts. Please wait and try again.'
+                    );
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        data?.message || 'Unable to submit your enquiry.'
+                    );
+                }
+
+                if (data?.success !== true) {
+                    throw new Error(
+                        data?.message ||
+                        'Server did not confirm submission. Check the controller JSON response.'
+                    );
+                }
+
+                // Clear entered values only after confirmed success.
+                form.reset();
+
+                [
+                    'name', 'company', 'email', 'phone',
+                    'teamSize', 'timeline', 'program', 'goals'
+                ].forEach(name => {
+                    const input = getField(name);
+                    if (input) input.value = '';
+                });
+
+                clearErrors();
+
+                // Custom phone widgets can listen for this event if needed.
+                form.dispatchEvent(new CustomEvent('corporate:submitted', {
+                    bubbles: true,
+                    detail: data
+                }));
+
+                openSuccess(
+                    data.message ||
+                    'Thank you! Your enquiry has been submitted successfully.'
+                );
+            } catch (error) {
+                showGlobalError(
+                    error.message || 'Network error. Please try again.'
+                );
+            } finally {
+                submitting = false;
+                submitButton.disabled = originallyDisabled;
+                submitButton.replaceChildren(...originalContent);
+                form.removeAttribute('aria-busy');
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCorporateForm, {
+            once: true
+        });
+    } else {
+        initCorporateForm();
+    }
+})();
+</script>
+
+
 @endsection

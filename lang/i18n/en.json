@@ -476,6 +476,7 @@
       "phone": "Phone",
       "teamSize": "Team size",
       "teamSizeSelect": "Select a range",
+      "teamSize0": "1–5 people",
       "teamSize1": "5–20 people",
       "teamSize2": "21–50 people",
       "teamSize3": "51–200 people",

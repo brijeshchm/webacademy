@@ -30,7 +30,7 @@ use App\Exports\excelFormateExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
- 
+ use Str;
 class CourseController extends Controller implements HasMiddleware
 {
 
@@ -601,10 +601,160 @@ class CourseController extends Controller implements HasMiddleware
 		}
     } 
 	
-	public function editSaveCurriculum(Request $request, $id)
+
+ 
+
+public function editSaveCurriculum(Request $request, $id)
+{
+    $validator = Validator::make($request->all(), [
+        'course_curriculum' => 'required|file|mimes:csv,txt|max:5120',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 1,
+            'errors' => $validator->getMessageBag()->toArray(),
+        ], 400);
+    }
+
+    try {
+        $course = Course::findOrFail($id);
+        $file   = $request->file('course_curriculum');
+
+        // ---- 1. Read + normalise the CSV in memory ----
+        $csv = file_get_contents($file->getRealPath());
+        $csv = preg_replace('/^\xEF\xBB\xBF/', '', $csv);              // strip UTF-8 BOM
+
+        if (!mb_check_encoding($csv, 'UTF-8')) {                        // Excel "CSV" files
+            $csv = mb_convert_encoding($csv, 'UTF-8', 'Windows-1252');
+        }
+
+        $csv = str_replace(["\r\n", "\r"], "\n", $csv);
+
+        // Auto-detect delimiter from the header line
+        $firstLine = strtok($csv, "\n");
+        $delimiter = substr_count($firstLine, ';') > substr_count($firstLine, ',') ? ';' : ',';
+
+        $stream = fopen('php://temp', 'r+');
+        fwrite($stream, $csv);
+        rewind($stream);
+
+        // ---- 2. Helper to create a row ----
+        $make = function (array $attrs) use ($id) {
+            $m = new CourseCurriculumExcel;
+            $m->course_id = $id;
+            foreach ($attrs as $key => $value) {
+                $m->{$key} = $value;
+            }
+            $m->save();
+            return $m;
+        };
+
+        // ---- 3. Parse + insert inside a transaction ----
+        $inserted = DB::transaction(function () use ($stream, $delimiter, $id, $make) {
+
+            CourseCurriculumExcel::where('course_id', $id)->delete();
+
+            fgetcsv($stream, 0, $delimiter);   // skip header row
+
+            $count = 0;
+            $heading = $content = $subContent = $lastContent = null;
+
+            while (($row = fgetcsv($stream, 0, $delimiter)) !== false) {
+
+                $row = array_pad($row, 5, '');
+
+                // Remove control chars only (UTF-8 safe) and trim incl. non-breaking spaces
+                $row = array_map(function ($cell) {
+                    $cell = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/u', '', (string) $cell);
+                    return preg_replace('/^[\s\p{Z}]+|[\s\p{Z}]+$/u', '', $cell);
+                }, $row);
+
+                [$h, $l1, $l2, $l3, $l4] = array_slice($row, 0, 5);
+
+                if ($h === '' && $l1 === '' && $l2 === '' && $l3 === '' && $l4 === '') {
+                    continue;
+                }
+
+                if ($h !== '') {
+                    $heading = $make(['heading' => $h]);
+                    // reset deeper levels so children never attach to the wrong parent
+                    $content = $subContent = $lastContent = null;
+                    $count++;
+
+                } elseif ($l1 !== '') {
+                    if (!$heading) continue;
+                    $content = $make(['heading_id' => $heading->id, 'coursescontent' => $l1]);
+                    $subContent = $lastContent = null;
+                    $count++;
+
+                } elseif ($l2 !== '') {
+                    if (!$content) continue;
+                    $subContent = $make(['content_id' => $content->id, 'subcontent' => $l2]);
+                    $lastContent = null;
+                    $count++;
+
+                } elseif ($l3 !== '') {
+                    if (!$subContent) continue;
+                    $lastContent = $make(['subcontent_id' => $subContent->id, 'lastcontent' => $l3]);
+                    $count++;
+
+                } elseif ($l4 !== '') {
+                    if (!$lastContent) continue;
+                    $make(['endcontent_id' => $lastContent->id, 'endcontent' => $l4]);
+                    $count++;
+                }
+            }
+
+            if ($count === 0) {
+                throw new \RuntimeException('EMPTY_CSV');   // rolls back, old data is kept
+            }
+
+            return $count;
+        });
+
+        fclose($stream);
+
+        // ---- 4. Save the file only after DB success ----
+        // $dir = public_path('excell');
+        // if (!is_dir($dir)) {
+        //     mkdir($dir, 0755, true);
+        // }
+        $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.csv';
+        // $file->move($dir, $filename);
+
+        $course->coursecurriculumexcel = $filename;
+        $course->save();
+
+        return response()->json([
+            'status' => 1,
+            'msg'    => "Course curriculum updated successfully! ($inserted rows imported)",
+        ], 200);
+
+    } catch (\RuntimeException $e) {
+        if ($e->getMessage() === 'EMPTY_CSV') {
+            return response()->json([
+                'status' => 0,
+                'msg'    => 'Course curriculum could not be updated! Check CSV format.',
+            ], 200);
+        }
+        throw $e;
+
+    } catch (\Illuminate\Database\QueryException $e) {
+       
+        return response()->json(['status' => 0, 'msg' => 'Database error while saving curriculum.'], 500);
+
+    } catch (\Throwable $e) {
+      
+        return response()->json(['status' => 0, 'msg' => 'Something went wrong: ' . $e->getMessage()], 500);
+    }
+}
+
+
+	public function editSaveCurriculum_old(Request $request, $id)
 	{
 
-
+// dd($request->all());
     if ($request->isMethod('post')) {
 
         try {
@@ -646,7 +796,7 @@ class CourseController extends Controller implements HasMiddleware
             // Delete old curriculum before re-inserting
             CourseCurriculumExcel::where('course_id', $id)->delete();
 
-                    
+               
             
                         // ✅ Read entire file and fix line endings first
             $csvContent = file_get_contents($destinationPath . '/' . $filename);
@@ -660,12 +810,12 @@ class CourseController extends Controller implements HasMiddleware
             
             // Now open cleaned file
             $csvFile = fopen($destinationPath . '/' . $filename, 'r');
-            
+            // dd($csvFile);
             if ($csvFile === false) {
                 throw new \Exception('Failed to open CSV file.');
             }
             
-            fgetcsv($csvFile, 0, ','); // skip header row
+            fgetcsv($csvFile, 0, ','); 
             
             $add                = 0;
             $coursesHeading     = null;
@@ -674,7 +824,7 @@ class CourseController extends Controller implements HasMiddleware
             $coursesLastcontent = null;
             
             while (($row = fgetcsv($csvFile, 0, ',')) !== FALSE) {
-            
+                
                 $row = array_pad($row, 5, '');
             
                 // Clean each cell
@@ -694,8 +844,7 @@ class CourseController extends Controller implements HasMiddleware
                     continue;
                 }
             
-                \Log::info('CSV Row', compact('heading', 'level1', 'level2', 'level3', 'level4'));
-            
+               
                 if ($heading != "") {
             
                     $coursesHeading            = new CourseCurriculumExcel;
@@ -703,11 +852,11 @@ class CourseController extends Controller implements HasMiddleware
                     $coursesHeading->heading   = str_replace('?', '', $heading);
                     $coursesHeading->save();
                     $add = 1;
-            
+            dd($coursesHeading);
                 } elseif ($level1 != "") {
             
                     if (!$coursesHeading) {
-                        \Log::warning('level1 found but no heading parent', ['level1' => $level1]);
+                        
                         continue;
                     }
             
@@ -721,7 +870,7 @@ class CourseController extends Controller implements HasMiddleware
                 } elseif ($level2 != "") {
             
                     if (!$coursesContent) {
-                        \Log::warning('level2 found but no content parent', ['level2' => $level2]);
+                       
                         continue;
                     }
             
@@ -735,7 +884,7 @@ class CourseController extends Controller implements HasMiddleware
                 } elseif ($level3 != "") {
             
                     if (!$coursesSubContent) {
-                        \Log::warning('level3 found but no subcontent parent', ['level3' => $level3]);
+                       
                         continue;
                     }
             
@@ -749,7 +898,7 @@ class CourseController extends Controller implements HasMiddleware
                 } elseif ($level4 != "") {
             
                     if (!$coursesLastcontent) {
-                        \Log::warning('level4 found but no lastcontent parent', ['level4' => $level4]);
+                       
                         continue;
                     }
             
@@ -766,7 +915,7 @@ class CourseController extends Controller implements HasMiddleware
 
             if (!empty($add)) {
 
-                $coursesexcel                        = Course::findOrFail($id);
+                $coursesexcel  = Course::findOrFail($id);
                 $coursesexcel->coursecurriculumexcel = $fileTextName;
                 $coursesexcel->save();
 

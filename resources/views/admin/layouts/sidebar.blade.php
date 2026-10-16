@@ -53,9 +53,9 @@
 					@if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('testimonial') )
                         <li><a href="{{url('admin/testimonial')}}">All Testimonial</a></li>  
 					@endif
-						@if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('all_course_pdf') )
+						<!-- @if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('all_course_pdf') )
 					 	<li><a href="{{url('admin/coursepdf')}}">All Course PDF</a></li>  
-						@endif	
+						@endif	 -->
 						@if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('all_client') )
 					 	<li><a href="{{url('admin/client')}}">All Client</a></li>  
 						@endif	

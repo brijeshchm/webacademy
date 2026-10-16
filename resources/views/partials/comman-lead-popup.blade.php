@@ -45,30 +45,8 @@
                 </div>
 
                 {{-- Step bar --}}
-                <div class="flex items-center gap-0 mb-6">
-                    @foreach ([
-                        '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
-                        '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
-                        '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
-                    ] as $i => $icon)
-                        <div class="flex items-center flex-1">
-                            <div data-lead-step-dot="{{ $i }}" class="flex items-center justify-center w-7 h-7 rounded-full border-2 shrink-0 transition-all duration-300 border-muted-foreground/20 text-muted-foreground/30">
-                                <svg data-lead-step-check class="hidden w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                                <svg data-lead-step-icon class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{!! $icon !!}</svg>
-                            </div>
-                            @if ($i < 2)
-                                <div data-lead-step-line="{{ $i }}" class="h-[2px] flex-1 mx-1 rounded-full transition-all duration-500 bg-muted-foreground/15"></div>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-
-                {{-- Step labels --}}
-                @foreach (['stepAboutYou', 'stepBackground', 'stepGoals'] as $i => $labelKey)
-                    <p data-lead-step-label="{{ $i }}" class="{{ $i === 0 ? '' : 'hidden ' }}text-[11px] font-semibold uppercase tracking-widest text-primary/60 mb-4">
-                        {{ t('popup.stepLabel', ['current' => $i + 1, 'label' => t('popup.' . $labelKey)]) }}
-                    </p>
-                @endforeach
+               
+ 
 
                 <form data-lead-form method="POST"  action="{{ route('leads.store') }}" class="ajax-lead-form" novalidate>
                     @csrf
@@ -81,13 +59,13 @@
                     <div data-lead-step="0" class="space-y-3">
                         <div>
                             <label class="text-xs font-semibold text-foreground/70 mb-1.5 flex gap-1">{{ t('popup.fullName') }}<span class="text-red-400">*</span></label>
-                            <input name="name" type="text" autocomplete="name" placeholder="{{ t('popup.namePlaceholder') }}" data-testid="input-popup-name"
+                            <input name="name" type="text" autocomplete="name" placeholder="Enter Full name" data-testid="input-popup-name"
                                 class="h-11 w-full rounded-xl border border-input bg-background px-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary">
                             <p data-lead-err="name" class="hidden text-[11px] text-red-500 mt-1">{{ t('popup.nameRequired') }}</p>
                         </div>
                         <div>
                             <label class="text-xs font-semibold text-foreground/70 mb-1.5 flex gap-1">{{ t('popup.emailAddress') }}<span class="text-red-400">*</span></label>
-                            <input name="email" type="email" autocomplete="email" placeholder="{{ t('popup.emailPlaceholder') }}" data-testid="input-popup-email"
+                            <input name="email" type="email" autocomplete="email" placeholder="Enter Email" data-testid="input-popup-email"
                                 class="h-11 w-full rounded-xl border border-input bg-background px-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary">
                             <p data-lead-err="email" class="hidden text-[11px] text-red-500 mt-1">{{ t('popup.emailRequired') }}</p>
                         </div>
@@ -150,7 +128,7 @@
                     <button type="submit" data-lead-cta data-testid="button-popup-submit"
                         data-label-continue="{{ t('popup.continue') }}" data-label-submit="{{ t('popup.submit') }}" data-label-submitting="{{ t('popup.submitting') }}"
                         class="w-full h-11 mt-5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2">
-                        <span data-lead-cta-text>{{ t('popup.continue') }}</span>
+                        <span data-lead-cta-text>Submit</span>
                         <svg data-lead-cta-arrow class="w-4 h-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                     </button>
 
