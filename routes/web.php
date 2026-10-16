@@ -11,16 +11,7 @@ use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\StaticPageController;
 use Illuminate\Support\Facades\Route;
 
-/*
-| Public website routes (server-rendered Blade). Paths mirror the React
-| router exactly. Pages are placeholder stubs for now; other agents fill them
-| in. The /api/* routes (routes/api.php) are untouched and remain the source
-| of truth for JSON behaviour.
-*/
-
-
-
- Route::get('/cache-clear/', function () {
+Route::get('/cache-clear/', function () {
 
 	$exitCode = Artisan::call('config:clear');
 	$exitCode = Artisan::call('cache:clear');
@@ -43,12 +34,13 @@ Route::get('/refund-cancellation-policy',[PageController::class,'refundCancellat
 
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'blogdetails'])->name('blog.show');
+Route::get('/blog/blogCategory/{slug}', [BlogController::class, 'blogCategory'])->name('blog.blogCategory');
 
 
 
 Route::post('/enquiry', [CoursesController::class, 'enquiry'])->middleware('throttle:leads')->name('courses.enquiry');
 
-//Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+ 
 Route::get('/categories/{slug}', [CategoriesController::class, 'show'])->name('categories.show');
 
 Route::get('/about-us', [StaticPageController::class, 'about'])->name('aboutUs');
@@ -57,7 +49,7 @@ Route::get('/enquiry', [StaticPageController::class, 'enquiry'])->name('enquiry'
 Route::get('/scholarship', [StaticPageController::class, 'scholarship'])->name('scholarship');
 Route::get('/corporate-training', [StaticPageController::class, 'corporateTraining'])->name('corporate-training');
 
-// Public lead intake (contact / enquiry / scholarship / corporate-training forms).
+ 
 Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
 
 Route::get('/doctorate', [DoctorateController::class, 'index'])->name('doctorate');
@@ -69,17 +61,9 @@ Route::get('/courses/{slug}', [CoursesController::class, 'coursesDetails'])->nam
 
 
 
-/*
-| Server-rendered admin panel. Auth uses the App\Services\AdminAuth service
-| directly (session token stored in the Laravel session). The /api/*
-| endpoints stay untouched. Same throttle limiters as the API login/forgot.
-*/
-
+ 
 Auth::routes();
-//  Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-//     Route::get('course', [App\Http\Controllers\Admin\CourseController::class, 'index'])
-//         ->name('course.index');
-// });
+ 
 
 Route::prefix('admin')->name('admin.')->group(function () {
 	
@@ -519,11 +503,7 @@ Route::get('/mobilebanner/del_icon/{id}',[App\Http\Controllers\Admin\HomesliderC
         Route::post('/videos/{id}', [AdminController::class, 'updateVideo'])->name('videos.update');
         Route::delete('/videos/{id}', [AdminController::class, 'destroyVideo'])->name('videos.destroy');
 
-        // Courses
-        // Route::post('/courses', [AdminController::class, 'storeCourse'])->name('courses.store');
-        // Route::post('/courses/{id}', [AdminController::class, 'updateCourse'])->name('courses.update');
-        // Route::delete('/courses/{id}', [AdminController::class, 'destroyCourse'])->name('courses.destroy');
-
+    
         // Testimonials / reviews
         Route::post('/reviews', [AdminController::class, 'storeReview'])->name('reviews.store');
         Route::post('/reviews/{id}/visibility', [AdminController::class, 'toggleReview'])->name('reviews.toggle');

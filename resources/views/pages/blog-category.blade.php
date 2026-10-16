@@ -42,8 +42,8 @@
 							<div class="breadcum blog-det-breadcum">
 								<span>Home</span>
 								<i class="fa fa-angle-right"></i>
-							    <span><a href="{{url('blog')}}">Blog</a></span><i class="fa fa-angle-right"></i>
-								<span><a href="{{url('blog/category/'.generate_slug($url))}}" ><?php if(!empty($url)){ echo ucwords($url); } ?></a></span>
+							    <span><a href="{{route('blog')}}">Blog</a></span><i class="fa fa-angle-right"></i>
+								<span><?php if(!empty($url)){ echo ucwords($url); } ?></span>
 							</div>
 						
 						</div>
@@ -62,7 +62,7 @@
 				<div class="row">	
 				
 				<div class="col-lg-12">
-				    				<h1 class="title mb-3"> <a href="#0"><i class="icon-blog-left-arrow d-md-none d-lg-none"></i></a> What do you want to learn in <?php if(!empty($url)){ echo ucwords($url); } ?> ?</h1>
+				    				<h1 class="title mb-3"><i class="icon-blog-left-arrow d-md-none d-lg-none"></i> What do you want to learn in <?php if(!empty($url)){ echo ucwords($url); } ?> ?</h1>
 
 				</div>
 				</div>

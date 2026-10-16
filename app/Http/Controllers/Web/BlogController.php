@@ -8,7 +8,7 @@ use Validator;
 use DB;
 use Session;
 use Carbon\Carbon; 
-use App\Models\Courses;
+use App\Models\Course;
 use App\Models\CoursesMaster;
 use App\Models\Category;
 use App\Models\FAQs;
@@ -176,9 +176,7 @@ function get_time($time)
      * @return \Illuminate\Http\Response
      */
      public function blogdetails(Request $reques,$url)
-    {	 
-		//echo $url;die;
-	//	$blog_details =Blog::where('slug',$url)->first();
+    {		 
 		
 		$blogcategory =DB::table('web_blog as blog'); 
 		$blogcategory  =$blogcategory->join('web_categories as category','blog.category','=','category.id','left');
@@ -187,35 +185,33 @@ function get_time($time)
     	$blogcategory =$blogcategory->where('blog.status','1');
 		$blogcategory =$blogcategory->get();
 	
-	//	echo "<pre>";print_r($blogcategory);die;
-$blog_details = DB::table('web_blog as blog')
-    ->leftJoin('web_categories as category', 'blog.category', '=', 'category.id')
-    ->select('blog.*', 'category.category as categoryname', 'category.id as categoryid')
-    ->where('blog.slug', $url)
-    ->where('blog.status', 1) // re-enabled — see flag below
-    ->orderBy('blog.id', 'desc')
-    ->first();
+		
+		$blog_details = DB::table('web_blog as blog')
+			->leftJoin('web_categories as category', 'blog.category', '=', 'category.id')
+			->select('blog.*', 'category.category as categoryname', 'category.id as categoryid')
+			->where('blog.slug', $url)
+			->where('blog.status', 1) // re-enabled — see flag below
+			->orderBy('blog.id', 'desc')
+			->first();
 
 if (!$blog_details) {
     abort(404); // see flag below
 }
 			$countblog =Blog::where('category',$blog_details->category)->where('status',1)->count();
 		
-	//	echo "<pre>";print_r($countblog);die;
+	 
 		
 		$previous = Blog::where('id', '<', $blog_details->id)->orderBy('id','desc')->first();
-	//	$previous = Blog::where('id', '<', $blog_details->id)->max('id');
-		// get next user id
+	 
 		$next = Blog::select('*')->where('id', '>', $blog_details->id)->orderBy('id','asc')->first();
-		//$next = Blog::select('*')->where('id', '>', $blog_details->id)->min('id');
-	//	return View::make('users.show')->with('previous', $previous)->with('next', $next);
-	//echo "<pre>";print_r($previous); print_r($next); 
+		 
 	$blogs =Blog::limit(6)->get();
+	$trendCourse =Course::limit(6)->get();
+	
+	dd($trendCourse);
 	
 	
-	
-	
-        return view('site.blog-details',['blog_details'=>$blog_details,'blogcategory'=>$blogcategory,'countblog'=>$countblog,'blogs'=>$blogs])->with('previous', $previous)->with('next', $next);
+        return view('site.blog-details',['blog_details'=>$blog_details,'blogcategory'=>$blogcategory,'countblog'=>$countblog,'trendCourse'=>$trendCourse,'blogs'=>$blogs])->with('previous', $previous)->with('next', $next);
     } 
 	 
  
@@ -238,16 +234,7 @@ if (!$blog_details) {
 
 		$bloglists = Blog::where('category', '=', $blog_category->id)->orderBy('id','desc')->get();
 		
-	//	echo "<pre>";print_r($bloglists);die;
-	//	$previous = Blog::where('id', '<', $blog_details->id)->max('id');
-
-		// get next user id
-	//	$next = Blog::select('*')->where('id', '>', $blog_details->id)->orderBy('id','asc')->first();
-		//$next = Blog::select('*')->where('id', '>', $blog_details->id)->min('id');
-
-	//	return View::make('users.show')->with('previous', $previous)->with('next', $next);
-	
-	//echo "<pre>";print_r($previous); print_r($next); 
+	 
         return view('site.blog-category',['bloglists'=>$bloglists,'url'=>$url]);
     } 
 	 

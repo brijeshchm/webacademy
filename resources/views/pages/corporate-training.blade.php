@@ -186,13 +186,7 @@
 
                
 
-<form
-    id="corporateEnquiryForm"
-    method="POST"
-    action="{{ route('leads.store') }}"
-    class="space-y-6"
-    novalidate
->
+   <form data-lead-form method="POST"  action="{{ route('leads.store') }}" class="ajax-lead-form" novalidate>
     @csrf
 
     <input type="hidden" name="form_type" value="corporate">
@@ -457,50 +451,58 @@
     </div>
 </main>
 
-<dialog
-    id="corporateSuccessPopup"
-    aria-labelledby="corporateSuccessTitle"
-    aria-describedby="corporateSuccessMessage"
-    class="corporate-success-popup"
+
+
+<style>
+    #lead-result-popup {
+        position: fixed;
+        inset: 50% auto auto 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        width: calc(100% - 2rem);
+        max-width: 28rem;
+        max-height: calc(100dvh - 2rem);
+        overflow-y: auto;
+    }
+</style>
+
+
+ <dialog
+    id="lead-result-popup"
+    aria-labelledby="lead-popup-title"
+    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-slate-900/50"
 >
-    <div class="p-7 text-center sm:p-9">
-        <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
-            <svg
-                class="h-10 w-10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-            >
-                <path d="m5 12 4 4L19 6"/>
-            </svg>
+    <div class="p-6 text-center">
+        <div
+            aria-hidden="true"
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-3xl font-bold text-green-600"
+        >
+            ✓
         </div>
 
-        <h3
-            id="corporateSuccessTitle"
-            class="mt-5 text-2xl font-bold text-gray-900"
+        <h2
+            id="lead-popup-title"
+            class="text-xl font-bold text-slate-900"
         >
-            {{ t('corporateTraining.form.successTitle') }}
-        </h3>
+            Submitted successfully
+        </h2>
 
         <p
-            id="corporateSuccessMessage"
-            class="mt-3 text-sm leading-7 text-gray-600"
+            id="lead-popup-message"
+            class="mt-2 break-words text-sm leading-6 text-slate-600"
         ></p>
 
         <button
-            id="corporateSuccessClose"
+            id="lead-popup-close"
             type="button"
             autofocus
-            class="mt-7 w-full rounded-xl bg-green-600 px-6 py-3 font-bold text-white hover:bg-green-700"
+            class="mt-6 w-full rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700"
         >
-            Done
+            OK
         </button>
     </div>
 </dialog>
+
 
 <style>
     #corporateFormError[hidden] {
@@ -537,177 +539,27 @@
         backdrop-filter: blur(5px);
     }
 </style>
+
+
 <script>
-(function () {
-    'use strict';
+(() => {
+    function initializeLeadForms() {
+        const popup = document.getElementById('lead-result-popup');
+        const popupMessage = document.getElementById('lead-popup-message');
+        const closeButton = document.getElementById('lead-popup-close');
 
-    function initCorporateForm() {
-        const form = document.getElementById('corporateEnquiryForm');
+        let focusAfterClose = null;
 
-        if (!form || form.dataset.ajaxReady === '1') return;
-        form.dataset.ajaxReady = '1';
+        function showSuccessPopup(text, focusTarget) {
+            focusAfterClose = focusTarget;
 
-        const submitButton = document.getElementById('corporateSubmitButton');
-        const globalError = document.getElementById('corporateFormError');
-        const popup = document.getElementById('corporateSuccessPopup');
-        const popupMessage = document.getElementById('corporateSuccessMessage');
-        const closeButton = document.getElementById('corporateSuccessClose');
-
-        let submitting = false;
-        let previousOverflow = '';
-
-        function getField(name) {
-            return [...form.elements].find(element => element.name === name);
-        }
-
-        function getContainer(name) {
-            const direct = [...form.querySelectorAll('[data-field]')]
-                .find(element => element.dataset.field === name);
-
-            return direct || getField(name)?.closest('[data-field]');
-        }
-
-        function showGlobalError(message) {
-            globalError.textContent = message;
-            globalError.hidden = false;
-        }
-
-        function clearFieldError(name) {
-            form.querySelectorAll('[data-error-for]').forEach(error => {
-                if (error.dataset.errorFor === name) {
-                    const input = getField(name);
-                    if (input?.getAttribute('aria-describedby') === error.id) {
-                        input.removeAttribute('aria-describedby');
-                    }
-                    error.remove();
-                }
-            });
-
-            getField(name)?.removeAttribute('aria-invalid');
-        }
-
-        function showFieldError(name, message) {
-            clearFieldError(name);
-
-            const input = getField(name);
-            const container = getContainer(name);
-
-            if (!input || !container || input.type === 'hidden') {
-                showGlobalError(message);
-                return;
-            }
-
-            input.setAttribute('aria-invalid', 'true');
-
-            const error = document.createElement('p');
-            error.id = 'corporate-error-' + name.replace(/[^a-zA-Z0-9_-]/g, '-');
-            error.dataset.errorFor = name;
-            error.className = 'corporate-field-error';
-            error.textContent = message;
-
-            container.appendChild(error);
-            input.setAttribute('aria-describedby', error.id);
-        }
-
-        function clearErrors() {
-            globalError.hidden = true;
-            globalError.textContent = '';
-
-            form.querySelectorAll('[data-error-for]').forEach(error => {
-                clearFieldError(error.dataset.errorFor);
-            });
-
-            form.querySelectorAll('[aria-invalid]').forEach(input => {
-                input.removeAttribute('aria-invalid');
-            });
-        }
-
-        function validate() {
-            let valid = true;
-
-            const requiredFields = {
-                name: 'Enter your full name.',
-                company: 'Enter your company name.',
-                email: 'Enter your email address.',
-                phone: 'Enter your phone number.',
-                teamSize: 'Select your team size.',
-                timeline: 'Select your training timeline.',
-                program: 'Enter your training program.',
-                goals: 'Enter your training goals.'
-            };
-
-            Object.entries(requiredFields).forEach(([name, message]) => {
-                const input = getField(name);
-
-                if (!input || !input.value.trim()) {
-                    showFieldError(name, message);
-                    valid = false;
-                }
-            });
-
-            const name = getField('name');
-
-            if (name?.value.trim() && name.value.trim().length < 2) {
-                showFieldError('name', 'Name must contain at least 2 characters.');
-                valid = false;
-            }
-
-            const email = getField('email');
-
-            if (
-                email?.value.trim() &&
-                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())
-            ) {
-                showFieldError('email', 'Enter a valid email address.');
-                valid = false;
-            }
-
-            const phone = getField('phone');
-
-            if (phone?.value.trim()) {
-                const digits = phone.value.replace(/[\s()+-]/g, '');
-
-                if (!/^\d{7,15}$/.test(digits)) {
-                    showFieldError('phone', 'Enter a valid phone number.');
-                    valid = false;
-                }
-            }
-
-            form.querySelectorAll('[maxlength]').forEach(input => {
-                if (input.value.length > input.maxLength) {
-                    showFieldError(
-                        input.name,
-                        'Maximum ' + input.maxLength + ' characters allowed.'
-                    );
-                    valid = false;
-                }
-            });
-
-            return valid;
-        }
-
-        function focusFirstError() {
-            form.querySelector('[aria-invalid="true"]')?.focus();
-        }
-
-        function openSuccess(message) {
-            if (!popup || !popupMessage) {
-                showGlobalError('Success popup HTML is missing.');
-                return;
-            }
-
-            popupMessage.textContent = message;
-
-            // Keep the dialog directly under body.
-            if (popup.parentElement !== document.body) {
-                document.body.appendChild(popup);
-            }
+            popupMessage.textContent = text;
 
             if (!popup.open) {
-                previousOverflow = document.body.style.overflow;
                 popup.showModal();
-                document.body.style.overflow = 'hidden';
             }
+
+            closeButton.focus();
         }
 
         closeButton.addEventListener('click', () => {
@@ -715,154 +567,263 @@
         });
 
         popup.addEventListener('close', () => {
-            document.body.style.overflow = previousOverflow;
-            submitButton.focus();
-        });
-
-        form.addEventListener('input', event => {
-            if (event.target.name) clearFieldError(event.target.name);
-        });
-
-        form.addEventListener('change', event => {
-            if (event.target.name) clearFieldError(event.target.name);
-        });
-
-        form.addEventListener('submit', async event => {
-            event.preventDefault();
-
-            if (submitting) return;
-
-            clearErrors();
-
-            if (!validate()) {
-                focusFirstError();
-                return;
+            if (focusAfterClose?.isConnected) {
+                focusAfterClose.focus();
             }
 
-            // Includes CSRF and fields from the existing phone partial.
-            const payload = new FormData(form);
+            focusAfterClose = null;
+        });
 
-            [
-                'name', 'company', 'email',
-                'phone', 'program', 'goals'
-            ].forEach(name => {
-                const value = payload.get(name);
+        document.querySelectorAll('.ajax-lead-form').forEach((form) => {
+            if (form.dataset.ajaxInitialized === 'true') return;
 
-                if (typeof value === 'string') {
-                    payload.set(name, value.trim());
+            form.dataset.ajaxInitialized = 'true';
+
+            // Show inline validation instead of browser validation bubbles.
+            form.noValidate = true;
+
+            let submitting = false;
+
+            function getMessageBox() {
+                let box = form.querySelector('[data-form-message]');
+
+                if (!box) {
+                    box = document.createElement('div');
+                    box.setAttribute('data-form-message', '');
+                    box.setAttribute('role', 'alert');
+                    form.prepend(box);
                 }
-            });
 
-            const token = getField('_token')?.value || '';
+                return box;
+            }
 
-            const originalContent = [...submitButton.childNodes];
-            const originallyDisabled = submitButton.disabled;
+            function showFormError(text) {
+                const box = getMessageBox();
 
-            submitting = true;
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting…';
-            form.setAttribute('aria-busy', 'true');
+                box.textContent = text;
+                box.className =
+                    'mb-4 whitespace-pre-line rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700';
+            }
 
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': token
-                    },
-                    body: payload
+            function clearErrors() {
+                form.querySelectorAll('[data-field-error]').forEach(error => {
+                    error.remove();
                 });
 
-                const data = await response.json().catch(() => null);
-
-                if (response.status === 422) {
-                    Object.entries(data?.errors || {}).forEach(([field, errors]) => {
-                        showFieldError(
-                            field,
-                            Array.isArray(errors) ? errors[0] : String(errors)
-                        );
-                    });
-
-                    showGlobalError(
-                        data?.message || 'Please fix the highlighted fields.'
-                    );
-
-                    focusFirstError();
-                    return;
-                }
-
-                if (response.status === 419) {
-                    throw new Error(
-                        'Session expired. Refresh the page and try again.'
-                    );
-                }
-
-                if (response.status === 429) {
-                    throw new Error(
-                        'Too many attempts. Please wait and try again.'
-                    );
-                }
-
-                if (!response.ok) {
-                    throw new Error(
-                        data?.message || 'Unable to submit your enquiry.'
-                    );
-                }
-
-                if (data?.success !== true) {
-                    throw new Error(
-                        data?.message ||
-                        'Server did not confirm submission. Check the controller JSON response.'
-                    );
-                }
-
-                // Clear entered values only after confirmed success.
-                form.reset();
-
-                [
-                    'name', 'company', 'email', 'phone',
-                    'teamSize', 'timeline', 'program', 'goals'
-                ].forEach(name => {
-                    const input = getField(name);
-                    if (input) input.value = '';
+                form.querySelectorAll('[aria-invalid="true"]').forEach(field => {
+                    field.removeAttribute('aria-invalid');
+                    field.classList.remove('border-red-500');
                 });
+
+                const box = form.querySelector('[data-form-message]');
+
+                if (box) {
+                    box.textContent = '';
+                    box.classList.add('hidden');
+                }
+            }
+
+            function addFieldError(field, text) {
+                if (!field || field.type === 'hidden') return false;
+
+                field.setAttribute('aria-invalid', 'true');
+                field.classList.add('border-red-500');
+
+                const error = document.createElement('p');
+                error.dataset.fieldError = field.name;
+                error.className = 'mt-1 text-sm text-red-600';
+                error.textContent = text;
+
+                field.insertAdjacentElement('afterend', error);
+
+                return true;
+            }
+
+            function clearFieldError(event) {
+                const field = event.target;
+
+                if (!field.name) return;
+
+                field.removeAttribute('aria-invalid');
+                field.classList.remove('border-red-500');
+
+                form.querySelectorAll('[data-field-error]').forEach(error => {
+                    if (error.dataset.fieldError === field.name) {
+                        error.remove();
+                    }
+                });
+            }
+
+            form.addEventListener('input', clearFieldError);
+            form.addEventListener('change', clearFieldError);
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                if (submitting) return;
 
                 clearErrors();
 
-                // Custom phone widgets can listen for this event if needed.
-                form.dispatchEvent(new CustomEvent('corporate:submitted', {
-                    bubbles: true,
-                    detail: data
-                }));
+                // Client-side validation: inline errors only.
+                const invalidFields = [...form.elements].filter(
+                    field => field.willValidate && !field.validity.valid
+                );
 
-                openSuccess(
-                    data.message ||
-                    'Thank you! Your enquiry has been submitted successfully.'
+                if (invalidFields.length) {
+                    invalidFields.forEach(field => {
+                        addFieldError(field, field.validationMessage);
+                    });
+
+                    invalidFields[0].focus();
+                    return;
+                }
+
+                const token = form.querySelector('[name="_token"]')?.value
+                    || document.querySelector('meta[name="csrf-token"]')?.content;
+
+                if (!token) {
+                    showFormError('Session token missing. Please refresh the page.');
+                    return;
+                }
+
+                const submitter = event.submitter;
+                const formData = new FormData(form);
+
+                if (submitter?.name) {
+                    formData.append(submitter.name, submitter.value);
+                }
+
+                const buttons = [...form.elements].filter(
+                    field => field.type === 'submit'
                 );
-            } catch (error) {
-                showGlobalError(
-                    error.message || 'Network error. Please try again.'
-                );
-            } finally {
-                submitting = false;
-                submitButton.disabled = originallyDisabled;
-                submitButton.replaceChildren(...originalContent);
-                form.removeAttribute('aria-busy');
-            }
+
+                const previousStates = buttons.map(button => button.disabled);
+                const button = submitter || buttons[0];
+
+                const originalHTML = button?.innerHTML;
+                const originalValue = button?.value;
+
+                submitting = true;
+                form.setAttribute('aria-busy', 'true');
+                buttons.forEach(button => button.disabled = true);
+
+                if (button?.tagName === 'BUTTON') {
+                    button.textContent = 'Submitting...';
+                } else if (button) {
+                    button.value = 'Submitting...';
+                }
+
+                let successMessage = null;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': token
+                        },
+                        body: formData
+                    });
+
+                    if (response.status === 419) {
+                        showFormError(
+                            'Your session expired. Please refresh the page.'
+                        );
+                        return;
+                    }
+
+                    const contentType = response.headers.get('content-type') || '';
+                    const data = contentType.includes('application/json')
+                        ? await response.json()
+                        : null;
+
+                    // Server-side validation: inline errors only.
+                    if (response.status === 422) {
+                        let firstInvalidField = null;
+                        const unmatchedErrors = [];
+
+                        Object.entries(data?.errors || {}).forEach(([name, errors]) => {
+                            const messages = Array.isArray(errors)
+                                ? errors
+                                : [errors];
+
+                            const field = [...form.elements].find(
+                                field => field.name === name
+                            );
+
+                            if (addFieldError(field, messages[0])) {
+                                firstInvalidField ??= field;
+                            } else {
+                                unmatchedErrors.push(...messages);
+                            }
+                        });
+
+                        if (unmatchedErrors.length) {
+                            showFormError(unmatchedErrors.join('\n'));
+                        } else if (!firstInvalidField) {
+                            showFormError(
+                                data?.message || 'Please correct the form errors.'
+                            );
+                        }
+
+                        firstInvalidField?.focus();
+                        return;
+                    }
+
+                    if (!response.ok || data?.status !== true) {
+                        showFormError(
+                            response.status >= 500 || !data
+                                ? 'Submission could not be confirmed. Please contact support before submitting again.'
+                                : data.message || 'Unable to submit. Please try again.'
+                        );
+                        return;
+                    }
+
+                    // Reset only after the server confirms success.
+                    form.reset();
+                    clearErrors();
+
+                    successMessage = data.message
+                        || 'Your enquiry has been submitted successfully.';
+
+                } catch (error) {
+                    showFormError(
+                        'Submission could not be confirmed. Please check your connection before trying again.'
+                    );
+                } finally {
+                    submitting = false;
+                    form.removeAttribute('aria-busy');
+
+                    buttons.forEach((button, index) => {
+                        button.disabled = previousStates[index];
+                    });
+
+                    if (button?.tagName === 'BUTTON') {
+                        button.innerHTML = originalHTML;
+                    } else if (button) {
+                        button.value = originalValue;
+                    }
+                }
+
+                // Popup only after successful submission.
+                if (successMessage) {
+                    showSuccessPopup(successMessage, button);
+                }
+            });
         });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCorporateForm, {
-            once: true
-        });
+        document.addEventListener('DOMContentLoaded', initializeLeadForms);
     } else {
-        initCorporateForm();
+        initializeLeadForms();
     }
 })();
 </script>
+
+ 
 
 
 @endsection

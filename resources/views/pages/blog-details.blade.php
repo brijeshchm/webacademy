@@ -32,7 +32,7 @@
                 <h1><span>Blogs Details </span></h1> 
 			</div>
             <div class="bread_crums">
-                <p id="breadcrumbs"><span><span><a href="{{url('/')}}">Home</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <span><a href="{{url('blog')}}">Blogs</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <strong class="breadcrumb_last" aria-current="page">Blog</strong></span></span></span></p>            </div>
+                <p id="breadcrumbs"><span><span><a href="{{route('home')}}">Home</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <span><a href="{{url('blog')}}">Blogs</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <strong class="breadcrumb_last" aria-current="page">Blog</strong></span></span></span></p>            </div>
         </div>
     </div>
 </div>
@@ -112,7 +112,7 @@ break;
  
 <div class="name-and-date"> 
 
-<span class="tstm-name"><a href="#0" title="tstm-name" rel="author">{{$blog_details->categoryname}}</a>
+<span class="tstm-name">{{$blog_details->categoryname}}
  
 </span> 
 
@@ -152,16 +152,12 @@ break;
                             <div class="corp-tablink-group" id="myLinks">
                                 @if(!empty($blogcategory))
                                 @foreach($blogcategory as $category)
-                            <a href="{{url('blog/category/'.generate_slug($category->categoryname))}}" >{{$category->categoryname}}</a>
+                            <a href="{{route('blog.blogCategory',generate_slug($category->categoryname))}}" >{{$category->categoryname}}</a>
                             @endforeach
-                            @endif                                                       
+                            @endif                            
                             
-                            </div>
-
-
-
-							
-						</div>
+                            </div>							
+							</div>
 								
 								<div class="an-pi-right" style="margin-top: 40px;background: #f9f9f9;">
 									<div class="blog-course-inner">
@@ -185,11 +181,15 @@ break;
 									<div class="blog-course-inner">
 										<h3>Trending Course</h3>
 										<div class="course-inner">
+
+
 											<div class="course-inner-section">
 											  
 											 <a href="{{url('courses/aws-certification-training')}}">AWS</a>
 												 
 											</div>
+
+
 											<div class="course-inner-section">
 												<a href="{{url('courses/cloud-computing-certification-training')}}">Cloud</a>
 											</div>

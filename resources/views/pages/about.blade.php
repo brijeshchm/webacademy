@@ -157,7 +157,7 @@
                         </ul>
                     </div>
 
-                    <a href="/courses" class="inline-flex items-center justify-center w-full sm:w-auto h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-xl shadow-lg shadow-primary/20 transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0 font-semibold">
+                    <a href="{{ route('courses') }}" class="inline-flex items-center justify-center w-full sm:w-auto h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-xl shadow-lg shadow-primary/20 transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0 font-semibold">
                         {{ t('about.exploreOurPrograms') }} <svg class="w-5 h-5 ml-2 rtl:ml-0 rtl:mr-2 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>

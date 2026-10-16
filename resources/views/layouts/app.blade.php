@@ -15,8 +15,10 @@
 @endif
 @if(View::hasSection('meta_robots'))
 @yield('meta_robots')
+@elseif(isset($_GET['v']))
+<meta name="robots" content="noindex, nofollow">
 @else
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="robots" content="index, follow">
 @endif
 <meta property="og:title" content="@yield('title')">
 <meta property="og:description" content="@yield('description')">
@@ -34,11 +36,11 @@
 <meta name="twitter:image" content="@yield('og_image', asset('images/logo-academy.webp'))">
 <meta name="twitter:image:alt" content="@yield('title')">
 <meta name="google-site-verification" content="cdZRjAwe6T9AoQoE-gqxeeMPgs_8FuKWR3GXR2JJI2c" />
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="{{ asset('favicon.ico') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/app.css">  
+<link rel="stylesheet" href="{{ asset('assets/app.css') }}">  
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
