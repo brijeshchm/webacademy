@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Image;
 use App\Models\Courses;
-use App\CourseCity;
+use App\Models\CourseCity;
 use App\Models\Category;
 use App\Certificate;
 use App\Helpers;

@@ -19,7 +19,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Helpers;
 use App\Models\ToolsCovered;
-use App\Client;
+use App\Models\Client;
 use App\MasterCurriculumExcel;
 class CourseMasterController extends Controller
 {

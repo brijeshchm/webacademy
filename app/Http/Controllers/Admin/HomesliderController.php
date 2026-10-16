@@ -12,9 +12,9 @@ use Session;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Input;
 use Image; 
-use App\Homebannar;
-use App\Mobilebanner;
-use App\Homeslider; 
+use App\Models\Homebannar;
+use App\Models\Mobilebanner;
+use App\Models\Homeslider; 
 use App\Helpers;
 
 class HomesliderController extends Controller
@@ -73,11 +73,12 @@ class HomesliderController extends Controller
 			}	  
 				$homeslider = New Homeslider;
 				$homeslider->slider_name = trim($request->input('slider_name'));					 
+				$image = "";
 				if ($request->hasFile('image_slider')) {
-					$image = [];
-					//$filePath = getsliderFolderStructure();
+					
+				 
 					$filePath = "uploads/slider";;
-			//	$file = Input::file('course_image');
+			 
 					$file =  $request->file('image_slider');
 					$filename =str_replace(' ', '_', $file->getClientOriginalName());
 					$alt = str_replace(' ', '_', $file->getClientOriginalName());
@@ -94,13 +95,12 @@ class HomesliderController extends Controller
 						'alt'=>$alt,						
 						'src'=>$filePath."/".$filename
 					);	
-					$sliderimage= serialize($image);
-				}else{
-						$sliderimage="";
-				}					
-				$homeslider->image_slider = $sliderimage;	
+					$sliderimage= json_encode($image);
+					$homeslider->image_slider = $sliderimage;
+				} 					
+					
 				$homeslider->status = '1';				 
-		//echo "<pre>"; print_r($homeslider);	 	
+		  	
 			if($homeslider->save()){
 				$status=1;							 
 				$msg="Home slider submitted successfully !";		
@@ -158,11 +158,12 @@ class HomesliderController extends Controller
 				 
 				$homeslider= Homeslider::findOrFail($id); 
 				$homeslider->slider_name = ucfirst(trim($request->input('slider_name')));		
-				//echo"<pre>"; print_r($homeslider); die;			
+			 			
+				$image = "";
 				if ($request->hasFile('image_slider')) {
-					$image = [];
-					$filePath = "uploads/slider";
-					//	$file = Input::file('course_image');
+					
+					$filePath = "/uploads/slider";
+				 
 					$file =  $request->file('image_slider');
 					$filename =str_replace(' ', '_', $file->getClientOriginalName());	
 					$alt = str_replace(' ', '_', $file->getClientOriginalName());
@@ -174,18 +175,20 @@ class HomesliderController extends Controller
 						$filename = $name."_".time().'.'.$ext;
 					}
 					$file->move($destinationPath,$filename);				 
-					$image['image_slider'] = array(
-						'name'=>$filename,
-						'alt'=>$alt,						
-						'src'=>$filePath."/".$filename
-					);	
-					$homeslider->image_slider = serialize($image);		
-				}else{
-					$homeslider->image_slider = $homeslider->image_slider;	
-				}	
+					 
+					$image = [
+							'image_slider' => [
+								'name' => $filename,
+								'alt'  => $alt,
+								'src'  => $filePath . '/' . $filename,
+							],
+						];
+				 
+					$homeslider->image_slider = json_encode($image);		
+				} 	
 				
 				$homeslider->status = '1';
-				//echo"<pre>"; print_r($homeslider); die;	
+				 	
 				if($homeslider->save()){
 					$status=1;							 
 					$msg="Home Bannar Slider updated successfully !";				
@@ -205,9 +208,9 @@ class HomesliderController extends Controller
 		if($delet_data->image_slider!='')
 		{				 
 			$image = json_decode($delet_data->image_slider);			
-			$large = $image['image_slider']['src'];
-			if(!empty($image['image_slider']['src'])){
-			$thumbnail = $image['image_slider']['src'];
+			$large = $image->image_slider->src;
+			if(!empty($image->image_slider->src)){
+			$thumbnail = $image->image_slider->src;
 			if (file_exists($thumbnail))
 			{
 			unlink($thumbnail);
@@ -226,7 +229,7 @@ class HomesliderController extends Controller
     }
 
 	/**
-	 get pagination city Title with slug
+	 * get pagination city Title with slug
      * Author: Brijesh Chauhan.
      * Show the application dashboard.
      *
@@ -255,6 +258,7 @@ class HomesliderController extends Controller
 			foreach($homesliders as $sliders){				 
 				$action="";
 				$seperate="";
+				$image="";
 				$status="";
 				 $i++;		 
 				$action .='<a href="/admin/homeslider/edit/'.base64_encode($sliders->id).'" title="Edit sliders" class="btn btn-success"><i class="fa fa-edit" aria-hidden="true"></i></a>';
@@ -266,9 +270,12 @@ class HomesliderController extends Controller
 				}else{
 					$status .='<a href="javascript:homesliderController.status('.$sliders->id.',1)" title="sliders status" class="btn btn-danger">Inactive</a>';
 				}
-				$vimage= json_decode($sliders->image_slider);
-				$image='<img src="'.asset($vimage['image_slider']['src']).'" type="'.$vimage['image_slider']['alt'].'" width="50">';	
-					$data[] = [		
+				
+				if($sliders->image_slider){
+					$vimage= json_decode($sliders->image_slider);
+					$image='<img src="'.asset($vimage->image_slider->src).'"  width="50">';	
+				}	
+				$data[] = [		
 						$i,					
 						$sliders->slider_name,	
 						$image,	
@@ -295,7 +302,22 @@ class HomesliderController extends Controller
     {
        	 
 		$homeslider = Homeslider::findOrFail($id);	 
-		// echo "<pre>";print_r($homebannar);
+		 if($homeslider->image_slider!='')
+			{				 
+				$image = json_decode($homeslider->image_slider);			
+				$large = $image->image_slider->src;
+				if(!empty($image->image_slider->src)){
+				$thumbnail = $image->image_slider->src;
+				if (file_exists($thumbnail))
+				{
+				unlink($thumbnail);
+				}  
+				}
+				if (file_exists($large))
+				{
+				unlink($large);
+				} 		 
+			}
 			if($homeslider->delete()){
 				$status=1;							 
 				$msg="Home slider deleted successfully !";		
@@ -359,6 +381,7 @@ class HomesliderController extends Controller
 				$action="";
 				$seperate="";
 				$status="";
+				$image="";
 				  					 
 				$action .='<a href="/admin/mobilebanner/edit/'.base64_encode($mobBanner->id).'" title="Edit mobile Banner" class="btn btn-success"><i class="fa fa-edit" aria-hidden="true"></i></a>';
 
@@ -369,9 +392,11 @@ class HomesliderController extends Controller
 				}else{
 					$status .='<a href="javascript:homesliderController.statusBanner('.$mobBanner->id.',1)" title="mobile Banner status" class="btn btn-danger">Inactive</a>';
 				}
-				$vimage= json_decode($mobBanner->image_banner);
-				$image='<img src="'.asset($vimage['image_banner']['src']).'" type="'.$vimage['image_banner']['alt'].'" width="50">';	
-					$data[] = [		 		 		 
+				if($mobBanner->image_banner){
+					$vimage= json_decode($mobBanner->image_banner);
+					$image='<img src="'.asset($vimage->image_banner->src).'" width="50">';	
+				}
+				$data[] = [		 		 		 
 						$mobBanner->banner_name,	
 						$image,	
 						$status,						
@@ -417,12 +442,13 @@ class HomesliderController extends Controller
 				 
 				$mobilebanner= Mobilebanner::findOrFail($id); 
 				$mobilebanner->banner_name = ucfirst(trim($request->input('banner_name')));		
-				//echo"<pre>"; print_r($mobilebanner); die;			
+			 		
+				$image = "";
 				if ($request->hasFile('image_banner')) {
-					$image = [];
-					//$filePath = getContentFolderStructure();
+					
+				 
 					$filePath = 'uploads/mobilebanner/';
-					//	$file = Input::file('course_image');
+					 
 					$file =  $request->file('image_banner');
 					$filename =str_replace(' ', '_', $file->getClientOriginalName());		
 					$alt = str_replace(' ', '_', $file->getClientOriginalName());
@@ -434,18 +460,19 @@ class HomesliderController extends Controller
 						$filename = $name."_".time().'.'.$ext;
 					}
 					$file->move($destinationPath,$filename);				 
-					$image['image_banner'] = array(
-						'name'=>$filename,
-						'alt'=>$alt,						
-						'src'=>$filePath."/".$filename
-					);	
-					$mobilebanner->image_banner = serialize($image);		
-				}else{
-					$mobilebanner->image_banner = $mobilebanner->image_banner;	
-				}	
+				 
+					$image = [
+							'image_banner' => [
+								'name' => $filename,
+								'alt'  => $alt,
+								'src'  => $filePath . '/' . $filename,
+							],
+						];
+					$mobilebanner->image_banner = json_encode($image);		
+				} 	
 				
 				$mobilebanner->status = '1';
-				//echo"<pre>"; print_r($mobilebanner); die;	
+				 
 				if($mobilebanner->save()){
 					$status=1;							 
 					$msg="Home Bannar Slider updated successfully !";				
@@ -461,7 +488,29 @@ class HomesliderController extends Controller
     {
        	 
 		$mobilebanner = Mobilebanner::findOrFail($id);	 
-		// echo "<pre>";print_r($homebannar);
+	 
+		
+
+		if($mobilebanner->image_banner!='')
+			{				 
+				$image = json_decode($mobilebanner->image_banner);			
+				$large = $image->image_banner->src;
+				if(!empty($image->image_banner->src)){
+				$thumbnail = $image->image_banner->src;
+				if (file_exists($thumbnail))
+				{
+				unlink($thumbnail);
+				}  
+				}
+				if (file_exists($large))
+				{
+				unlink($large);
+				} 		 
+			}
+
+		
+
+
 			if($mobilebanner->delete()){
 				$status=1;							 
 				$msg="Mobile Home Banner deleted successfully !";		
@@ -473,9 +522,7 @@ class HomesliderController extends Controller
 		
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
     }
-  
-
-	  public function statusBanner(request $request, $id,$val)
+  	  public function statusBanner(request $request, $id,$val)
 		{
 			 if($request->ajax()){	 
 				$mobilebanner = Mobilebanner::findOrFail($id);	 
@@ -498,9 +545,9 @@ class HomesliderController extends Controller
 			if($delet_data->image_banner!='')
 			{				 
 				$image = json_decode($delet_data->image_banner);			
-				$large = $image['image_banner']['src'];
-				if(!empty($image['image_banner']['src'])){
-				$thumbnail = $image['image_banner']['src'];
+				$large = $image->image_banner->src;
+				if(!empty($image->image_banner->src)){
+				$thumbnail = $image->image_banner->src;
 				if (file_exists($thumbnail))
 				{
 				unlink($thumbnail);

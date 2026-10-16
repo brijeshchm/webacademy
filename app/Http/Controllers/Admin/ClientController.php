@@ -16,7 +16,7 @@ use App\Models\Courses;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Helpers;
-use App\Client;
+use App\Models\Client;
 use App\Models\ToolsCovered;
 class ClientController extends Controller
 {

@@ -53,7 +53,7 @@ Edit Mobile Banner
 							@if(isset($edit_data) && $edit_data->image_banner !='')									 
 							<?php $vimage= json_decode($edit_data->image_banner);  ?>
 							<div >
-							<img src="<?php echo asset('public/'.$vimage['image_banner']['src']); ?>" style="max-width:100px;" height="100" width="100">	
+							<img src="<?php echo asset($vimage->image_banner->src); ?>" style="max-width:100px;" height="100" width="100">	
 							<a href="/admin/mobilebanner/del_icon/{{$edit_data->id}}" class="btn btn-inverse btn-circle m-b-5 deleteIcon"><i class="glyphicon glyphicon-trash"></i></a>
 							<input type="hidden" class="" name="image_banner" value="{{ $edit_data->image_banner }}" accept=".jpeg,.jpg,.png,.svg" >
 							</div>
@@ -66,7 +66,7 @@ Edit Mobile Banner
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           
-						  <button class="btn btn-primary" type="reset">Reset</button>
+						   
                           <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>

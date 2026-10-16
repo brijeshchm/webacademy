@@ -36,8 +36,7 @@ class ToolsCoveredController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {	 
-	//echo "test";die;
+    {	  
         return view('admin.toolscovered.index');
     } 
 	
@@ -48,8 +47,7 @@ class ToolsCoveredController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {	  
-		 
+    {	  		 
         return view('admin.toolscovered.index');
     } 
 	 /**
@@ -62,7 +60,7 @@ class ToolsCoveredController extends Controller
     {	  
 	
         if($request->ajax()){ 
-		 //echo "<pre>";print_r($_POST);die;
+		 
 			
   
 		  $validator = Validator::make($request->all(),[			 
@@ -82,7 +80,7 @@ class ToolsCoveredController extends Controller
 				if ($request->hasFile('covered_icons')) {
 			
 				$filePath = $this->getToolCoveredFolderStructure();
-			//	$file = Input::file('course_image');
+			 
 				$file =  $request->file('covered_icons');
 				$iconsfilename =str_replace(' ', '_', $file->getClientOriginalName());			 
 				$destinationPath = public_path($filePath);
@@ -93,11 +91,13 @@ class ToolsCoveredController extends Controller
 				$iconsfilename = $name."_".time().'.'.$ext;
 				}
 				$file->move($destinationPath,$iconsfilename);				 
+				
 				$image['covered_icons'] = array(
 				'name'=>$iconsfilename,
 				'alt'=>$alt,						
 				'src'=>$filePath."/".$iconsfilename
 				);	
+
 				} 			
 				$toolsCovered->covered_icons = $image?serialize($image):"";
 				

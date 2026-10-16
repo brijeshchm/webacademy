@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Input;
 use Image;
 use App\Models\Courses;
 use App\Models\Category;
-use App\Social;
+use App\Models\Social;
 use App\Helpers;
 class SocialController extends Controller
 {
@@ -52,7 +52,7 @@ class SocialController extends Controller
         return view('admin.social.index');
     } 
 	 /**
-	 add save Course Title with slug
+	 *add save Course Title with slug
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -61,7 +61,7 @@ class SocialController extends Controller
     {	  
 	
         if($request->ajax()){ 
-		 //echo "<pre>";print_r($_POST);die;
+	 
 			
   
 		  $validator = Validator::make($request->all(),[		 
@@ -83,10 +83,11 @@ class SocialController extends Controller
 				$social->social = ucfirst(trim($request->input('social')));		
 				$social->average_rating = ucfirst(trim($request->input('average_rating')));	
 				$social->total_review = trim($request->input('total_review'));	
+				$image = "";
 				if ($request->hasFile('social_icon')) {
-				$image = [];
+				
 				$filePath = $this->getSocialFolderStructure();
-			//	$file = Input::file('course_image');
+			 
 				$file =  $request->file('social_icon');
 				$filename =str_replace(' ', '_', $file->getClientOriginalName());			 
 				$destinationPath = public_path($filePath);
@@ -102,12 +103,13 @@ class SocialController extends Controller
 				'alt'=>$alt,						
 				'src'=>$filePath."/".$filename
 				);	
+					$social->social_icon = json_encode($image);	
 				} 			
-				$social->social_icon = serialize($image);						
+								
 				 					
 				$social->status = '1';				 
 				$social->created_by =1; 	
-//echo "<pre>";print_r($social);die;				
+				
 			if($social->save()){
 				$status=1;							 
 				$msg="Social submitted successfully!";		
@@ -148,7 +150,7 @@ class SocialController extends Controller
     public function editSaveSocial(Request $request,$id)
     {	  
 	
-//echo "<pre>";print_r($_POST);print_r($_FILES);die;
+
         if($request->ajax()){ 		 
 		  $validator = Validator::make($request->all(),[				 
 				 
@@ -176,8 +178,10 @@ class SocialController extends Controller
 				$social->social = ucfirst(trim($request->input('social')));	
 				$social->average_rating = ucfirst(trim($request->input('average_rating')));	
 				$social->total_review = trim($request->input('total_review'));	
+				
+				$image = "";
 				if ($request->hasFile('social_icon')) {
-				$image = [];
+			
 				$filePath = $this->getSocialFolderStructure();
 				//	$file = Input::file('course_image');
 				$file =  $request->file('social_icon');
@@ -195,12 +199,10 @@ class SocialController extends Controller
 				'alt'=>$alt,						
 				'src'=>$filePath."/".$filename
 				);	
-				$social->social_icon = serialize($image);		
-				}else{
-				$social->social_icon = $social->social_icon;	
-				}				
+				$social->social_icon = json_encode($image);		
+				} 				
 				$social->updated_by =1;			 
-				//echo "<pre>";print_r($social);die;
+			 
 			if($social->save()){
 				$status=1;							 
 				$msg="Social updated successfully!";		
@@ -240,13 +242,17 @@ class SocialController extends Controller
 			foreach($socials as $social){				 
 				$action="";
 				$seperate="";				 					 
+				$image="";				 					 
 				$action .='<a href="/admin/social/edit/'.base64_encode($social->id).'" title="Edit Social Content" class="btn btn-success"><i class="fa fa-edit" aria-hidden="true"></i></a>';
 				if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('delete_social') ){
 				$action .='<a href="javascript:socialController.delete('.$social->id.')" title="Delete Social Content" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>';	
 				}
-				 $vimage= json_decode($social->social_icon); 
-				$image='<img src="'.asset($vimage['social_icon']['src']).'" type="'.$vimage['social_icon']['alt'].'" width="50">'; 
-					$data[] = [		 		 		 
+				if(!empty($social->social_icon)){
+				 	$vimage= json_decode($social->social_icon); 
+					$image='<img src="'.asset($vimage->social_icon->src).'"  width="50">'; 
+					
+				}
+				$data[] = [		 		 		 
 						$social->social,					 			
 						$image,					 			
 						$action,					  
@@ -274,9 +280,9 @@ class SocialController extends Controller
 		if($delet_data->social_icon!='')
 		{				 
 			$image = json_decode($delet_data->social_icon);			
-			$large = $image['social_icon']['src'];
-			if(!empty($image['social_icon']['src'])){
-			$thumbnail = $image['social_icon']['src'];
+			$large = $image->social_icon->src;
+			if(!empty($image->social_icon->src)){
+			$thumbnail = $image->social_icon->src;
 			if (file_exists($thumbnail))
 			{
 			unlink($thumbnail);
@@ -305,14 +311,14 @@ class SocialController extends Controller
     {
        	 
 		$social = Social::findOrFail($id);	
-		 //echo "<pre>";print_r($social);die;
+	 
 		 
 			if($social->social_icon!='')
 			{
 			$image = json_decode($social->social_icon);
-			$large = $image['social_icon']['src'];
-			if(!empty($image['social_icon']['src'])){
-			$thumbnail = $image['social_icon']['src'];
+			$large = $image->social_icon->src;
+			if(!empty($image->social_icon->src)){
+			$thumbnail = $image->social_icon->src;
 			if (file_exists($thumbnail))
 			{
 			unlink($thumbnail);

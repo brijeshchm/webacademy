@@ -107,12 +107,14 @@ $image = [];
 				if(file_exists($destinationPath.'/'.$filename)){
 				$filename = $name."_".time().'.'.$ext;
 				}
-				$file->move($destinationPath,$filename);				 
-				$image['review_image'] = array(
-				'name'=>$filename,
-				'alt'=>$alt,						
-				'src'=>$filePath."/".$filename
-				);	
+				$file->move($destinationPath,$filename);	
+				$image = [
+						'review_image' => [
+							'name'   => $filename,
+							'alt'    => $filename,							 
+							'src'    => $filePath . '/' . $filename,
+						],
+					];
 				} 
 				
 				$reviews = New Reviews;
@@ -221,7 +223,7 @@ $image = [];
 				if ($request->hasFile('review_image')) {
 				
 				$filePath = $this->getReviewsFolderStructure();
-				//	$file = Input::file('course_image');
+				 
 				$file =  $request->file('review_image');
 				$filename =str_replace(' ', '_', $file->getClientOriginalName());			 
 				$destinationPath = public_path($filePath);
@@ -232,11 +234,13 @@ $image = [];
 				$filename = $name."_".time().'.'.$ext;
 				}
 				$file->move($destinationPath,$filename);				 
-				$image['review_image'] = array(
-				'name'=>$filename,
-				'alt'=>$alt,						
-				'src'=>$filePath."/".$filename
-				);	
+				$image = [
+						'review_image' => [
+							'name'   => $filename,
+							'alt'    => $filename,							 
+							'src'    => $filePath . '/' . $filename,
+						],
+					];
 				$reviews->review_image = json_encode($image);		
 				} 				
 			 	$reviews->updated_by = '1';			
@@ -290,9 +294,7 @@ $image = [];
 				 if(!empty($vimage)){
 					$image ='<img src="'.asset($vimage->review_image->src).'" type="'.$vimage->review_image->alt.'" width="100">'; 
 				 }					
-				}else{
-					$image="";
-				}
+				} 
 				if($review->status=='1'){
 				$status .='<a href="javascript:reviewsController.status('.$review->id.',0)" title="Course status" class="btn btn-success">Active</a>';	
 				}else{

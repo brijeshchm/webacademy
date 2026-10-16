@@ -16,12 +16,12 @@ use App\Models\City;
 use App\Models\FAQs;
 use App\Models\Blog;
 use App\Models\Placement;
-use App\Models\Courses;
-use App\Offer;
+use App\Models\Course;
+use App\Models\Offer;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Helpers;
-use App\CoursesPdf;
+use App\Models\CoursesPdf;
 class CoursePDFController extends Controller
 {
     /**
@@ -103,7 +103,7 @@ class CoursePDFController extends Controller
 				
 				
 				
-				$coursesPdf = New CoursePdf;
+				$coursesPdf = New CoursesPdf;
 				$coursesPdf->category = $request->input('category');		
 				$coursesPdf->subcategory = $request->input('subcategory');					 					
 				$coursesPdf->coursePdfText = $fileTextName;				 				 								
@@ -149,9 +149,7 @@ class CoursePDFController extends Controller
      */
     public function editSaveCoursePDF(Request $request,$id)
     {	  
-	//echo "<pre>";print_r($_POST);die;  
-	
-	//echo $id;die;
+	 
         if($request->ajax()){ 
 		
 		  $validator = Validator::make($request->all(),[			 
@@ -216,8 +214,8 @@ class CoursePDFController extends Controller
 		if($request->ajax()){		
 
 		$coursesPdf= DB::table('web_coursepdf as pdf');		 
-		$coursesPdf  =$coursesPdf->join('web_categories as category','pdf.category','=','category.id','left');
-		$coursesPdf= $coursesPdf->select('pdf.*','category.id as categoryid','category.category as categoryname');		
+		$coursesPdf  = $coursesPdf->join('web_categories as category','pdf.category','=','category.id','left');
+		$coursesPdf  = $coursesPdf->select('pdf.*','category.id as categoryid','category.category as categoryname');		
 		$coursesPdf = 	$coursesPdf->orderBy('category.category','ASC');		 
 		$coursesPdf = 	$coursesPdf->groupBy('pdf.subcategory');		 
 	 		 
@@ -273,7 +271,7 @@ class CoursePDFController extends Controller
 					$status .='<a href="javascript:coursePdfController.status('.$pdf->id.',1)" title="Course status" class="btn btn-danger" >Inactive</a>';	
 					}
 				$coursePdfText= CoursesPdf::where('subcategory',$pdf->subcategory)->get();
-				// echo "<pre>";print_r($coursePdfText);die;
+				 
 				
 				 $PdfText= "";
 				 $linkhtml= "";
@@ -292,12 +290,7 @@ class CoursePDFController extends Controller
 																			 																			
 						$linkhtml .='<a href="/download/'.$text->coursePdfText.'.pdf" target="_blank" class="cnt-dwnss lms-pdf" title="'.ucwords(str_replace('-',' ',$text->coursePdfText)).'" data-stud_id="'.$text->id.'" style="margin-right: 5px;"><span class="course-pdf"> <i class="fa fa-file-pdf-o"></i> </span></a>';
 						$linkhtml .='<a href="javascript:coursePdfController.delete('.$text->id.')" title="PDF deleted" class="deleteIcon lms-delete" onclick="return ConfirmDelete()" ><i class="fa fa-trash" style="color:red"></i></a></div></div>';
-						
-						
-						
-						
-						
-						
+								
 						
 						$PdfText .= '<li>'.$text->coursePdfText.''.$linkhtml.'</li>';
 					}
@@ -332,7 +325,7 @@ class CoursePDFController extends Controller
     public function coursepdfstatus(Request $request, $id,$val)
     {
 		
-		//echo $id;$val;die;
+		 
 		try{
 				$coursePdf = CoursesPdf::findorFail($id);
 				$coursePdf->status = $val;
@@ -361,7 +354,7 @@ class CoursePDFController extends Controller
 		$coursesPdf  =$coursesPdf->join('web_categories as category','pdf.category','=','category.id','left');
 		$coursesPdf= $coursesPdf->select('pdf.*','category.id as categoryid','category.category as categoryname');		
 		$coursesPdf = 	$coursesPdf->orderBy('category.category','ASC');		 
-	//	$coursesPdf = 	$coursesPdf->groupBy('pdf.subcategory');		 
+		 
 	 		 
 		if($request->input('search.value')!==''){
 				$coursesPdf = $coursesPdf->where(function($query) use($request){
@@ -377,7 +370,7 @@ class CoursePDFController extends Controller
 			$returnLeads['recordsTotal'] = $coursesPdf->total();
 			$returnLeads['recordsFiltered'] = $coursesPdf->total();
 			$returnLeads['recordCollection'] = [];
- 
+ dd($coursesPdf);
 			foreach($coursesPdf as $pdf){				 
 				$action="";
 				$seperate="";				 					 
@@ -400,13 +393,12 @@ class CoursePDFController extends Controller
 					 $subcategoryname="";
 				 }
 				 
-				 	if($pdf->status=='1'){
-					$status .='<a href="javascript:coursePdfController.status('.$pdf->id.',0)" title="Course status" class="btn btn-success" >Active</a>';	
-					}else{
-					$status .='<a href="javascript:coursePdfController.status('.$pdf->id.',1)" title="Course status" class="btn btn-danger" >Inactive</a>';	
-					}
-				 
-				 
+				if($pdf->status=='1'){
+				$status .='<a href="javascript:coursePdfController.status('.$pdf->id.',0)" title="Course status" class="btn btn-success" >Active</a>';	
+				}else{
+				$status .='<a href="javascript:coursePdfController.status('.$pdf->id.',1)" title="Course status" class="btn btn-danger" >Inactive</a>';	
+				}
+							 
 					$data[] = [		
 						$categoryname,					 			
 						$subcategoryname,						

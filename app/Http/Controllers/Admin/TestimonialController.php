@@ -15,8 +15,8 @@ use Image;
 use App\Models\City;
 use App\Models\FAQs;
 use App\Models\Blog;
-use App\Testimonial;
-use App\Models\Courses;
+use App\Models\Testimonial;
+use App\Models\Course;
 use App\Helpers;
 class TestimonialController extends Controller
 {

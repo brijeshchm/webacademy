@@ -12,7 +12,7 @@ use Session;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Input;
 use Image; 
-use App\CourseCity;
+use App\Models\CourseCity;
 use App\Helpers;
 class CityController extends Controller
 {

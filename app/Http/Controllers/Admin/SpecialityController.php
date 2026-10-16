@@ -15,7 +15,7 @@ use Image;
 use App\Models\Courses;
 use App\Models\Category;
 use App\Models\Speciality;
-use App\Social;
+use App\Models\Social;
 use App\Helpers;
 class SpecialityController extends Controller
 {
