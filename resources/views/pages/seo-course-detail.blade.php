@@ -233,7 +233,7 @@
 @section('content')
 <div class="pb-24 bg-gray-50">
     {{-- ═══ HERO ═══ --}}
-    <div class="relative overflow-hidden bg-gradient-to-br from-[#06102a] via-[#0c1f5c] to-[#0a0f2e]">
+    <div class="relative overflow-hidden" style="background: linear-gradient(to bottom right, #5f7cc7, #37509f, #5066f3);">
         <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none"></div>
         <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-blue-500/15 rounded-full blur-[130px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-[100px] pointer-events-none"></div>
