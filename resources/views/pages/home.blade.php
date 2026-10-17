@@ -450,7 +450,7 @@
                 <h2 class="text-3xl md:text-4xl font-display font-extrabold mb-4 text-gray-900">{{ t('home.chooseYourPath') }}</h2>
                 <p class="text-lg text-gray-500">{{ t('home.chooseYourPathDesc') }}</p>
             </div>
-            <a href="{{ url('/categories') }}" class="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 font-semibold whitespace-nowrap group bg-primary/5 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-colors">
+            <a href="{{ route('courses') }}" class="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 font-semibold whitespace-nowrap group bg-primary/5 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-colors">
                 {{ t('home.viewAllPaths') }} hh
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -686,7 +686,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
 
         <div class="mt-10 text-center md:hidden">
-            <a href="{{ url('/courses') }}" class="inline-flex items-center justify-center w-full h-10 px-4 border border-input bg-white/50 backdrop-blur-md rounded-xl text-sm font-medium hover:bg-accent">{{ t('home.viewAllPrograms') }}</a>
+            <a href="{{ route('courses') }}" class="inline-flex items-center justify-center w-full h-10 px-4 border border-input bg-white/50 backdrop-blur-md rounded-xl text-sm font-medium hover:bg-accent">{{ t('home.viewAllPrograms') }}</a>
         </div>
     </div>
 </section>

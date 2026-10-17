@@ -31,9 +31,9 @@
             <h1 class="text-2xl md:text-3xl font-display font-bold">Privacy Policy</h1>
             <p class="mt-2 text-sm text-white/60">
                 <span>
-                    <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Home</a>
+                    <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Home</a>
                     <i class="fa fa-angle-double-right mx-2" aria-hidden="true"></i>
-                    <a href="{{ url('privacy-policy') }}" class="hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="{{ route('privacy.policy') }}" class="hover:text-primary transition-colors">Privacy Policy</a>
                     <i class="fa fa-angle-double-right mx-2" aria-hidden="true"></i>
                     <strong class="text-white font-medium" aria-current="page">Privacy Policy</strong>
                 </span>

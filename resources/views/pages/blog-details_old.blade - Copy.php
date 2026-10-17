@@ -32,7 +32,7 @@
                 <h1><span>Blogs Details </span></h1> 
 			</div>
             <div class="bread_crums">
-                <p id="breadcrumbs"><span><span><a href="{{route('home')}}">Home</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <span><a href="{{url('blog')}}">Blogs</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <strong class="breadcrumb_last" aria-current="page">Blog</strong></span></span></span></p>            </div>
+                <p id="breadcrumbs"><span><span><a href="{{route('home')}}">Home</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <span><a href="{{route('blog')}}">Blogs</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <strong class="breadcrumb_last" aria-current="page">Blog</strong></span></span></span></p>            </div>
         </div>
     </div>
 </div>

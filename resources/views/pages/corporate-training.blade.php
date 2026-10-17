@@ -97,7 +97,7 @@
                 <p class="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">{{ t('corporateTraining.hero.subtitle') }}</p>
                 <div class="mt-9 flex flex-col gap-3 sm:flex-row">
                     <a href="#enquiry" class="inline-flex h-13 items-center justify-center gap-2 rounded-full px-7 text-base font-bold shadow-xl shadow-primary/25 bg-primary text-primary-foreground">{{ t('corporateTraining.hero.ctaPrimary') }} {!! $icon('arrow-right', 'h-4 w-4 rtl:rotate-180') !!}</a>
-                    <a href="/enquiry" class="inline-flex h-13 items-center justify-center gap-2 rounded-full border border-primary/20 bg-card/60 px-7 text-base font-bold">{{ t('corporateTraining.hero.ctaSecondary') }} {!! $icon('chevron-right', 'h-4 w-4 rtl:rotate-180') !!}</a>
+                    <a href="{{ route('courses.enquiry') }}" class="inline-flex h-13 items-center justify-center gap-2 rounded-full border border-primary/20 bg-card/60 px-7 text-base font-bold">{{ t('corporateTraining.hero.ctaSecondary') }} {!! $icon('chevron-right', 'h-4 w-4 rtl:rotate-180') !!}</a>
                 </div>
                 <div class="mt-11 flex flex-wrap items-center gap-x-7 gap-y-3 text-xs font-bold uppercase tracking-[0.13em] text-muted-foreground"><span class="inline-flex items-center gap-2">{!! $icon('badge-check', 'h-4 w-4 text-primary') !!} {{ t('corporateTraining.hero.trust1') }}</span><span class="inline-flex items-center gap-2">{!! $icon('globe', 'h-4 w-4 text-primary') !!} {{ t('corporateTraining.hero.trust2') }}</span></div>
             </div>

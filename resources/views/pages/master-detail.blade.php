@@ -171,9 +171,7 @@
                         <a href="javascript:void(0)" data-lead-comman-popup rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-[#e53935] hover:bg-[#c62828] text-white shadow-xl shadow-red-700/40 rounded-xl ring-2 ring-[#e53935]/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5">
                             {{ t('doctorateDetail.applyNow') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'ml-2 h-4 w-4'])
                         </a>
-                        <a href="{{ url('/doctorate') }}" class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">
-                            {{ t('doctorateDetail.allProgrammesArrow') }}
-                        </a>
+                        
                     </div>
 
                     {{-- Trust row --}}
@@ -237,7 +235,7 @@
                         </div>
 
                         <div class="mt-5 space-y-2 border-t border-dashed border-gray-100 pt-4">
-                            <a href="{{ url('/enquiry') }}" class="inline-flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold border border-gray-200 hover:border-[#e53935] hover:text-[#e53935]">
+                            <a href="{{ route('courses.enquiry') }}" class="inline-flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold border border-gray-200 hover:border-[#e53935] hover:text-[#e53935]">
                                 @include('partials.lucide', ['icon' => 'message-square', 'class' => 'h-4 w-4 mr-2']){{ t('doctorateDetail.card.requestCounselling') }}
                             </a>
                             <button type="button" class="inline-flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold text-gray-500 hover:text-[#e53935]">
@@ -818,7 +816,7 @@ Interview with programme director
                             <p class="font-semibold text-white text-sm">{{ t('doctorateDetail.corporate.title') }}</p>
                         </div>
                         <p class="text-xs text-white/50 mb-3 leading-relaxed">{{ t('doctorateDetail.corporate.desc') }}</p>
-                        <a href="{{ url('/corporate-training') }}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-white border border-white/20 hover:bg-white/10 rounded-xl">
+                        <a href="{{ route('corporate.training') }}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-white border border-white/20 hover:bg-white/10 rounded-xl">
                             {{ t('doctorateDetail.corporate.button') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'w-3.5 h-3.5 ml-1'])
                         </a>
                     </div>
@@ -826,9 +824,7 @@ Interview with programme director
                     {{-- Browse all programmes --}}
                     <div class="bg-gray-50 rounded-2xl border border-gray-100 p-5">
                         <p class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">@include('partials.lucide', ['icon' => 'graduation-cap', 'class' => 'h-4 w-4 text-[#e53935]']) {{ t('doctorateDetail.browseOther') }}</p>
-                        <a href="{{ url('/doctorate') }}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold border border-gray-200 hover:border-[#e53935] hover:text-[#e53935] rounded-xl">
-                            {{ t('doctorateDetail.viewAll16') }}
-                        </a>
+                        
                     </div>
                 </div>
             </div>

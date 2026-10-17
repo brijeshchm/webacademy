@@ -12,7 +12,7 @@
     <div class="container relative z-10 mx-auto px-4 pb-8 pt-14 md:px-6 md:pt-20">
         <div class="grid grid-cols-1 gap-12 border-b border-primary/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_1.2fr] lg:gap-10 lg:pb-14">
             <div class="space-y-6">
-                <a href="/" aria-label="Corporate Academy home" class="group inline-flex items-center">
+                <a href="{{ route('home') }}" aria-label="Corporate Academy home" class="group inline-flex items-center">
                     <img loading="lazy" decoding="async" src="/images/logo-academy.webp" alt="Corporates Academy" width="802" height="205" class="h-16 w-auto max-w-[260px] object-contain transition-transform duration-300 group-hover:scale-[1.03]">
                 </a>
                 <p class="max-w-sm text-sm leading-7 text-muted-foreground">{{ t('footer.empowering') }}</p>
@@ -43,7 +43,7 @@
                     <li><a href="{{ route('aboutUs') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">{{ t('footer.aboutUs') }}{!! $arrowUpRight !!}</a></li>
                     <li><a href="{{ route('courses') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">{{ t('footer.learningPaths') }}{!! $arrowUpRight !!}</a></li>
                     <li><a href="{{ route('contactUs')}}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">{{ t('footer.contactSupport') }}{!! $arrowUpRight !!}</a></li>
-                    <li><a href="/blog" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Blog</a></li>
+                    <li><a href="{{ route('blog') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Blog</a></li>
 
                     <li><a href="{{ route('privacy.policy') }}" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Privacy Policy {!! $arrowUpRight !!}</a></li>
 

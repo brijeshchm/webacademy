@@ -563,7 +563,7 @@
                             {!! $icon('phone', 'mr-2 h-4 w-4') !!} {{ t('scholarshipPage.finalCta.call') }}
                         </button>
                     </a>
-                    <a href="/enquiry">
+                    <a href="{{ route('courses.enquiry') }}">
                         <button class="inline-flex items-center justify-center h-11 px-7 rounded-xl font-bold border border-gray-200 hover:border-primary hover:text-primary text-sm">
                             {!! $icon('mail', 'mr-2 h-4 w-4') !!} {{ t('scholarshipPage.finalCta.sendMessage') }}
                         </button>

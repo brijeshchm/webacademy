@@ -29,9 +29,9 @@
             <h1 class="text-2xl md:text-3xl font-display font-bold">Terms &amp; Conditions</h1>
             <p class="mt-2 text-sm text-white/60">
                 <span>
-                    <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Home</a>
+                    <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Home</a>
                     <i class="fa fa-angle-double-right mx-2" aria-hidden="true"></i>
-                    <a href="{{ url('terms-conditions') }}" class="hover:text-primary transition-colors">Terms &amp; Conditions</a>
+                    <a href="{{ route('terms.conditions') }}" class="hover:text-primary transition-colors">Terms &amp; Conditions</a>
                     <i class="fa fa-angle-double-right mx-2" aria-hidden="true"></i>
                     <strong class="text-white font-medium" aria-current="page">Terms &amp; Conditions</strong>
                 </span>

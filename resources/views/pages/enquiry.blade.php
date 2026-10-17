@@ -148,7 +148,7 @@
                         </div>
                         <h2 class="text-2xl font-display font-bold mb-3">{{ t('enquiryX.enquiryReceived') }}</h2>
                         <p class="text-muted-foreground mb-8 max-w-sm mx-auto">{{ t('enquiryX.enquiryReceivedDesc') }}</p>
-                        <a href="/enquiry" class="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-input bg-background text-sm font-semibold hover:bg-muted transition-colors">
+                        <a href="{{ route('courses.enquiry') }}" class="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-input bg-background text-sm font-semibold hover:bg-muted transition-colors">
                             {{ t('enquiryX.submitAnother') }}
                         </a>
                     </div>
