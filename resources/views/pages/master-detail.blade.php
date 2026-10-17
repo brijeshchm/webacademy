@@ -816,7 +816,7 @@ Interview with programme director
                             <p class="font-semibold text-white text-sm">{{ t('doctorateDetail.corporate.title') }}</p>
                         </div>
                         <p class="text-xs text-white/50 mb-3 leading-relaxed">{{ t('doctorateDetail.corporate.desc') }}</p>
-                        <a href="{{ route('corporate.training') }}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-white border border-white/20 hover:bg-white/10 rounded-xl">
+                        <a href="{{ route('corporate-training') }}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-white border border-white/20 hover:bg-white/10 rounded-xl">
                             {{ t('doctorateDetail.corporate.button') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'w-3.5 h-3.5 ml-1'])
                         </a>
                     </div>

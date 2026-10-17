@@ -94,7 +94,7 @@
                                 ['navX.corpLeadershipTitle', 'navX.corpLeadershipDesc'],
                                 ['navX.corpEnterpriseTitle', 'navX.corpEnterpriseDesc'],
                             ] as [$labelKey, $descKey])
-                                <a href="{{ route('corporate.training') }}" class="flex flex-col gap-0.5 p-3.5 rounded-xl hover:bg-gray-50 transition-colors group">
+                                <a href="{{ route('corporate-training') }}" class="flex flex-col gap-0.5 p-3.5 rounded-xl hover:bg-gray-50 transition-colors group">
                                     <span class="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors">{{ t($labelKey) }}</span>
                                     <span class="text-xs text-gray-400">{{ t($descKey) }}</span>
                                 </a>

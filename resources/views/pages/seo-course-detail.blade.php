@@ -1995,7 +1995,7 @@ margin-bottom: .5rem !important;
                             <p class="font-semibold text-gray-900 text-sm">{{ t('courseDetailX.trainingForTeams') }}</p>
                         </div>
                         <p class="text-xs text-gray-500 mb-3 leading-relaxed">{{ t('courseDetailX.trainingForTeamsDesc') }}</p>
-                        <a href="{{ route('corporate.training')}}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-violet-700 border border-violet-200 hover:bg-violet-50 rounded-xl">
+                        <a href="{{ route('corporate-training')}}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-violet-700 border border-violet-200 hover:bg-violet-50 rounded-xl">
                             {{ t('courseDetailX.exploreCorporatePlans') }}
                             <svg class="w-3.5 h-3.5 ml-1" {!! $iconStroke !!}><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
