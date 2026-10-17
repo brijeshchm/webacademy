@@ -169,50 +169,152 @@ function get_time($time)
 }
 
 
- 
- /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-     public function blogdetails(Request $reques,$url)
-    {		 
-		
-		$blogcategory =DB::table('web_blog as blog'); 
-		$blogcategory  =$blogcategory->join('web_categories as category','blog.category','=','category.id','left');
-		$blogcategory =$blogcategory->select('blog.*','category.category as categoryname','category.id as categoryid');
-    	$blogcategory =$blogcategory->orderby('blog.id','desc');
-    	$blogcategory =$blogcategory->where('blog.status','1');
-		$blogcategory =$blogcategory->get();
-	
-		
-		$blog_details = DB::table('web_blog as blog')
-			->leftJoin('web_categories as category', 'blog.category', '=', 'category.id')
-			->select('blog.*', 'category.category as categoryname', 'category.id as categoryid')
-			->where('blog.slug', $url)
-			->where('blog.status', 1) // re-enabled — see flag below
-			->orderBy('blog.id', 'desc')
-			->first();
+  public function blogdetails(Request $request, $url)
+{
+    $slug = $url;
 
-if (!$blog_details) {
-    abort(404); // see flag below
+    $blogDetails = DB::table('web_blog as blog')
+        ->leftJoin('web_categories as category', 'blog.category', '=', 'category.id')
+        ->select(
+            'blog.*',
+            'category.category as categoryname',
+            'category.id as categoryid'
+        )
+        ->where('blog.slug', $slug)
+        ->where('blog.status', 1)
+        ->orderByDesc('blog.id')
+        ->first();
+
+
+
+    abort_if(!$blogDetails, 404);
+
+    $blogcategory = DB::table('web_blog as blog')
+        ->leftJoin('web_categories as category', 'blog.category', '=', 'category.id')
+        ->select(
+            'blog.*',
+            'category.category as categoryname',
+            'category.id as categoryid',
+            'category.category_slug as category_slug'
+        )
+        ->where('blog.status', 1)
+        ->orderByDesc('blog.id')
+        ->get();
+
+    $blogList = $blogcategory->all();
+    $tickerItems = array_slice($blogList, 4, 10);
+
+    $countblog = Blog::where('category', $blogDetails->category)
+        ->where('status', 1)
+        ->count();
+
+    $previous = Blog::where('status', 1)
+        ->where('id', '<', $blogDetails->id)
+        ->orderByDesc('id')
+        ->first();
+
+    $next = Blog::where('status', 1)
+        ->where('id', '>', $blogDetails->id)
+        ->orderBy('id')
+        ->first();
+
+    $blogs = Blog::where('status', 1)
+        ->where('id', '!=', $blogDetails->id)
+        ->orderByDesc('id')
+        ->limit(6)
+        ->get();
+
+    $trendCourse = Course::orderByDesc('id')
+        ->limit(6)
+        ->get();
+
+    $faqs = [];
+
+    for ($i = 1; $i <= 6; $i++) {
+        $question = $blogDetails->{'faqq' . $i} ?? '';
+        $answer = $blogDetails->{'faqa' . $i} ?? '';
+
+        if (trim($question) !== '' && trim($answer) !== '') {
+            $faqs[] = [
+                'q' => $question,
+                'a' => $answer,
+            ];
+        }
+    }
+
+    $gradients = [
+        'linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#0891b2 100%)',
+        'linear-gradient(135deg,#14532d 0%,#16a34a 50%,#0d9488 100%)',
+        'linear-gradient(135deg,#4c1d95 0%,#7c3aed 50%,#db2777 100%)',
+        'linear-gradient(135deg,#7c2d12 0%,#ea580c 50%,#d97706 100%)',
+        'linear-gradient(135deg,#064e3b 0%,#0f766e 50%,#0284c7 100%)',
+        'linear-gradient(135deg,#581c87 0%,#a21caf 50%,#db2777 100%)',
+    ];
+
+    $authorColor = $gradients[
+        (int) $blogDetails->id % count($gradients)
+    ];
+
+    $paragraphs = [];
+
+    for ($i = 1; $i <= 6; $i++) {
+        $paragraph = $blogDetails->{'paragraph' . $i} ?? '';
+
+        if (trim($paragraph) !== '') {
+            $paragraphs[] = $paragraph;
+        }
+    }
+
+    $categories = $blogcategory
+        ->filter(fn ($blog) => $blog->categoryid !== null)
+        ->unique('categoryid')
+        ->map(fn ($blog) => (object) [
+            'id' => $blog->categoryid,
+            'category' => $blog->categoryname,
+            'category_slug' => $blog->category_slug,
+        ])
+        ->values()
+        ->all();
+// dd($categories);
+    $city = 'delhi';
+    $metaTitle = $blogDetails->meta_title ?: $blogDetails->title;
+    $metaDescription = $blogDetails->meta_description ?? '';
+    $keyword = $blogDetails->title;
+
+    // Preserve the original variable name for existing Blade references.
+    $blog_details = $blogDetails;
+		$bgImage = "";
+	if($blogDetails->blog_image){
+$image = json_decode($blogDetails->blog_image);
+$bgImage = $image->blog_image->src;
+
+	};
+
+	 
+// dd($blogDetails);
+    return view('pages.blog-details', compact(
+        'blogDetails',
+        'blog_details',
+        'blogcategory',
+        'blogList',
+        'tickerItems',
+        'categories',
+        'countblog',
+        'blogs',
+        'bgImage',
+        'trendCourse',
+        'previous',
+        'next',
+        'faqs',
+        'authorColor',
+        'paragraphs',
+        'slug',
+        'city',
+        'metaTitle',
+        'metaDescription',
+        'keyword'
+    ));
 }
-			$countblog =Blog::where('category',$blog_details->category)->where('status',1)->count();
-		
-	 
-		
-		$previous = Blog::where('id', '<', $blog_details->id)->orderBy('id','desc')->first();
-	 
-		$next = Blog::select('*')->where('id', '>', $blog_details->id)->orderBy('id','asc')->first();
-		 
-	$blogs =Blog::limit(6)->get();
-	$trendCourse =Course::limit(6)->get();
-	
-	dd($trendCourse);
-	
-	
-        return view('site.blog-details',['blog_details'=>$blog_details,'blogcategory'=>$blogcategory,'countblog'=>$countblog,'trendCourse'=>$trendCourse,'blogs'=>$blogs])->with('previous', $previous)->with('next', $next);
-    } 
 	 
  
  
@@ -293,9 +395,9 @@ if (!$blog_details) {
 		$html .= '<div class="image-crs an-column-blog col-lg-3 col-md-4 col-sm-4 col-xs-6 filter">';
 					
 		$html .='<div class="content"><div class="an-blog-img"><a href="'.url('blog/'.$blog->slug).'" >';
-			$vblogimage= unserialize($blog->blog_icons); 
+			$vblogimage= json_decode($blog->blog_image); 
 			if(!empty($vblogimage)){
-			$html .='<img src="'.asset('public/'.$vblogimage['blog_icons']['src']).'" alt="'.$vblogimage['blog_icons']['alt'].'">'; 
+			$html .='<img src="'.asset('public/'.$vblogimage->blog_image->src).'" alt="'.$vblogimage->blog_image->alt.'">'; 
 			}else{
 				$html .='';				
 			} 
@@ -401,9 +503,9 @@ if (!$blog_details) {
 		$html .= '<div class="image-crs an-column-blog col-lg-3 col-md-4 col-sm-4 col-xs-6 filter">';
 					
 		$html .='<div class="content"><div class="an-blog-img"><a href="'.url('blog/'.$blog->slug).'" >';
-			$vblogimage= unserialize($blog->blog_icons); 
+			$vblogimage= json_decode($blog->blog_image); 
 			if(!empty($vblogimage)){
-			$html .='<img src="'.asset('public/'.$vblogimage['blog_icons']['src']).'" alt="'.$vblogimage['blog_icons']['alt'].'">'; 
+			$html .='<img src="'.asset('public/'.$vblogimage->blog_image->src).'" alt="'.$vblogimage->blog_image->alt.'">'; 
 			}else{
 				$html .='';				
 			} 

@@ -269,7 +269,7 @@
     <script type="application/ld+json">{!! json_ld($faqJsonLd) !!}</script>
  @endpush
 {{-- ── HERO ─────────────────────────────────────────────────── --}}
-<section class="relative bg-[#060e24] pt-8 pb-10 md:pt-14 md:pb-16 border-b border-white/10 overflow-hidden">
+<section class="bg-gradient-to-br from-blue-50 via-white to-indigo-50">
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
         <div class="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-primary/20 blur-[120px]"></div>
@@ -280,22 +280,22 @@
         <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {{-- Left: copy + search --}}
             <div class="text-center lg:text-start max-w-xl mx-auto lg:mx-0">
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white/90 px-4 py-1.5 rounded-full text-xs font-semibold mb-5 border border-white/20 shadow-sm">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-slate-900 px-4 py-1.5 rounded-full text-xs font-semibold mb-5 border border-white/20 shadow-sm">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
                     </span>
                     {{ t('home.enrollmentOpen') }}
                 </div>
-                <h1 class="text-2xl md:text-3xl lg:text-3xl font-display font-extrabold tracking-tight text-white mb-4 leading-[1.08]">
+                <h1 class="text-2xl md:text-3xl lg:text-3xl font-display font-extrabold tracking-tight text-slate-900 mb-4 leading-[1.08]">
                     {{ t('home.heroTitle') }}
                     <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#60a5fa] via-[#a78bfa] to-[#f472b6] ca-gradient-pan">Corporate Academy</span>
                 </h1>
-                <p class="text-base md:text-lg text-white/60 mb-6 leading-relaxed">{{ t('home.heroSubtitle') }}</p>
+                <p class="text-base md:text-lg text-slate-900 mb-6 leading-relaxed">{{ t('home.heroSubtitle') }}</p>
 
                 {{-- Search box: GET /courses?search=... works without JS; JS enhances with autocomplete --}}
                 <div class="relative mb-6 max-w-lg mx-auto lg:mx-0" data-hero-search>
-                    <form action="{{ url('/courses') }}" method="GET" class="flex items-center gap-2 p-1.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl shadow-black/30">
+                    <form action="{{ route('courses') }}" method="GET" class="flex items-center gap-2 p-1.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl shadow-black/30">
                         <div class="relative flex-1">
                             <svg class="absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                             <input
@@ -309,7 +309,7 @@
                                 aria-autocomplete="list"
                                 autocomplete="off"
                                 data-hero-search-input
-                                class="flex w-full rounded-md h-10 pl-10 rtl:pl-3 rtl:pr-10 border-0 bg-transparent shadow-none focus-visible:ring-0 focus-visible:outline-none text-base text-white placeholder:text-white/40"
+                                class="flex w-full rounded-md h-10 pl-10 rtl:pl-3 rtl:pr-10 border-0 bg-transparent shadow-none focus-visible:ring-0 focus-visible:outline-none text-base text-slate-900 placeholder:text-slate/40"
                             >
                         </div>
                         <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl h-10 px-5 shrink-0 shadow-md shadow-primary/20 bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0">
@@ -322,12 +322,12 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center lg:items-start gap-3 lg:justify-start justify-center">
-                    <a href="{{ url('/courses') }}" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-sm font-semibold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/40 group transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ring-2 ring-primary/30 ring-offset-2 ring-offset-transparent">
+                    <a href="{{ route('courses') }}" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-sm font-semibold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/40 group transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ring-2 ring-primary/30 ring-offset-2 ring-offset-transparent ">
                         {{ t('home.explorePrograms') }}
                         <svg class="ms-2 w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>
-                    <a href="{{ url('/categories') }}" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-sm font-semibold rounded-xl border border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md">
-                        {{ t('home.viewLearningPaths') }}
+                    <a href="{{ route('corporate-training') }}" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-sm font-semibold rounded-xl border border-white/20 bg-white/10 text-slate-900 hover:bg-white/20 backdrop-blur-md">
+                        View Corporate Paths
                     </a>
                 </div>
 
@@ -629,7 +629,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <h2 class="text-3xl md:text-4xl font-display font-extrabold mb-4 text-gray-900">{{ t('home.featuredPrograms') }}</h2>
                 <p class="text-lg text-gray-500">{{ t('home.featuredProgramsDesc') }}</p>
             </div>
-            <a href="{{ url('/courses') }}" class="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 font-semibold whitespace-nowrap group bg-primary/5 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-colors">
+            <a href="{{ route('courses') }}" class="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 font-semibold whitespace-nowrap group bg-primary/5 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-colors">
                 {{ t('home.viewAllPrograms') }}
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -637,14 +637,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach ($featuredCourses->take(6) as $course)
+
+                    @php                                 
+
+                    $col = $getCol($course->category_slug);
+
+                    @endphp
+
                 <div class="h-full">
-                    <a href="{{ url('/courses/' . $course->slug) }}">
-                        <div class="h-full hover:shadow-2xl transition-all duration-500 border border-white/60 bg-white/60 backdrop-blur-md hover:border-primary/40 cursor-pointer overflow-hidden group flex flex-col rounded-2xl shadow-sm">
+                    <a href="{{ route('courses.show',$course->slug) }}">
+                        <div class="h-full hover:shadow-2xl transition-all duration-500 border border-white/60 bg-white/60 backdrop-blur-md hover:border-primary/40 cursor-pointer overflow-hidden group flex flex-col rounded-2xl shadow-sm" >
                             <div class="h-48 bg-muted relative overflow-hidden">
                                 @if ($course->image_url)
                                     <img loading="lazy" decoding="async" src="{{ $course->image_url }}" alt="{{ $tDyn($course->title) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                 @else
-                                    <div class="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                                    <div class="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-700" style="background: linear-gradient(90deg, {{ $col['from'] }}, {{ $col['to'] }})">
                                         <svg class="h-12 w-12 text-primary/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
                                     </div>
                                 @endif
@@ -685,8 +692,15 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 
 @include('partials.home.why')
+  
+  
 
-{{-- ── ABOUT / SKILLS CONSTELLATION ────────────────────────── --}}
+
+
+
+
+
+
 <section class="py-8 md:py-10 relative overflow-hidden bg-gradient-to-br from-[hsl(217_45%_11%)] via-[hsl(220_40%_10%)] to-[hsl(224_50%_8%)] text-white">
     <div class="absolute -top-24 left-1/4 w-[360px] h-[360px] bg-primary/20 rounded-full blur-3xl pointer-events-none ca-float"></div>
     <div class="absolute bottom-0 right-0 w-[360px] h-[360px] bg-secondary/15 rounded-full blur-3xl pointer-events-none ca-float-slow"></div>
@@ -701,7 +715,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <h2 class="text-2xl md:text-3xl font-display font-bold leading-[1.1] mb-2">
                     {{ t('home.aboutTitle1') }}
                     <span class="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary ca-gradient-pan">{{ t('home.aboutTitleAccent') }}</span>
-                    {{ t('home.aboutTitle2') }}
+                    {{ t('home.aboutTitle2') }} 
                 </h2>
                 <p class="text-xs font-semibold uppercase tracking-wider text-primary mb-3">{{ t('home.aboutCategories') }}</p>
                 <p class="text-sm text-white/65 leading-relaxed mb-4 max-w-xl mx-auto lg:mx-0">{{ t('home.aboutParagraph') }}</p>
@@ -721,53 +735,286 @@ document.addEventListener('DOMContentLoaded', function () {
                     </a>
                 </div>
             </div>
-            {{-- Skills constellation (static list — the animated globe is JS-only in React) --}}
-            
-            {{-- Skills constellation — CSS-only circular arrangement --}}
-<div class="flex justify-center">
-    <div class="relative aspect-square w-full max-w-[400px] rounded-full">
 
-        <div class="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02]"></div>
-        <div class="absolute inset-[15%] rounded-full border border-white/10"></div>
-        <div class="absolute inset-[35%] rounded-full border border-white/5"></div>
 
-        @php
-            $skills = $allCourses->take(18);
-            $total  = $skills->count();
-            $rings  = [
-                ['radius' => 46, 'count' => 8],
-                ['radius' => 30, 'count' => 6],
-                ['radius' => 12, 'count' => 4],
-            ];
-            $flatIndex = 0;
-        @endphp
 
-        @foreach ($rings as $ring)
-            @for ($i = 0; $i < $ring['count'] && $flatIndex < $total; $i++)
-                @php
-                    $course = $skills[$flatIndex];
-                    $angle  = (360 / $ring['count']) * $i + ($ring['radius'] * 2);
-                    $rad    = deg2rad($angle);
-                    $x      = 50 + $ring['radius'] * cos($rad);
-                    $y      = 50 + $ring['radius'] * sin($rad);
-                    $delay  = $flatIndex * 0.15;
-                    $flatIndex++;
-                @endphp
-                
-                    <a href="{{ route('courses.show', $course->slug) }}"
-                    class="absolute z-10 -translate-x-1/2 -translate-y-1/2 inline-flex items-center whitespace-nowrap rounded-full bg-white/8 border border-white/15 px-3 py-1 text-[11px] text-white/70 backdrop-blur-sm hover:bg-primary/20 hover:border-primary/40 hover:text-white transition-colors duration-300 ca-float"
-                    style="left: {{ $x }}%; top: {{ $y }}%; animation-delay: {{ $delay }}s;"
+
+            @php
+    $facultySlides = [
+        [
+            'label' => 'Workday',
+            'name'  => 'Dr. Anjali Mehta',
+            'title' => 'Industry Mentor',
+            'image' => asset('images/hero/learner-1.webp'),
+        ],
+        [
+            'label' => 'Workday',
+            'name'  => 'Rahul Singh',
+            'title' => 'Data Science Professional',
+            'image' => asset('images/hero/learner-2.webp'),
+        ],
+        [
+            'label' => 'Workday',
+            'name'  => 'Priya Verma',
+            'title' => 'Machine Learning Mentor',
+            'image' => asset('images/hero/learner-1.webp'),
+        ],
+    ];
+@endphp
+
+<div class="flex flex-col items-center" data-faculty-slider>
+
+    
+    <div class="relative mx-auto w-full max-w-[280px]">
+
+        {{-- Decorative stacked cards --}}
+        <div aria-hidden="true"
+             class="absolute inset-0 rotate-6 rounded-2xl border
+                    border-white/10 bg-indigo-500/30"></div>
+
+        <div aria-hidden="true"
+             class="absolute inset-0 -rotate-3 rounded-2xl border
+                    border-white/10 bg-orange-500/20"></div>
+
+        {{-- Slider --}}
+        <div class="relative h-[360px] overflow-hidden rounded-2xl
+                    border border-white/20 bg-slate-800 shadow-2xl"
+             role="region"
+             aria-roledescription="carousel"
+             aria-label="Faculty feedback">
+
+            @foreach($facultySlides as $i => $slide)
+                <div
+                    data-faculty-slide
+                    class="absolute inset-0 duration-500 ease-in-out"
+                    style="opacity: {{ $i === 0 ? '1' : '0' }};
+                           z-index: {{ $i === 0 ? '1' : '0' }};
+                           pointer-events: {{ $i === 0 ? 'auto' : 'none' }};"
+                    aria-hidden="{{ $i === 0 ? 'false' : 'true' }}"
                 >
-                    {{ $course->title }}
-                </a>
-            @endfor
-        @endforeach
+                    {{-- Image --}}
+                    <img
+                        src="{{ $slide['image'] }}"
+                        alt="{{ $slide['name'] }}"
+                        width="280"
+                        height="360"
+                        loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
+                        class="h-full w-full object-cover object-top"
+                    >
 
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary shadow-lg shadow-primary/30 ca-gradient-pan"></div>
+                    {{-- Image overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t
+                                from-black via-black/10 to-black/20"></div>
+
+                    {{-- Label --}}
+                    <div class="absolute left-4 right-4 top-4">
+                        <span class="inline-block rounded-full border
+                                     border-white/20 bg-black/30 px-3 py-1.5
+                                     text-[10px] font-bold text-black backdrop-blur-md">
+                            {{ $slide['label'] }}
+                        </span>
+                    </div>
+
+                    {{-- Details --}}
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                       
+                        <h3 class="text-lg font-bold text-black">
+                            {{ $slide['name'] }}
+                        </h3>
+
+                        <p class="mt-1 text-xs leading-relaxed text-black">
+                            {{ $slide['title'] }}
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+
+            {{-- Previous --}}
+            <button
+                type="button"
+                data-faculty-prev
+                aria-label="Previous feedback"
+                class="absolute left-2 top-1/2 z-10 flex h-9 w-9
+                       -translate-y-1/2 items-center justify-center rounded-full
+                       border border-white/20 bg-black/30 text-xl text-white
+                       backdrop-blur-md transition hover:bg-black/60
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                ‹
+            </button>
+
+            {{-- Next --}}
+            <button
+                type="button"
+                data-faculty-next
+                aria-label="Next feedback"
+                class="absolute right-2 top-1/2 z-10 flex h-9 w-9
+                       -translate-y-1/2 items-center justify-center rounded-full
+                       border border-white/20 bg-black/30 text-xl text-white
+                       backdrop-blur-md transition hover:bg-black/60
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                ›
+            </button>
         </div>
     </div>
-</div>      
+
+    {{-- Dots --}}
+    <div class="mt-6 flex items-center gap-1">
+        @foreach($facultySlides as $i => $slide)
+            <button
+                type="button"
+                data-faculty-dot="{{ $i }}"
+                aria-label="Show feedback {{ $i + 1 }}"
+                aria-current="{{ $i === 0 ? 'true' : 'false' }}"
+                class="flex h-8 w-8 items-center justify-center rounded-full
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                <span
+                    data-faculty-dot-indicator
+                    class="block h-2 rounded-full transition-all duration-300"
+                    style="width: {{ $i === 0 ? '24px' : '8px' }};
+                           background-color: {{ $i === 0 ? '#ffffff' : '#64748b' }};"
+                ></span>
+            </button>
+        @endforeach
+    </div>
+</div>
+
+<script>
+(() => {
+    function initializeFacultySliders() {
+        document.querySelectorAll('[data-faculty-slider]').forEach(root => {
+            // Prevent duplicate initialization.
+            if (root.dataset.initialized === 'true') return;
+            root.dataset.initialized = 'true';
+
+            const slides = [...root.querySelectorAll('[data-faculty-slide]')];
+            const dots = [...root.querySelectorAll('[data-faculty-dot]')];
+            const previous = root.querySelector('[data-faculty-prev]');
+            const next = root.querySelector('[data-faculty-next]');
+
+            if (!slides.length) return;
+
+            let current = 0;
+            let timer = null;
+            let hovered = false;
+            const reducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            );
+
+            function showSlide(index) {
+                current = (index + slides.length) % slides.length;
+
+                slides.forEach((slide, i) => {
+                    const active = i === current;
+
+                    slide.style.opacity = active ? '1' : '0';
+                    slide.style.zIndex = active ? '1' : '0';
+                    slide.style.pointerEvents = active ? 'auto' : 'none';
+                    slide.setAttribute('aria-hidden', String(!active));
+                });
+
+                dots.forEach((dot, i) => {
+                    const active = i === current;
+                    const indicator = dot.querySelector(
+                        '[data-faculty-dot-indicator]'
+                    );
+
+                    dot.setAttribute('aria-current', String(active));
+
+                    if (indicator) {
+                        indicator.style.width = active ? '24px' : '8px';
+                        indicator.style.backgroundColor =
+                            active ? '#ffffff' : '#64748b';
+                    }
+                });
+            }
+
+            function stopAutoplay() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+
+                if (
+                    slides.length < 2 ||
+                    document.hidden ||
+                    hovered ||
+                    root.contains(document.activeElement) ||
+                    reducedMotion.matches
+                ) return;
+
+                timer = setInterval(() => {
+                    showSlide(current + 1);
+                }, 5000);
+            }
+
+            previous?.addEventListener('click', () => {
+                showSlide(current - 1);
+                startAutoplay();
+            });
+
+            next?.addEventListener('click', () => {
+                showSlide(current + 1);
+                startAutoplay();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    startAutoplay();
+                });
+            });
+
+            root.addEventListener('mouseenter', () => {
+                hovered = true;
+                stopAutoplay();
+            });
+
+            root.addEventListener('mouseleave', () => {
+                hovered = false;
+                startAutoplay();
+            });
+
+            root.addEventListener('focusin', stopAutoplay);
+
+            root.addEventListener('focusout', () => {
+                setTimeout(startAutoplay, 0);
+            });
+
+            document.addEventListener('visibilitychange', startAutoplay);
+            reducedMotion.addEventListener('change', startAutoplay);
+
+            previous.hidden = slides.length < 2;
+            next.hidden = slides.length < 2;
+
+            showSlide(0);
+            startAutoplay();
+        });
+    }
+
+    // Works whether the script runs before or after DOMContentLoaded.
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initializeFacultySliders,
+            { once: true }
+        );
+    } else {
+        initializeFacultySliders();
+    }
+})();
+</script>
+  
+ 
+            
+
             
         </div>
     </div>

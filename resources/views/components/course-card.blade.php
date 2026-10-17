@@ -58,7 +58,7 @@
     $levelLabel = isset($levelKeys[$course->level]) ? t($levelKeys[$course->level]) : $course->level;
     $displayTitle = $title ?? $course->title;
 @endphp
-<a href="/courses/{{ $course->slug }}" class="block">
+<a href="{{ route('courses.show',$course->slug)}}" class="block">
     <div class="group flex items-center gap-3 bg-white border border-gray-100 rounded-xl px-3 py-2.5 hover:border-primary/20 hover:shadow-sm transition-all duration-200 cursor-pointer">
         {{-- Color accent stripe --}}
         <div class="w-1 self-stretch rounded-full shrink-0" style="background: linear-gradient(180deg, {{ $col['from'] }}, {{ $col['to'] }});"></div>

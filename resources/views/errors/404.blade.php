@@ -17,7 +17,7 @@
                     </div>
                     <h1 class="text-2xl font-display font-bold text-foreground mb-2">{{ t('notFound.title') }}</h1>
                     <p class="text-muted-foreground">{{ t('notFound.desc') }}</p>
-                    <a href="/" class="mt-6 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground transition-colors">{{ t('nav.explorePrograms') }}</a>
+                    <a href="{{ route('home') }}" class="mt-6 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground transition-colors">{{ t('nav.explorePrograms') }}</a>
                 </div>
             </div>
         </div>

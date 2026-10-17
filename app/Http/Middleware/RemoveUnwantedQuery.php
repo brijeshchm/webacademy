@@ -11,10 +11,10 @@ class RemoveUnwantedQuery
     {
  
         
-        if ($request->has('v')) {
+        // if ($request->has('v')) {
             
-            return redirect()->to($request->url(), 301);
-        }
+        //     return redirect()->to($request->url(), 301);
+        // }
 
         return $next($request);
     }

@@ -3,7 +3,7 @@
 @section('description', 'Explore the blog for the latest updates, business tips, education guides, career advice, local service insights, digital marketing trends, technology news, and helpful articles to grow your business and stay informed.')
 @section('keywords', 'blog, business blog India, local business tips, education articles, career guidance, digital marketing tips, technology news, startup tips, local services blog, IT training guides, business growth strategies, online business directory blog, articles')
 @section('content') 
-@include('client.components.banner-section')
+ 
 <style>
 
 #scroll-progress {

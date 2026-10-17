@@ -33,7 +33,7 @@ Route::get('/refund-cancellation-policy',[PageController::class,'refundCancellat
 
 
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
-Route::get('/blog/{slug}', [BlogController::class, 'blogdetails'])->name('blog.show');
+Route::get('/blog/{slug}', [BlogController::class, 'blogdetails'])->name('blog.details');
 Route::get('/blog/blogCategory/{slug}', [BlogController::class, 'blogCategory'])->name('blog.blogCategory');
 
 

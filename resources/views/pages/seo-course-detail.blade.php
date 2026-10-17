@@ -1009,54 +1009,50 @@ margin-bottom: .5rem !important;
     </p>
 
 
-    <div class="max-w-7xl mx-auto px-4 py-5 my-5">
+    <section class="bg-slate-50 py-8 sm:py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="flex flex-col lg:flex-row gap-8 lg:gap-6">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            @foreach($careerSupports as $support)
+                <div
+                    class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
+                >
+                    <div class="mb-5 flex items-start gap-4">
 
-            <div class="lg:w-2/3">
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-
-                    @foreach($careerSupports as $support)
-
-                        <div class="relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 p-6">
-
-                            <div class="flex items-center gap-3 mb-3">
-
-                                <div class="w-11 h-11 shrink-0 rounded-xl bg-primary flex items-center justify-center">
-
-                                    <img
-                                        src="{{ asset($support['image']) }}"
-                                        alt="{{ $support['alt'] }}"
-                                        class="{{ $support['class'] }} w-9 h-9 object-contain rounded-xl"
-                                        loading="lazy"
-                                    >
-
-                                </div>
-
-                                <h6 class="text-base font-bold text-gray-900">
-                                    {{ $support['title'] }}
-                                </h6>
-
-                            </div>
-
-                            <p class="text-sm text-gray-500 leading-relaxed">
-                                {{ $support['description'] }}
-                            </p>
-
-                            <div class="absolute bottom-0 left-0 w-12 h-1 rounded-full bg-blue-600"></div>
-
+                        <div
+                            class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-50 ring-1 ring-blue-100 transition-colors group-hover:bg-blue-100"
+                        >
+                            <img
+                                src="{{ asset($support['image']) }}"
+                                alt="{{ $support['alt'] ?? $support['title'] }}"
+                                width="36"
+                                height="36"
+                                loading="lazy"
+                                decoding="async"
+                                class="h-9 w-9 object-contain"
+                            >
                         </div>
 
-                    @endforeach
+                        <h3 class="pt-1 text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-700">
+                            {{ $support['title'] }}
+                        </h3>
+                    </div>
 
+                    <p class="flex-1 text-sm leading-7 text-slate-600">
+                        {{ $support['description'] }}
+                    </p>
+
+                    <div
+                        aria-hidden="true"
+                        class="mt-6 h-1 w-12 rounded-full bg-blue-600 transition-all duration-300 group-hover:w-20"
+                    ></div>
                 </div>
-
-            </div>
-
+            @endforeach
         </div>
 
     </div>
+</section>
+
 
 </section>
 
@@ -1325,84 +1321,157 @@ margin-bottom: .5rem !important;
 </section>
 @endif
 
-<div id="training-roadmap" class="bg-gray-100 border-2 m-2 p-3 rounded-xl border shadow-sm">
 
+
+
+
+<div
+    id="training-roadmap"
+    class="m-2 rounded-xl border-2 border-gray-200 bg-gray-100 px-4 py-8 shadow-sm sm:px-6 lg:px-8"
+>
     {{-- Header --}}
-    <div class="relative text-center mb-14">
-
-        <span class="inline-flex items-center rounded-full bg-red-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#7f1d1d] mb-3">
+    <div class="relative mb-14 text-center">
+        <span class="mb-3 inline-flex items-center rounded-full bg-red-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#7f1d1d]">
             Your Learning Journey
         </span>
 
-        <h2 class="text-[#7f1d1d] md:text-3xl text-2xl font-bold">Training Roadmap</h2>
-        <svg class="mx-auto" width="340" height="6" viewBox="0 0 340 6" preserveAspectRatio="none">
-            <path d="M0 3 Q170 0 340 3 Q170 6 0 3 Z" fill="#7f1d1d"></path>
+        <h2 class="text-2xl font-bold text-[#7f1d1d] md:text-3xl">
+            Training Roadmap
+        </h2>
+
+        <svg
+            class="mx-auto w-full max-w-[340px]"
+            height="6"
+            viewBox="0 0 340 6"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+        >
+            <path
+                d="M0 3 Q170 0 340 3 Q170 6 0 3 Z"
+                fill="#7f1d1d"
+            ></path>
         </svg>
 
-        <p class="max-w-2xl mx-auto mt-3 text-sm md:text-base text-gray-500">
-            A complete learning journey designed to build practical skills and prepare you for real-world opportunities.
+        <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-gray-500 md:text-base">
+            A complete learning journey designed to build practical skills
+            and prepare you for real-world opportunities.
         </p>
 
-        <div class="flex justify-center mt-5">
-            <div class="w-20 h-1 rounded-full bg-gradient-to-r from-red-800 to-red-500"></div>
+        <div class="mt-5 flex justify-center">
+            <div class="h-1 w-20 rounded-full bg-gradient-to-r from-red-800 to-red-500"></div>
         </div>
-
     </div>
 
     @php
         $roadmap = [
-            ['num' => '01', 'color' => 'rgb(43, 166, 203)', 'title' => 'Industry Expert Trainer',   'desc' => 'Learn from an experienced professional with 10+ years of real-world industry expertise.'],
-            ['num' => '02', 'color' => 'rgb(31, 167, 122)', 'title' => 'Updated Learning Resources',    'desc' => 'Get access to updated presentation decks, notes, and materials used during live training sessions.'],
-            ['num' => '03', 'color' => 'rgb(228, 60, 60)',  'title' => 'Digital Study Material','desc' => 'Receive structured e-books and reference materials to support your learning throughout the course.'],
-            ['num' => '04', 'color' => 'rgb(245, 158, 11)', 'title' => 'Practice & Assessments',      'desc' => 'Strengthen your knowledge with module-wise assignments, practice exercises, and MCQs.'],
-            ['num' => '05', 'color' => 'rgb(99, 102, 241)', 'title' => 'Recorded Sessions',            'desc' => 'Access recorded training sessions anytime for revision, missed classes, and concept reinforcement.'],
-            ['num' => '06', 'color' => 'rgb(16, 185, 129)', 'title' => 'Hands-On Projects',                   'desc' => 'Work on practical, real-world projects to apply your skills and gain valuable hands-on experience.'],
-            ['num' => '07', 'color' => 'rgb(239, 68, 68)',  'title' => 'Professional Resume Support',            'desc' => 'Build an industry-ready resume with expert guidance focused on your skills, projects, and career goals.'],
-            ['num' => '08', 'color' => 'rgb(139, 92, 246)', 'title' => 'Interview Preparation',      'desc' => 'Prepare confidently with mock interviews, practical scenarios, commonly asked questions, and expert feedback.'],
+            [
+                'num' => '01',
+                'color' => 'rgb(43, 166, 203)',
+                'title' => 'Industry Expert Trainer',
+                'desc' => 'Learn from an experienced professional with 10+ years of real-world industry expertise.',
+            ],
+            [
+                'num' => '02',
+                'color' => 'rgb(31, 167, 122)',
+                'title' => 'Updated Learning Resources',
+                'desc' => 'Get access to updated presentation decks, notes, and materials used during live training sessions.',
+            ],
+            [
+                'num' => '03',
+                'color' => 'rgb(228, 60, 60)',
+                'title' => 'Digital Study Material',
+                'desc' => 'Receive structured e-books and reference materials to support your learning throughout the course.',
+            ],
+            [
+                'num' => '04',
+                'color' => 'rgb(245, 158, 11)',
+                'title' => 'Practice & Assessments',
+                'desc' => 'Strengthen your knowledge with module-wise assignments, practice exercises, and MCQs.',
+            ],
+            [
+                'num' => '05',
+                'color' => 'rgb(99, 102, 241)',
+                'title' => 'Recorded Sessions',
+                'desc' => 'Access recorded training sessions anytime for revision, missed classes, and concept reinforcement.',
+            ],
+            [
+                'num' => '06',
+                'color' => 'rgb(16, 185, 129)',
+                'title' => 'Hands-On Projects',
+                'desc' => 'Work on practical, real-world projects to apply your skills and gain valuable hands-on experience.',
+            ],
+            [
+                'num' => '07',
+                'color' => 'rgb(239, 68, 68)',
+                'title' => 'Professional Resume Support',
+                'desc' => 'Build an industry-ready resume with expert guidance focused on your skills, projects, and career goals.',
+            ],
+            [
+                'num' => '08',
+                'color' => 'rgb(139, 92, 246)',
+                'title' => 'Interview Preparation',
+                'desc' => 'Prepare confidently with mock interviews, practical scenarios, commonly asked questions, and expert feedback.',
+            ],
         ];
     @endphp
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+    <div class="grid grid-cols-1 justify-items-center gap-2 gap-x-5 gap-y-16 pt-4 sm:grid-cols-2 lg:grid-cols-4">
         @foreach($roadmap as $step)
+            <div
+                class="relative isolate flex h-full w-full min-w-0 max-w-[280px] items-center gap-3 rounded-[28px] bg-white px-3 pb-8 pt-12 shadow-[0_18px_35px_rgba(0,0,0,0.12)] transition-all duration-300 ease-in-out hover:shadow-[0_25px_45px_rgba(0,0,0,0.18)] motion-safe:hover:-translate-y-2"
+            >
+                {{-- Number badge --}}
+                <div class="absolute -top-8 left-1/2 z-10 -translate-x-1/2">
+                    <div
+                        class="relative isolate rounded-t-2xl px-5 py-3 text-xl font-bold text-white"
+                        style="background-color: {{ $step['color'] }};"
+                    >
+                        {{-- Pulse ring behind the number --}}
+                        <span
+                            aria-hidden="true"
+                            class="pointer-events-none absolute inset-0 -z-10 rounded-t-2xl opacity-30 motion-safe:animate-ping"
+                            style="background-color: {{ $step['color'] }};"
+                        ></span>
 
-        <div class="relative w-[280px] bg-white rounded-[28px] shadow-[0_18px_35px_rgba(0,0,0,0.12)] pt-5 pb-8 px-2 flex items-center gap-3 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-[0_25px_45px_rgba(0,0,0,0.18)]">
+                        <span class="relative z-10">
+                            {{ $step['num'] }}
+                        </span>
 
-            {{-- Number badge --}}
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2">
-                <div class="relative text-white text-xl font-bold px-5 py-3 rounded-t-2xl"
-                     style="background-color: {{ $step['color'] }};">
-
-                    {{-- Pulse ring sits BEHIND the badge, badge itself never fades --}}
-                    <span class="absolute inset-0 rounded-t-2xl animate-badge-pulse pointer-events-none -z-10"
-                          style="background-color: {{ $step['color'] }};"></span>
-
-                    <span class="relative z-10">{{ $step['num'] }}</span>
-
-                    <div class="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0"
-                         style="border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 14px solid {{ $step['color'] }};">
+                        {{-- Badge triangle --}}
+                        <span
+                            aria-hidden="true"
+                            class="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2"
+                            style="
+                                border-left: 14px solid transparent;
+                                border-right: 14px solid transparent;
+                                border-top: 14px solid {{ $step['color'] }};
+                            "
+                        ></span>
                     </div>
                 </div>
+
+                {{-- Vertical accent --}}
+                <div
+                    aria-hidden="true"
+                    class="mt-1 h-16 w-0.5 shrink-0 bg-red-200"
+                ></div>
+
+                {{-- Text --}}
+                <div class="flex min-w-0 flex-1 flex-col gap-3 pt-1">
+                    <h3 class="text-[15px] font-bold leading-snug tracking-wide text-gray-800">
+                        {{ $step['title'] }}
+                    </h3>
+
+                    <p class="text-[13px] leading-relaxed text-gray-500">
+                        {{ $step['desc'] }}
+                    </p>
+                </div>
             </div>
-
-            {{-- Vertical accent line --}}
-            <div class="w-[2px] h-16 bg-red-200 shrink-0 mt-1"></div>
-
-            {{-- Text --}}
-            <div class="flex flex-col gap-3 flex-1 min-w-0 pt-1">
-                <h3 class="font-bold text-[15px] text-gray-800 tracking-wide leading-snug">
-                    {{ $step['title'] }}
-                </h3>
-                <p class="text-[13px] text-gray-500 leading-relaxed">
-                    {{ $step['desc'] }}
-                </p>
-            </div>
-
-        </div>
         @endforeach
     </div>
-
 </div>
 
+ 
 <style>
     @keyframes badge-pulse {
         0%   { opacity: 0.5; transform: scale(1); }
@@ -1413,9 +1482,8 @@ margin-bottom: .5rem !important;
         animation: badge-pulse 2.4s ease-out infinite;
     }
 </style>
-
-<section id="hiring-partners" class="scroll-mt-36 bg-white rounded-3xl border border-blue-900/40 shadow-xl p-4 sm:p-6 md:p-8 text-black">
-    <div class="bg-[#272C37] rounded-2xl p-6 md:p-8">
+ <section id="hiring-partners" class="scroll-mt-36 bg-white rounded-3xl border border-blue-900/40 shadow-xl p-4 sm:p-6 md:p-8 text-black">
+    <div class="bg-white rounded-2xl p-6 md:p-8">
 
         {{-- Header --}}
         <div class="flex items-center gap-2 mb-1">
@@ -1428,9 +1496,9 @@ margin-bottom: .5rem !important;
                 <path d="M9 15v.01"/>
                 <path d="M9 18v.01"/>
             </svg>
-            <h2 class="text-black font-bold text-xl">Our Hiring Partners</h2>
+            <h2 class="text-gray-500 font-bold text-xl">Our Hiring Partners</h2>
         </div>
-        <p class="text-black-400 text-sm mb-8">Top companies actively hire from our alumni network.</p>
+        <p class="text-gray-500 text-sm mb-8">Top companies actively hire from our alumni network.</p>
 
         @php
             $partners = [
@@ -1452,18 +1520,22 @@ margin-bottom: .5rem !important;
         {{-- Logo grid --}}
         <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-4 mb-8">
             @foreach($partners as $partner)
+           
+           
+           
+           
             <div class="group relative aspect-square bg-white rounded-2xl border border-white/10
                         flex items-center justify-center p-3
-                        shadow-[0_4px_12px_rgba(0,0,0,0.15)]
-                        hover:shadow-[0_8px_24px_rgba(59,130,246,0.35)]
-                        hover:-translate-y-1 hover:border-blue-400/40
+                        
+                        
+                        hover:-translate-y-1 
                         transition-all duration-300 ease-out overflow-hidden">
 
                 <img
                     src="{{ $partner['partnerIcon'] }}"
                     alt="{{ $partner['name'] }}"
                     class="max-w-full max-h-full w-auto h-auto object-contain
-                           grayscale opacity-70
+                           opacity-100
                            group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110
                            transition-all duration-300 ease-out"
                     loading="lazy"
@@ -1493,6 +1565,7 @@ margin-bottom: .5rem !important;
 
     </div>
 </section>
+
 
                 {{-- CURRICULUM --}}
                 @if(!empty($curriculum))

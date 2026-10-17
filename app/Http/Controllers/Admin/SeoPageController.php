@@ -80,7 +80,7 @@ class SeoPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveCourseTitle_old(Request $request)
+    public function saveCourseTitle(Request $request)
     {	  
 
         if($request->ajax()){   

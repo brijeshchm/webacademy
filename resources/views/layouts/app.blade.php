@@ -40,7 +40,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/app.css') }}">  
+<!-- <link rel="stylesheet" href="{{ asset('assets/app.css') }}">   -->
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -75,6 +77,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 @include('partials.floating-widgets')
 <!-- @include('partials.lead-popup') -->
 </div>
-<script src="/assets/app.js" defer></script>
+<!-- <script src="/assets/app.js" defer></script>x -->
 </body>
 </html>
