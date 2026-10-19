@@ -943,7 +943,7 @@ margin-bottom: .5rem !important;
         color: #111827 !important;
         font-size: 24px !important;
         line-height: 32px !important;
-        font-family: inherit !important;
+        font-weight: var(--font-weight-bold);
     }
 
     .faq-item h3,
@@ -951,7 +951,7 @@ margin-bottom: .5rem !important;
         color: #111827 !important;
         font-size: 14px !important;
         line-height: 20px !important;
-        font-family: inherit !important;
+        font-weight: var(--font-weight-bold);
     }
 
     .faq-item h4,
@@ -959,7 +959,7 @@ margin-bottom: .5rem !important;
         color: #111827 !important;
         font-size: 20px !important;
         line-height: 28px !important;
-        font-family: inherit !important;
+        font-weight: var(--font-weight-bold);
     }
 
 
