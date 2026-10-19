@@ -25,8 +25,7 @@
         // 'workday-customer-accounts-training',
         // 'workday-recruitment-training',
         // 'workday-studio-training',
-        'workday-hcm-functional-course'
-        // 'workday-hcm-functional-course-in-delhi',
+        'workday-hcm-functional-course'         
     ];
 
     $currentSlug  = strtolower(trim($course->slug ?? ''));
@@ -65,7 +64,7 @@
         'Online Live' => 'catalog.mode.onlineLive',
         'Self-Paced' => 'catalog.mode.selfPaced',
     ];
-    $catName   = isset($categoryKeys[$course->category_name]) ? t($categoryKeys[$course->category_name]) : $course->category_name;
+    $catName   = isset($categoryKeys[$course->category_name]) ? t($categoryKeys[$course->category_name]) : 'Data Science';
     $levelLbl  = isset($levelKeys[$course->level]) ? t($levelKeys[$course->level]) : $course->level;
     //$modeLbl   = isset($modeKeys[$course->mode]) ? t($modeKeys[$course->mode]) : $course->mode;
 
@@ -936,6 +935,24 @@ margin-bottom: .5rem !important;
     .faq-item[open] .icon-plus { display: none; }     /* open: hide + */
     .faq-item[open] .icon-minus { display: inline; }  /* open: show − */
     .faq-item[open] { border-color: #bfdbfe; }
+    .faq-item h3{
+        color: var(--color-gray-900);
+            font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+
+    .faq-item h2{
+        color: var(--color-gray-900);
+               
+                font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+
+    .faq-item h4{
+        color: var(--color-gray-900);
+        font-size: var(--text-1xl);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
 </style>
 
 
