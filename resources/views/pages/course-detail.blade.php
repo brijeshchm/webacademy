@@ -2,6 +2,41 @@
 @section('title', $course->meta_title)
 @section('description', $course->meta_description)
 @php
+    $indexableCourses = [
+        'aws-certification-training',
+        'six-sigma-training',
+        'salesforce-training',
+        'workday-integration-training',
+        'aws-developer-training',
+        'workday-payroll-training',
+        'workday-hcm-technical-training',
+        'workday-hcm-techno-functional-training',
+        'servicenow-training',
+        'workday-hr-case-management-training',
+        'workday-prism-analytics',
+        'machine-learning-training',
+        'python-training',
+        'data-analytics-training',
+        'generative-ai-training-program',
+        'data-science-training',
+        'artificial-intelligence-training',
+        'workday-training',
+        'workday-finance-modules-training',
+        'workday-customer-accounts-training',
+        'workday-recruitment-training',
+        'workday-studio-training',
+        'workday-hcm-functional-course',
+        // 'workday-hcm-functional-course-in-delhi',
+    ];
+
+    $currentSlug  = strtolower(trim($course->slug ?? ''));
+    $shouldIndex  = in_array($currentSlug, $indexableCourses, true);
+@endphp
+@section('meta_robots')
+<meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, follow' }}">
+@endsection
+
+@php
     use App\Support\JsonLd;
     $site = JsonLd::siteUrl();
 
