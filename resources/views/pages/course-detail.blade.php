@@ -827,12 +827,15 @@ margin-bottom: .5rem !important;
 </style>
 
     {{-- ═══ MAIN + SIDEBAR ═══ --}}
+
     <div class="container mx-auto px-4 md:px-6 pt-10">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
             {{-- LEFT --}}
             <div class="lg:col-span-2 space-y-10">
 
+
+            @if(!empty($aboutHeading->heading))
                 {{-- OVERVIEW --}}
                 <section id="overview" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                     <div class="flex items-center gap-3 mb-6">
@@ -845,21 +848,224 @@ margin-bottom: .5rem !important;
                             <p class="mb-4 last:mb-0">{!! $aboutHeading->courseabout  !!}</p>
                         @endif
 
- @for ($i = 1; $i <= 6; $i++)
-    @php
-        $paragraph = $aboutHeading->{'paragraph'.$i} ?? null;
-    @endphp
+                    @for ($i = 1; $i <= 6; $i++)
+                        @php
+                            $paragraph = $aboutHeading->{'paragraph'.$i} ?? null;
+                        @endphp
 
-    @if(!empty($paragraph))
-        <div class="flex items-start gap-2.5 text-sm text-black-500 mb-3">
-                 <svg class="mt-1 h-3.5 w-3.5 shrink-0 fill-current opacity-70" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            {{ $paragraph }}
-        </div>
-    @endif
-@endfor
+                        @if(!empty($paragraph))
+                            <div class="flex items-start gap-2.5 text-sm text-black-500 mb-3">
+                                    <svg class="mt-1 h-3.5 w-3.5 shrink-0 fill-current opacity-70" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                {{ $paragraph }}
+                            </div>
+                        @endif
+                    @endfor
 
                     </div>
+
+                       
+
+
+@if(!empty($aboutHeading->heading ))
+<div class="relative isolate overflow-hidden rounded-2xl border border-slate-200">
+    <img
+        class="block h-auto w-full"
+        src="{{ asset('images/Corporates-Academy-career-growth-banner.png') }}"
+        alt="{{ $aboutHeading->heading ?? 'Corporates Academy Career Growth' }}"
+        width="688"
+        height="359"
+        loading="lazy"
+    >
+
+    {{-- Heading background --}}
+    <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-transparent"
+        aria-hidden="true"
+    ></div>
+     
+    <div class="absolute inset-x-0 bottom-6 p-4 sm:p-6">
+        <h3 class="text-lg font-bold leading-snug text-white drop-shadow-lg sm:text-2xl lg:text-3xl">
+            {{ $course->title }}
+        </h3>
+    </div>
+</div>
+
+@endif
+
                 </section>
+
+@endif
+
+
+<section class="scroll-mt-36 bg-white " data-tailwind-course>
+ <div class="mx-auto max-w-7xl">
+  
+
+  <div class="scroll-mt-36 bg-white">
+   <div class="min-w-0 space-y-4 lg:col-span-2" data-course-accordion-list>
+ 
+@if(!empty($aboutHeading->heading1) && !empty($aboutHeading->description1))
+<details class="group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+ <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
+  <span>{{ $aboutHeading->heading1 }}:</span>
+  <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+ </summary>
+ <div class="border-t border-slate-100 px-5 py-5 text-sm leading-7 text-slate-600 sm:px-6">
+
+ {!! $aboutHeading->description1 !!}
+</div>
+</details>
+@endif
+
+
+@if(!empty($aboutHeading->heading2) && !empty($aboutHeading->description2))
+<details class="group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+ <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
+  <span>{{ $aboutHeading->heading2 }}:</span>
+  <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+ </summary>
+ <div class="border-t border-slate-100 px-5 py-5 text-sm leading-7 text-slate-600 sm:px-6">
+   {!! $aboutHeading->description2 !!}
+ 
+</div>
+</details>
+@endif
+
+@if(!empty($aboutHeading->heading3) && !empty($aboutHeading->description3))
+
+<details class="group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+ <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
+  <span>{!! $aboutHeading->heading3 !!}:</span>
+  <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+ </summary>
+ <div class="border-t border-slate-100 px-5 py-5 text-sm leading-7 text-slate-600 sm:px-6">
+     {!! $aboutHeading->description3 !!}
+</div>
+</details>
+@endif
+
+
+@if(!empty($aboutHeading->heading4) && !empty($aboutHeading->description4))
+<details class="group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+ <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
+  <span>{!! $aboutHeading->heading4 !!}:</span>
+  <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+ </summary>
+ <div class="border-t border-slate-100 px-5 py-5 text-sm leading-7 text-slate-600 sm:px-6">
+    {!! $aboutHeading->description4 !!}
+</div>
+</details>
+
+@endif
+
+@if(!empty($aboutHeading->heading5) && !empty($aboutHeading->description5))
+
+<details class="group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+ <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
+  <span>{!! $aboutHeading->heading5 !!}:</span>
+  <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+ </summary>
+ <div class="border-t border-slate-100 px-5 py-5 text-sm leading-7 text-slate-600 sm:px-6">
+    {!! $aboutHeading->description5 !!}
+</div>
+</details>
+@endif
+
+@if(!empty($aboutHeading->heading6) && !empty($aboutHeading->description6))
+
+<details class="group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+ <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
+  <span>{!! $aboutHeading->heading6 !!}:</span>
+  <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+ </summary>
+ <div class="border-t border-slate-100 px-5 py-5 text-sm leading-7 text-slate-600 sm:px-6">
+    {!! $aboutHeading->description6 !!}
+</div>
+</details>
+
+@endif
+ 
+   </div>
+
+   
+  </div>
+ </div>
+</section>
+<script>
+(function () {
+ function initialize() {
+  document.querySelectorAll('[data-tailwind-course]').forEach(root => {
+   if (root.dataset.ready) return;
+   root.dataset.ready = 'true';
+   const details = [...root.querySelectorAll('[data-course-accordion]')];
+   details.forEach(item => item.addEventListener('toggle', () => {
+    if (item.open) details.forEach(other => { if (other !== item) other.open = false; });
+   }));
+   const box = root.querySelector('[data-course-highlights]');
+   const slides = [...box.querySelectorAll('[data-highlight]')];
+   const dots = [...box.querySelectorAll('[data-highlight-dot]')];
+   let current = 0, timer, hovered = false;
+   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+   function show(index) {
+    if (!slides.length) return;
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.hidden = i !== current);
+    dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+   }
+   function autoplay() {
+    clearInterval(timer);
+    if (document.hidden || hovered || reduced.matches || box.contains(document.activeElement) || slides.length < 2) return;
+    timer = setInterval(() => show(current + 1), 5000);
+   }
+   box.querySelector('[data-highlight-prev]').addEventListener('click', () => { show(current - 1); autoplay(); });
+   box.querySelector('[data-highlight-next]').addEventListener('click', () => { show(current + 1); autoplay(); });
+   dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); autoplay(); }));
+   box.addEventListener('mouseenter', () => { hovered = true; clearInterval(timer); });
+   box.addEventListener('mouseleave', () => { hovered = false; autoplay(); });
+   box.addEventListener('focusin', () => clearInterval(timer));
+   box.addEventListener('focusout', () => setTimeout(autoplay, 0));
+   document.addEventListener('visibilitychange', autoplay);
+   reduced.addEventListener('change', autoplay);
+   show(0); autoplay();
+   // Keep the supplied application's existing enquiry handler.
+   const form = root.querySelector('[data-course-enquiry]');
+   form.addEventListener('submit', event => {
+    event.preventDefault();
+    const error = form.querySelector('[data-enquiry-error]');
+    error.hidden = true;
+    if (window.sidehomeController && typeof window.sidehomeController.saveEnquirySide === 'function') {
+     window.sidehomeController.saveEnquirySide(form);
+    } else {
+     error.textContent = 'Enquiry service is unavailable. Please try again later.';
+     error.hidden = false;
+    }
+   });
+  });
+ }
+ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once: true });
+ else initialize();
+})();
+</script>
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 {{-- WHO IS THIS FOR --}}
                 <section id="whoisthisfor" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">

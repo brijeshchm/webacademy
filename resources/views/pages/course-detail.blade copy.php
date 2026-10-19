@@ -839,26 +839,36 @@ margin-bottom: .5rem !important;
                         <div class="h-8 w-1 rounded-full bg-gradient-to-b from-blue-500 to-violet-500"></div>
                         <h2 class="text-2xl font-display font-bold text-gray-900">@if($aboutHeading) {{ $aboutHeading->heading }} @endif</h2>
                     </div>
+                   
+                   
                     <div class="prose prose-neutral max-w-none prose-p:text-gray-500 prose-p:leading-relaxed">
 
                     @if($aboutHeading)
                             <p class="mb-4 last:mb-0">{!! $aboutHeading->courseabout  !!}</p>
+                    @endif
+
+                    @for ($i = 1; $i <= 6; $i++)
+                        @php
+                            $paragraph = $aboutHeading->{'paragraph'.$i} ?? null;
+                        @endphp
+
+                        @if(!empty($paragraph))
+                            <div class="flex items-start gap-2.5 text-sm text-black-500 mb-3">
+                                    <svg class="mt-1 h-3.5 w-3.5 shrink-0 fill-current opacity-70" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                {{ $paragraph }}
+                            </div>
                         @endif
-
- @for ($i = 1; $i <= 6; $i++)
-    @php
-        $paragraph = $aboutHeading->{'paragraph'.$i} ?? null;
-    @endphp
-
-    @if(!empty($paragraph))
-        <div class="flex items-start gap-2.5 text-sm text-black-500 mb-3">
-                 <svg class="mt-1 h-3.5 w-3.5 shrink-0 fill-current opacity-70" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            {{ $paragraph }}
-        </div>
-    @endif
-@endfor
+                    @endfor
 
                     </div>
+
+
+
+
+
+
+
+
                 </section>
 
                 {{-- WHO IS THIS FOR --}}

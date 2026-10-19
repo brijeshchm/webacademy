@@ -1352,7 +1352,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});	
-						 window.location.reload();
+						  
 						 removeValidationErrors($this);	
 						 
 						}else{					 
@@ -1379,7 +1379,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 			},
 
 			editSaveCourseContent:function(THIS,id){	
-			  var $this = $(THIS);
+			var $this = $(THIS);
 			var form = new FormData(THIS);	
 			 mainSpinner.start();
 				$.ajax({
@@ -1442,7 +1442,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});	
 						 removeValidationErrors($this);	
-						  window.location.reload();
+						   
 						}else{					 
 
 						$('#successMessageId .modal-title').text("Course Content");	
@@ -1486,7 +1486,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+						 
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1530,7 +1530,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
-							  window.location.reload();
+							 
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1573,7 +1573,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
-								 window.location.reload();
+							 
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1617,7 +1617,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");		
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
-							 window.location.reload();
+							 
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1660,7 +1660,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
-							window.location.reload();
+							//window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1703,7 +1703,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
-							 window.location.reload();
+							 //window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1747,7 +1747,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							 //window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1835,7 +1835,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							 //window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Trainer Content");	
@@ -1923,7 +1923,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Testimonial");	
@@ -2483,7 +2483,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
-							  window.location.reload();
+							//   window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -2521,7 +2521,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});
-						 window.location.reload();
+						//  window.location.reload();
 						 
 					}else{
 							$('#successMessageId .modal-title').text("Course Content Delete");	
@@ -2604,7 +2604,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
 								removeValidationErrors($this);	
-								window.location.reload();
+								// window.location.reload();
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -2650,7 +2650,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
 								removeValidationErrors($this);	
-								window.location.reload();
+								// window.location.reload();
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -2695,7 +2695,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
 								removeValidationErrors($this);	
-								window.location.reload();
+								// window.location.reload();
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -2825,7 +2825,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});	
 								removeValidationErrors($this);	
-								window.location.reload();
+								// window.location.reload();
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -2870,7 +2870,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
 							removeValidationErrors($this);	
-							window.location.reload();
+							// window.location.reload();
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -2913,7 +2913,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});
-						 		window.location.reload();
+						 		// window.location.reload();
 						}else{
 							$('#successMessageId .modal-title').text("Testimonial Content");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -3145,7 +3145,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});	
-							 window.location.reload();
+							//  window.location.reload();
 						 removeValidationErrors($this);	
 						 
 						}else{					 
@@ -3190,7 +3190,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});	
-							 window.location.reload();
+							//  window.location.reload();
 						 removeValidationErrors($this);	
 						 
 						}else{					 
@@ -3283,7 +3283,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3326,7 +3326,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3369,7 +3369,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3412,7 +3412,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-								 window.location.reload();
+								//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3456,7 +3456,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-								 window.location.reload();
+								//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3501,7 +3501,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-								 window.location.reload();
+								//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3544,7 +3544,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-								 window.location.reload();
+								//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3588,7 +3588,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-								 window.location.reload();
+								//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -3633,7 +3633,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-								 window.location.reload();
+								//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	

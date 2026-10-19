@@ -34,7 +34,7 @@ Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content">                    
-						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSave.CourseTitle',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle" >
+						<form   method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSave.CourseTitle',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle" >
 
 							@csrf
                         	<div class="form-group">
@@ -228,7 +228,7 @@ Edit Course
 				 
 					</div>
 					<div class="x_content">                    
-						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSaveCourseTopic',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTopic" >
+						<form   method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSaveCourseTopic',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTopic" >
 							@csrf
                          
 							<div class="form-group">
@@ -681,9 +681,7 @@ Edit Course
 			  	method="POST"
 				action=""
                onsubmit="return courseController.editSaveCourseContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" >
-               
-			   @csrf
-
+             
                 @for($i = 1; $i <= 6; $i++)
                     @php
                         $headingField = 'heading' . $i;
@@ -861,7 +859,7 @@ Edit Course
                
                  
             >
-                @csrf
+                
 
                 <div class="learn-items">
                     @foreach($whyLearn as $value)
@@ -1235,7 +1233,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                   </div>
                   <div class="x_content">
                     
-                    <form id="course-faq-form" method="POST" data-parsley-validate class="form-horizontal form-label-left" 
+                    <form id="course-faq-form" method="POST"  class="form-horizontal form-label-left" 
 					action=""
 					onsubmit="return courseController.editSaveFAQ(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"	
 					 >
@@ -1323,7 +1321,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                   </div>
                   <div class="x_content">
                     
-                    <form id="course-reviews-form" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('admin.editSaveTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="Testimonial" method="post" >
+                    <form id="course-reviews-form"  class="form-horizontal form-label-left" action="{{ route('admin.editSaveTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="Testimonial" method="post" >
 
 					@csrf
 					 <?php if(!empty($edit_data->reviews)){
@@ -1469,7 +1467,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                   </div>
                   <div class="x_content">
                     
-                    <form data-parsley-validate class="form-horizontal form-label-left" 
+                    <form  class="form-horizontal form-label-left" 
 					
 					action="{{ route('admin.editSaveCourseRelated',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseRelated" method="post"  >
 					@csrf
@@ -1796,6 +1794,7 @@ function get_courseReleted(cid,cr=""){
 	});
 	 
 }
+
 // function get_subcategory(cid,sid){	 
 // 	var token = $('input[name=_token]').val();
 // 	$.ajax({
@@ -2199,7 +2198,7 @@ function showfooter(gst){
                 if (!form.isConnected) { clearInterval(watcher); clearTimeout(timer); return; }
                 detect();
             }, 500);
-            window.addEventListener('beforeunload', event => {
+            window.addEventListener('	', event => {
                 if (saving || failed || getPayload().signature !== saved) {
                     event.preventDefault(); event.returnValue = '';
                 }
