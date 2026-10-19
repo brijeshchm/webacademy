@@ -396,11 +396,11 @@ class CourseController extends Controller implements HasMiddleware
 				$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
 				if($checkupdate){
 				$status=1;							 
-				$msg="Course About submitted successfully !";		
+				$msg="Course Extra submitted successfully !";		
 				
 			}else{
 				$status=0;							 
-				$msg="Course About could not be submitted!";	
+				$msg="Course Extra could not be submitted!";	
 			}
 			
 			}
