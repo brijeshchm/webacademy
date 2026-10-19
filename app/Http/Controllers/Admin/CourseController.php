@@ -371,7 +371,7 @@ class CourseController extends Controller implements HasMiddleware
 
        
 		  $validator = Validator::make($request->all(),[				 
-				'top_heading'=>'required',
+				'top_heading'=>'nullable|string',
 				'top_description'=>'nullable|string',		 				 				
 			 				 				
 			]);

@@ -25,7 +25,7 @@
         // 'workday-customer-accounts-training',
         // 'workday-recruitment-training',
         // 'workday-studio-training',
-        'workday-hcm-functional-course',
+        'workday-hcm-functional-course'
         // 'workday-hcm-functional-course-in-delhi',
     ];
 
