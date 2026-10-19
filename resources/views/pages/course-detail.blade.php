@@ -936,23 +936,33 @@ margin-bottom: .5rem !important;
     .faq-item[open] .icon-minus { display: inline; }  /* open: show − */
     .faq-item[open] { border-color: #bfdbfe; }
  
-    .faq-item h2 {
+     
+
+    .faq-item h2,
+    .faq-item h2 * {
         color: #111827 !important;
         font-size: 24px !important;
         line-height: 32px !important;
+        font-family: inherit !important;
     }
 
-    .faq-item h3 {
+    .faq-item h3,
+    .faq-item h3 * {
         color: #111827 !important;
         font-size: 14px !important;
         line-height: 20px !important;
+        font-family: inherit !important;
     }
 
-    .faq-item h4 {
+    .faq-item h4,
+    .faq-item h4 * {
         color: #111827 !important;
         font-size: 20px !important;
         line-height: 28px !important;
+        font-family: inherit !important;
     }
+
+
  
 </style>
 
