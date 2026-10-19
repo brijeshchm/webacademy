@@ -195,7 +195,8 @@ class CourseController extends Controller implements HasMiddleware
     public function editSaveCourseTitle(Request $request,$id)
     {	  
 	
-        if($request->ajax()){ 			
+ 
+       			
   
 		  $validator = Validator::make($request->all(),[		 
 				
@@ -257,8 +258,104 @@ class CourseController extends Controller implements HasMiddleware
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
+	
+	
+
+		/*
+	 add save Course Title with slug
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editSaveCourseContent(Request $request,$id)
+    {	  
+	 
+		  $validator = Validator::make($request->all(),[				 
+				'heading1'=>'required',
+				'description1'=>'required',
+			 				 				
+			 				 				
+			]);
+			
+			if($validator->fails()){
+				$errorsBag = $validator->getMessageBag()->toArray();
+				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+			}
+				  
+				  
+			$courseAbout = 	  CourseAbout::where('course_id',$id)->first();
+
+			
+			if(!empty($courseAbout)){
+			$updatelearn =array(
+			 				
+			'heading1'=>$request->input('heading1'),	
+			'description1'=>$request->input('description1'),	
+			'heading2'=>$request->input('heading2'),	
+			'description2'=>$request->input('description2'),	
+			'heading3'=>$request->input('heading3'),	
+			'description3'=>$request->input('description3'),	
+			'heading4'=>$request->input('heading4'),	
+			'description4'=>$request->input('description4'),	
+			'heading5'=>$request->input('heading5'),	
+			'description5'=>$request->input('description5'),	
+			'heading6'=>$request->input('heading6'),	
+			'description6'=>$request->input('description6'),	
+	 	
+                );
+
+				 
+			$checkupdate  = CourseAbout::where('course_id',$id)->update($updatelearn);	
+				if($checkupdate){
+				$status=1;							 
+				$msg="Course About submitted successfully !";		
+				
+			}else{
+				$status=0;							 
+				$msg="Course About could not be submitted!";	
+			}
+			
+			}else{
+			    	$courseAboutHeading  = New CourseAbout;
+			    	
+					$courseAboutHeading->course_id = $id;
+				 
+					$courseAboutHeading->heading1 = $request->input('heading1');
+					$courseAboutHeading->description1 = $request->input('description1');
+					$courseAboutHeading->heading2 = $request->input('heading2');
+					$courseAboutHeading->description2 = $request->input('description2');
+					$courseAboutHeading->heading3 = $request->input('heading3');
+					$courseAboutHeading->description3 = $request->input('description3');
+					$courseAboutHeading->heading4 = $request->input('heading4');
+					$courseAboutHeading->description4 = $request->input('description4');
+					$courseAboutHeading->heading5 = $request->input('heading5');
+					$courseAboutHeading->description5 = $request->input('description5');
+					$courseAboutHeading->heading6 = $request->input('heading6');
+					$courseAboutHeading->description6 = $request->input('description6');
+
+ 
+			    
+			    	if($courseAboutHeading->save()){
+				$status=1;							 
+				$msg="Course About submitted successfully !";		
+				
+			}else{
+				$status=0;							 
+				$msg="Course About could not be submitted!";	
+			}
+			}
+		
+		
+			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
+			
+		
+	
+ 
+	 
+   } 
 	
 
 	
@@ -272,7 +369,7 @@ class CourseController extends Controller implements HasMiddleware
     public function editSaveCourseExtraContent(Request $request,$id)
     {	  
 
-        if($request->ajax()){   
+       
 		  $validator = Validator::make($request->all(),[				 
 				'top_heading'=>'required',
 				'top_description'=>'nullable|string',		 				 				
@@ -312,7 +409,7 @@ class CourseController extends Controller implements HasMiddleware
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 
 
@@ -326,11 +423,9 @@ class CourseController extends Controller implements HasMiddleware
     public function editSaveCourseLearn(Request $request,$id)
     {	  
 	
-
-	//dd($request);
-        if($request->ajax()){   
+  
 		  $validator = Validator::make($request->all(),[				 
-				'why_learn_heading'=>'required',
+				 
 				'why_learn'=>'required',					 				
 			]);
 			
@@ -340,7 +435,7 @@ class CourseController extends Controller implements HasMiddleware
 			}
 				  
 			$updatelearn =array(
-			'why_learn_heading'=>$request->input('why_learn_heading'),	
+			// 'why_learn_heading'=>$request->input('why_learn_heading'),	
 			'why_learn'=>json_encode($request->input('why_learn')));	
 
 			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
@@ -356,7 +451,7 @@ class CourseController extends Controller implements HasMiddleware
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 	/**
 	 *add save Course Title with slug
@@ -368,8 +463,7 @@ class CourseController extends Controller implements HasMiddleware
     public function editSaveTrainerAbout(Request $request,$id)
     {	  
 	
- 
-        if($request->ajax()){   
+         
 		  $validator = Validator::make($request->all(),[				 
 				'trainer_about'=>'required',
 				'trainer_paragraph'=>'required',					 				
@@ -403,14 +497,12 @@ class CourseController extends Controller implements HasMiddleware
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 
 	public function editSaveCourseTopic(Request $request, $id)
-{
-    if (!$request->ajax()) {
-        return response()->json(['status' => 0, 'msg' => 'Invalid request'], 400);
-    }
+	{
+    
 
     $course = Course::find($id);
     if (!$course) {
@@ -483,14 +575,10 @@ class CourseController extends Controller implements HasMiddleware
      */
     public function editSaveCourseAbout(Request $request,$id)
     {	  
- 
-
-	//dd($request);
-        if($request->ajax()){   
+   
 		  $validator = Validator::make($request->all(),[				 
 				'courseabout'=>'required',
-				'paragraph1'=>'required',
-			 				 				
+				'paragraph1'=>'required',		 				 				
 			 				 				
 			]);
 			
@@ -552,7 +640,7 @@ class CourseController extends Controller implements HasMiddleware
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 	
     
@@ -568,7 +656,7 @@ class CourseController extends Controller implements HasMiddleware
     public function editSaveCourseBatchVisibility(Request $request,$id)
     {	  
 	
-        if($request->ajax()){   
+          
 		  $validator = Validator::make($request->all(),[				 
 				'batch_visibility'=>'required',				 
 				 				
@@ -598,7 +686,7 @@ class CourseController extends Controller implements HasMiddleware
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 	
 
@@ -971,9 +1059,7 @@ public function editSaveCurriculum(Request $request, $id)
 public function editSaveCourseRelated(Request $request, $id)
 {
 
-    if (!$request->ajax()) {
-        return response()->json(['status' => 0, 'msg' => 'Invalid request.'], 400);
-    }
+    
 
     $validator = Validator::make($request->all(), [
         'show_front_page'    => 'required',
@@ -1023,69 +1109,7 @@ public function editSaveCourseRelated(Request $request, $id)
         'msg'    => 'Course related submitted successfully!',
     ], 200);
 }
-	/*
-	 add save Course Title with slug
-     * Author: Brijesh Chauhan.
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSaveCourseCertificate(Request $request,$id)
-    {	  
-	
-        if($request->ajax()){ 
-  
-		  $validator = Validator::make($request->all(),[				 
-				'exam_title'=>'required',
-				'exam_text'=>'required',
-				'format'=>'required',
-				'certification_type'=>'required',
-				'delivery_method'=>'required',
-				'certification_time'=>'required',
-				'certification_cost'=>'required',
-				'language'=>'required',
-				 
-				 				
-			]);
-			
-			if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-			
-
-			$course_cerificate =array(
-			'exam_title'=>$request->input('exam_title'),
-			'exam_text'=>$request->input('exam_text'),
-			'format'=>$request->input('format'),
-			'certification_type'=>$request->input('certification_type'),
-			'delivery_method'=>$request->input('delivery_method'),
-			'certification_time'=>$request->input('certification_time'),			
-			'certification_cost'=>$request->input('certification_cost'),
-			'language'=>$request->input('language'),			
-			'certification_visibility'=>$request->input('certification_visibility'),
-			'updated_by'=>1,
-			);	
-				 
-			$update  =DB::table('web_courses')->where('id',$id)->update($course_cerificate);			
-				 
 	 
-			if(!empty($update)){	
-				
-				$status=1;							 
-				$msg="Course certificate update successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course certificate could not be updated!";	
-			}
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-		
-		}
-    } 
-	
 	/*
 	 add save Course Title with slug
      * Author: Brijesh Chauhan.
@@ -1096,7 +1120,7 @@ public function editSaveCourseRelated(Request $request, $id)
     public function editSaveFAQ(Request $request,$id)
     {	  
 	
-        if($request->ajax()){ 		
+      	
 		 $validator = Validator::make($request->all(),[				 
 				'faqq'=>'required',
 				'faqa'=>'required',				 				
@@ -1139,7 +1163,7 @@ public function editSaveCourseRelated(Request $request, $id)
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 	
 	
@@ -1153,7 +1177,7 @@ public function editSaveCourseRelated(Request $request, $id)
     public function editSaveTestimonial(Request $request,$id)
     {	  
 
-        if($request->ajax()){ 		
+     	
 		 $validator = Validator::make($request->all(),[				 
 				'name'=>'required',
 				'comment'=>'required',	
@@ -1220,7 +1244,7 @@ public function editSaveCourseRelated(Request $request, $id)
 			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
 			
 		
-		}
+		
     } 
 	
    /*

@@ -1332,6 +1332,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 				 return false;	
 			},
 
+			
 			editSaveCourseTitle:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	
@@ -1377,6 +1378,49 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 				 return false;	
 			},
 
+			editSaveCourseContent:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+			 mainSpinner.start();
+				$.ajax({
+					url:"/admin/course/editSaveCourseContent/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					    mainSpinner.stop();			
+						if(data.status){			
+												
+							$('#successMessageId .modal-title').text("SEO page Content");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+							//  window.location.reload();
+							removeValidationErrors($this);	
+						}else{
+							$('#successMessageId .modal-title').text("Course Content");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});	
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					    mainSpinner.stop();			
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},
 			
         editSaveCourseExtraContent:function(THIS,id){	
 			  var $this = $(THIS);
@@ -1747,7 +1791,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -1835,7 +1879,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 							$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 							$('#successMessageId').css({'width':'100%'});
-							 window.location.reload();
+							//  window.location.reload();
 							removeValidationErrors($this);	
 						}else{
 							$('#successMessageId .modal-title').text("Course Content");	
@@ -2416,6 +2460,9 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 				}); 
 				 return false;	
 			},
+
+		 
+
             editSaveCourseCurriculumExcel:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	
@@ -3193,7 +3240,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});	
 						 removeValidationErrors($this);	
-						  window.location.reload();
+						//   window.location.reload();
 						}else{					 
 
 						$('#successMessageId .modal-title').text("Course Content");	

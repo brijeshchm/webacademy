@@ -34,7 +34,9 @@ Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content">                    
-						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return courseController.editSaveCourseTitle(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSave.CourseTitle',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle" >
+
+							@csrf
                         	<div class="form-group">
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="last-name">Course Name<span class="required">*</span>
 							</label>
@@ -226,7 +228,8 @@ Edit Course
 				 
 					</div>
 					<div class="x_content">                    
-						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return courseController.editSaveCourseTopic(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSaveCourseTopic',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTopic" >
+							@csrf
                          
 							<div class="form-group">
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Enrolled Students<span class="required">*</span>
@@ -245,60 +248,60 @@ Edit Course
 							</div>
 
 						<div class="form-group">
-    <label class="control-label col-md-2 col-sm-3 col-xs-12" for="offer">
-        Offer <span class="required">*</span>
-    </label>
-    <div class="col-md-8 col-sm-8 col-xs-12">
+							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="offer">
+								Offer <span class="required">*</span>
+							</label>
+							<div class="col-md-8 col-sm-8 col-xs-12">
 
-        @php
-            $offers = ['10%','15%','20%','25%','30%','35%','40%','45%','50%','55%','60%'];
-            $selectedOffer = old('offer', isset($edit_data) ? $edit_data->offer : '');
-        @endphp
+								@php
+									$offers = ['10%','15%','20%','25%','30%','35%','40%','45%','50%','55%','60%'];
+									$selectedOffer = old('offer', isset($edit_data) ? $edit_data->offer : '');
+								@endphp
 
-        <select class="form-control col-md-7 col-xs-12" name="offer" id="offer" required>
-            <option value="" {{ $selectedOffer == '' ? 'selected' : '' }}>Select Offer</option>
-            @foreach($offers as $offer)
-                <option value="{{ $offer }}" {{ $selectedOffer == $offer ? 'selected' : '' }}>
-                    {{ $offer }}
-                </option>
-            @endforeach
-        </select>
+								<select class="form-control col-md-7 col-xs-12" name="offer" id="offer" required>
+									<option value="" {{ $selectedOffer == '' ? 'selected' : '' }}>Select Offer</option>
+									@foreach($offers as $offer)
+										<option value="{{ $offer }}" {{ $selectedOffer == $offer ? 'selected' : '' }}>
+											{{ $offer }}
+										</option>
+									@endforeach
+								</select>
 
-        @error('offer')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
+								@error('offer')
+									<span class="text-danger">{{ $message }}</span>
+								@enderror
 
-    </div>
-</div>
+							</div>
+						</div>
 
 
 
-	<div class="form-group">
-    <label class="control-label col-md-2 col-sm-3 col-xs-12" for="offer">
-        Featured <span class="required">*</span>
-    </label>
-    <div class="col-md-8 col-sm-8 col-xs-12">
+						<div class="form-group">
+						<label class="control-label col-md-2 col-sm-3 col-xs-12" for="offer">
+							Featured <span class="required">*</span>
+						</label>
+						<div class="col-md-8 col-sm-8 col-xs-12">
 
-        @php
-            $featured = ['1'=>'Recommended','0'=>'un-Recommended'];
-            $selectedFeatured = old('featured', isset($edit_data) ? $edit_data->featured : '');
-        @endphp
+							@php
+								$featured = ['1'=>'Recommended','0'=>'un-Recommended'];
+								$selectedFeatured = old('featured', isset($edit_data) ? $edit_data->featured : '');
+							@endphp
 
-        <select class="form-control col-md-7 col-xs-12" name="featured" required>
-            <option value="" {{ $selectedFeatured == '' ? 'selected' : '' }}>Select featured</option>
-            @foreach($featured as $featur=>$feturValue)
-                <option value="{{ $featur }}" {{ $selectedFeatured == $featur ? 'selected' : '' }}>
-                    {{ $feturValue }}
-                </option>
-            @endforeach
-        </select>
+							<select class="form-control col-md-7 col-xs-12" name="featured" required>
+								<option value="" {{ $selectedFeatured == '' ? 'selected' : '' }}>Select featured</option>
+								@foreach($featured as $featur=>$feturValue)
+									<option value="{{ $featur }}" {{ $selectedFeatured == $featur ? 'selected' : '' }}>
+										{{ $feturValue }}
+									</option>
+								@endforeach
+							</select>
 
-        @error('featur')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
+							@error('featur')
+								<span class="text-danger">{{ $message }}</span>
+							@enderror
 
-    </div>
-</div>
+						</div>
+					</div>
 
 
 					
@@ -573,13 +576,13 @@ Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveCourseAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
-
+						<form class="form-horizontal form-label-left" method="post" onsubmit="return courseController.editSaveCourseAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"  >
+							@csrf
 
 	                    <div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Heading <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="heading" placeholder="Enter coure heading"   value="{{ old('heading',(isset($aboutHeading->heading)) ? $aboutHeading->heading:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12"  name="heading" placeholder="Enter coure heading"  value="{{ old('heading',(isset($aboutHeading->heading)) ? $aboutHeading->heading:"")}}" > 
 						</div>
 						</div>
 
@@ -587,7 +590,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Course About <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote"  name="courseabout" rows="7" placeholder="Enter coure about">{{ old('courseabout',(isset($aboutHeading->courseabout)) ? $aboutHeading->courseabout:"")}}</textarea>
+						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote note-editor" name="courseabout" rows="7" placeholder="Enter coure about">{{ old('courseabout',(isset($aboutHeading->courseabout)) ? $aboutHeading->courseabout:"")}}</textarea>
 						</div>
 						</div> 
 									
@@ -648,7 +651,7 @@ Edit Course
 						<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                          
 						 
 					 
-					<button type="submit" class="btn btn-success" name="submit">Submit</button>
+					<button type="submit" class="btn btn-success"  onclick="check(this)">Submit</button>
 					 
 						</div>
 						</div>
@@ -656,71 +659,330 @@ Edit Course
 					</div>
                 </div>
               </div> 
+
 			  
-			   	  
-			
-<div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-					
-					<div class="x_title">
-					<h3>What You'll Learn<small></small></h3>
-					<div class="successCourseOverview"></div><div class="errorCourseOverview"></div>					
-					<div class="clearfix"></div>
-					</div>
-					<div class="x_content">        
-				  
-                    <form class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveCourseLearn(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">                
-					  
 
 
-					  <div class="form-group">   
-						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Why should you learn?<span class="required">*</span></label>					  
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <input type="text" class="form-control col-md-7 col-xs-12"  name="why_learn_heading" value="{{ old('why_learn_heading',(isset($edit_data)) ? $edit_data->why_learn_heading:"")}}" placeholder="Why should you learn Heading"></textarea>
-                        </div>
-                      </div> 
-					  
-					  
-					<?php 
-					  if(!empty($edit_data->why_learn)){
-					  $why_learn = json_decode($edit_data->why_learn); 
- 					  					 
-										 ?>	
-					@foreach($why_learn as $key=>$value)
-				 
-						<div class="form-group">
-                        <label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Answer </label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <textarea class="form-control col-md-7 col-xs-12" type="text" name="why_learn[]" placeholder="Why should you learn" multiple="true">{{$value}}</textarea>
-						  <span class="btn btn-inverse btn-circle m-b-5" onclick="remove(this)" style="margin-right: -38px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span>
-                        </div>
-                      </div>
-					  @endforeach
-					 <?php }else{ ?>
-					 <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Answer</label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <textarea class="form-control col-md-7 col-xs-12" type="text" name="why_learn[]" placeholder="Why should you learn" multiple="true"></textarea>
-                        </div>
-                      </div>
-					 <?php } ?>
-						<div class="result_why_learn">
+   	  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3>Course Content</h3>
 
-						</div>
-						<button class="add_why_learn" type="button" style="margin-top: 1px;float: right;margin-right: 95px;">Add More</button>
-                      
-					  
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                          
-						 
-                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
-						    
+            <div id="courseSaveStatus" role="status" aria-live="polite"></div>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+            {{-- Replace this URL with your existing POST save URL --}}
+            <form
+                 
+                class="form-horizontal form-label-left"
+			  	method="POST"
+				action=""
+               onsubmit="return courseController.editSaveCourseContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" >
+               
+			   @csrf
+
+                @for($i = 1; $i <= 6; $i++)
+                    @php
+                        $headingField = 'heading' . $i;
+                        $descriptionField = 'description' . $i;
+                    @endphp
+
+                    <details
+                        class="course-content-section"
+                        @if($i === 1) open @endif
+                    >
+                        <summary class="course-content-trigger">
+                            Heading {{ $i }}
+                            <span class="course-content-arrow">⌄</span>
+                        </summary>
+
+                        <div class="course-content-body">
+                            <div class="form-group">
+                                <label
+                                    for="course-{{ $headingField }}"
+                                    class="control-label col-md-2 col-sm-3 col-xs-12"
+                                >
+                                    Heading {{ $i }}
+                                </label>
+
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <input
+                                        type="text"
+                                        id="course-{{ $headingField }}"
+                                        name="{{ $headingField }}"
+                                        class="form-control"
+                                        placeholder="Enter Heading {{ $i }}"
+                                        value="{{ old($headingField, $aboutHeading->{$headingField} ?? '') }}"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    for="course-{{ $descriptionField }}"
+                                    class="control-label col-md-2 col-sm-3 col-xs-12"
+                                >
+                                    Description {{ $i }}
+                                </label>
+
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <textarea
+                                        id="course-{{ $descriptionField }}"
+                                        name="{{ $descriptionField }}"
+                                        class="form-control summernote"
+                                        rows="6"
+                                        placeholder="Enter Description {{ $i }}"
+                                    >{{ old($descriptionField, $aboutHeading->{$descriptionField} ?? '') }}</textarea>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </form>
-                  </div>
+                    </details>
+                @endfor
+
+                <div class="form-group">
+                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            Save Now
+                        </button>
+                    </div>
                 </div>
-              </div>   
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .course-content-section {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fff;
+    }
+
+    .course-content-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        background: #f5f7fa;
+        color: #34495e;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        list-style: none;
+        border-radius: 6px;
+    }
+
+    .course-content-trigger::-webkit-details-marker {
+        display: none;
+    }
+
+    .course-content-arrow {
+        transition: transform .2s ease;
+    }
+
+    .course-content-section[open] > summary {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .course-content-section[open] .course-content-arrow {
+        transform: rotate(180deg);
+    }
+
+    .course-content-body {
+        padding: 20px 15px 5px;
+    }
+
+    #courseSaveStatus {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    #courseSaveStatus:empty {
+        display: none;
+    }
+
+    #courseSaveStatus[data-state="success"] {
+        padding: 10px 14px;
+        color: #166534;
+        background: #dcfce7;
+        border: 1px solid #86efac;
+        border-radius: 5px;
+    }
+
+    #courseSaveStatus[data-state="error"] {
+        padding: 10px 14px;
+        color: #991b1b;
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        border-radius: 5px;
+    }
+
+    #courseSaveStatus[data-state="pending"] {
+        color: #64748b;
+    }
+</style>
+
+
+
+
+
+
+@php
+    $whyLearn = old(
+        'why_learn',
+        json_decode($edit_data->why_learn ?? '[]', true)
+    );
+
+    $whyLearn = is_array($whyLearn) && count($whyLearn)
+        ? $whyLearn
+        : [''];
+@endphp
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <details class="x_panel learn-panel">
+        {{-- Content trigger --}}
+        <summary class="learn-trigger">
+            <span>What You'll Learn</span>
+            <span class="learn-arrow">⌄</span>
+        </summary>
+
+        <div class="x_content">
+            <div class="successCourseOverview"></div>
+            <div class="errorCourseOverview"></div>
+
+            <form
+                class="form-horizontal form-label-left"         
+ 				method="POST"
+				 onsubmit="return courseController.editSaveCourseLearn(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"
+               
+                 
+            >
+                @csrf
+
+                <div class="learn-items">
+                    @foreach($whyLearn as $value)
+                        <div class="form-group learn-item">
+                            <label class="control-label col-md-2 col-sm-3 col-xs-12">
+                                Answer
+                            </label>
+
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <textarea
+                                    class="form-control"
+                                    name="why_learn[]"
+                                    rows="3"
+                                    placeholder="Why should you learn"
+                                    aria-label="Learning outcome"
+                                >{{ $value }}</textarea>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-danger btn-xs learn-remove"
+                                    style="margin-top: 8px;"
+                                    aria-label="Remove answer"
+                                >
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2">
+                        <button type="button" class="btn btn-default learn-add">
+                            + Add More
+                        </button>
+
+                        <button type="submit" class="btn btn-success" name="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </details>
+</div>
+
+<style>
+    .learn-panel > .learn-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 10px;
+        color: #34495e;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .learn-trigger::-webkit-details-marker {
+        display: none;
+    }
+
+    .learn-trigger:focus-visible {
+        outline: 2px solid #337ab7;
+    }
+
+    .learn-panel[open] > .learn-trigger {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e6e9ed;
+    }
+
+    .learn-arrow {
+        transition: transform .2s ease;
+    }
+
+    .learn-panel[open] > .learn-trigger .learn-arrow {
+        transform: rotate(180deg);
+    }
+
+    .learn-panel > .x_content {
+        float: none;
+    }
+</style>
+
+<script>
+document.querySelectorAll('.learn-panel').forEach(function (panel) {
+    if (panel.dataset.triggerReady) return;
+    panel.dataset.triggerReady = 'true';
+
+    const items = panel.querySelector('.learn-items');
+
+    panel.querySelector('.learn-add').addEventListener('click', function () {
+        const newItem = items.querySelector('.learn-item').cloneNode(true);
+
+        newItem.querySelector('textarea').value = '';
+        items.appendChild(newItem);
+        newItem.querySelector('textarea').focus();
+    });
+
+    items.addEventListener('click', function (event) {
+        const button = event.target.closest('.learn-remove');
+        if (!button) return;
+
+        const item = button.closest('.learn-item');
+
+        if (items.querySelectorAll('.learn-item').length > 1) {
+            item.remove();
+        } else {
+            item.querySelector('textarea').value = '';
+        }
+    });
+});
+</script>
+
+
+
+
+			 
+    
 
 
 
@@ -732,8 +994,12 @@ Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveTrainerAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
-
+						<form class="form-horizontal form-label-left" action="" method="post"
+						onsubmit="return courseController.editSaveTrainerAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"
+						
+						
+						>
+							@csrf
  
 
 						<div class="form-group">   
@@ -803,8 +1069,11 @@ Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveCourseExtraContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
+						<form class="form-horizontal form-label-left" action="" method="post"
+						onsubmit="return courseController.editSaveCourseExtraContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"						
+						>
 
+							@csrf
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Top Heading<span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
@@ -852,17 +1121,17 @@ Edit Course
                   </div>
                   <div class="x_content">        
 				  
-                    <form class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveCurriculum(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
-
+                    <form class="form-horizontal form-label-left" method="post" onsubmit="return courseController.editSaveCurriculum(this,<?php echo (isset($edit_data->id)? $edit_data->id:''); ?>)"  enctype="multipart/form-data">
+							@csrf
                       <div class="form-group">   
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Course Curriculum <span class="required">*</span></label>					  
                         <div class="col-md-8 col-sm-8 col-xs-12">
-                          <input type="file" class="form-control col-md-7 col-xs-12"  name="course_curriculum" accept=".csv" placeholder="Enter coure Curriculum"  <?php if(count($coursecurriculum)>0 && !empty($coursecurriculum)){ ?> disabled  <?php } ?> >
+                          <input type="file" class="form-control col-md-7 col-xs-12"  name="course_curriculum" accept=".csv" placeholder="Enter coure Curriculum"  <?php if(!empty($coursecurriculum) && count($coursecurriculum)>0){ ?> disabled  <?php } ?> >
                         </div>
                       </div> 
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">   
-                           <?php if(count($coursecurriculum)>0 && !empty($coursecurriculum)){ ?>
+                           <?php if(!empty($coursecurriculum) && count($coursecurriculum)>0){ ?>
 							<?php }else{?>
 							<button type="submit" class="btn btn-success" name="submit">Submit</button>
 							<?php } ?>
@@ -966,7 +1235,12 @@ Edit Course
                   </div>
                   <div class="x_content">
                     
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveFAQ(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+                    <form id="course-faq-form" method="POST" data-parsley-validate class="form-horizontal form-label-left" 
+					action=""
+					onsubmit="return courseController.editSaveFAQ(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"	
+					 >
+
+						@csrf
 					 <?php if(!empty($edit_data->FAQs)){
 					     if($edit_data->FAQs){
 						 $FAQs =json_decode($edit_data->FAQs);    
@@ -978,11 +1252,11 @@ Edit Course
 					        $faqanswer  = json_decode($FAQs->faqa);
 						 }else{
 						     
-						     $faqquestion ="";
+						     $faqquestion = [];
 						 }
 					 }else{
 					     
-					     $faqquestion ="";
+					     $faqquestion = [];
 					 }
 					 for($i=0; $i<count($faqquestion); $i++){						 
 					 ?>
@@ -1049,21 +1323,23 @@ Edit Course
                   </div>
                   <div class="x_content">
                     
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveTestimonial(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+                    <form id="course-reviews-form" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('admin.editSaveTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="Testimonial" method="post" >
+
+					@csrf
 					 <?php if(!empty($edit_data->reviews)){
-					 $reviews = json_decode($reviews->reviews ?? '[]', true) ?? [];              
-					 $name  = json_decode($reviews->name ?? '[]', true) ?? []; 
-					 
-					 $comment  = json_decode($reviews->comment ?? '[]', true) ?? [];
-					 $company  = json_decode($reviews->company ?? '[]', true) ?? [];
-					 $rating  = json_decode($reviews->rating ?? '[]', true) ?? []; 
-				 
- 					 if(!empty($testimonials->linkedinurl)){
-					$linkedinurl  = json_decode($testimonials->linkedinurl);
-					}else{
-						$linkedinurl="";
-					}
-					 for($i=0; $i<count($name); $i++){						 
+					 $reviewData = json_decode($edit_data->reviews ?? '{}', true);
+                     $reviewData = is_array($reviewData) ? $reviewData : [];
+                     $reviewArray = static function ($value) {
+                         if (is_array($value)) return $value;
+                         $decoded = json_decode($value ?? '[]', true);
+                         return is_array($decoded) ? $decoded : [];
+                     };
+                     $name = $reviewArray($reviewData['name'] ?? []);
+                     $comment = $reviewArray($reviewData['comment'] ?? []);
+                     $company = $reviewArray($reviewData['company'] ?? []);
+                     $rating = $reviewArray($reviewData['rating'] ?? []);
+                     $linkedinurl = $reviewArray($reviewData['linkedinurl'] ?? []);
+                     for($i=0; $i<count($name); $i++){						 
 					 ?>
 					 <div>
 					<div class="form-group">
@@ -1153,14 +1429,14 @@ Edit Course
 						<div class="col-12 col-md-3">
 						Yes
 						<input type="radio" name="reviews_visibility" value="1"  @if (1== old('reviews_visibility'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->reviews_visibility == 1 ) ? "checked":"" }} @endif>	
 						</div>
 						<div class="col-12 col-md-3">
 						No
 						<input type="radio" name="reviews_visibility" value="0"  @if ('0'== old('reviews_visibility'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->reviews_visibility == '0' ) ? "checked":"" }} @endif>
 						</div>
@@ -1193,8 +1469,10 @@ Edit Course
                   </div>
                   <div class="x_content">
                     
-                    <form data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return courseController.editSaveCourseRelated(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+                    <form data-parsley-validate class="form-horizontal form-label-left" 
 					
+					action="{{ route('admin.editSaveCourseRelated',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseRelated" method="post"  >
+					@csrf
 				
 					<div class="form-group">
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Show Related Courses (Sidebar)<span class="required">*</span></label>
@@ -1202,16 +1480,16 @@ Edit Course
 					<select class="form-control col-md-7 col-xs-12 select_related_courses_side" name="related_courses_side[]" multiple>
 					<option value="">Select Course</option> 
 						 @php
-    $relatedCoursesSide = !empty($edit_data->related_courses_side)
-        ? (json_decode($edit_data->related_courses_side, true) ?? [])
-        : [];
-@endphp
+						$relatedCoursesSide = !empty($edit_data->related_courses_side)
+							? (json_decode($edit_data->related_courses_side, true) ?? [])
+							: [];
+					@endphp
 
-@foreach($course_list ?? [] as $coursev)
-    <option value="{{ $coursev->slug }}" @selected(in_array($coursev->slug, $relatedCoursesSide))>
-        {{ $coursev->title }}
-    </option>
-@endforeach		
+					@foreach($course_list ?? [] as $coursev)
+						<option value="{{ $coursev->slug }}" @selected(in_array($coursev->slug, $relatedCoursesSide))>
+							{{ $coursev->title }}
+						</option>
+					@endforeach		
  
 					</select>
 
@@ -1223,14 +1501,14 @@ Edit Course
 						<div class="col-12 col-md-3">
 						Yes
 						<input type="radio" name="show_front_page" value="1"  @if (1== old('show_front_page'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_front_page == 1 ) ? "checked":"" }} @endif>	
 						</div>
 						<div class="col-12 col-md-3">
 						No
 						<input type="radio" name="show_front_page" value="0"  @if ('0'== old('show_front_page'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_front_page == '0' ) ? "checked":"" }} @endif>
 						</div>
@@ -1243,7 +1521,7 @@ Edit Course
 						<div class="col-12 col-md-2">
 						Yes
 						<input type="radio" name="show_front_second" value="1"  @if (1== old('show_front_second'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_front_second == 1 ) ? "checked":"" }} @endif>	
 						</div>
@@ -1263,7 +1541,7 @@ Edit Course
 						<div class="col-12 col-md-2">
 						Yes
 						<input type="radio" name="footer_certificate" value="1"  @if (1== old('footer_certificate'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->footer_certificate == 1 ) ? "checked":"" }} @endif>	
 						</div>
@@ -1284,7 +1562,7 @@ Edit Course
 						<div class="col-12 col-md-2">
 						Yes
 						<input type="radio" name="footer_top_course" value="1"  @if (1== old('footer_top_course'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->footer_top_course == 1 ) ? "checked":"" }} @endif>	
 						</div>
@@ -1303,7 +1581,7 @@ Edit Course
 						<div class="col-12 col-md-2">
 						Yes
 						<input type="radio" name="show_trending_courses" value="1"  @if (1== old('show_trending_courses'))
-								selected="selected"	
+								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_trending_courses == 1 ) ? "checked":"" }} @endif>	
 						</div>
@@ -1322,60 +1600,7 @@ Edit Course
 						
 						
 						
-						<!--<div class="form-group">
-						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Top Menu?</label></div>
-						<div class="col-12 col-md-3">
-						Yes
-						<input type="radio" name="show_top_menu" value="1"  @if (1== old('show_top_menu'))
-								selected="selected"	
-							@else
-							{{ (isset($edit_data) && $edit_data->show_top_menu == 1 ) ? "checked":"" }} @endif>	
-						</div>
-						<div class="col-12 col-md-3">
-						No
-						<input type="radio" name="show_top_menu" value="0"  @if ('0'== old('show_top_menu'))
-								selected="selected"	
-							@else
-							{{ (isset($edit_data) && $edit_data->show_top_menu == '0' ) ? "checked":"" }} @endif>
-						</div>
-						</div>   
-
-						<div class="form-group">
-						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Footer?</label></div>
-						<div class="col-12 col-md-2">
-						Yes
-						<input type="radio" name="show_on_footer" onchange="showfooter(this.value)" value="1"  @if (1== old('show_on_footer'))
-								selected="selected"	
-							@else
-							{{ (isset($edit_data) && $edit_data->show_on_footer == 1 ) ? "checked":"" }} @endif>	
-						</div>
-						<div class="show_footer_city">
-						 
-						<div class="col-12 col-md-2">
-						<select name="city" class="form-control col-md-3 col-xs-12">
-						<option value="">Select City</option>
-						@if(!empty($citys))
-							@foreach($citys as $city)
-						<option value="{{$city->city}}" @if($city->city ==old('city'))
-							selected="selected"
-						@else 
-						{{(isset($edit_data) && $edit_data->city==$city->city)?"selected":""}} @endif  >{{$city->city}}</option>
-						@endforeach
-						@endif
-						</select>						 	
-						</div>
-						 
-						
-						</div>
-						<div class="col-12 col-md-2">
-						No 
-						<input type="radio" name="show_on_footer" onchange="nofooter(this.value)" value="0"  @if ('0'== old('show_on_footer'))
-								checked="checked"	
-							@else
-							{{ (isset($edit_data) && $edit_data->show_on_footer == '0' ) ? "checked":"" }} @endif>
-						</div>
-						</div>  
-						 -->
+					 
                      	<div class="form-group">
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Related Courses</label>
 					<div class="col-md-8 col-sm-8 col-xs-12">Please Select 4 Or  8
@@ -1414,28 +1639,56 @@ Edit Course
             </div>
             </div>
 
-			<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script type="text/javascript">
+function initializeAllCourseEditors() {
+    const $ = window.jQuery;
+    if (!$ || !$.fn.summernote) return;
+    $('.summernote').each(function () {
+        if (!$(this).data('summernote')) $(this).summernote({ height: 200 });
+    });
+}
+if (document.readyState === 'complete') 
+	
+	initializeAllCourseEditors();
+
+else 
+
+window.addEventListener('load', initializeAllCourseEditors, { once: true });
+
+
+</script>
+
+
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> -->
 <script type="text/javascript">
 $('.summernote').summernote({
 height: 200
 });
 </script>
-
-
+ 
 
 
 <script>   
 	  
-	  var maxAppend = 0;
+	  var learnAppendCount = 0;
 $(".add_why_learn").click(function(){
-    if (maxAppend >= 8) return;
+    if (learnAppendCount >= 8) return;
     var addinput = $(
         '<div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Answer</label><div class="col-md-8 col-sm-8 col-xs-12"><textarea class="form-control col-md-7 col-xs-12" type="text" name="why_learn[]" placeholder="Why should you learn" multiple="true"></textarea> <span class="btn btn-inverse btn-circle m-b-5" onclick="remove(this)" style="margin-right: -38px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span></div></div></div><br />');   
-		maxAppend++;
+		learnAppendCount++;
 
     $(".result_why_learn").append(addinput);
 });
@@ -1448,13 +1701,13 @@ $(a).parent("div").parent("div").remove();
 }
 </script>
      <script>	  
-	  var maxAppend = 2;
+	  var faqAppendCount = 2;
 $(".add_more_stream").click(function(){
-    if (maxAppend >= 11) return;
+    if (faqAppendCount >= 11) return;
 
     var addinput = $(
-        '<div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">FAQ Question '+maxAppend+' <span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="faqq[]" placeholder="FAQ Question '+maxAppend+'"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">FAQ Answer '+maxAppend+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><textarea class="form-control col-md-7 col-xs-12" type="text" name="faqa[] placeholder="Enter FAQ Answer " multiple="true"></textarea></div></div><span class="btn btn-inverse btn-circle m-b-5" onclick="removefaq(this)" style="margin-right: 132px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span></div><br />');
-    maxAppend++;
+        '<div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">FAQ Question '+faqAppendCount+' <span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="faqq[]" placeholder="FAQ Question '+faqAppendCount+'"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">FAQ Answer '+faqAppendCount+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><textarea class="form-control col-md-7 col-xs-12" type="text" name="faqa[]" placeholder="Enter FAQ Answer " multiple="true"></textarea></div></div><span class="btn btn-inverse btn-circle m-b-5" onclick="removefaq(this)" style="margin-right: 132px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span></div><br />');
+    faqAppendCount++;
 
     $(".addfqa").append(addinput);
 });
@@ -1489,20 +1742,20 @@ $(a).parent("div").remove();
 </script>
 
 <script>	
-	window.onload = function()
+	window.addEventListener('load', function()
 	{
-		var category_id 	='<?php echo $edit_data->category; ?>';
-		var subcategory_id 	= '<?php echo $edit_data->subcategory; ?>';	 
-		var course_pdf_text 	= '<?php echo $edit_data->course_pdf_text; ?>';	 
-		var course_type 	= '<?php echo $edit_data->course_type; ?>';	 
-		var course_module 	= '<?php echo $edit_data->courses_module; ?>';	 
-		var course_releted 	= '<?php echo $edit_data->related_courses?>';	 
-		get_subcategory(category_id,subcategory_id);	 
-		get_categoryPDF(subcategory_id,course_pdf_text);			
+		var category_id = @json($edit_data->category ?? '');
+		var subcategory_id = @json($edit_data->subcategory ?? '');
+		var course_pdf_text = @json($edit_data->course_pdf_text ?? '');
+		var course_type = @json($edit_data->course_type ?? '');
+		var course_module = @json($edit_data->courses_module ?? '');
+		var course_releted = @json($edit_data->related_courses ?? '');
+		// get_subcategory(category_id,subcategory_id);	 
+		// get_categoryPDF(subcategory_id,course_pdf_text);			
 		get_courseModuleedit(course_type,category_id,course_module);	 
 		get_courseReleted(category_id,course_releted);		 
 	 
-	}	 
+	});
 </script>
  
 
@@ -1543,52 +1796,52 @@ function get_courseReleted(cid,cr=""){
 	});
 	 
 }
-function get_subcategory(cid,sid){	 
-	var token = $('input[name=_token]').val();
-	$.ajax({
-	type: "post",	 
-	url: "{{URl('admin/subcategory_pdf/get_subcategory_pdf')}}",
-	data: {cid:cid,sid:sid},
-	headers: {'X-CSRF-TOKEN': token},		
-	cache: false,
-	success: function(data)
-	{ 		 
-		$(".show_subcategory_pdf").html(data);
-	}
-	});
-var cc_id =<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>;
-	$.ajax({
-	type: "post",	 
-	url: "{{URl('admin/getcategory/get_video_link')}}",
-	data: {cid:cid,cc_id:cc_id},
-	headers: {'X-CSRF-TOKEN': token},		
-	cache: false,
-	success: function(data)
-	{ 		  
-		$("#video_link").val(data);
-	}
-	});
+// function get_subcategory(cid,sid){	 
+// 	var token = $('input[name=_token]').val();
+// 	$.ajax({
+// 	type: "post",	 
+// 	url: "{{URl('admin/subcategory_pdf/get_subcategory_pdf')}}",
+// 	data: {cid:cid,sid:sid},
+// 	headers: {'X-CSRF-TOKEN': token},		
+// 	cache: false,
+// 	success: function(data)
+// 	{ 		 
+// 		$(".show_subcategory_pdf").html(data);
+// 	}
+// 	});
+// var cc_id =<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>;
+// 	$.ajax({
+// 	type: "post",	 
+// 	url: "{{URl('admin/getcategory/get_video_link')}}",
+// 	data: {cid:cid,cc_id:cc_id},
+// 	headers: {'X-CSRF-TOKEN': token},		
+// 	cache: false,
+// 	success: function(data)
+// 	{ 		  
+// 		$("#video_link").val(data);
+// 	}
+// 	});
 
 
-}
+// }
 
-function get_categoryPDF(sid,pid){	 
-	var token = $('input[name=_token]').val();
-	$.ajax({
-	type: "post",	 
-	url: "{{URl('admin/get_category_course_pdf/get_course_pdf')}}",
-	data: {sid:sid,pid:pid},
-	headers: {'X-CSRF-TOKEN': token},		
-	cache: false,
-	success: function(data)
-	{ 		 
-		$(".show_course_pdf").html(data);
-	}
-	});
+// function get_categoryPDF(sid,pid){	 
+// 	var token = $('input[name=_token]').val();
+// 	$.ajax({
+// 	type: "post",	 
+// 	url: "{{URl('admin/get_category_course_pdf/get_course_pdf')}}",
+// 	data: {sid:sid,pid:pid},
+// 	headers: {'X-CSRF-TOKEN': token},		
+// 	cache: false,
+// 	success: function(data)
+// 	{ 		 
+// 		$(".show_course_pdf").html(data);
+// 	}	
+// 	});
 
 
 
-}
+// }
 
 </script>
   
@@ -1669,7 +1922,7 @@ function showfooter(gst){
 		content: "\2212";
 		}
 
-		.panel {
+		.lms-accordian .panel {
 		padding: 0 18px;
 		background-color: white;
 		max-height: 0;
@@ -1680,6 +1933,278 @@ function showfooter(gst){
 
 
 
+
+
+
+
+<style>
+    .course-section-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        width: 100%;
+        padding: 14px 12px;
+        border: 0;
+        border-radius: 6px;
+        background: #f5f7fa;
+        color: #34495e;
+        text-align: left;
+        font: inherit;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .course-section-toggle:hover { background: #eaf0f7; }
+    .course-section-toggle:focus-visible { outline: 2px solid #337ab7; }
+    .course-section-toggle small { font-size: 12px; color: #64748b; }
+    .course-toggle-arrow { transition: transform .2s ease; }
+    .course-section-toggle[aria-expanded="true"] .course-toggle-arrow {
+        transform: rotate(180deg);
+    }
+    .course-trigger-panel > .x_title { padding: 0 0 10px; }
+    .course-trigger-panel > .x_title h1,
+    .course-trigger-panel > .x_title h3 {
+        float: none;
+        width: 100%;
+        margin: 0 0 8px;
+    }
+    .course-trigger-panel > .x_content { float: none; }
+    .course-trigger-panel > .x_content[hidden] { display: none !important; }
+</style>
+<script>
+(function () {
+    function initializeCourseTriggers() {
+        document.querySelectorAll('.right_col .x_panel').forEach(function (panel, index) {
+            // The learning section already has its own native details trigger.
+            if (panel.tagName === 'DETAILS' || panel.dataset.sectionTriggerReady) return;
+            const title = [...panel.children].find(el => el.classList.contains('x_title'));
+            const content = [...panel.children].find(el => el.classList.contains('x_content'));
+            if (!title || !content) return;
+            panel.dataset.sectionTriggerReady = '1';
+            panel.classList.add('course-trigger-panel');
+            let heading = title.querySelector('h1, h3');
+            if (!heading) {
+                heading = document.createElement('h3');
+                heading.textContent = 'Related Courses & Visibility';
+                title.prepend(heading);
+            }
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'course-section-toggle';
+            const label = document.createElement('span');
+            while (heading.firstChild) label.appendChild(heading.firstChild);
+            const arrow = document.createElement('span');
+            arrow.className = 'course-toggle-arrow';
+            arrow.textContent = '⌄';
+            arrow.setAttribute('aria-hidden', 'true');
+            button.append(label, arrow);
+            heading.appendChild(button);
+            if (!content.id) content.id = 'course-section-body-' + index;
+            button.setAttribute('aria-controls', content.id);
+            function setOpen(open) {
+                content.hidden = !open;
+                button.setAttribute('aria-expanded', String(open));
+                if (open) {
+                    // Notify responsive widgets that their container is visible.
+                    window.dispatchEvent(new Event('resize'));
+                    const $ = window.jQuery;
+                    if ($ && $.fn.dataTable) {
+                        $(content).find('table').each(function () {
+                            if ($.fn.dataTable.isDataTable(this)) {
+                                $(this).DataTable().columns.adjust();
+                            }
+                        });
+                    }
+                }
+            }
+            button.addEventListener('click', function () {
+                setOpen(button.getAttribute('aria-expanded') !== 'true');
+            });
+            content.addEventListener('invalid', function () { setOpen(true); }, true);
+            setOpen(index === 0 || !!content.querySelector('.text-danger, .alert-danger'));
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCourseTriggers, { once: true });
+    } else initializeCourseTriggers();
+})();
+</script>
+
+
+
+
+
+<!-- Success / error popup -->
+<div id="courseSavePopup" role="status" aria-live="polite"></div>
+
+<style>
+    #courseSavePopup {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        z-index: 99999;
+        max-width: calc(100vw - 40px);
+        padding: 14px 22px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .18);
+        opacity: 0;
+        transform: translateY(-15px);
+        transition: opacity .25s, transform .25s;
+        pointer-events: none;
+    }
+
+    #courseSavePopup.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #courseSavePopup[data-type="success"] {
+        background: #15803d;
+    }
+
+    #courseSavePopup[data-type="error"] {
+        background: #dc2626;
+    }
+</style>
+
+
+
+<style>
+.common-save-status { margin: 0 0 15px; padding: 10px 14px; border-radius: 5px; }
+.common-save-status:empty { display: none; }
+.common-save-status[data-state="pending"] { color: #475569; background: #f1f5f9; }
+.common-save-status[data-state="success"] { color: #166534; background: #dcfce7; }
+.common-save-status[data-state="error"] { color: #991b1b; background: #fee2e2; }
+</style>
+<script>
+(function () {
+    function initializeCommonAutosave() {
+        const forms = [...document.querySelectorAll('.right_col form[data-ajax-autosave]')];
+        const popup = document.getElementById('courseSavePopup');
+        let popupTimer;
+        function toast(text, type) {
+            if (!popup) return;
+            clearTimeout(popupTimer);
+            popup.textContent = text;
+            popup.dataset.type = type;
+            popup.classList.add('is-visible');
+            popupTimer = setTimeout(() => popup.classList.remove('is-visible'), 3500);
+        }
+        forms.forEach(form => {
+            if (form.dataset.commonSaveReady) return;
+            form.dataset.commonSaveReady = '1';
+          
+            form.querySelectorAll('button[type="submit"]').forEach(button => button.removeAttribute('onclick'));
+            const status = document.createElement('div');
+            status.className = 'common-save-status';
+            status.setAttribute('role', 'status');
+            status.setAttribute('aria-live', 'polite');
+            form.prepend(status);
+            let timer, saving = false, queued = false, failed = false;
+            function message(text, state) {
+                status.textContent = text;
+                status.dataset.state = state;
+            }
+            function getPayload() {
+                form.querySelectorAll('textarea.summernote').forEach(field => {
+                    const wrapper = field.parentElement.querySelector('.note-editor');
+                    if (!wrapper) return;
+                    const source = wrapper.querySelector('.note-codable');
+                    const editable = wrapper.querySelector('.note-editable');
+                    if (wrapper.classList.contains('codeview') && source) field.value = source.value;
+                    else if (editable) field.value = editable.innerHTML;
+                });
+                const data = new FormData(form);
+                // Include an empty value when every entry of an array is removed.
+                const names = new Set([...form.querySelectorAll('[name$="[]"]')].map(el => el.name));
+                names.forEach(name => { if (!data.has(name)) data.append(name, ''); });
+                const signature = JSON.stringify([...data.entries()].map(([key, value]) => [key,
+                    value instanceof File ? [value.name, value.size, value.lastModified] : value
+                ]));
+                return { data, signature };
+            }
+            let observed = getPayload().signature;
+            let saved = observed;
+            function detect() {
+                const signature = getPayload().signature;
+                if (signature === observed) return;
+                observed = signature;
+                failed = false;
+                clearTimeout(timer);
+                message('Unsaved changes…', 'pending');
+                timer = setTimeout(() => save(false), 1000);
+            }
+            async function save(force) {
+                clearTimeout(timer);
+                if (saving) { queued = true; return; }
+                const { data, signature } = getPayload();
+                if (!force && signature === saved) { message('All changes saved.', 'success'); return; }
+                if (!form.checkValidity()) {
+                    message('Complete the required fields to save this section.', 'error');
+                    if (force) form.reportValidity();
+                    return;
+                }
+                saving = true;
+                queued = false;
+                message('Saving…', 'pending');
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method.toUpperCase(), body: data, credentials: 'same-origin',
+                        headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                    });
+                    if (!(response.headers.get('content-type') || '').includes('application/json')) {
+                        throw new Error('Save endpoint must return JSON; check the route or login session.');
+                    }
+                    const result = await response.json();
+                    if (!response.ok || result.success === false || result.status === false || result.status === 'error') {
+                        const errors = Object.values(result.errors || {}).flat().join(' ');
+                        throw new Error(errors || result.message || 'Unable to save this section.');
+                    }
+                    saved = signature;
+                    failed = false;
+                    if (getPayload().signature === signature) {
+                        message('✓ Saved successfully.', 'success');
+                        toast((form.dataset.sectionName || 'Section') + ' saved successfully!', 'success');
+                    }
+                } catch (error) {
+                    failed = true;
+                    message(error.message + ' Use Submit to retry.', 'error');
+                    toast(error.message, 'error');
+                } finally {
+                    saving = false;
+                    const latest = getPayload().signature;
+                    if (latest !== signature || queued) {
+                        observed = latest;
+                        queued = false;
+                        clearTimeout(timer);
+                        timer = setTimeout(() => save(false), 1000);
+                    }
+                }
+            }
+            form.addEventListener('input', detect);
+            form.addEventListener('change', detect);
+            form.addEventListener('submit', event => { event.preventDefault(); save(true); });
+            // Polling covers editor toolbar actions, Select2, and added/removed rows.
+            const watcher = setInterval(() => {
+                if (!form.isConnected) { clearInterval(watcher); clearTimeout(timer); return; }
+                detect();
+            }, 500);
+            window.addEventListener('beforeunload', event => {
+                if (saving || failed || getPayload().signature !== saved) {
+                    event.preventDefault(); event.returnValue = '';
+                }
+            });
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeCommonAutosave, { once: true });
+    else initializeCommonAutosave();
+})();
+
+</script>
 
 
 

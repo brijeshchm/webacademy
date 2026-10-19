@@ -1144,17 +1144,17 @@ SEO Edit Course
 					<div class="col-md-8 col-sm-8 col-xs-12">
 					<select class="form-control col-md-7 col-xs-12 select_related_courses_side" name="related_courses_side[]" multiple>
 					<option value="">Select Course</option> 
-						 @php
-    $relatedCoursesSide = !empty($edit_data->related_courses_side)
-        ? (json_decode($edit_data->related_courses_side, true) ?? [])
-        : [];
-@endphp
+					@php
+						$relatedCoursesSide = !empty($edit_data->related_courses_side)
+							? (json_decode($edit_data->related_courses_side, true) ?? [])
+							: [];
+					@endphp
 
-@foreach($course_list ?? [] as $coursev)
-    <option value="{{ $coursev->slug }}" @selected(in_array($coursev->slug, $relatedCoursesSide))>
-        {{ $coursev->title }}
-    </option>
-@endforeach		
+					@foreach($course_list ?? [] as $coursev)
+						<option value="{{ $coursev->slug }}" @selected(in_array($coursev->slug, $relatedCoursesSide))>
+							{{ $coursev->title }}
+						</option>
+					@endforeach		
  
 					</select>
 
