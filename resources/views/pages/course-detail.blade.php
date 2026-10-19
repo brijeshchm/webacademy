@@ -935,24 +935,25 @@ margin-bottom: .5rem !important;
     .faq-item[open] .icon-plus { display: none; }     /* open: hide + */
     .faq-item[open] .icon-minus { display: inline; }  /* open: show − */
     .faq-item[open] { border-color: #bfdbfe; }
-    .faq-item h3{
-        color: var(--color-gray-900);
-            font-size: var(--text-sm);
-    line-height: var(--tw-leading, var(--text-sm--line-height));
+ 
+    .faq-item h2 {
+        color: #111827 !important;
+        font-size: 24px !important;
+        line-height: 32px !important;
     }
 
-    .faq-item h2{
-        color: var(--color-gray-900);
-               
-                font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-sm--line-height));
+    .faq-item h3 {
+        color: #111827 !important;
+        font-size: 14px !important;
+        line-height: 20px !important;
     }
 
-    .faq-item h4{
-        color: var(--color-gray-900);
-        font-size: var(--text-1xl);
-    line-height: var(--tw-leading, var(--text-sm--line-height));
+    .faq-item h4 {
+        color: #111827 !important;
+        font-size: 20px !important;
+        line-height: 28px !important;
     }
+ 
 </style>
 
 
