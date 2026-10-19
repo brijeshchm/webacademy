@@ -271,9 +271,47 @@ class CourseController extends Controller implements HasMiddleware
      * @return \Illuminate\Http\Response
      */
 
-	 
+	 public function editSaveCourseContent(Request $request, $id)
+{
+    $rules = [];
+    foreach (range(1, 6) as $i) {
+        $rules["heading{$i}"]     = 'nullable|string|max:255';
+        $rules["description{$i}"] = 'nullable|string';
+    }
 
-    public function editSaveCourseContent(Request $request,$id)
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 1,
+            'errors' => $validator->getMessageBag()->toArray(),
+        ], 422);
+    }
+
+    try {
+        $data = $request->only(array_keys($rules));
+
+        // ONE query: insert if missing, update if it exists
+        CourseAbout::updateOrCreate(['course_id' => $id], $data);
+
+        return response()->json([
+            'status' => 1,
+            'msg'    => 'Course About submitted successfully!',
+        ]);
+    } catch (\Throwable $e) {
+        \Log::error('Course About save failed', [
+            'course_id' => $id,
+            'error'     => $e->getMessage(),
+        ]);
+
+        return response()->json([
+            'status' => 0,
+            'msg'    => 'Course About could not be submitted!',
+        ], 500);
+    }
+}
+
+    public function editSaveCourseContent_old(Request $request,$id)
     {	  
 	 
 		  $validator = Validator::make($request->all(),[				 
