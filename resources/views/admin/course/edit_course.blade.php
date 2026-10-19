@@ -1971,6 +1971,12 @@ function showfooter(gst){
     }
     .course-trigger-panel > .x_content { float: none; }
     .course-trigger-panel > .x_content[hidden] { display: none !important; }
+
+	.x_title span{
+
+	    color: #060606;
+
+	}
 </style>
 <script>
 (function () {
