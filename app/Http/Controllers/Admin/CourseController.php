@@ -270,13 +270,15 @@ class CourseController extends Controller implements HasMiddleware
      *
      * @return \Illuminate\Http\Response
      */
+
+	 
+
     public function editSaveCourseContent(Request $request,$id)
     {	  
 	 
 		  $validator = Validator::make($request->all(),[				 
-				'heading1'=>'required',
-				'description1'=>'required',
-			 				 				
+				'heading1'=>'nullable|string',
+				'description1'=>'nullable|string',		 				 				
 			 				 				
 			]);
 			
@@ -287,7 +289,7 @@ class CourseController extends Controller implements HasMiddleware
 				  
 				  
 			$courseAbout = 	  CourseAbout::where('course_id',$id)->first();
-
+ 
 			
 			if(!empty($courseAbout)){
 			$updatelearn =array(
@@ -321,8 +323,7 @@ class CourseController extends Controller implements HasMiddleware
 			}else{
 			    	$courseAboutHeading  = New CourseAbout;
 			    	
-					$courseAboutHeading->course_id = $id;
-				 
+					$courseAboutHeading->course_id = $id;				 
 					$courseAboutHeading->heading1 = $request->input('heading1');
 					$courseAboutHeading->description1 = $request->input('description1');
 					$courseAboutHeading->heading2 = $request->input('heading2');
@@ -335,7 +336,7 @@ class CourseController extends Controller implements HasMiddleware
 					$courseAboutHeading->description5 = $request->input('description5');
 					$courseAboutHeading->heading6 = $request->input('heading6');
 					$courseAboutHeading->description6 = $request->input('description6');
-
+ 
  
 			    
 			    	if($courseAboutHeading->save()){
