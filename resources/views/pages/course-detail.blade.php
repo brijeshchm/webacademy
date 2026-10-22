@@ -907,7 +907,7 @@ margin-bottom: .5rem !important;
     .about-item h2,
     .about-item h2 * {
         color: #111827 !important;
-        font-size: 24px !important;
+        font-size: 1.5rem !important;
         line-height: 45px !important;
         font-weight: var(--font-weight-bold);
     }
