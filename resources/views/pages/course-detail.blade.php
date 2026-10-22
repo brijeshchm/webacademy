@@ -941,7 +941,7 @@ margin-bottom: .5rem !important;
     counter-increment: step;
     position: relative;
     padding: 6px 0 6px 41px;
-    margin-bottom: 12px;
+    margin-bottom: 0px;
     line-height: 1.7;
     min-height: 34px;
 }
@@ -959,9 +959,7 @@ margin-bottom: .5rem !important;
     font-size: 15px;
     font-weight: 700;
     line-height: 34px;
-    text-align: center;
-
- 
+    text-align: center; 
 }
 
  
