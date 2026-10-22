@@ -929,6 +929,7 @@ margin-bottom: .5rem !important;
     }
 
 /* ===== Ordered list with number circles ===== */
+
 .about-item ol {
     list-style: none;
     counter-reset: step;
@@ -939,27 +940,31 @@ margin-bottom: .5rem !important;
 .about-item ol li {
     counter-increment: step;
     position: relative;
-    padding: 6px 0 6px 48px;
+    padding: 6px 0 6px 41px;
     margin-bottom: 12px;
     line-height: 1.7;
     min-height: 34px;
 }
 
 .about-item ol li::before {
-    content: counter(step);
+    content: "✓";
     position: absolute;
     left: 0;
     top: 4px;
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: #1d4ed8;
-    color: #fff;
+    background: #dcfce7;
+    color: #166534;
     font-size: 15px;
     font-weight: 700;
     line-height: 34px;
     text-align: center;
+
+ 
 }
+
+ 
  
 </style>
 
