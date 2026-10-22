@@ -96,7 +96,7 @@
                                 <ul class="list-disc list-inside space-y-1 text-sm text-gray-600">
                                     <li>
                                         If you have previously agreed to receive marketing communications, you can opt-out at any time by emailing us at
-                                        <a href="mailto:corporate@gmail.com" class="text-primary hover:underline">corporate@gmail.com</a>.
+                                        <a href="mailto:corporatesacademy2@gmail.com" class="text-primary hover:underline">corporatesacademy2@gmail.com</a>.
                                         We do not share, sell, or rent your personal information to third parties without your consent, except when required by law. If you suspect any inaccuracies in your data, please contact us, and we will correct or update it promptly.
                                     </li>
                                 </ul>
