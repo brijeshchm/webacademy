@@ -2552,7 +2552,7 @@ document.addEventListener('DOMContentLoaded', function () {
 .about-item table th,
 .about-item table thead td,
 .about-item table tr:first-child td {
-    background: #1d4ed8;
+    background: #6183e2;
     color: #fff;
     font-weight: 600;
     text-align: left;
@@ -2573,7 +2573,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 .about-item table tr:hover td {
-    background: #eff6ff;               /* hover highlight */
+    background: #f8fafc;               /* hover highlight */
 }
 
 /* ===== Rounded corners (optional) ===== */
