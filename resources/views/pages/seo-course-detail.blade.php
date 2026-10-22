@@ -261,7 +261,7 @@
 
                     <h1 class="text-2xl md:text-2xl lg:text-2xl font-display font-extrabold tracking-tight mb-5 text-white leading-[1.1]">{{ $course->title }}</h1>
 
-                    <p class="text-base md:text-lg text-blue-100/70 mb-7 leading-relaxed">{{ $course->course_defination }}</p>
+                    <p class="text-base md:text-lg text-white mb-7 leading-relaxed">{{ $course->course_defination }}</p>
 
                     {{-- Rating row --}}
                     <div class="flex flex-wrap items-center gap-5 mb-7">
