@@ -314,7 +314,7 @@
 
                 
                     {{-- Trust badges --}}
-                    <div class="flex flex-wrap gap-4 mt-5">
+                    <div class="flex flex-wrap gap-4 mt-5 mb-6">
                         @foreach(['Expert Trainer', 'Industry Certificate','Real-live Projects','Trainer Support','Interview Preparation','Resume Building Support','Career Guidance','Lifetime Membership Access'] as $tb)
                             <span class="flex items-center gap-1.5 text-xs text-white font-medium">
                                 <svg class="h-3.5 w-3.5 text-emerald-400" {!! $iconStroke !!}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path></svg>
