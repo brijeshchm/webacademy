@@ -1902,7 +1902,7 @@ margin-bottom: .5rem !important;
                             $courseTitle = trim($course->title ?? '') ?: 'this course';
 
                             $certificatePoints = [
-                            "<strong>{$courseTitle}</strong>course completion certificate",
+                            "<strong>{$courseTitle}</strong> course completion certificate",
                             'Share your achievement on LinkedIn and your resume',
                             'Highlight your completed training and newly learned skills',
                             'Add your certificate to your professional portfolio',
@@ -1911,7 +1911,7 @@ margin-bottom: .5rem !important;
                                 @foreach($certificatePoints as $pt)
                                     <li class="flex items-center gap-2.5 text-sm text-gray-700">
                                         <svg class="h-4 w-4 text-violet-500 shrink-0" {!! $iconStroke !!}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                        {!! $pt !!}
+                                       <p>{!! $pt !!}</p>
                                     </li>
                                 @endforeach
                             </ul>
@@ -2284,5 +2284,74 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 }
 </style>
+
+
+
+<style>
+    .about-item .icon-minus { display: none; }          /* closed: hide − */
+    .about-item[open] .icon-plus { display: none; }     /* open: hide + */
+    .about-item[open] .icon-minus { display: inline; }  /* open: show − */
+    .about-item[open] { border-color: #bfdbfe; }
+     
+
+    .about-item h2,
+    .about-item h2 * {
+        color: #111827 !important;
+        font-size: 24px !important;
+        line-height: 45px !important;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .about-item h3,
+    .about-item h3 * {
+        color: #111827 !important;
+        font-size: 20px !important;
+        line-height: 45px !important;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .about-item h4,
+    .about-item h4 * {
+        color: #111827 !important;
+        font-size: 20px !important;
+        line-height: 45px !important;
+        font-weight: var(--font-weight-bold);
+    }
+
+/* ===== Ordered list with number circles ===== */
+.about-item ol {
+    list-style: none;
+    counter-reset: step;
+    margin: 16px 0;
+    padding: 0;
+}
+
+.about-item ol li {
+    counter-increment: step;
+    position: relative;
+    padding: 6px 0 6px 48px;
+    margin-bottom: 12px;
+    line-height: 1.7;
+    min-height: 34px;
+}
+
+.about-item ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1d4ed8;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 34px;
+    text-align: center;
+}
+ 
+</style>
+
 @include('partials.comman-lead-popup')
 @endsection
