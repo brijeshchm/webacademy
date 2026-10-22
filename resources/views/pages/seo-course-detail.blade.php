@@ -307,7 +307,7 @@
                         <a href="javascript:void(0)" data-lead-comman-popup rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/40 rounded-xl ring-2 ring-primary/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5" >
                             {{ t('courseDetail.enrollNow') }}                             <svg class="ml-2 h-4 w-4" {!! $iconStroke !!}><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
-                        <a href="{{ route('courses.enquiry') }}" class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">{{ t('courseDetailX.requestFreeCounselling') }}</a>
+                        <a href="javascript:void(0)" data-lead-comman-popup class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">Download Curriculum</a>
                     </div>
 
 
@@ -732,10 +732,8 @@
                                     font-semibold
                                     uppercase
                                     tracking-wider
-                                    text-black
-
+                                    text-white
                                     group-hover:text-blue-100
-
                                     transition-colors
                                     duration-300
                                 "
@@ -822,7 +820,7 @@ margin-bottom: .5rem !important;
                 {{-- OVERVIEW --}}
 
                     @if($aboutHeading)
-                    <section id="overview" class="course-content scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
+                    <section id="overview" class="about-item scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                         <div class="space-y-3">
 
                             @if($aboutHeading->courseabout)
@@ -866,43 +864,7 @@ margin-bottom: .5rem !important;
                         </div>
                     </section>
                     @endif
-                  
-<style>
-    .about-item .icon-minus { display: none; }          /* closed: hide − */
-    .about-item[open] .icon-plus { display: none; }     /* open: hide + */
-    .about-item[open] .icon-minus { display: inline; }  /* open: show − */
-    .about-item[open] { border-color: #bfdbfe; }
- 
-     
-
-    .about-item h2,
-    .about-item h2 * {
-        color: #111827 !important;
-        font-size: 24px !important;
-        line-height: 35px !important;
-        font-weight: var(--font-weight-bold);
-    }
-
-    .about-item h3,
-    .about-item h3 * {
-        color: #111827 !important;
-        font-size: 25px !important;
-        line-height: 35px !important;
-        font-weight: var(--font-weight-bold);
-    }
-
-    .about-item h4,
-    .about-item h4 * {
-        color: #111827 !important;
-        font-size: 20px !important;
-        line-height: 35px !important;
-        font-weight: var(--font-weight-bold);
-    }
-
-
- 
-</style>
-              
+          
 
                 {{-- WHO IS THIS FOR --}}
                 <section id="whoisthisfor" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
@@ -1103,7 +1065,7 @@ margin-bottom: .5rem !important;
     ];
 @endphp
 
-    @if(!empty($placementStories))
+    @if(!empty($placementStories->isNotEmpty()))
 <section id="placementSuccessStories"
     class="bg-white rounded-xl border shadow-sm p-6">
 
@@ -1448,7 +1410,7 @@ margin-bottom: .5rem !important;
             'num' => '02',
             'color' => 'rgb(31, 167, 122)',
             'title' => 'Learning Resources',
-            'desc' => "Get the presentation decks, training notes and extra materials used in live sessions and live project {$liveProjects}",
+            'desc' => "Get access to presentation decks, full training notes, and extra study materials used during live sessions and {$liveProjects} live projects  to strengthen your knowledge and build practical skills",
         ],
         [
             'num' => '03',
@@ -2231,7 +2193,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <style>
 	/* ===== Base table ===== */
-.course-content table {
+.about-item table {
     width: 100%;
     border-collapse: collapse;
     margin: 16px 0;
@@ -2241,9 +2203,9 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 /* ===== Header row ===== */
-.course-content table th,
-.course-content table thead td,
-.course-content table tr:first-child td {
+.about-item table th,
+.about-item table thead td,
+.about-item table tr:first-child td {
     background: #1d4ed8;
     color: #fff;
     font-weight: 600;
@@ -2251,8 +2213,8 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 /* ===== All cells ===== */
-.course-content table th,
-.course-content table td {
+.about-item table th,
+.about-item table td {
     padding: 10px 14px;
     border: 1px solid #e2e8f0;
     vertical-align: top;
@@ -2260,16 +2222,14 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 /* ===== Row styling ===== */
-.course-content table tr:nth-child(even) td {
+.about-item table tr:nth-child(even) td {
     background: #f8fafc;               /* striped rows */
 }
 
-.course-content table tr:hover td {
-    background: #eff6ff;               /* hover highlight */
-}
+ 
 
 /* ===== Rounded corners (optional) ===== */
-.course-content table {
+.about-item table {
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #e2e8f0;
@@ -2277,7 +2237,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ===== Mobile: scroll sideways instead of breaking layout ===== */
 @media (max-width: 640px) {
-    .course-content table {
+    .about-item table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
@@ -2318,37 +2278,62 @@ document.addEventListener('DOMContentLoaded', function () {
         font-weight: var(--font-weight-bold);
     }
 
+    
+ .about-item h2,
+    .about-item h2 * {
+        color: #111827 !important;
+        font-size: 1.2rem !important;
+        line-height: 45px !important;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .about-item h3,
+    .about-item h3 * {
+        color: #111827 !important;
+        font-size: 20px !important;
+        line-height: 45px !important;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .about-item h4,
+    .about-item h4 * {
+        color: #111827 !important;
+        font-size: 20px !important;
+        line-height: 45px !important;
+        font-weight: var(--font-weight-bold);
+    }
+ 
+
+
+
 /* ===== Ordered list with number circles ===== */
-.about-item ol {
+ .about-item ol {
     list-style: none;
-    counter-reset: step;
-    margin: 16px 0;
-    padding: 0;
+    padding-left: 0;
 }
 
 .about-item ol li {
-    counter-increment: step;
     position: relative;
-    padding: 6px 0 6px 48px;
-    margin-bottom: 12px;
-    line-height: 1.7;
-    min-height: 34px;
+    padding-left: 41px;
+    min-height: 36px;
+    margin-bottom: 0px;
+    display: flex;
 }
 
 .about-item ol li::before {
-    content: counter(step);
+      content: "✓";
     position: absolute;
     left: 0;
-    top: 4px;
+    top: 0px;
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: #1d4ed8;
-    color: #fff;
+    background: #dcfce7;
+    color: #166534;
     font-size: 15px;
     font-weight: 700;
     line-height: 34px;
-    text-align: center;
+    text-align: center; 
 }
  
 </style>

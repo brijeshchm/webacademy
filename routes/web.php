@@ -197,22 +197,22 @@ Route::get('/seopage/add',[App\Http\Controllers\Admin\SeoPageController::class, 
 
 Route::get('seopage/edit/{id}', [App\Http\Controllers\Admin\SeoPageController::class, 'edit']);
 Route::post('seopage/saveCourseTitle',[App\Http\Controllers\Admin\SeoPageController::class, 'saveCourseTitle'] );
-Route::post('seopage/editSaveCourseSeoTitle/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseTitle']);
+Route::post('seopage/editSaveCourseSeoTitle/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseTitle'])->name('editSaveCourseSeoTitle');
 Route::post('seopage/editSaveCourseAboutExtra/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseAboutExtra'] );
 Route::post('seopage/editSaveCourseOverview/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseOverview'] );
-Route::post('seopage/editSaveCourseSeoAbout/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseSeoAbout']);
-Route::post('seopage/editSaveCourseSeoTopic/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseSeoTopic']);
-Route::post('seopage/editSaveTrainerAbout/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTrainerAbout']);
-Route::post('seopage/editSaveCourseLearn/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseLearn']);
-Route::post('seopage/editSaveCourseExtraContent/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseExtraContent']);
+Route::post('seopage/editSaveCourseSeoAbout/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseSeoAbout'])->name('editSaveCourseSeoAbout');
+Route::post('seopage/editSaveCourseSeoTopic/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseSeoTopic'])->name('editSaveCourseSeoTopic');
+Route::post('seopage/editSaveTrainerAbout/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTrainerAbout'])->name('editSaveSeoTrainerAbout');
+Route::post('seopage/editSaveCourseLearn/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseLearn'])->name('editSaveCourseSeoLearn');
+Route::post('seopage/editSaveCourseExtraContent/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseExtraContent'])->name('editSaveCourseSeoExtraContent');
 
 Route::post('seopage/editSaveCourseBatchVisibility/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseBatchVisibility'] );
 Route::post('seopage/editSaveCurriculum/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCurriculum']);
 Route::post('seopage/editSaveCourseCurriculum/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseCurriculum'] );
-Route::post('seopage/editSaveCourseRelated/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseRelated'] );
+Route::post('seopage/editSaveCourseRelated/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseRelated'])->name('editSaveCourseSeoRelated');
 Route::post('seopage/editSaveCourseCertificate/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseCertificate'] );
-Route::post('seopage/editSaveFAQ/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveFAQ']);
-Route::post('seopage/editSaveTestimonial/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTestimonial']);
+Route::post('seopage/editSaveFAQ/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveFAQ'])->name('editSaveSeoFAQ');
+Route::post('seopage/editSaveTestimonial/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTestimonial'])->name('editSaveSeoTestimonial');
 Route::get('/seopage/get-seopage',[App\Http\Controllers\Admin\SeoPageController::class, 'getCoursePagination'])->middleware('auth');
 Route::get('/seopage/del_icon/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'del_icon']);
 Route::get('/seopage/del_image/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'del_image']);

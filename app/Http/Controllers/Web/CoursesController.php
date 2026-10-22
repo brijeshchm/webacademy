@@ -142,11 +142,14 @@ class CoursesController extends Controller
         $aboutHeading     = CourseAbout::where('course_id',$course->id)->first();
         }
         
-        $placementStories="";
-        
-        if($course){
-        $placementStories     = Placement::where('course',$course->id)->get();
-        }
+      $placementStories = collect();
+
+    if (!empty($course?->id)) {
+        $placementStories = Placement::where('course', $course->id)->get();
+    }
+
+
+    
         $allTopics = [];
         $moduleTopicCount = [];
         $curriculumTopics = [];
@@ -301,7 +304,7 @@ class CoursesController extends Controller
             $courseModules = Course::whereIn('slug', $courses_module)->get();
             return view('pages.master-detail', [
             'course'            => $course,
-            'placementStories'            => $placementStories,
+            'placementStories'  => $placementStories,
             'curriculum'        => $coursecurriculum,
             'courseModules'        => $courseModules,
             'aboutHeading'        => $aboutHeading,
@@ -343,7 +346,7 @@ class CoursesController extends Controller
 
 
         }else{
-
+ 
         return view('pages.course-detail', [
             'course'            => $course,
             'curriculum'        => $coursecurriculum,

@@ -310,7 +310,9 @@
                         <a href="javascript:void(0)" data-lead-comman-popup rel="noopener noreferrer" class="inline-flex items-center justify-center h-12 px-8 font-bold bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/40 rounded-xl ring-2 ring-primary/30 ring-offset-2 ring-offset-transparent transition-all duration-300 hover:-translate-y-0.5" >
                             {{ t('courseDetail.enrollNow') }}                             <svg class="ml-2 h-4 w-4" {!! $iconStroke !!}><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
-                        <a href="{{ route('courses.enquiry') }}" class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">{{ t('courseDetailX.requestFreeCounselling') }}</a>
+                      
+
+                         <a href="javascript:void(0)" data-lead-comman-popup class="inline-flex items-center justify-center h-12 px-8 font-semibold bg-white/10 text-white border border-white/25 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5">Download Curriculum</a>
                     </div>
 
 
@@ -740,14 +742,13 @@
                         {{-- CONTENT --}}
                         <div class="relative z-10 min-w-0">
 
-                            <p
-                                class="
+                            <p class="
                                     text-[10px]
                                     leading-4
                                     font-semibold
                                     uppercase
                                     tracking-wider
-                                    text-black
+                                    text-white
 
                                     group-hover:text-blue-100
 
@@ -1345,8 +1346,8 @@ margin-bottom: .5rem !important;
         '272C37',
     ];
 @endphp
-
-    @if(!empty($placementStories))
+ 
+    @if(!empty($placementStories->isNotEmpty()))
 <section id="placementSuccessStories"
     class="bg-white rounded-xl border shadow-sm p-6">
 
@@ -1699,7 +1700,7 @@ margin-bottom: .5rem !important;
         : '';
 
     $projectText = $hasValue($liveProjects)
-        ? " Live projects included: {$liveProjects}."
+        ? " {$liveProjects} Live projects included."
         : '';
 
     $batchText = $hasValue($monthlyBatches)
@@ -1718,7 +1719,7 @@ margin-bottom: .5rem !important;
             'num' => '02',
             'color' => 'rgb(31, 167, 122)',
             'title' => 'Updated Learning Resources',
-            'desc' => 'Access updated presentation decks, training notes, and supporting resources used during live sessions.',
+            'desc' => 'Access updated presentation decks, training notes, practice files, and supporting resources used during live sessions, so you can revise every topic at your own pace and stay prepared for interviews.',
         ],
         [
             'num' => '03',
@@ -2298,10 +2299,11 @@ margin-bottom: .5rem !important;
 
                         <div class="px-6 pb-6 space-y-2 border-t border-dashed border-gray-100 pt-4">
                        
-                            <a href="{{ route('courses.enquiry') }}" class="inline-flex items-center justify-center w-full h-10 font-semibold text-gray-500 hover:text-primary rounded-xl text-sm">
+                            <a href="javascript:void(0)" data-lead-comman-popup class="inline-flex items-center justify-center w-full h-10 font-semibold text-gray-500 hover:text-primary rounded-xl text-sm">
                                 <svg class="h-4 w-4 mr-2" {!! $iconStroke !!}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                 {{ t('courseDetailX.downloadBrochure') }}
                             </a>
+                             
                         </div>
                     </div>
 

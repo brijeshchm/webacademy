@@ -3,6 +3,7 @@
 SEO Edit Course
 @endsection
 @section('content') 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <div class="right_col" role="main">
           <div class="">            
             <div class="clearfix"></div>
@@ -11,7 +12,7 @@ SEO Edit Course
 			<div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
 					<div class="x_title">
-					<h1> Course Page <small>Course Title and Rating</small></h1>  
+					<h1> SEO Course Page</h1>  
 					<div class="succesmessage"></div><div class="errormessage"></div>
 					@if(Session::has('success')) 	
 					<div class="row">
@@ -33,8 +34,13 @@ SEO Edit Course
 					@endif                  
 					<div class="clearfix"></div>
 					</div>
-					<div class="x_content">                    
-						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return SEOController.editSaveCourseSeoTitle(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+					<div class="x_content">    
+						 
+
+						<form method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSaveCourseSeoTitle',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle" >
+
+
+				 
                         	<div class="form-group">
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="last-name">Course Name<span class="required">*</span>
 							</label>
@@ -173,7 +179,8 @@ SEO Edit Course
 				 
 					</div>
 					<div class="x_content">                    
-						<form  data-parsley-validate method="post" class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return SEOController.editSaveCourseSeoTopic(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+						<form method="post" class="form-horizontal form-label-left" autocomplete="off"
+						action="{{ route('admin.editSaveCourseSeoTopic',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseSeoTopic">
                          
 							<div class="form-group">
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Enrolled Students<span class="required">*</span>
@@ -514,7 +521,8 @@ SEO Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveCourseSeoAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
+						<form class="form-horizontal form-label-left" method="post"  						
+						action="{{ route('admin.editSaveCourseSeoAbout',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseSeoTopic">
 
 
 	                    <div class="form-group">   
@@ -528,7 +536,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Course About <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote"  name="courseabout" rows="7" placeholder="Enter coure about">{{ old('courseabout',(isset($aboutHeading->courseabout)) ? $aboutHeading->courseabout:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote"  name="courseabout" rows="7" placeholder="Enter coure about" style="display:none">{{ old('courseabout',(isset($aboutHeading->courseabout)) ? $aboutHeading->courseabout:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 									
@@ -545,7 +554,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Description 1 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote" name="description1" placeholder="Enter description 1"  >{{ old('description1',(isset($aboutHeading->description1)) ? $aboutHeading->description1:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote" name="description1" placeholder="Enter description 1"  >{{ old('description1',(isset($aboutHeading->description1)) ? $aboutHeading->description1:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 				 
@@ -561,7 +571,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Description 2 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote" name="description2" placeholder="Enter description 2"  >{{ old('description2',(isset($aboutHeading->description2)) ? $aboutHeading->description2:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote" name="description2" placeholder="Enter description 2"  >{{ old('description2',(isset($aboutHeading->description2)) ? $aboutHeading->description2:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 
@@ -576,7 +587,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Description 3 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote" name="description3" placeholder="Enter description 3"  >{{ old('description3',(isset($aboutHeading->description3)) ? $aboutHeading->description3:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote" name="description3" placeholder="Enter description 3"  >{{ old('description3',(isset($aboutHeading->description3)) ? $aboutHeading->description3:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 
@@ -592,7 +604,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Description 4 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote" name="description4" placeholder="Enter description 4"  >{{ old('description4',(isset($aboutHeading->description4)) ? $aboutHeading->description4:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote" name="description4" placeholder="Enter description 4"  >{{ old('description4',(isset($aboutHeading->description4)) ? $aboutHeading->description4:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 
@@ -607,7 +620,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Description 5 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote" name="description5" placeholder="Enter description 5"  >{{ old('description5',(isset($aboutHeading->description5)) ? $aboutHeading->description5:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote" name="description5" placeholder="Enter description 5"  >{{ old('description5',(isset($aboutHeading->description5)) ? $aboutHeading->description5:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 						
@@ -624,7 +638,8 @@ SEO Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Description 6 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote" name="description6" placeholder="Enter description 6"  >{{ old('description6',(isset($aboutHeading->description6)) ? $aboutHeading->description6:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote" name="description6" placeholder="Enter description 6"  >{{ old('description6',(isset($aboutHeading->description6)) ? $aboutHeading->description6:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 						
@@ -654,11 +669,11 @@ SEO Edit Course
 					</div>
 					<div class="x_content">        
 				  
-                    <form class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveCourseLearn(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">                
-					  
-
-
-					 
+                    <form class="form-horizontal form-label-left" method="post"
+					action="{{ route('admin.editSaveCourseSeoLearn',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseSeoTopic"
+					
+					>                
+					  			 
 					  
 					  
 					<?php 
@@ -712,14 +727,16 @@ SEO Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveTrainerAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
+						<form class="form-horizontal form-label-left" method="post" 
+						action="{{ route('admin.editSaveSeoTrainerAbout',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle" >
 
  
 
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Trainer About <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote"  name="trainer_about" rows="7" placeholder="Enter trainer about">{{ old('trainer_about',(isset($edit_data->trainer_about)) ? $edit_data->trainer_about:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 summernote"  name="trainer_about" rows="7" placeholder="Enter trainer about">{{ old('trainer_about',(isset($edit_data->trainer_about)) ? $edit_data->trainer_about:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 									
@@ -783,7 +800,8 @@ SEO Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveCourseExtraContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multiform/data-from">
+					<form class="form-horizontal form-label-left" method="post" 
+						action="{{ route('admin.editSaveCourseSeoExtraContent',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseExtraContent">
 
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Top Heading<span class="required">*</span></label>					  
@@ -799,17 +817,19 @@ SEO Edit Course
 						<div class="col-md-8 col-sm-8 col-xs-12">
 						<textarea
 						id="top_description"
+						data-quill-editor
 						class="form-control col-md-7 col-xs-12 summernote"
 						name="top_description"
 						placeholder="Enter top description"
 						>{{ old('top_description', $edit_data->top_description ?? '') }}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div>
 
 
 						<div class="form-group">
 						<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                          
-						 <button type="submit" class="btn btn-success" name="submit">Submit</button>							 
+						 <button type="submit" class="btn btn-success">Submit</button>							 
 						</div>
 						</div>
 						</form>
@@ -904,7 +924,10 @@ SEO Edit Course
                   </div>
                   <div class="x_content">
                     
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveFAQ(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+                    <form class="form-horizontal form-label-left" method="post"  
+					action="{{ route('admin.editSaveSeoFAQ',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle"
+					
+					>
 					 <?php if(!empty($edit_data->FAQs)){
 					     if($edit_data->FAQs){
 						 $FAQs =json_decode($edit_data->FAQs);    
@@ -987,7 +1010,8 @@ SEO Edit Course
                   </div>
                   <div class="x_content">
                     
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveTestimonial(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+                    <form class="form-horizontal form-label-left" method="post"  
+					action="{{ route('admin.editSaveSeoTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle">
 					 <?php if(!empty($edit_data->reviews)){
 					 $reviews = json_decode($reviews->reviews ?? '[]', true) ?? [];              
 					 $name  = json_decode($reviews->name ?? '[]', true) ?? []; 
@@ -1131,7 +1155,8 @@ SEO Edit Course
                   </div>
                   <div class="x_content">
                     
-                    <form data-parsley-validate class="form-horizontal form-label-left" action="" method="post" onsubmit="return SEOController.editSaveCourseRelated(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
+                    <form class="form-horizontal form-label-left" method="post"  
+					action="{{ route('admin.editSaveCourseSeoRelated',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle">
 					
 				
 					<div class="form-group">
@@ -1611,6 +1636,110 @@ function showfooter(gst){
 
 
 <style>
+    .course-section-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        width: 100%;
+        padding: 14px 12px;
+        border: 0;
+        border-radius: 6px;
+        background: #f5f7fa;
+        color: #34495e;
+        text-align: left;
+        font: inherit;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .course-section-toggle:hover { background: #eaf0f7; }
+    .course-section-toggle:focus-visible { outline: 2px solid #337ab7; }
+    .course-section-toggle small { font-size: 12px; color: #64748b; }
+    .course-toggle-arrow { transition: transform .2s ease; }
+    .course-section-toggle[aria-expanded="true"] .course-toggle-arrow {
+        transform: rotate(180deg);
+    }
+    .course-trigger-panel > .x_title { padding: 0 0 10px; }
+    .course-trigger-panel > .x_title h1,
+    .course-trigger-panel > .x_title h3 {
+        float: none;
+        width: 100%;
+        margin: 0 0 8px;
+    }
+    .course-trigger-panel > .x_content { float: none; }
+    .course-trigger-panel > .x_content[hidden] { display: none !important; }
+
+	.x_title span{
+
+	    color: #060606;
+
+	}
+</style>
+<script>
+(function () {
+    function initializeCourseTriggers() {
+        document.querySelectorAll('.right_col .x_panel').forEach(function (panel, index) {
+            // The learning section already has its own native details trigger.
+            if (panel.tagName === 'DETAILS' || panel.dataset.sectionTriggerReady) return;
+            const title = [...panel.children].find(el => el.classList.contains('x_title'));
+            const content = [...panel.children].find(el => el.classList.contains('x_content'));
+            if (!title || !content) return;
+            panel.dataset.sectionTriggerReady = '1';
+            panel.classList.add('course-trigger-panel');
+            let heading = title.querySelector('h1, h3');
+            if (!heading) {
+                heading = document.createElement('h3');
+                heading.textContent = 'Related Courses & Visibility';
+                title.prepend(heading);
+            }
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'course-section-toggle';
+            const label = document.createElement('span');
+            while (heading.firstChild) label.appendChild(heading.firstChild);
+            const arrow = document.createElement('span');
+            arrow.className = 'course-toggle-arrow';
+            arrow.textContent = '⌄';
+            arrow.setAttribute('aria-hidden', 'true');
+            button.append(label, arrow);
+            heading.appendChild(button);
+            if (!content.id) content.id = 'course-section-body-' + index;
+            button.setAttribute('aria-controls', content.id);
+            function setOpen(open) {
+                content.hidden = !open;
+                button.setAttribute('aria-expanded', String(open));
+                if (open) {
+                    // Notify responsive widgets that their container is visible.
+                    window.dispatchEvent(new Event('resize'));
+                    const $ = window.jQuery;
+                    if ($ && $.fn.dataTable) {
+                        $(content).find('table').each(function () {
+                            if ($.fn.dataTable.isDataTable(this)) {
+                                $(this).DataTable().columns.adjust();
+                            }
+                        });
+                    }
+                }
+            }
+            button.addEventListener('click', function () {
+                setOpen(button.getAttribute('aria-expanded') !== 'true');
+            });
+            content.addEventListener('invalid', function () { setOpen(true); }, true);
+            setOpen(index === 0 || !!content.querySelector('.text-danger, .alert-danger'));
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCourseTriggers, { once: true });
+    } else initializeCourseTriggers();
+})();
+</script>
+
+
+
+
+
+<style>
 .common-save-status { margin: 0 0 15px; padding: 10px 14px; border-radius: 5px; }
 .common-save-status:empty { display: none; }
 .common-save-status[data-state="pending"] { color: #475569; background: #f1f5f9; }
@@ -1626,6 +1755,42 @@ width:100%;
 
 
 
+<!-- Success / error popup -->
+<div id="courseSavePopup" role="status" aria-live="polite"></div>
+
+<style>
+    #courseSavePopup {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        z-index: 99999;
+        max-width: calc(100vw - 40px);
+        padding: 14px 22px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .18);
+        opacity: 0;
+        transform: translateY(-15px);
+        transition: opacity .25s, transform .25s;
+        pointer-events: none;
+    }
+
+    #courseSavePopup.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #courseSavePopup[data-type="success"] {
+        background: #15803d;
+    }
+
+    #courseSavePopup[data-type="error"] {
+        background: #dc2626;
+    }
+</style>
+ 
 			  
  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
@@ -1640,6 +1805,10 @@ width:100%;
 
         document.querySelectorAll('textarea[data-quill-editor]')
             .forEach(function (textarea) {
+                // Force original textarea to stay hidden.
+                textarea.hidden = true;
+                textarea.style.setProperty('display', 'none', 'important');
+
                 if (textarea.dataset.quillReady === 'true') return;
 
                 const editor = textarea.nextElementSibling;
@@ -1649,7 +1818,6 @@ width:100%;
                     return;
                 }
 
-                const savedHTML = textarea.value || '';
                 let htmlMode = false;
 
                 const quill = new Quill(editor, {
@@ -1672,49 +1840,57 @@ width:100%;
                     }
                 });
 
-                quill.clipboard.dangerouslyPasteHTML(savedHTML, 'silent');
+                quill.clipboard.dangerouslyPasteHTML(
+                    textarea.value || '',
+                    'silent'
+                );
 
                 textarea.dataset.quillReady = 'true';
-                textarea.hidden = true;
-
-                // Allows other scripts to access this editor.
                 textarea.quillInstance = quill;
 
                 const toolbar = quill.getModule('toolbar').container;
 
                 const htmlEditor = document.createElement('textarea');
-                htmlEditor.className =
-                    'form-control w-full rounded-lg border border-gray-300 p-4 font-mono text-sm';
+                htmlEditor.className = 'form-control';
                 htmlEditor.rows = 12;
-                htmlEditor.hidden = true;
                 htmlEditor.spellcheck = false;
                 htmlEditor.setAttribute('aria-label', 'Edit HTML source');
-                htmlEditor.style.minHeight = '220px';
+                htmlEditor.style.cssText =
+                    'width:100%;min-height:220px;padding:15px;font-family:monospace;';
+
+                // Use display:none!important to prevent CSS overriding hidden.
+                htmlEditor.hidden = true;
+                htmlEditor.style.setProperty('display', 'none', 'important');
 
                 editor.insertAdjacentElement('afterend', htmlEditor);
 
                 const toggleButton = document.createElement('button');
                 toggleButton.type = 'button';
-                toggleButton.className =
-                    'btn btn-default mb-2 rounded-lg border border-gray-300 px-3 py-2 text-sm';
+                toggleButton.className = 'btn btn-default';
                 toggleButton.textContent = '</> Edit HTML';
                 toggleButton.setAttribute('aria-pressed', 'false');
 
                 toolbar.parentNode.insertBefore(toggleButton, toolbar);
 
+                function setVisible(element, visible) {
+                    element.hidden = !visible;
+                    element.style.setProperty(
+                        'display',
+                        visible ? 'block' : 'none',
+                        'important'
+                    );
+                }
+
                 function updateTextarea(html) {
                     if (textarea.value === html) return;
 
                     textarea.value = html;
-
-                    // Existing common autosave receives this event.
                     textarea.dispatchEvent(new Event('input', {
                         bubbles: true
                     }));
                 }
 
                 function getEditorHTML() {
-                    // Preserve embedded content as well as text.
                     const isEmpty =
                         quill.getLength() === 1 &&
                         quill.getText() === '\n' &&
@@ -1726,9 +1902,9 @@ width:100%;
                 }
 
                 quill.on('text-change', function (delta, oldDelta, source) {
-                    if (htmlMode || source === 'silent') return;
-
-                    updateTextarea(getEditorHTML());
+                    if (!htmlMode && source !== 'silent') {
+                        updateTextarea(getEditorHTML());
+                    }
                 });
 
                 htmlEditor.addEventListener('input', function () {
@@ -1736,18 +1912,16 @@ width:100%;
                 });
 
                 toggleButton.addEventListener('click', function () {
-                    if (!htmlMode) {
-                        // Preserve original HTML until explicitly converted
-                        // back to the visual editor.
-                        htmlEditor.value = textarea.value;
-                        htmlMode = true;
+                    htmlMode = !htmlMode;
 
-                        editor.style.display = 'none';
-                        toolbar.style.display = 'none';
-                        htmlEditor.hidden = false;
+                    if (htmlMode) {
+                        htmlEditor.value = textarea.value;
+
+                        setVisible(editor, false);
+                        setVisible(toolbar, false);
+                        setVisible(htmlEditor, true);
 
                         toggleButton.textContent = 'Visual Editor';
-                        toggleButton.setAttribute('aria-pressed', 'true');
                         htmlEditor.focus();
                     } else {
                         quill.clipboard.dangerouslyPasteHTML(
@@ -1755,16 +1929,18 @@ width:100%;
                             'silent'
                         );
 
-                        htmlMode = false;
-                        htmlEditor.hidden = true;
-                        editor.style.display = '';
-                        toolbar.style.display = '';
+                        setVisible(htmlEditor, false);
+                        setVisible(editor, true);
+                        setVisible(toolbar, true);
 
                         toggleButton.textContent = '</> Edit HTML';
-                        toggleButton.setAttribute('aria-pressed', 'false');
-
                         updateTextarea(getEditorHTML());
                     }
+
+                    toggleButton.setAttribute(
+                        'aria-pressed',
+                        String(htmlMode)
+                    );
                 });
             });
     }
@@ -1779,81 +1955,12 @@ width:100%;
         initializeQuillEditors();
     }
 
-    // Call after adding textarea/editor pairs dynamically.
     window.initializeQuillEditors = initializeQuillEditors;
 })();
 </script>
 
 
-
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Quill === 'undefined') {
-        console.error('Quill library did not load.');
-        return;
-    }
-
-    document.querySelectorAll('textarea[data-quill-editor]').forEach(function (textarea) {
-        const editor = textarea.nextElementSibling;
-
-        if (!editor || !editor.classList.contains('quill-editor')) {
-            console.error('Quill editor container missing after:', textarea);
-            return;
-        }
-
-        const quill = new Quill(editor, {
-            theme: 'snow',
-            placeholder: textarea.dataset.placeholder || 'Write here...',
-            modules: {
-                toolbar: [
-                   
-
-
-
-					[{ header: [2, 3, 4, 5, false] }],
-            [{ font: [] }],
-            [{ size: ['small', false, 'large', 'huge'] }],
-
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ color: [] }, { background: [] }],
  
-            [{ align: [] }],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ indent: '-1' }, { indent: '+1' }],
-
-            ['blockquote', 'code-block'],
-            ['link'],
-            ['clean']
-                ]
-            }
-        });
-
-        // Existing saved HTML.
-        if (textarea.value.trim()) {
-            quill.clipboard.dangerouslyPasteHTML(textarea.value, 'silent');
-        }
-
-        // Keep the original textarea in sync for Laravel and autosave.
-        quill.on('text-change', function (delta, oldDelta, source) {
-            if (source !== 'user') return;
-
-            textarea.value = quill.getText().trim()
-                ? quill.root.innerHTML
-                : '';
-
-            textarea.dispatchEvent(new Event('input', {
-                bubbles: true
-            }));
-        });
-    });
-});
-</script>
-  -->
-   
-
-
-{{-- ======================= PART 2: AUTOSAVE ======================= --}}
-
 <script>
 (function () {
     'use strict';
