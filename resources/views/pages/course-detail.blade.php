@@ -904,13 +904,13 @@ margin-bottom: .5rem !important;
     .about-item[open] { border-color: #bfdbfe; }
      
 
-    .about-item h2,
+    /* .about-item h2,
     .about-item h2 * {
         color: #111827 !important;
         font-size: 1.2rem !important;
         line-height: 45px !important;
         font-weight: var(--font-weight-bold);
-    }
+    } */
 
     .about-item h3,
     .about-item h3 * {
@@ -971,7 +971,7 @@ margin-bottom: .5rem !important;
 @if(!empty($aboutHeading->heading1) && !empty($aboutHeading->description1))
 <details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
-  <h2>{{ $aboutHeading->heading1 }}</h2> 
+  <h2 class="text-2xl font-display font-bold text-gray-900">{{ $aboutHeading->heading1 }}</h2> 
 
    <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700">
             <span class="icon-plus">+</span>
@@ -989,7 +989,7 @@ margin-bottom: .5rem !important;
 @if(!empty($aboutHeading->heading2) && !empty($aboutHeading->description2))
 <details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
-  <h2>{{ $aboutHeading->heading2 }}</h2>
+  <h2 class="text-2xl font-display font-bold text-gray-900">{{ $aboutHeading->heading2 }}</h2>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
             <span class="icon-minus">−</span>
 
@@ -1006,7 +1006,7 @@ margin-bottom: .5rem !important;
 
 <details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
-  <h2>{!! $aboutHeading->heading3 !!}</h2>
+  <h2 class="text-2xl font-display font-bold text-gray-900">{!! $aboutHeading->heading3 !!}</h2>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
             <span class="icon-minus">−</span>
 
@@ -1022,7 +1022,7 @@ margin-bottom: .5rem !important;
 @if(!empty($aboutHeading->heading4) && !empty($aboutHeading->description4))
 <details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
-  <h2>{!! $aboutHeading->heading4 !!}</h2>
+  <h2 class="text-2xl font-display font-bold text-gray-900">{!! $aboutHeading->heading4 !!}</h2>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
             <span class="icon-minus">−</span>
 
@@ -1039,7 +1039,7 @@ margin-bottom: .5rem !important;
 
 <details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
-  <h2>{!! $aboutHeading->heading5 !!}</h2>
+  <h2 class="text-2xl font-display font-bold text-gray-900">{!! $aboutHeading->heading5 !!}</h2>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
             <span class="icon-minus">−</span></span>
  </summary>
@@ -1053,7 +1053,7 @@ margin-bottom: .5rem !important;
 
 <details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
-  <h2>{!! $aboutHeading->heading6 !!}</h2>
+  <h2 class="text-2xl font-display font-bold text-gray-900">{!! $aboutHeading->heading6 !!}</h2>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
             <span class="icon-minus">−</span></span>
  </summary>
