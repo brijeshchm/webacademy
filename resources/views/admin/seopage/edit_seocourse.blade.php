@@ -1615,4 +1615,505 @@ function showfooter(gst){
 	transition: max-height 0.2s ease-out;
 	} 
 	</style>
+
+
+
+
+
+
+<style>
+.common-save-status { margin: 0 0 15px; padding: 10px 14px; border-radius: 5px; }
+.common-save-status:empty { display: none; }
+.common-save-status[data-state="pending"] { color: #475569; background: #f1f5f9; }
+.common-save-status[data-state="success"] { color: #166534; background: #dcfce7; }
+.common-save-status[data-state="error"] { color: #991b1b; background: #fee2e2; }
+table {
+width:100%;
+}
+
+
+
+</style>
+
+
+
+			  
+ <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+<script>
+(function () {
+    function initializeQuillEditors() {
+        if (typeof Quill === 'undefined') {
+            console.error('Quill library did not load.');
+            return;
+        }
+
+        document.querySelectorAll('textarea[data-quill-editor]')
+            .forEach(function (textarea) {
+                if (textarea.dataset.quillReady === 'true') return;
+
+                const editor = textarea.nextElementSibling;
+
+                if (!editor || !editor.classList.contains('quill-editor')) {
+                    console.error('Quill editor container missing:', textarea);
+                    return;
+                }
+
+                const savedHTML = textarea.value || '';
+                let htmlMode = false;
+
+                const quill = new Quill(editor, {
+                    theme: 'snow',
+                    placeholder: textarea.dataset.placeholder || 'Write here...',
+                    modules: {
+                        toolbar: [
+                            [{ header: [2, 3, 4, 5, false] }],
+                            [{ font: [] }],
+                            [{ size: ['small', false, 'large', 'huge'] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ color: [] }, { background: [] }],
+                            [{ align: [] }],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ indent: '-1' }, { indent: '+1' }],
+                            ['blockquote', 'code-block'],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                });
+
+                quill.clipboard.dangerouslyPasteHTML(savedHTML, 'silent');
+
+                textarea.dataset.quillReady = 'true';
+                textarea.hidden = true;
+
+                // Allows other scripts to access this editor.
+                textarea.quillInstance = quill;
+
+                const toolbar = quill.getModule('toolbar').container;
+
+                const htmlEditor = document.createElement('textarea');
+                htmlEditor.className =
+                    'form-control w-full rounded-lg border border-gray-300 p-4 font-mono text-sm';
+                htmlEditor.rows = 12;
+                htmlEditor.hidden = true;
+                htmlEditor.spellcheck = false;
+                htmlEditor.setAttribute('aria-label', 'Edit HTML source');
+                htmlEditor.style.minHeight = '220px';
+
+                editor.insertAdjacentElement('afterend', htmlEditor);
+
+                const toggleButton = document.createElement('button');
+                toggleButton.type = 'button';
+                toggleButton.className =
+                    'btn btn-default mb-2 rounded-lg border border-gray-300 px-3 py-2 text-sm';
+                toggleButton.textContent = '</> Edit HTML';
+                toggleButton.setAttribute('aria-pressed', 'false');
+
+                toolbar.parentNode.insertBefore(toggleButton, toolbar);
+
+                function updateTextarea(html) {
+                    if (textarea.value === html) return;
+
+                    textarea.value = html;
+
+                    // Existing common autosave receives this event.
+                    textarea.dispatchEvent(new Event('input', {
+                        bubbles: true
+                    }));
+                }
+
+                function getEditorHTML() {
+                    // Preserve embedded content as well as text.
+                    const isEmpty =
+                        quill.getLength() === 1 &&
+                        quill.getText() === '\n' &&
+                        quill.getContents().ops.every(function (operation) {
+                            return typeof operation.insert === 'string';
+                        });
+
+                    return isEmpty ? '' : quill.root.innerHTML;
+                }
+
+                quill.on('text-change', function (delta, oldDelta, source) {
+                    if (htmlMode || source === 'silent') return;
+
+                    updateTextarea(getEditorHTML());
+                });
+
+                htmlEditor.addEventListener('input', function () {
+                    updateTextarea(htmlEditor.value);
+                });
+
+                toggleButton.addEventListener('click', function () {
+                    if (!htmlMode) {
+                        // Preserve original HTML until explicitly converted
+                        // back to the visual editor.
+                        htmlEditor.value = textarea.value;
+                        htmlMode = true;
+
+                        editor.style.display = 'none';
+                        toolbar.style.display = 'none';
+                        htmlEditor.hidden = false;
+
+                        toggleButton.textContent = 'Visual Editor';
+                        toggleButton.setAttribute('aria-pressed', 'true');
+                        htmlEditor.focus();
+                    } else {
+                        quill.clipboard.dangerouslyPasteHTML(
+                            htmlEditor.value,
+                            'silent'
+                        );
+
+                        htmlMode = false;
+                        htmlEditor.hidden = true;
+                        editor.style.display = '';
+                        toolbar.style.display = '';
+
+                        toggleButton.textContent = '</> Edit HTML';
+                        toggleButton.setAttribute('aria-pressed', 'false');
+
+                        updateTextarea(getEditorHTML());
+                    }
+                });
+            });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initializeQuillEditors,
+            { once: true }
+        );
+    } else {
+        initializeQuillEditors();
+    }
+
+    // Call after adding textarea/editor pairs dynamically.
+    window.initializeQuillEditors = initializeQuillEditors;
+})();
+</script>
+
+
+
+<!-- <script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Quill === 'undefined') {
+        console.error('Quill library did not load.');
+        return;
+    }
+
+    document.querySelectorAll('textarea[data-quill-editor]').forEach(function (textarea) {
+        const editor = textarea.nextElementSibling;
+
+        if (!editor || !editor.classList.contains('quill-editor')) {
+            console.error('Quill editor container missing after:', textarea);
+            return;
+        }
+
+        const quill = new Quill(editor, {
+            theme: 'snow',
+            placeholder: textarea.dataset.placeholder || 'Write here...',
+            modules: {
+                toolbar: [
+                   
+
+
+
+					[{ header: [2, 3, 4, 5, false] }],
+            [{ font: [] }],
+            [{ size: ['small', false, 'large', 'huge'] }],
+
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ color: [] }, { background: [] }],
+ 
+            [{ align: [] }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ indent: '-1' }, { indent: '+1' }],
+
+            ['blockquote', 'code-block'],
+            ['link'],
+            ['clean']
+                ]
+            }
+        });
+
+        // Existing saved HTML.
+        if (textarea.value.trim()) {
+            quill.clipboard.dangerouslyPasteHTML(textarea.value, 'silent');
+        }
+
+        // Keep the original textarea in sync for Laravel and autosave.
+        quill.on('text-change', function (delta, oldDelta, source) {
+            if (source !== 'user') return;
+
+            textarea.value = quill.getText().trim()
+                ? quill.root.innerHTML
+                : '';
+
+            textarea.dispatchEvent(new Event('input', {
+                bubbles: true
+            }));
+        });
+    });
+});
+</script>
+  -->
+   
+
+
+{{-- ======================= PART 2: AUTOSAVE ======================= --}}
+
+<script>
+(function () {
+    'use strict';
+
+    function initialize() {
+        if (window.courseAutosaveInitialized) return;
+        window.courseAutosaveInitialized = true;
+
+        const popup = document.getElementById('courseSavePopup');
+        let popupTimer;
+
+        function toast(message, type) {
+            if (!popup) return;
+            clearTimeout(popupTimer);
+            popup.textContent = message;
+            popup.dataset.type = type;
+            popup.classList.add('is-visible');
+            popupTimer = setTimeout(() => popup.classList.remove('is-visible'), 4000);
+        }
+
+        const states = new Map();
+
+        // Copy Summernote content back into its textarea before reading the form
+         
+
+		function sync(form) {
+			const $ = window.jQuery;
+			if (!$ || !$.fn.summernote) return;
+
+			form.querySelectorAll('textarea.summernote').forEach(textarea => {
+				const $ta = $(textarea);
+				if (!$ta.data('summernote')) return;   // not initialized yet
+				textarea.value = $ta.summernote('code');
+			});
+		}
+
+        function payload(form) {
+            sync(form);
+            const data = new FormData(form);
+
+            // Keep empty multi-selects / removed repeatable rows explicit
+            const arrayNames = new Set([...form.querySelectorAll('[name$="[]"]')].map(el => el.name));
+            arrayNames.forEach(name => {
+                if (!data.has(name)) data.append(name, '');
+            });
+
+            // Always send the freshest CSRF token
+            const token = document.querySelector('meta[name="csrf-token"]')?.content
+                || form.querySelector('[name="_token"]')?.value;
+            if (token) data.set('_token', token);
+
+            return data;
+        }
+
+        function snapshot(data) {
+            return JSON.stringify([...data].map(([key, value]) => [
+                key,
+                typeof value === 'string' ? value : [value.name, value.size, value.lastModified]
+            ]));
+        }
+
+        function status(state, message, type) {
+            state.status.textContent = message;
+            state.status.dataset.state = type;
+        }
+
+        function schedule(form) {
+            const state = states.get(form);
+            if (!state) return;
+            state.dirty = true;
+            clearTimeout(state.timer);
+            status(state, 'Unsaved changes…', 'pending');
+            state.timer = setTimeout(() => save(form), 1000);
+        }
+
+
+
+		async function save(form, manual = false) {
+    const state = states.get(form);
+    clearTimeout(state.timer);
+
+    if (state.saving) { state.queued = true; return; }
+
+    state.saving = true;
+    let succeeded = false;
+    let sentSnapshot = '';
+
+    try {
+        const data = payload(form);
+        sentSnapshot = snapshot(data);
+
+        // Nothing changed: skip the request
+        if (!manual && sentSnapshot === state.saved) {
+            state.dirty = false;
+            status(state, '', 'success');
+            return;
+        }
+
+        if (!form.checkValidity()) {
+            status(state, 'Complete the required fields to save this section.', 'error');
+            if (manual) form.reportValidity();
+            return;
+        }
+
+        const action = form.getAttribute('action');
+        if (!action) throw new Error('Save URL is missing for this form.');
+
+        status(state, 'Saving…', 'pending');
+        console.log('[autosave] POST', action);
+
+        const response = await fetch(action, {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: data,
+            headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+        });
+
+        if (!(response.headers.get('content-type') || '').includes('application/json')) {
+            throw new Error('Save route must return JSON (HTTP ' + response.status + '). Check route and login.');
+        }
+
+        const result = await response.json();
+
+        const failed = result.success === false || result.success === 0
+            || result.status === false || result.status === 0 || result.status === '0'
+            || result.status === 'error'
+            || (result.errors && Object.keys(result.errors).length);
+
+        if (!response.ok || failed) {
+            const errors = Object.values(result.errors || {}).flat().join(' ');
+            throw new Error(errors || result.message || result.msg || 'Save failed.');
+        }
+
+        const confirmed = result.success === true || result.success === 1
+            || result.status === true || result.status === 1 || result.status === '1'
+            || result.status === 'success';
+
+        if (!confirmed) throw new Error('Server did not confirm saving. Return status: 1 in JSON.');
+
+        state.saved = sentSnapshot;
+        succeeded = true;
+        state.dirty = snapshot(payload(form)) !== sentSnapshot;
+
+        if (!state.dirty) {
+            status(state, 'Saved successfully.', 'success');
+            toast(result.message || result.msg || 'Saved successfully.', 'success');
+        }
+    } catch (error) {
+        console.error('[autosave] failed:', error);
+        state.dirty = true;
+        status(state, (error.message || 'Save failed.') + ' Use Submit to retry.', 'error');
+        toast(error.message || 'Save failed.', 'error');
+    } finally {
+        state.saving = false;
+        try {
+            const latest = snapshot(payload(form));
+            if ((succeeded || latest !== sentSnapshot) && latest !== state.saved) {
+                clearTimeout(state.timer);
+                state.timer = setTimeout(() => save(form), 1000);
+            }
+        } catch (e) { console.error('[autosave] re-check failed:', e); }
+    }
+}
+
+
+       
+
+        document.querySelectorAll('form[data-ajax-autosave]').forEach(form => {
+            const indicator = document.createElement('div');
+            indicator.className = 'common-save-status';
+            indicator.setAttribute('role', 'status');
+            indicator.setAttribute('aria-live', 'polite');
+            form.prepend(indicator);
+
+            const state = {
+                status: indicator,
+                saved: snapshot(payload(form)),
+                dirty: false,
+                saving: false,
+                timer: null
+            };
+            states.set(form, state);
+
+            form.addEventListener('input', event => {
+                if (event.target.matches('input,textarea,select,[contenteditable="true"],.note-codable')) schedule(form);
+            });
+
+            form.addEventListener('change', event => {
+                if (event.target.matches('input,textarea,select')) schedule(form);
+            });
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                save(form, true);
+            }, true);
+
+            // Detect added/removed repeatable fields (FAQ, reviews, learn items)
+            new MutationObserver(records => {
+                const fieldChanged = records.some(record =>
+                    [...record.addedNodes, ...record.removedNodes].some(node =>
+                        node.nodeType === 1
+                        && !node.matches('.note-editor,.note-toolbar,.note-statusbar,.common-save-status')
+                        && (node.matches('input[name],textarea[name],select[name]')
+                            || node.querySelector('input[name],textarea[name],select[name]'))
+                    )
+                );
+                if (fieldChanged) schedule(form);
+            }).observe(form, { childList: true, subtree: true });
+        });
+
+        // FIXED: the event is "summernote.change" with NO extra namespace
+        // (a dot in jQuery means namespace, so the old name never fired)
+        const $ = window.jQuery;
+        if ($) {
+            $(document).on('change', 'textarea.summernote', function (event, contents) {
+                if (typeof contents === 'string') this.value = contents;
+                if (this.form) schedule(this.form);
+            });
+        }
+
+        // Safety net: catches code-view and plugin changes. Only changed data saves.
+        setInterval(() => {
+            states.forEach((state, form) => {
+                const current = snapshot(payload(form));
+                if (current !== state.observed) {
+                    if (state.observed !== undefined && current !== state.saved) schedule(form);
+                    state.observed = current;
+                }
+            });
+        }, 700);
+
+        window.addEventListener('beforeunload', event => {
+            if ([...states.values()].some(state => state.dirty || state.saving)) {
+                event.preventDefault();
+                event.returnValue = '';
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once: true });
+    else initialize();
+})();
+
+
+ 
+
+</script>
+
+
+
 @endsection

@@ -4,6 +4,62 @@ Edit Course
 @endsection
 @section('content') 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+	/* ===== Base table ===== */
+.course-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    background: #fff;
+}
+
+/* ===== Header row ===== */
+.course-content table th,
+.course-content table thead td,
+.course-content table tr:first-child td {
+    background: #1d4ed8;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* ===== All cells ===== */
+.course-content table th,
+.course-content table td {
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+    text-align: left;
+}
+
+/* ===== Row styling ===== */
+.course-content table tr:nth-child(even) td {
+    background: #f8fafc;               /* striped rows */
+}
+
+.course-content table tr:hover td {
+    background: #eff6ff;               /* hover highlight */
+}
+
+/* ===== Rounded corners (optional) ===== */
+.course-content table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+/* ===== Mobile: scroll sideways instead of breaking layout ===== */
+@media (max-width: 640px) {
+    .course-content table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+</style>
 <div class="right_col" role="main">
           <div class="">            
             <div class="clearfix"></div>
@@ -701,7 +757,7 @@ Edit Course
                     @endphp
 
                     <details
-                        class="course-content-section"
+                        class="course-content-section course-content"
                         @if($i === 1) open @endif
                     >
                         <summary class="course-content-trigger">
@@ -2017,13 +2073,336 @@ function showfooter(gst){
 .common-save-status[data-state="success"] { color: #166534; background: #dcfce7; }
 .common-save-status[data-state="error"] { color: #991b1b; background: #fee2e2; }
 </style>
-
+ 
 
 
 			  
  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
+<script>
+(function () {
+    function initializeQuillEditors() {
+        if (typeof Quill === 'undefined') {
+            console.error('Quill library did not load.');
+            return;
+        }
+
+        document.querySelectorAll('textarea[data-quill-editor]')
+            .forEach(function (textarea) {
+                // Force original textarea to stay hidden.
+                textarea.hidden = true;
+                textarea.style.setProperty('display', 'none', 'important');
+
+                if (textarea.dataset.quillReady === 'true') return;
+
+                const editor = textarea.nextElementSibling;
+
+                if (!editor || !editor.classList.contains('quill-editor')) {
+                    console.error('Quill editor container missing:', textarea);
+                    return;
+                }
+
+                let htmlMode = false;
+
+                const quill = new Quill(editor, {
+                    theme: 'snow',
+                    placeholder: textarea.dataset.placeholder || 'Write here...',
+                    modules: {
+                        toolbar: [
+                            [{ header: [2, 3, 4, 5, false] }],
+                            [{ font: [] }],
+                            [{ size: ['small', false, 'large', 'huge'] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ color: [] }, { background: [] }],
+                            [{ align: [] }],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ indent: '-1' }, { indent: '+1' }],
+                            ['blockquote', 'code-block'],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                });
+
+                quill.clipboard.dangerouslyPasteHTML(
+                    textarea.value || '',
+                    'silent'
+                );
+
+                textarea.dataset.quillReady = 'true';
+                textarea.quillInstance = quill;
+
+                const toolbar = quill.getModule('toolbar').container;
+
+                const htmlEditor = document.createElement('textarea');
+                htmlEditor.className = 'form-control';
+                htmlEditor.rows = 12;
+                htmlEditor.spellcheck = false;
+                htmlEditor.setAttribute('aria-label', 'Edit HTML source');
+                htmlEditor.style.cssText =
+                    'width:100%;min-height:220px;padding:15px;font-family:monospace;';
+
+                // Use display:none!important to prevent CSS overriding hidden.
+                htmlEditor.hidden = true;
+                htmlEditor.style.setProperty('display', 'none', 'important');
+
+                editor.insertAdjacentElement('afterend', htmlEditor);
+
+                const toggleButton = document.createElement('button');
+                toggleButton.type = 'button';
+                toggleButton.className = 'btn btn-default';
+                toggleButton.textContent = '</> Edit HTML';
+                toggleButton.setAttribute('aria-pressed', 'false');
+
+                toolbar.parentNode.insertBefore(toggleButton, toolbar);
+
+                function setVisible(element, visible) {
+                    element.hidden = !visible;
+                    element.style.setProperty(
+                        'display',
+                        visible ? 'block' : 'none',
+                        'important'
+                    );
+                }
+
+                function updateTextarea(html) {
+                    if (textarea.value === html) return;
+
+                    textarea.value = html;
+                    textarea.dispatchEvent(new Event('input', {
+                        bubbles: true
+                    }));
+                }
+
+                function getEditorHTML() {
+                    const isEmpty =
+                        quill.getLength() === 1 &&
+                        quill.getText() === '\n' &&
+                        quill.getContents().ops.every(function (operation) {
+                            return typeof operation.insert === 'string';
+                        });
+
+                    return isEmpty ? '' : quill.root.innerHTML;
+                }
+
+                quill.on('text-change', function (delta, oldDelta, source) {
+                    if (!htmlMode && source !== 'silent') {
+                        updateTextarea(getEditorHTML());
+                    }
+                });
+
+                htmlEditor.addEventListener('input', function () {
+                    updateTextarea(htmlEditor.value);
+                });
+
+                toggleButton.addEventListener('click', function () {
+                    htmlMode = !htmlMode;
+
+                    if (htmlMode) {
+                        htmlEditor.value = textarea.value;
+
+                        setVisible(editor, false);
+                        setVisible(toolbar, false);
+                        setVisible(htmlEditor, true);
+
+                        toggleButton.textContent = 'Visual Editor';
+                        htmlEditor.focus();
+                    } else {
+                        quill.clipboard.dangerouslyPasteHTML(
+                            htmlEditor.value,
+                            'silent'
+                        );
+
+                        setVisible(htmlEditor, false);
+                        setVisible(editor, true);
+                        setVisible(toolbar, true);
+
+                        toggleButton.textContent = '</> Edit HTML';
+                        updateTextarea(getEditorHTML());
+                    }
+
+                    toggleButton.setAttribute(
+                        'aria-pressed',
+                        String(htmlMode)
+                    );
+                });
+            });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initializeQuillEditors,
+            { once: true }
+        );
+    } else {
+        initializeQuillEditors();
+    }
+
+    window.initializeQuillEditors = initializeQuillEditors;
+})();
+</script>
+
+
+
+
+<!-- 
+ <script>
+(function () {
+    function initializeQuillEditors() {
+        if (typeof Quill === 'undefined') {
+            console.error('Quill library did not load.');
+            return;
+        }
+
+        document.querySelectorAll('textarea[data-quill-editor]')
+            .forEach(function (textarea) {
+                if (textarea.dataset.quillReady === 'true') return;
+
+                const editor = textarea.nextElementSibling;
+
+                if (!editor || !editor.classList.contains('quill-editor')) {
+                    console.error('Quill editor container missing:', textarea);
+                    return;
+                }
+
+                const savedHTML = textarea.value || '';
+                let htmlMode = false;
+
+                const quill = new Quill(editor, {
+                    theme: 'snow',
+                    placeholder: textarea.dataset.placeholder || 'Write here...',
+                    modules: {
+                        toolbar: [
+                            [{ header: [2, 3, 4, 5, false] }],
+                            [{ font: [] }],
+                            [{ size: ['small', false, 'large', 'huge'] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ color: [] }, { background: [] }],
+                            [{ align: [] }],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ indent: '-1' }, { indent: '+1' }],
+                            ['blockquote', 'code-block'],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                });
+
+                quill.clipboard.dangerouslyPasteHTML(savedHTML, 'silent');
+
+                textarea.dataset.quillReady = 'true';
+                textarea.hidden = true;
+
+                // Allows other scripts to access this editor.
+                textarea.quillInstance = quill;
+
+                const toolbar = quill.getModule('toolbar').container;
+
+                const htmlEditor = document.createElement('textarea');
+                htmlEditor.className =
+                    'form-control w-full rounded-lg border border-gray-300 p-4 font-mono text-sm';
+                htmlEditor.rows = 12;
+                htmlEditor.hidden = true;
+                htmlEditor.spellcheck = false;
+                htmlEditor.setAttribute('aria-label', 'Edit HTML source');
+                htmlEditor.style.minHeight = '220px';
+
+                editor.insertAdjacentElement('afterend', htmlEditor);
+
+                const toggleButton = document.createElement('button');
+                toggleButton.type = 'button';
+                toggleButton.className =
+                    'btn btn-default mb-2 rounded-lg border border-gray-300 px-3 py-2 text-sm';
+                toggleButton.textContent = '</> Edit HTML';
+                toggleButton.setAttribute('aria-pressed', 'false');
+
+                toolbar.parentNode.insertBefore(toggleButton, toolbar);
+
+                function updateTextarea(html) {
+                    if (textarea.value === html) return;
+
+                    textarea.value = html;
+
+                    // Existing common autosave receives this event.
+                    textarea.dispatchEvent(new Event('input', {
+                        bubbles: true
+                    }));
+                }
+
+                function getEditorHTML() {
+                    // Preserve embedded content as well as text.
+                    const isEmpty =
+                        quill.getLength() === 1 &&
+                        quill.getText() === '\n' &&
+                        quill.getContents().ops.every(function (operation) {
+                            return typeof operation.insert === 'string';
+                        });
+
+                    return isEmpty ? '' : quill.root.innerHTML;
+                }
+
+                quill.on('text-change', function (delta, oldDelta, source) {
+                    if (htmlMode || source === 'silent') return;
+
+                    updateTextarea(getEditorHTML());
+                });
+
+                htmlEditor.addEventListener('input', function () {
+                    updateTextarea(htmlEditor.value);
+                });
+
+                toggleButton.addEventListener('click', function () {
+                    if (!htmlMode) {
+                        // Preserve original HTML until explicitly converted
+                        // back to the visual editor.
+                        htmlEditor.value = textarea.value;
+                        htmlMode = true;
+
+                        editor.style.display = 'none';
+                        toolbar.style.display = 'none';
+                        htmlEditor.hidden = false;
+
+                        toggleButton.textContent = 'Visual Editor';
+                        toggleButton.setAttribute('aria-pressed', 'true');
+                        htmlEditor.focus();
+                    } else {
+                        quill.clipboard.dangerouslyPasteHTML(
+                            htmlEditor.value,
+                            'silent'
+                        );
+
+                        htmlMode = false;
+                        htmlEditor.hidden = true;
+                        editor.style.display = '';
+                        toolbar.style.display = '';
+
+                        toggleButton.textContent = '</> Edit HTML';
+                        toggleButton.setAttribute('aria-pressed', 'false');
+
+                        updateTextarea(getEditorHTML());
+                    }
+                });
+            });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initializeQuillEditors,
+            { once: true }
+        );
+    } else {
+        initializeQuillEditors();
+    }
+
+    // Call after adding textarea/editor pairs dynamically.
+    window.initializeQuillEditors = initializeQuillEditors;
+})();
+</script> -->
+
+<!-- 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof Quill === 'undefined') {
@@ -2044,15 +2423,19 @@ document.addEventListener('DOMContentLoaded', function () {
             placeholder: textarea.dataset.placeholder || 'Write here...',
             modules: {
                 toolbar: [
-                    [{ header: [2, 3, 4, 5,  false] }],
-                    ['bold', 'italic', 'underline'],
-					[{ align: [] }],
-                    [{ list: 'ordered' }, { list: 'bullet' }],
-					[{ indent: '-1' }, { indent: '+1' }],
-					['blockquote'],
-                    ['link'],
-					 ['table'], 
-                    ['clean']
+                
+					[{ header: [2, 3, 4, 5, false] }],
+                            [{ font: [] }],
+                            [{ size: ['small', false, 'large', 'huge'] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ color: [] }, { background: [] }],
+                            [{ align: [] }],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ indent: '-1' }, { indent: '+1' }],
+                            ['blockquote', 'code-block'],
+                            ['link'],
+							 ['table'], 
+                            ['clean']
                 ]
             }
         });
@@ -2077,7 +2460,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
- 
+  -->
    
 
 
@@ -2248,91 +2631,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 
-        // async function save(form, manual = false) {
-        //     const state = states.get(form);
-        //     clearTimeout(state.timer);
-
-        //     if (state.saving) { state.queued = true; return; }
-
-        //     const data = payload(form);
-        //     const sentSnapshot = snapshot(data);
-
-        //     // Nothing changed: skip the request
-        //     if (!manual && sentSnapshot === state.saved) {
-        //         state.dirty = false;
-        //         status(state, '', 'success');
-        //         return;
-        //     }
-
-        //     if (!form.checkValidity()) {
-        //         status(state, 'Complete the required fields to save this section.', 'error');
-        //         if (manual) form.reportValidity();
-        //         return;
-        //     }
-
-        //     const action = form.getAttribute('action');
-        //     if (!action) {
-        //         status(state, 'Save URL is missing for this form.', 'error');
-        //         toast('Save URL is missing for this form.', 'error');
-        //         return;
-        //     }
-
-        //     state.saving = true;
-        //     state.queued = false;
-        //     status(state, 'Saving…', 'pending');
-        //     let succeeded = false;
-
-        //     try {
-        //         const response = await fetch(form.action, {
-        //             method: 'POST',
-        //             credentials: 'same-origin',
-        //             body: data,
-        //             headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
-        //         });
-
-        //         if (!(response.headers.get('content-type') || '').includes('application/json')) {
-        //             throw new Error('Save route must return JSON. Check the route and login session.');
-        //         }
-
-        //         const result = await response.json();
-
-        //         const failed = result.success === false || result.success === 0
-        //             || result.status === false || result.status === 0 || result.status === '0'
-        //             || result.status === 'error'
-        //             || (result.errors && Object.keys(result.errors).length);
-
-        //         if (!response.ok || failed) {
-        //             const errors = Object.values(result.errors || {}).flat().join(' ');
-        //             throw new Error(errors || result.message || result.msg || 'Save failed.');
-        //         }
-
-        //         const confirmed = result.success === true || result.success === 1
-        //             || result.status === true || result.status === 1 || result.status === '1'
-        //             || result.status === 'success';
-
-        //         if (!confirmed) throw new Error('Server did not confirm saving. Return status: 1 in JSON.');
-
-        //         state.saved = sentSnapshot;
-        //         succeeded = true;
-        //         state.dirty = snapshot(payload(form)) !== sentSnapshot;
-
-        //         if (!state.dirty) {
-        //             status(state, 'Saved successfully.', 'success');
-        //             toast(result.message || result.msg || 'Saved successfully.', 'success');
-        //         }
-        //     } catch (error) {
-        //         state.dirty = true;
-        //         status(state, error.message + ' Use Submit to retry.', 'error');
-        //         toast(error.message, 'error');
-        //     } finally {
-        //         state.saving = false;
-        //         const latest = snapshot(payload(form));
-        //         if ((succeeded || latest !== sentSnapshot) && latest !== state.saved) {
-        //             clearTimeout(state.timer);
-        //             state.timer = setTimeout(() => save(form), 1000);
-        //         }
-        //     }
-        // }
+       
 
         document.querySelectorAll('form[data-ajax-autosave]').forEach(form => {
             const indicator = document.createElement('div');

@@ -838,7 +838,7 @@ margin-bottom: .5rem !important;
 
             @if(!empty($aboutHeading->heading))
                 {{-- OVERVIEW --}}
-                <section id="overview" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
+                <section id="overview" class="course-content scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="h-8 w-1 rounded-full bg-gradient-to-b from-blue-500 to-violet-500"></div>
                         <h2 class="text-2xl font-display font-bold text-gray-900">@if($aboutHeading) {{ $aboutHeading->heading }} @endif</h2>
@@ -1502,7 +1502,7 @@ margin-bottom: .5rem !important;
     <section
         id="aboutTrainer"
         aria-labelledby="trainer-heading"
-        class="relative isolate overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-3 shadow-sm sm:p-5"
+        class="relative about-item isolate overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-3 shadow-sm sm:p-5"
     >
         {{-- Ambient glow --}}
         <div
@@ -2482,6 +2482,116 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
+
+
+<style>
+	/* ===== Base table ===== */
+.course-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    background: #fff;
+}
+
+/* ===== Header row ===== */
+.course-content table th,
+.course-content table thead td,
+.course-content table tr:first-child td {
+    background: #1d4ed8;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* ===== All cells ===== */
+.course-content table th,
+.course-content table td {
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+    text-align: left;
+}
+
+/* ===== Row styling ===== */
+.course-content table tr:nth-child(even) td {
+    background: #f8fafc;               /* striped rows */
+}
+
+.course-content table tr:hover td {
+    background: #eff6ff;               /* hover highlight */
+}
+
+/* ===== Rounded corners (optional) ===== */
+.course-content table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+/* ===== Mobile: scroll sideways instead of breaking layout ===== */
+@media (max-width: 640px) {
+    .course-content table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+	/* ===== Base table ===== */
+.about-item table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    background: #fff;
+}
+
+/* ===== Header row ===== */
+.about-item table th,
+.about-item table thead td,
+.about-item table tr:first-child td {
+    background: #1d4ed8;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* ===== All cells ===== */
+.about-item table th,
+.about-item table td {
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+    text-align: left;
+}
+
+/* ===== Row styling ===== */
+.about-item table tr:nth-child(even) td {
+    background: #f8fafc;               /* striped rows */
+}
+
+.about-item table tr:hover td {
+    background: #eff6ff;               /* hover highlight */
+}
+
+/* ===== Rounded corners (optional) ===== */
+.about-item table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+/* ===== Mobile: scroll sideways instead of breaking layout ===== */
+@media (max-width: 640px) {
+    .about-item table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+</style>
 @include('partials.comman-lead-popup')
 
  
