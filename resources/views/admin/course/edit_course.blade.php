@@ -40,9 +40,7 @@ Edit Course
     background: #f8fafc;               /* striped rows */
 }
 
-.course-content table tr:hover td {
-    background: #eff6ff;               /* hover highlight */
-}
+ 
 
 /* ===== Rounded corners (optional) ===== */
 .course-content table {
