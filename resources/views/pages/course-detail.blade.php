@@ -2,7 +2,6 @@
 @section('title', $course->meta_title)
 @section('description', $course->meta_description)
 
-
 @php
     use App\Support\JsonLd;
     $site = JsonLd::siteUrl();
@@ -899,34 +898,34 @@ margin-bottom: .5rem !important;
  
 
 <style>
-    .faq-item .icon-minus { display: none; }          /* closed: hide − */
-    .faq-item[open] .icon-plus { display: none; }     /* open: hide + */
-    .faq-item[open] .icon-minus { display: inline; }  /* open: show − */
-    .faq-item[open] { border-color: #bfdbfe; }
+    .about-item .icon-minus { display: none; }          /* closed: hide − */
+    .about-item[open] .icon-plus { display: none; }     /* open: hide + */
+    .about-item[open] .icon-minus { display: inline; }  /* open: show − */
+    .about-item[open] { border-color: #bfdbfe; }
  
      
 
-    .faq-item h2,
-    .faq-item h2 * {
+    .about-item h2,
+    .about-item h2 * {
         color: #111827 !important;
         font-size: 24px !important;
-        line-height: 32px !important;
+        line-height: 35px !important;
         font-weight: var(--font-weight-bold);
     }
 
-    .faq-item h3,
-    .faq-item h3 * {
-        color: #111827 !important;
-        font-size: 14px !important;
-        line-height: 20px !important;
-        font-weight: var(--font-weight-bold);
-    }
-
-    .faq-item h4,
-    .faq-item h4 * {
+    .about-item h3,
+    .about-item h3 * {
         color: #111827 !important;
         font-size: 20px !important;
-        line-height: 28px !important;
+        line-height: 35px !important;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .about-item h4,
+    .about-item h4 * {
+        color: #111827 !important;
+        font-size: 20px !important;
+        line-height: 35px !important;
         font-weight: var(--font-weight-bold);
     }
 
@@ -937,7 +936,7 @@ margin-bottom: .5rem !important;
 
 
 @if(!empty($aboutHeading->heading1) && !empty($aboutHeading->description1))
-<details class="faq-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+<details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
   <span>{{ $aboutHeading->heading1 }}:</span>
   
@@ -957,7 +956,7 @@ margin-bottom: .5rem !important;
 
 
 @if(!empty($aboutHeading->heading2) && !empty($aboutHeading->description2))
-<details class="faq-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+<details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
   <span>{{ $aboutHeading->heading2 }}:</span>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
@@ -974,7 +973,7 @@ margin-bottom: .5rem !important;
 
 @if(!empty($aboutHeading->heading3) && !empty($aboutHeading->description3))
 
-<details class="faq-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+<details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
   <span>{!! $aboutHeading->heading3 !!}:</span>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
@@ -990,7 +989,7 @@ margin-bottom: .5rem !important;
 
 
 @if(!empty($aboutHeading->heading4) && !empty($aboutHeading->description4))
-<details class="faq-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+<details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
   <span>{!! $aboutHeading->heading4 !!}:</span>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
@@ -1007,7 +1006,7 @@ margin-bottom: .5rem !important;
 
 @if(!empty($aboutHeading->heading5) && !empty($aboutHeading->description5))
 
-<details class="faq-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+<details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
   <span>{!! $aboutHeading->heading5 !!}:</span>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
@@ -1021,7 +1020,7 @@ margin-bottom: .5rem !important;
 
 @if(!empty($aboutHeading->heading6) && !empty($aboutHeading->description6))
 
-<details class="faq-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
+<details class="about-item group rounded-2xl border border-slate-200 bg-white shadow-sm open:border-blue-200" data-course-accordion >
  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-left text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 [&::-webkit-details-marker]:hidden sm:px-6">
   <span>{!! $aboutHeading->heading6 !!}:</span>
   <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xl text-blue-700"><span class="icon-plus">+</span>
@@ -1204,14 +1203,14 @@ margin-bottom: .5rem !important;
     $careerSupports = [
         [
             'title' => 'Mock Interview Session',
-            'description' => 'Practice '.$course->title.' interview questions, case studies, and technical scenarios with expert feedback.',
+            'description' => 'Practice <b>'.$course->title.'</b> interview questions, case studies, and technical scenarios with expert feedback.',
             'image' => 'images/Mock_Session.webp',
             'alt' => 'Mock Session',
             'class' => 'lazyload20',
         ],
         [
             'title' => 'LMS Learning',
-            'description' => 'Access '.$course->title.' recordings, '.$course->course_name.' exercises, datasets, assignments, and study materials anytime.',
+            'description' => 'Access <b>'.$course->title.'</b> recordings, '.$course->course_name.' exercises, datasets, assignments, and study materials anytime.',
             'image' => 'images/LMS_Learning.webp',
             'alt' => 'LMS Learning',
             'class' => 'for-animate lazyload20',
@@ -1287,7 +1286,7 @@ margin-bottom: .5rem !important;
                     </div>
 
                     <p class="flex-1 text-sm leading-7 text-slate-600">
-                        {{ $support['description'] }}
+                        {!! $support['description'] !!}
                     </p>
 
                     <div
@@ -1498,19 +1497,7 @@ margin-bottom: .5rem !important;
 
 
 @if(filled($course->trainer_about))
-    @php
-        $trainerPoints = $course->trainer_paragraph ?? [];
-
-        if (is_string($trainerPoints)) {
-            $trainerPoints = json_decode($trainerPoints, true) ?? [];
-        }
-
-        $trainerPoints = collect(
-            is_array($trainerPoints) ? $trainerPoints : []
-        )->filter(
-            fn ($point) => is_string($point) && trim($point) !== ''
-        )->values();
-    @endphp
+    
 
     <section
         id="aboutTrainer"
@@ -1559,9 +1546,24 @@ margin-bottom: .5rem !important;
                         {!! $course->trainer_about !!}
                     </div>
 
-                    @if($trainerPoints->isNotEmpty())
+                    @if(!empty($course->trainer_paragraph))
+                    @php
+
+
+                            $trainerPoints = $course->trainer_paragraph ?? [];
+
+                            if (is_string($trainerPoints)) {
+                                $trainerPoints = json_decode($trainerPoints, true) ?? [];
+                            }
+
+                     
+                            
+                        @endphp
+
                         <ul class="mt-6 space-y-2 border-t border-slate-100 pt-5">
+                            @if($trainerPoints)
                             @foreach($trainerPoints as $point)
+                              @if($point)
                                 <li class="group flex items-start gap-3 rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-blue-50">
                                     <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors duration-200 group-hover:bg-blue-600 group-hover:text-white">
                                         <svg
@@ -1584,7 +1586,9 @@ margin-bottom: .5rem !important;
                                         {{ $point }}
                                     </span>
                                 </li>
+                            @endif
                             @endforeach
+                            @endif
                         </ul>
                     @endif
 
@@ -1632,59 +1636,102 @@ margin-bottom: .5rem !important;
             <div class="h-1 w-20 rounded-full bg-gradient-to-r from-red-800 to-red-500"></div>
         </div>
     </div>
+      
 
-    @php
-        $roadmap = [
-            [
-                'num' => '01',
-                'color' => 'rgb(43, 166, 203)',
-                'title' => 'Industry Expert Trainer',
-                'desc' => 'Learn from an experienced professional with 10+ years of real-world industry expertise.',
-            ],
-            [
-                'num' => '02',
-                'color' => 'rgb(31, 167, 122)',
-                'title' => 'Updated Learning Resources',
-                'desc' => 'Get access to updated presentation decks, notes, and materials used during live training sessions.',
-            ],
-            [
-                'num' => '03',
-                'color' => 'rgb(228, 60, 60)',
-                'title' => 'Digital Study Material',
-                'desc' => 'Receive structured e-books and reference materials to support your learning throughout the course.',
-            ],
-            [
-                'num' => '04',
-                'color' => 'rgb(245, 158, 11)',
-                'title' => 'Practice & Assessments',
-                'desc' => 'Strengthen your knowledge with module-wise assignments, practice exercises, and MCQs.',
-            ],
-            [
-                'num' => '05',
-                'color' => 'rgb(99, 102, 241)',
-                'title' => 'Recorded Sessions',
-                'desc' => 'Access recorded training sessions anytime for revision, missed classes, and concept reinforcement.',
-            ],
-            [
-                'num' => '06',
-                'color' => 'rgb(16, 185, 129)',
-                'title' => 'Hands-On Projects',
-                'desc' => 'Work on practical, real-world projects to apply your skills and gain valuable hands-on experience.',
-            ],
-            [
-                'num' => '07',
-                'color' => 'rgb(239, 68, 68)',
-                'title' => 'Professional Resume Support',
-                'desc' => 'Build an industry-ready resume with expert guidance focused on your skills, projects, and career goals.',
-            ],
-            [
-                'num' => '08',
-                'color' => 'rgb(139, 92, 246)',
-                'title' => 'Interview Preparation',
-                'desc' => 'Prepare confidently with mock interviews, practical scenarios, commonly asked questions, and expert feedback.',
-            ],
-        ];
-    @endphp
+@php
+    $courseTitle = trim($course->title ?? '') ?: 'this course';
+
+    $modules = is_countable($curriculum ?? null)
+        ? count($curriculum)
+        : 0;
+
+    $topics = (int) ($totalTopics ?? 0);
+    $hours = $course->duration_hours ?? null;
+    $liveProjects = $course->live_project ?? null;
+    $monthlyBatches = $course->batches_every_month ?? null;
+
+    $hasValue = static fn ($value) =>
+        $value !== null
+        && trim((string) $value) !== ''
+        && trim((string) $value) !== '0';
+
+    $durationText = $hasValue($hours)
+        ? " Build your skills through <b>{$hours}</b> hours of training."
+        : '';
+
+    $moduleText = $modules > 0
+        ? " Study materials are organized across <b>{$modules}</b> modules."
+        : '';
+
+    $topicText = $topics > 0
+        ? " Reinforce your understanding of <b>{$topics}</b> topics covered in the curriculum."
+        : '';
+
+    $projectText = $hasValue($liveProjects)
+        ? " Live projects included: {$liveProjects}."
+        : '';
+
+    $batchText = $hasValue($monthlyBatches)
+        ? " Choose from <b>{$monthlyBatches}</b> batches scheduled each month."
+        : '';
+
+    $roadmap = [
+        [
+            'num' => '01',
+            'color' => 'rgb(43, 166, 203)',
+            'title' => 'Industry Expert Trainer',
+            'desc' => "Learn <b>{$courseTitle}</b> from an experienced trainer through practical explanations and real-world examples."
+                . $durationText,
+        ],
+        [
+            'num' => '02',
+            'color' => 'rgb(31, 167, 122)',
+            'title' => 'Updated Learning Resources',
+            'desc' => 'Access updated presentation decks, training notes, and supporting resources used during live sessions.',
+        ],
+        [
+            'num' => '03',
+            'color' => 'rgb(228, 60, 60)',
+            'title' => 'Digital Study Material',
+            'desc' => "Support your <b>{$courseTitle}</b> learning with structured digital materials, reference guides, and revision notes."
+                . $moduleText,
+        ],
+        [
+            'num' => '04',
+            'color' => 'rgb(245, 158, 11)',
+            'title' => 'Practice & Assessments',
+            'desc' => 'Test your knowledge through module-wise assignments, practice exercises, and assessments.'
+                . $topicText,
+        ],
+        [
+            'num' => '05',
+            'color' => 'rgb(99, 102, 241)',
+            'title' => 'Recorded Sessions',
+            'desc' => 'Revisit important concepts and catch up on missed classes with recorded sessions, where available.'
+                . $batchText,
+        ],
+        [
+            'num' => '06',
+            'color' => 'rgb(16, 185, 129)',
+            'title' => 'Hands-On Projects',
+            'desc' => "Apply your <b>{$courseTitle}</b> knowledge through practical projects and scenarios relevant to the course."
+                . $projectText,
+        ],
+        [
+            'num' => '07',
+            'color' => 'rgb(239, 68, 68)',
+            'title' => 'Professional Resume Support',
+            'desc' => 'Create a professional resume that highlights your skills, practical work, and career goals with expert guidance with '.$course->professional_trained,
+        ],
+        [
+            'num' => '08',
+            'color' => 'rgb(139, 92, 246)',
+            'title' => 'Interview Preparation',
+            'desc' => "Prepare for roles related to <b>{$courseTitle}</b> with mock interviews, relevant questions, practical scenarios, and trainer feedback.",
+        ],
+    ];
+@endphp
+
 
     <div class="grid grid-cols-1 justify-items-center gap-2 gap-x-5 gap-y-16 pt-4 sm:grid-cols-2 lg:grid-cols-4">
         @foreach($roadmap as $step)
@@ -1734,7 +1781,7 @@ margin-bottom: .5rem !important;
                     </h3>
 
                     <p class="text-[13px] leading-relaxed text-gray-500">
-                        {{ $step['desc'] }}
+                        {!! $step['desc'] !!}
                     </p>
                 </div>
             </div>
@@ -2098,12 +2145,23 @@ margin-bottom: .5rem !important;
                         <div>
                             <span class="inline-block bg-violet-100 text-violet-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">{{ t('courseDetailX.industryRecognisedCertificate') }}</span>
                             <h2 class="text-2xl font-display font-bold text-gray-900 mb-3">{{ t('courseDetailX.earnYourCertificate') }}</h2>
-                            <p class="text-gray-500 text-sm leading-relaxed mb-5">{{ t('courseDetailX.earnYourCertificateDesc') }}</p>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-5">Finish every module and project to earn the Corporate Academy course completion certificate. Share the Corporate Academy certificate on LinkedIn attach it to your resume and display this Corporate Academy achievement to recruiters, across India and worldwide.</p>
                             <ul class="space-y-2">
-                                @foreach([t('courseDetailX.certPtLinkedIn'), t('courseDetailX.certPtVerified'), t('courseDetailX.certPtCountries'), t('courseDetailX.certPtBadge')] as $pt)
+
+                            @php
+                            $courseTitle = trim($course->title ?? '') ?: 'this course';
+
+                            $certificatePoints = [
+                            "<b>{$courseTitle}</b>course completion certificate",
+                            'Share your achievement on LinkedIn and your resume',
+                            'Highlight your completed training and newly learned skills',
+                            'Add your certificate to your professional portfolio',
+                            ];
+                            @endphp
+                                @foreach($certificatePoints as $pt)
                                     <li class="flex items-center gap-2.5 text-sm text-gray-700">
                                         <svg class="h-4 w-4 text-violet-500 shrink-0" {!! $iconStroke !!}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                        {{ $pt }}
+                                        {!! $pt !!}
                                     </li>
                                 @endforeach
                             </ul>

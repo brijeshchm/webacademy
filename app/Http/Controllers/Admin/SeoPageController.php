@@ -377,7 +377,7 @@ class SeoPageController extends Controller
 
         if($request->ajax()){   
 		  $validator = Validator::make($request->all(),[				 
-				'top_heading'=>'required',
+				'top_heading'=>'nullable|string',
 				'top_description'=>'nullable|string',		 				 				
 			 				 				
 			]);
@@ -433,7 +433,7 @@ class SeoPageController extends Controller
  
         if($request->ajax()){   
 		  $validator = Validator::make($request->all(),[				 
-				'why_learn_heading'=>'required',
+			 
 				'why_learn'=>'required',					 				
 			]);
 			
@@ -443,7 +443,7 @@ class SeoPageController extends Controller
 			}
 				  
 			$updatelearn =array(
-			'why_learn_heading'=>$request->input('why_learn_heading'),	
+			// 'why_learn_heading'=>$request->input('why_learn_heading'),	
 			'why_learn'=>json_encode($request->input('why_learn')));	
 
 			$checkupdate  =DB::table('web_courses')->where('id',$id)->update($updatelearn);	
@@ -469,8 +469,7 @@ class SeoPageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function editSaveTrainerAbout(Request $request,$id)
-    {	  
-	
+    {	 
  
         if($request->ajax()){   
 		  $validator = Validator::make($request->all(),[				 
@@ -485,8 +484,8 @@ class SeoPageController extends Controller
 				  
 			
 			$updatelearn = array(
-    'trainer_about' => $request->input('trainer_about'),
-);
+			'trainer_about' => $request->input('trainer_about'),
+			);
 
 			if ($request->filled('trainer_paragraph')) {
 				$updatelearn['trainer_paragraph'] = json_encode(
@@ -652,11 +651,6 @@ class SeoPageController extends Controller
 		
 		}
     } 
-	
- 
-
- 
-	
 	 
  
  /**

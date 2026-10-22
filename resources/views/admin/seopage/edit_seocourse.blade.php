@@ -658,12 +658,7 @@ SEO Edit Course
 					  
 
 
-					  <div class="form-group">   
-						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Why should you learn?<span class="required">*</span></label>					  
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <input type="text" class="form-control col-md-7 col-xs-12"  name="why_learn_heading" value="{{ old('why_learn_heading',(isset($edit_data)) ? $edit_data->why_learn_heading:"")}}" placeholder="Why should you learn Heading"></textarea>
-                        </div>
-                      </div> 
+					 
 					  
 					  
 					<?php 
