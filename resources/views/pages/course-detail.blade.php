@@ -904,13 +904,13 @@ margin-bottom: .5rem !important;
     .about-item[open] { border-color: #bfdbfe; }
      
 
-    /* .about-item h2,
+    .about-item h2,
     .about-item h2 * {
         color: #111827 !important;
         font-size: 1.2rem !important;
         line-height: 45px !important;
         font-weight: var(--font-weight-bold);
-    } */
+    }
 
     .about-item h3,
     .about-item h3 * {
