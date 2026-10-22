@@ -2152,7 +2152,7 @@ margin-bottom: .5rem !important;
                             $courseTitle = trim($course->title ?? '') ?: 'this course';
 
                             $certificatePoints = [
-                            "<b>{$courseTitle}</b>course completion certificate",
+                            "<strong>{$courseTitle}</strong>course completion certificate",
                             'Share your achievement on LinkedIn and your resume',
                             'Highlight your completed training and newly learned skills',
                             'Add your certificate to your professional portfolio',

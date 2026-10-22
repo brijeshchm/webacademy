@@ -3,6 +3,7 @@
 Edit Course
 @endsection
 @section('content') 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <div class="right_col" role="main">
           <div class="">            
             <div class="clearfix"></div>
@@ -35,10 +36,9 @@ Edit Course
 					</div>
 					<div class="x_content">                    
 						<form   method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSave.CourseTitle',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle" >
-
-							@csrf
+@csrf
                         	<div class="form-group">
-							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="last-name">Course Name<span class="required">*</span>
+							<label class="control-label col-md-2 col-sm-3 col-xs-12 auto-save-field" for="last-name">Course Name<span class="required">*</span>
 							</label>
 							<div class="col-md-8 col-sm-8 col-xs-12">
 							<input type="text" name="course_name"  class="form-control col-md-7 col-xs-12" value="{{ old('course_name',(isset($edit_data)) ? $edit_data->course_name:"")}}"  placeholder="Enter Course Name"> 
@@ -212,7 +212,7 @@ Edit Course
 							
 							<div class="form-group">
 							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-							<button type="submit" class="btn btn-success" onclick="check(this)">Submit</button>
+							<button type="submit" class="btn btn-success">Submit</button>
 							</div>
 							</div>
 
@@ -229,7 +229,7 @@ Edit Course
 					</div>
 					<div class="x_content">                    
 						<form   method="post" class="form-horizontal form-label-left" autocomplete="off" action="{{ route('admin.editSaveCourseTopic',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTopic" >
-							@csrf
+@csrf
                          
 							<div class="form-group">
 							<label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Enrolled Students<span class="required">*</span>
@@ -557,7 +557,7 @@ Edit Course
 							
 							<div class="form-group">
 							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-							<button type="submit" class="btn btn-success" onclick="check(this)">Submit</button>
+							<button type="submit" class="btn btn-success">Submit</button>
 							</div>
 							</div>
 
@@ -576,13 +576,16 @@ Edit Course
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" method="post" onsubmit="return courseController.editSaveCourseAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"  >
-							@csrf
+						<form class="form-horizontal form-label-left" method="post" 
+						action="{{ route('admin.editSaveCourseAbout',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave 
+						
+						  >
+@csrf
 
 	                    <div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Heading <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="heading" placeholder="Enter coure heading"  value="{{ old('heading',(isset($aboutHeading->heading)) ? $aboutHeading->heading:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="heading" placeholder="Enter coure heading"  value="{{ old('heading',(isset($aboutHeading->heading)) ? $aboutHeading->heading:"")}}" > 
 						</div>
 						</div>
 
@@ -590,7 +593,11 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Course About <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote note-editor" name="courseabout" rows="7" placeholder="Enter coure about">{{ old('courseabout',(isset($aboutHeading->courseabout)) ? $aboutHeading->courseabout:"")}}</textarea>
+						<textarea type="text" data-quill-editor class="form-control col-md-7 col-xs-12 auto-save-field summernote" name="courseabout" rows="7" placeholder="Enter coure about" style="display:none" >{{ old('courseabout',(isset($aboutHeading->courseabout)) ? $aboutHeading->courseabout:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
+				 
+
+
 						</div>
 						</div> 
 									
@@ -599,7 +606,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Paragraph 1 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="paragraph1" placeholder="Enter Paragraph 1"   value="{{ old('paragraph1',(isset($aboutHeading->paragraph1)) ? $aboutHeading->paragraph1:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="paragraph1" placeholder="Enter Paragraph 1" value="{{ old('paragraph1',(isset($aboutHeading->paragraph1)) ? $aboutHeading->paragraph1:"")}}" > 
 						</div>
 						</div> 
 						
@@ -609,7 +616,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Paragraph 2 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="paragraph2" placeholder="Enter Paragraph 2"   value="{{ old('paragraph2',(isset($aboutHeading->paragraph2)) ? $aboutHeading->paragraph2:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="paragraph2" placeholder="Enter Paragraph 2"   value="{{ old('paragraph2',(isset($aboutHeading->paragraph2)) ? $aboutHeading->paragraph2:"")}}" > 
 						</div>
 						</div> 
 						
@@ -618,7 +625,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Paragraph 3 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="paragraph3" placeholder="Enter Paragraph 3"   value="{{ old('paragraph3',(isset($aboutHeading->paragraph3)) ? $aboutHeading->paragraph3:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="paragraph3" placeholder="Enter Paragraph 3"   value="{{ old('paragraph3',(isset($aboutHeading->paragraph3)) ? $aboutHeading->paragraph3:"")}}" > 
 						</div>
 						</div> 
 						
@@ -627,7 +634,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Paragraph 4 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="paragraph4" placeholder="Enter Paragraph 4"   value="{{ old('paragraph4',(isset($aboutHeading->paragraph4)) ? $aboutHeading->paragraph4:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="paragraph4" placeholder="Enter Paragraph 4"   value="{{ old('paragraph4',(isset($aboutHeading->paragraph4)) ? $aboutHeading->paragraph4:"")}}" > 
 						</div>
 						</div> 
 						
@@ -635,7 +642,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Paragraph 5 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="paragraph5" placeholder="Enter Paragraph 5"   value="{{ old('paragraph5',(isset($aboutHeading->paragraph5)) ? $aboutHeading->paragraph5:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="paragraph5" placeholder="Enter Paragraph 5"   value="{{ old('paragraph5',(isset($aboutHeading->paragraph5)) ? $aboutHeading->paragraph5:"")}}" > 
 						</div>
 						</div> 
 						
@@ -643,7 +650,7 @@ Edit Course
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Paragraph 6 <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" class="form-control col-md-7 col-xs-12"  name="paragraph6" placeholder="Enter Paragraph 6"   value="{{ old('paragraph6',(isset($aboutHeading->paragraph6)) ? $aboutHeading->paragraph6:"")}}" > 
+						<input type="text" class="form-control col-md-7 col-xs-12 auto-save-field"  name="paragraph6" placeholder="Enter Paragraph 6" value="{{ old('paragraph6',(isset($aboutHeading->paragraph6)) ? $aboutHeading->paragraph6:"")}}" > 
 						</div>
 						</div>
 						
@@ -651,7 +658,7 @@ Edit Course
 						<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                          
 						 
 					 
-					<button type="submit" class="btn btn-success"  onclick="check(this)">Submit</button>
+					<button type="submit" class="btn btn-success" >Submit</button>
 					 
 						</div>
 						</div>
@@ -661,6 +668,10 @@ Edit Course
               </div> 
 
 			  
+
+
+
+
 
 
    	  <div class="col-md-12 col-sm-12 col-xs-12">
@@ -675,13 +686,14 @@ Edit Course
 
         <div class="x_content">
             {{-- Replace this URL with your existing POST save URL --}}
-            <form
-                 
+            <form                 
                 class="form-horizontal form-label-left"
-			  	method="POST"
-				action=""
-               onsubmit="return courseController.editSaveCourseContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" >
-             
+			  	method="POST"			 
+				action="{{ route('admin.editSaveCourseContent',(isset($edit_data->id)? $edit_data->id:'')) }}"
+					 
+				
+				data-section-name="editSaveCourseContent"  data-ajax-autosave>
+@csrf
                 @for($i = 1; $i <= 6; $i++)
                     @php
                         $headingField = 'heading' . $i;
@@ -711,7 +723,7 @@ Edit Course
                                         type="text"
                                         id="course-{{ $headingField }}"
                                         name="{{ $headingField }}"
-                                        class="form-control"
+                                        class="form-control auto-save-field"
                                         placeholder="Enter Heading {{ $i }}"
                                         value="{{ old($headingField, $aboutHeading->{$headingField} ?? '') }}"
                                     >
@@ -730,10 +742,12 @@ Edit Course
                                     <textarea
                                         id="course-{{ $descriptionField }}"
                                         name="{{ $descriptionField }}"
-                                        class="form-control summernote"
+										data-quill-editor
+                                        class="form-control auto-save-field"
                                         rows="6"
-                                        placeholder="Enter Description {{ $i }}"
+                                        placeholder="Enter Description {{ $i }}" style="display:none"
                                     >{{ old($descriptionField, $aboutHeading->{$descriptionField} ?? '') }}</textarea>
+									<div class="quill-editor min-h-[250px]"></div>
                                 </div>
                             </div>
                         </div>
@@ -855,10 +869,10 @@ Edit Course
             <form
                 class="form-horizontal form-label-left"         
  				method="POST"
-				 onsubmit="return courseController.editSaveCourseLearn(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"
                
-                 
-            >
+                 action="{{ route('admin.editSaveCourseLearn',(isset($edit_data->id)? $edit_data->id:'')) }}"
+             data-section-name="editSaveCourseLearn"  data-ajax-autosave>
+@csrf
                 
 
                 <div class="learn-items">
@@ -992,18 +1006,20 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post"
-						onsubmit="return courseController.editSaveTrainerAbout(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"
+						<form class="form-horizontal form-label-left" method="post"
+						 action="{{ route('admin.editSaveTrainerAbout',(isset($edit_data->id)? $edit_data->id:'')) }}"
 						
-						
-						>
-							@csrf
+						 data-section-name="editSaveTrainerAbout"  data-ajax-autosave>
+@csrf
  
 
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Trainer About <span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
-						<textarea type="text" class="form-control col-md-7 col-xs-12 summernote"  name="trainer_about" rows="7" placeholder="Enter trainer about">{{ old('trainer_about',(isset($edit_data->trainer_about)) ? $edit_data->trainer_about:"")}}</textarea>
+						<textarea type="text" 
+						data-quill-editor
+						class="form-control col-md-7 col-xs-12 summernote"  name="trainer_about" rows="7" placeholder="Enter trainer about" style="display:none">{{ old('trainer_about',(isset($edit_data->trainer_about)) ? $edit_data->trainer_about:"")}}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div> 
 									
@@ -1067,11 +1083,11 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content"> 
-						<form class="form-horizontal form-label-left" action="" method="post"
-						onsubmit="return courseController.editSaveCourseExtraContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"						
-						>
-
-							@csrf
+						<form class="form-horizontal form-label-left" method="post"			
+						 action="{{ route('admin.editSaveCourseExtraContent',(isset($edit_data->id)? $edit_data->id:'')) }}"
+						
+						 data-section-name="editSaveCourseExtraContent"  data-ajax-autosave>
+@csrf
 						<div class="form-group">   
 						<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Top Heading<span class="required">*</span></label>					  
 						<div class="col-md-8 col-sm-8 col-xs-12">
@@ -1086,10 +1102,12 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
 						<div class="col-md-8 col-sm-8 col-xs-12">
 						<textarea
 						id="top_description"
-						class="form-control col-md-7 col-xs-12 summernote"
+						data-quill-editor
+						class="form-control col-md-7 col-xs-12"
 						name="top_description"
-						placeholder="Enter top description"
+						placeholder="Enter top description" style="display:none"
 						>{{ old('top_description', $edit_data->top_description ?? '') }}</textarea>
+						<div class="quill-editor min-h-[250px]"></div>
 						</div>
 						</div>
 
@@ -1119,8 +1137,11 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                   </div>
                   <div class="x_content">        
 				  
-                    <form class="form-horizontal form-label-left" method="post" onsubmit="return courseController.editSaveCurriculum(this,<?php echo (isset($edit_data->id)? $edit_data->id:''); ?>)"  enctype="multipart/form-data">
-							@csrf
+                    <form class="form-horizontal form-label-left" method="post"  enctype="multipart/form-data" 
+					 action="{{ route('admin.editSaveCurriculum',(isset($edit_data->id)? $edit_data->id:'')) }}"
+					
+					  data-section-name="editSaveCurriculum"  data-ajax-autosave>
+@csrf
                       <div class="form-group">   
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Course Curriculum <span class="required">*</span></label>					  
                         <div class="col-md-8 col-sm-8 col-xs-12">
@@ -1233,12 +1254,10 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                   </div>
                   <div class="x_content">
                     
-                    <form id="course-faq-form" method="POST"  class="form-horizontal form-label-left" 
-					action=""
-					onsubmit="return courseController.editSaveFAQ(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)"	
-					 >
-
-						@csrf
+                    <form id="course-faq-form" method="POST"  class="form-horizontal form-label-left"	
+					 action="{{ route('admin.editSaveFAQ',(isset($edit_data->id)? $edit_data->id:'')) }}"
+					 data-section-name="editSaveFAQ"  data-ajax-autosave>
+@csrf
 					 <?php if(!empty($edit_data->FAQs)){
 					     if($edit_data->FAQs){
 						 $FAQs =json_decode($edit_data->FAQs);    
@@ -1322,8 +1341,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                   <div class="x_content">
                     
                     <form id="course-reviews-form"  class="form-horizontal form-label-left" action="{{ route('admin.editSaveTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="Testimonial" method="post" >
-
-					@csrf
+@csrf
 					 <?php if(!empty($edit_data->reviews)){
 					 $reviewData = json_decode($edit_data->reviews ?? '{}', true);
                      $reviewData = is_array($reviewData) ? $reviewData : [];
@@ -1470,7 +1488,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                     <form  class="form-horizontal form-label-left" 
 					
 					action="{{ route('admin.editSaveCourseRelated',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseRelated" method="post"  >
-					@csrf
+@csrf
 				
 					<div class="form-group">
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Show Related Courses (Sidebar)<span class="required">*</span></label>
@@ -1637,47 +1655,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
             </div>
             </div>
 
-
-
-
-
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<script type="text/javascript">
-function initializeAllCourseEditors() {
-    const $ = window.jQuery;
-    if (!$ || !$.fn.summernote) return;
-    $('.summernote').each(function () {
-        if (!$(this).data('summernote')) $(this).summernote({ height: 200 });
-    });
-}
-if (document.readyState === 'complete') 
-	
-	initializeAllCourseEditors();
-
-else 
-
-window.addEventListener('load', initializeAllCourseEditors, { once: true });
-
-
-</script>
-
-
-
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet"> -->
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> -->
-<script type="text/javascript">
-$('.summernote').summernote({
-height: 200
-});
-</script>
  
-
 
 <script>   
 	  
@@ -1795,52 +1773,6 @@ function get_courseReleted(cid,cr=""){
 	 
 }
 
-// function get_subcategory(cid,sid){	 
-// 	var token = $('input[name=_token]').val();
-// 	$.ajax({
-// 	type: "post",	 
-// 	url: "{{URl('admin/subcategory_pdf/get_subcategory_pdf')}}",
-// 	data: {cid:cid,sid:sid},
-// 	headers: {'X-CSRF-TOKEN': token},		
-// 	cache: false,
-// 	success: function(data)
-// 	{ 		 
-// 		$(".show_subcategory_pdf").html(data);
-// 	}
-// 	});
-// var cc_id =<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>;
-// 	$.ajax({
-// 	type: "post",	 
-// 	url: "{{URl('admin/getcategory/get_video_link')}}",
-// 	data: {cid:cid,cc_id:cc_id},
-// 	headers: {'X-CSRF-TOKEN': token},		
-// 	cache: false,
-// 	success: function(data)
-// 	{ 		  
-// 		$("#video_link").val(data);
-// 	}
-// 	});
-
-
-// }
-
-// function get_categoryPDF(sid,pid){	 
-// 	var token = $('input[name=_token]').val();
-// 	$.ajax({
-// 	type: "post",	 
-// 	url: "{{URl('admin/get_category_course_pdf/get_course_pdf')}}",
-// 	data: {sid:sid,pid:pid},
-// 	headers: {'X-CSRF-TOKEN': token},		
-// 	cache: false,
-// 	success: function(data)
-// 	{ 		 
-// 		$(".show_course_pdf").html(data);
-// 	}	
-// 	});
-
-
-
-// }
 
 </script>
   
@@ -2085,131 +2017,406 @@ function showfooter(gst){
 .common-save-status[data-state="success"] { color: #166534; background: #dcfce7; }
 .common-save-status[data-state="error"] { color: #991b1b; background: #fee2e2; }
 </style>
+
+
+
+			  
+ <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Quill === 'undefined') {
+        console.error('Quill library did not load.');
+        return;
+    }
+
+    document.querySelectorAll('textarea[data-quill-editor]').forEach(function (textarea) {
+        const editor = textarea.nextElementSibling;
+
+        if (!editor || !editor.classList.contains('quill-editor')) {
+            console.error('Quill editor container missing after:', textarea);
+            return;
+        }
+
+        const quill = new Quill(editor, {
+            theme: 'snow',
+            placeholder: textarea.dataset.placeholder || 'Write here...',
+            modules: {
+                toolbar: [
+                    [{ header: [2, 3, 4, 5,  false] }],
+                    ['bold', 'italic', 'underline'],
+					[{ align: [] }],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+					[{ indent: '-1' }, { indent: '+1' }],
+					['blockquote'],
+                    ['link'],
+					 ['table'], 
+                    ['clean']
+                ]
+            }
+        });
+
+        // Existing saved HTML.
+        if (textarea.value.trim()) {
+            quill.clipboard.dangerouslyPasteHTML(textarea.value, 'silent');
+        }
+
+        // Keep the original textarea in sync for Laravel and autosave.
+        quill.on('text-change', function (delta, oldDelta, source) {
+            if (source !== 'user') return;
+
+            textarea.value = quill.getText().trim()
+                ? quill.root.innerHTML
+                : '';
+
+            textarea.dispatchEvent(new Event('input', {
+                bubbles: true
+            }));
+        });
+    });
+});
+</script>
+ 
+   
+
+
+{{-- ======================= PART 2: AUTOSAVE ======================= --}}
+
 <script>
 (function () {
-    function initializeCommonAutosave() {
-        const forms = [...document.querySelectorAll('.right_col form[data-ajax-autosave]')];
+    'use strict';
+
+    function initialize() {
+        if (window.courseAutosaveInitialized) return;
+        window.courseAutosaveInitialized = true;
+
         const popup = document.getElementById('courseSavePopup');
         let popupTimer;
-        function toast(text, type) {
+
+        function toast(message, type) {
             if (!popup) return;
             clearTimeout(popupTimer);
-            popup.textContent = text;
+            popup.textContent = message;
             popup.dataset.type = type;
             popup.classList.add('is-visible');
-            popupTimer = setTimeout(() => popup.classList.remove('is-visible'), 3500);
+            popupTimer = setTimeout(() => popup.classList.remove('is-visible'), 4000);
         }
-        forms.forEach(form => {
-            if (form.dataset.commonSaveReady) return;
-            form.dataset.commonSaveReady = '1';
-          
-            form.querySelectorAll('button[type="submit"]').forEach(button => button.removeAttribute('onclick'));
-            const status = document.createElement('div');
-            status.className = 'common-save-status';
-            status.setAttribute('role', 'status');
-            status.setAttribute('aria-live', 'polite');
-            form.prepend(status);
-            let timer, saving = false, queued = false, failed = false;
-            function message(text, state) {
-                status.textContent = text;
-                status.dataset.state = state;
+
+        const states = new Map();
+
+        // Copy Summernote content back into its textarea before reading the form
+         
+
+		function sync(form) {
+			const $ = window.jQuery;
+			if (!$ || !$.fn.summernote) return;
+
+			form.querySelectorAll('textarea.summernote').forEach(textarea => {
+				const $ta = $(textarea);
+				if (!$ta.data('summernote')) return;   // not initialized yet
+				textarea.value = $ta.summernote('code');
+			});
+		}
+
+        function payload(form) {
+            sync(form);
+            const data = new FormData(form);
+
+            // Keep empty multi-selects / removed repeatable rows explicit
+            const arrayNames = new Set([...form.querySelectorAll('[name$="[]"]')].map(el => el.name));
+            arrayNames.forEach(name => {
+                if (!data.has(name)) data.append(name, '');
+            });
+
+            // Always send the freshest CSRF token
+            const token = document.querySelector('meta[name="csrf-token"]')?.content
+                || form.querySelector('[name="_token"]')?.value;
+            if (token) data.set('_token', token);
+
+            return data;
+        }
+
+        function snapshot(data) {
+            return JSON.stringify([...data].map(([key, value]) => [
+                key,
+                typeof value === 'string' ? value : [value.name, value.size, value.lastModified]
+            ]));
+        }
+
+        function status(state, message, type) {
+            state.status.textContent = message;
+            state.status.dataset.state = type;
+        }
+
+        function schedule(form) {
+            const state = states.get(form);
+            if (!state) return;
+            state.dirty = true;
+            clearTimeout(state.timer);
+            status(state, 'Unsaved changes…', 'pending');
+            state.timer = setTimeout(() => save(form), 1000);
+        }
+
+
+
+		async function save(form, manual = false) {
+    const state = states.get(form);
+    clearTimeout(state.timer);
+
+    if (state.saving) { state.queued = true; return; }
+
+    state.saving = true;
+    let succeeded = false;
+    let sentSnapshot = '';
+
+    try {
+        const data = payload(form);
+        sentSnapshot = snapshot(data);
+
+        // Nothing changed: skip the request
+        if (!manual && sentSnapshot === state.saved) {
+            state.dirty = false;
+            status(state, '', 'success');
+            return;
+        }
+
+        if (!form.checkValidity()) {
+            status(state, 'Complete the required fields to save this section.', 'error');
+            if (manual) form.reportValidity();
+            return;
+        }
+
+        const action = form.getAttribute('action');
+        if (!action) throw new Error('Save URL is missing for this form.');
+
+        status(state, 'Saving…', 'pending');
+        console.log('[autosave] POST', action);
+
+        const response = await fetch(action, {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: data,
+            headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+        });
+
+        if (!(response.headers.get('content-type') || '').includes('application/json')) {
+            throw new Error('Save route must return JSON (HTTP ' + response.status + '). Check route and login.');
+        }
+
+        const result = await response.json();
+
+        const failed = result.success === false || result.success === 0
+            || result.status === false || result.status === 0 || result.status === '0'
+            || result.status === 'error'
+            || (result.errors && Object.keys(result.errors).length);
+
+        if (!response.ok || failed) {
+            const errors = Object.values(result.errors || {}).flat().join(' ');
+            throw new Error(errors || result.message || result.msg || 'Save failed.');
+        }
+
+        const confirmed = result.success === true || result.success === 1
+            || result.status === true || result.status === 1 || result.status === '1'
+            || result.status === 'success';
+
+        if (!confirmed) throw new Error('Server did not confirm saving. Return status: 1 in JSON.');
+
+        state.saved = sentSnapshot;
+        succeeded = true;
+        state.dirty = snapshot(payload(form)) !== sentSnapshot;
+
+        if (!state.dirty) {
+            status(state, 'Saved successfully.', 'success');
+            toast(result.message || result.msg || 'Saved successfully.', 'success');
+        }
+    } catch (error) {
+        console.error('[autosave] failed:', error);
+        state.dirty = true;
+        status(state, (error.message || 'Save failed.') + ' Use Submit to retry.', 'error');
+        toast(error.message || 'Save failed.', 'error');
+    } finally {
+        state.saving = false;
+        try {
+            const latest = snapshot(payload(form));
+            if ((succeeded || latest !== sentSnapshot) && latest !== state.saved) {
+                clearTimeout(state.timer);
+                state.timer = setTimeout(() => save(form), 1000);
             }
-            function getPayload() {
-                form.querySelectorAll('textarea.summernote').forEach(field => {
-                    const wrapper = field.parentElement.querySelector('.note-editor');
-                    if (!wrapper) return;
-                    const source = wrapper.querySelector('.note-codable');
-                    const editable = wrapper.querySelector('.note-editable');
-                    if (wrapper.classList.contains('codeview') && source) field.value = source.value;
-                    else if (editable) field.value = editable.innerHTML;
-                });
-                const data = new FormData(form);
-                // Include an empty value when every entry of an array is removed.
-                const names = new Set([...form.querySelectorAll('[name$="[]"]')].map(el => el.name));
-                names.forEach(name => { if (!data.has(name)) data.append(name, ''); });
-                const signature = JSON.stringify([...data.entries()].map(([key, value]) => [key,
-                    value instanceof File ? [value.name, value.size, value.lastModified] : value
-                ]));
-                return { data, signature };
-            }
-            let observed = getPayload().signature;
-            let saved = observed;
-            function detect() {
-                const signature = getPayload().signature;
-                if (signature === observed) return;
-                observed = signature;
-                failed = false;
-                clearTimeout(timer);
-                message('Unsaved changes…', 'pending');
-                timer = setTimeout(() => save(false), 1000);
-            }
-            async function save(force) {
-                clearTimeout(timer);
-                if (saving) { queued = true; return; }
-                const { data, signature } = getPayload();
-                if (!force && signature === saved) { message('All changes saved.', 'success'); return; }
-                if (!form.checkValidity()) {
-                    message('Complete the required fields to save this section.', 'error');
-                    if (force) form.reportValidity();
-                    return;
-                }
-                saving = true;
-                queued = false;
-                message('Saving…', 'pending');
-                try {
-                    const response = await fetch(form.action, {
-                        method: form.method.toUpperCase(), body: data, credentials: 'same-origin',
-                        headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
-                    });
-                    if (!(response.headers.get('content-type') || '').includes('application/json')) {
-                        throw new Error('Save endpoint must return JSON; check the route or login session.');
-                    }
-                    const result = await response.json();
-                    if (!response.ok || result.success === false || result.status === false || result.status === 'error') {
-                        const errors = Object.values(result.errors || {}).flat().join(' ');
-                        throw new Error(errors || result.message || 'Unable to save this section.');
-                    }
-                    saved = signature;
-                    failed = false;
-                    if (getPayload().signature === signature) {
-                        message('✓ Saved successfully.', 'success');
-                        toast((form.dataset.sectionName || 'Section') + ' saved successfully!', 'success');
-                    }
-                } catch (error) {
-                    failed = true;
-                    message(error.message + ' Use Submit to retry.', 'error');
-                    toast(error.message, 'error');
-                } finally {
-                    saving = false;
-                    const latest = getPayload().signature;
-                    if (latest !== signature || queued) {
-                        observed = latest;
-                        queued = false;
-                        clearTimeout(timer);
-                        timer = setTimeout(() => save(false), 1000);
-                    }
-                }
-            }
-            form.addEventListener('input', detect);
-            form.addEventListener('change', detect);
-            form.addEventListener('submit', event => { event.preventDefault(); save(true); });
-            // Polling covers editor toolbar actions, Select2, and added/removed rows.
-            const watcher = setInterval(() => {
-                if (!form.isConnected) { clearInterval(watcher); clearTimeout(timer); return; }
-                detect();
-            }, 500);
-            window.addEventListener('	', event => {
-                if (saving || failed || getPayload().signature !== saved) {
-                    event.preventDefault(); event.returnValue = '';
+        } catch (e) { console.error('[autosave] re-check failed:', e); }
+    }
+}
+
+
+        // async function save(form, manual = false) {
+        //     const state = states.get(form);
+        //     clearTimeout(state.timer);
+
+        //     if (state.saving) { state.queued = true; return; }
+
+        //     const data = payload(form);
+        //     const sentSnapshot = snapshot(data);
+
+        //     // Nothing changed: skip the request
+        //     if (!manual && sentSnapshot === state.saved) {
+        //         state.dirty = false;
+        //         status(state, '', 'success');
+        //         return;
+        //     }
+
+        //     if (!form.checkValidity()) {
+        //         status(state, 'Complete the required fields to save this section.', 'error');
+        //         if (manual) form.reportValidity();
+        //         return;
+        //     }
+
+        //     const action = form.getAttribute('action');
+        //     if (!action) {
+        //         status(state, 'Save URL is missing for this form.', 'error');
+        //         toast('Save URL is missing for this form.', 'error');
+        //         return;
+        //     }
+
+        //     state.saving = true;
+        //     state.queued = false;
+        //     status(state, 'Saving…', 'pending');
+        //     let succeeded = false;
+
+        //     try {
+        //         const response = await fetch(form.action, {
+        //             method: 'POST',
+        //             credentials: 'same-origin',
+        //             body: data,
+        //             headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+        //         });
+
+        //         if (!(response.headers.get('content-type') || '').includes('application/json')) {
+        //             throw new Error('Save route must return JSON. Check the route and login session.');
+        //         }
+
+        //         const result = await response.json();
+
+        //         const failed = result.success === false || result.success === 0
+        //             || result.status === false || result.status === 0 || result.status === '0'
+        //             || result.status === 'error'
+        //             || (result.errors && Object.keys(result.errors).length);
+
+        //         if (!response.ok || failed) {
+        //             const errors = Object.values(result.errors || {}).flat().join(' ');
+        //             throw new Error(errors || result.message || result.msg || 'Save failed.');
+        //         }
+
+        //         const confirmed = result.success === true || result.success === 1
+        //             || result.status === true || result.status === 1 || result.status === '1'
+        //             || result.status === 'success';
+
+        //         if (!confirmed) throw new Error('Server did not confirm saving. Return status: 1 in JSON.');
+
+        //         state.saved = sentSnapshot;
+        //         succeeded = true;
+        //         state.dirty = snapshot(payload(form)) !== sentSnapshot;
+
+        //         if (!state.dirty) {
+        //             status(state, 'Saved successfully.', 'success');
+        //             toast(result.message || result.msg || 'Saved successfully.', 'success');
+        //         }
+        //     } catch (error) {
+        //         state.dirty = true;
+        //         status(state, error.message + ' Use Submit to retry.', 'error');
+        //         toast(error.message, 'error');
+        //     } finally {
+        //         state.saving = false;
+        //         const latest = snapshot(payload(form));
+        //         if ((succeeded || latest !== sentSnapshot) && latest !== state.saved) {
+        //             clearTimeout(state.timer);
+        //             state.timer = setTimeout(() => save(form), 1000);
+        //         }
+        //     }
+        // }
+
+        document.querySelectorAll('form[data-ajax-autosave]').forEach(form => {
+            const indicator = document.createElement('div');
+            indicator.className = 'common-save-status';
+            indicator.setAttribute('role', 'status');
+            indicator.setAttribute('aria-live', 'polite');
+            form.prepend(indicator);
+
+            const state = {
+                status: indicator,
+                saved: snapshot(payload(form)),
+                dirty: false,
+                saving: false,
+                timer: null
+            };
+            states.set(form, state);
+
+            form.addEventListener('input', event => {
+                if (event.target.matches('input,textarea,select,[contenteditable="true"],.note-codable')) schedule(form);
+            });
+
+            form.addEventListener('change', event => {
+                if (event.target.matches('input,textarea,select')) schedule(form);
+            });
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                save(form, true);
+            }, true);
+
+            // Detect added/removed repeatable fields (FAQ, reviews, learn items)
+            new MutationObserver(records => {
+                const fieldChanged = records.some(record =>
+                    [...record.addedNodes, ...record.removedNodes].some(node =>
+                        node.nodeType === 1
+                        && !node.matches('.note-editor,.note-toolbar,.note-statusbar,.common-save-status')
+                        && (node.matches('input[name],textarea[name],select[name]')
+                            || node.querySelector('input[name],textarea[name],select[name]'))
+                    )
+                );
+                if (fieldChanged) schedule(form);
+            }).observe(form, { childList: true, subtree: true });
+        });
+
+        // FIXED: the event is "summernote.change" with NO extra namespace
+        // (a dot in jQuery means namespace, so the old name never fired)
+        const $ = window.jQuery;
+        if ($) {
+            $(document).on('change', 'textarea.summernote', function (event, contents) {
+                if (typeof contents === 'string') this.value = contents;
+                if (this.form) schedule(this.form);
+            });
+        }
+
+        // Safety net: catches code-view and plugin changes. Only changed data saves.
+        setInterval(() => {
+            states.forEach((state, form) => {
+                const current = snapshot(payload(form));
+                if (current !== state.observed) {
+                    if (state.observed !== undefined && current !== state.saved) schedule(form);
+                    state.observed = current;
                 }
             });
+        }, 700);
+
+        window.addEventListener('beforeunload', event => {
+            if ([...states.values()].some(state => state.dirty || state.saving)) {
+                event.preventDefault();
+                event.returnValue = '';
+            }
         });
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeCommonAutosave, { once: true });
-    else initializeCommonAutosave();
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once: true });
+    else initialize();
 })();
 
+
+ 
+
 </script>
+
+
 
 
 

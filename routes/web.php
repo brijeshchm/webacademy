@@ -152,7 +152,7 @@ Route::get('course/add',[App\Http\Controllers\Admin\CourseController::class, 'ad
 Route::get('course/edit/{id}', [App\Http\Controllers\Admin\CourseController::class, 'edit']);
 Route::post('course/saveCourseTitle', [App\Http\Controllers\Admin\CourseController::class, 'saveCourseTitle'])->name('saveCourseTitle');
 Route::post('course/editSaveCourseTitle/{id}', [App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseTitle'])->name('editSave.CourseTitle');
-Route::post('course/editSaveCourseContent/{id}', [App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseContent'])->name('editSave.courseContent');
+Route::post('course/editSaveCourseContent/{id}', [App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseContent'])->name('editSaveCourseContent');
 Route::post('course/editSaveCourseOverview/{id}', [App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseOverview'])->name('editSaveCourseOverview');
 Route::post('course/editSaveCourseAbout/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseAbout'])->name('editSaveCourseAbout');
 Route::post('course/editSaveCourseLearn/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseLearn'])->name('editSaveCourseLearn');
@@ -161,7 +161,7 @@ Route::post('course/editSaveCourseExtraContent/{id}',[App\Http\Controllers\Admin
 Route::post('course/editSaveCourseTopic/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseTopic'])->name('editSaveCourseTopic');
 Route::post('course/editSaveCourseAboutExcel/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseAboutExcel']);
 Route::post('course/editSaveCourseBatchVisibility/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseBatchVisibility']);
-Route::post('course/editSaveCurriculum/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCurriculum']);
+Route::post('course/editSaveCurriculum/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCurriculum'])->name('editSaveCurriculum');
 Route::post('course/editSaveCourseCurriculum/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseCurriculum']);
 Route::post('course/editSaveCourseRelated/{id}', [App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseRelated'])->name('editSaveCourseRelated');
 Route::post('course/editSaveCourseCertificate/{id}',[App\Http\Controllers\Admin\CourseController::class, 'editSaveCourseCertificate']);

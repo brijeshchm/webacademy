@@ -989,14 +989,14 @@ margin-bottom: .5rem !important;
     $careerSupports = [
         [
             'title' => 'Mock Interview Session',
-            'description' => 'Practice <b>'.$course->title.'</b> interview questions, case studies, and technical scenarios with expert feedback.',
+            'description' => 'Practice <strong>'.$course->title.'</strong> interview questions, case studies, and technical scenarios with expert feedback.',
             'image' => 'images/Mock_Session.webp',
             'alt' => 'Mock Session',
             'class' => 'lazyload20',
         ],
         [
             'title' => 'LMS Learning',
-            'description' => 'Access <b>'.$course->title.'</b> recordings, '.$course->course_name.' exercises, datasets, assignments, and study materials anytime.',
+            'description' => 'Access <strong>'.$course->title.'</strong> recordings, '.$course->course_name.' exercises, datasets, assignments, and study materials anytime.',
             'image' => 'images/LMS_Learning.webp',
             'alt' => 'LMS Learning',
             'class' => 'for-animate lazyload20',
@@ -1441,7 +1441,7 @@ margin-bottom: .5rem !important;
             'num' => '01',
             'color' => 'rgb(43, 166, 203)',
             'title' => 'Industry Expert Trainer',
-            'desc' => "Learn <b>{$courseTitle}</b> from an experienced trainer through practical explanations and real-world examples."
+            'desc' => "Learn <strong>{$courseTitle}</strong> from an experienced trainer through practical explanations and real-world examples."
                 . $durationText,
         ],
         [
@@ -1454,7 +1454,7 @@ margin-bottom: .5rem !important;
             'num' => '03',
             'color' => 'rgb(228, 60, 60)',
             'title' => 'Digital Study Material',
-            'desc' => "Support your <b>{$courseTitle}</b> learning with structured digital materials, reference guides, and revision notes."
+            'desc' => "Support your <strong>{$courseTitle}</strong> learning with structured digital materials, reference guides, and revision notes."
                 . $moduleText,
         ],
         [
@@ -1475,7 +1475,7 @@ margin-bottom: .5rem !important;
             'num' => '06',
             'color' => 'rgb(16, 185, 129)',
             'title' => 'Hands-On Projects',
-            'desc' => "Apply your <b>{$courseTitle}</b> knowledge through practical projects and scenarios relevant to the course."
+            'desc' => "Apply your <strong>{$courseTitle}</strong> knowledge through practical projects and scenarios relevant to the course."
                 . $projectText,
         ],
         [
@@ -1488,7 +1488,7 @@ margin-bottom: .5rem !important;
             'num' => '08',
             'color' => 'rgb(139, 92, 246)',
             'title' => 'Interview Preparation',
-            'desc' => "Prepare for roles related to <b>{$courseTitle}</b> with mock interviews, relevant questions, practical scenarios, and trainer feedback.",
+            'desc' => "Prepare for roles related to <strong>{$courseTitle}</strong> with mock interviews, relevant questions, practical scenarios, and trainer feedback.",
         ],
     ];
 @endphp
@@ -1902,7 +1902,7 @@ margin-bottom: .5rem !important;
                             $courseTitle = trim($course->title ?? '') ?: 'this course';
 
                             $certificatePoints = [
-                            "<b>{$courseTitle}</b>course completion certificate",
+                            "<strong>{$courseTitle}</strong>course completion certificate",
                             'Share your achievement on LinkedIn and your resume',
                             'Highlight your completed training and newly learned skills',
                             'Add your certificate to your professional portfolio',
