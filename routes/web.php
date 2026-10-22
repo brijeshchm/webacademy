@@ -51,15 +51,23 @@ Route::get('/corporate-training', [StaticPageController::class, 'corporateTraini
 
  
 Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
-
-Route::get('/doctorate', [DoctorateController::class, 'index'])->name('doctorate');
-Route::get('/doctorate/{slug}', [DoctorateController::class, 'show'])->name('doctorate.show');
-
+ 
 Route::get('/universities/{slug}', [DoctorateController::class, 'university'])->name('universities.show');
 Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
 Route::get('/courses/{slug}', [CoursesController::class, 'coursesDetails'])->name('courses.show');
 
 
+Route::get('/sitemap.xml', function () {
+	 
+$keywords = DB::table('web_courses')
+		->where('status', '1')
+		->select('slug', 'updated_at')
+		->get();
+	return response()
+        ->view('pages.sitemap',compact('keywords'))
+        ->header('Content-Type', 'application/xml; charset=UTF-8');
+});
+ 
 
  
 Auth::routes();
