@@ -33,7 +33,7 @@
 
             {{-- LOGO --}}
             <a href="{{ route('home') }}" class="flex items-center shrink-0 group" aria-label="Corporate Academy home">
-                <img loading="eager" decoding="async" src="/images/logo-academy.webp" alt="Corporates Academy" width="802" height="205" class="h-10 w-auto max-w-[200px] object-contain transition-all duration-300 group-hover:scale-[1.04]">
+                <img loading="eager" decoding="async" src="{{ asset('images/logo-academy.webp') }}" alt="Corporates Academy" width="802" height="205" class="h-10 w-auto max-w-[200px] object-contain transition-all duration-300 group-hover:scale-[1.04]">
             </a>
 
             {{-- DESKTOP NAV --}}
@@ -143,7 +143,7 @@
 <div data-mobile-backdrop class="hidden fixed inset-0 z-[45] bg-black/60 backdrop-blur-sm xl:hidden"></div>
 <div data-mobile-drawer class="hidden fixed top-0 right-0 bottom-0 z-[48] w-[min(300px,85vw)] bg-[#060e24] border-l border-white/10 shadow-2xl xl:hidden flex-col overflow-y-auto">
     <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
-        <img loading="lazy" decoding="async" src="/images/logo-academy.webp" alt="Corporate Academy" width="802" height="205" class="h-8 w-auto">
+        <img loading="lazy" decoding="async" src="{{ asset('images/logo-academy.webp') }}" alt="Corporate Academy" width="802" height="205" class="h-8 w-auto">
         <button type="button" data-mobile-close aria-label="{{ t('navX.closeMenu') }}" class="w-11 h-11 -mr-2 flex items-center justify-center rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>

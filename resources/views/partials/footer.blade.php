@@ -13,7 +13,7 @@
         <div class="grid grid-cols-1 gap-12 border-b border-primary/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_1.2fr] lg:gap-10 lg:pb-14">
             <div class="space-y-6">
                 <a href="{{ route('home') }}" aria-label="Corporate Academy home" class="group inline-flex items-center">
-                    <img loading="lazy" decoding="async" src="/images/logo-academy.webp" alt="Corporates Academy" width="802" height="205" class="h-16 w-auto max-w-[260px] object-contain transition-transform duration-300 group-hover:scale-[1.03]">
+                    <img loading="lazy" decoding="async" src="{{ asset('images/logo-academy.webp') }}" alt="Corporates Academy" width="802" height="205" class="h-16 w-auto max-w-[260px] object-contain transition-transform duration-300 group-hover:scale-[1.03]">
                 </a>
                 <p class="max-w-sm text-sm leading-7 text-muted-foreground">{{ t('footer.empowering') }}</p>
                 <div class="flex items-center gap-3 pt-1">
