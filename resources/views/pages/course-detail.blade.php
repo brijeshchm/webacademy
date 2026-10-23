@@ -2175,7 +2175,7 @@ margin-bottom: .5rem !important;
                     <section id="faq" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="h-8 w-1 rounded-full bg-gradient-to-b from-orange-500 to-pink-500"></div>
-                            <h2 class="text-2xl font-display font-bold text-gray-900">FAQ's of {{ $course->title }}</h2>
+                            <h2 class="text-2xl font-display font-bold text-gray-900">FAQs for {{ $course->course_name }}</h2>
                         </div>
                         <div class="space-y-3">
 
@@ -2341,7 +2341,7 @@ margin-bottom: .5rem !important;
                             <p class="font-semibold text-gray-900 text-sm">{{ t('courseDetailX.trainingForTeams') }}</p>
                         </div>
                         <p class="text-xs text-gray-500 mb-3 leading-relaxed">{{ t('courseDetailX.trainingForTeamsDesc') }}</p>
-                        <a href="/corporate-training" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-violet-700 border border-violet-200 hover:bg-violet-50 rounded-xl">
+                        <a href="{{ route('corporate-training')}}" class="inline-flex items-center justify-center w-full h-9 text-sm font-semibold text-violet-700 border border-violet-200 hover:bg-violet-50 rounded-xl">
                             {{ t('courseDetailX.exploreCorporatePlans') }}
                             <svg class="w-3.5 h-3.5 ml-1" {!! $iconStroke !!}><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>

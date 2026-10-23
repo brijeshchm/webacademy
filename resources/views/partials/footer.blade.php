@@ -29,10 +29,24 @@
             <div>
                 <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/70">{{ t('footer.programs') }}</p>
                 <ul class="space-y-3.5">
-                    <li><a href="{{ route('courses.show','aws-certification-training')}}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">AWS Certification {!! $arrowUpRight !!}</a></li>
-                    <li><a href="{{ route('courses.show','servicenow-training') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Servicenow Training{!! $arrowUpRight !!}</a></li>
-                    <li><a href="{{ route('courses.show','cloud-computing-training')}}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Cloud Computing {!! $arrowUpRight !!}</a></li>
-                    <li><a href="{{ route('courses.show','cybersecurity-training') }}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">Cybersecurity Training{!! $arrowUpRight !!}</a></li>
+                                        @php
+                $coursesTopList = App\Models\Course::where(function ($query) {
+                $query->whereNull('city')
+                ->orWhere('city', '');
+                })
+                ->select('slug','title','course_name')
+                ->where('footer_top_course', '1')->limit('6')
+                ->get();
+
+                @endphp
+                @if($coursesTopList)
+                @foreach ($coursesTopList as $coursesTop)
+
+
+                <li><a href="{{ route('courses.show',$coursesTop->slug)}}" class="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary">{{ $coursesTop->course_name }}{!! $arrowUpRight !!}</a></li>
+                @endforeach
+                    @endif
+                     
                     <li><a href="{{ route('courses')}}" class="group inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary/75">{{ t('footer.viewAllCourses') }}{!! $arrowUpRight !!}<svg aria-hidden="true" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
                 </ul>
             </div>
@@ -80,7 +94,7 @@
             </div>
         </div>
 
-{{-- Courses in Top Cities — kept ONCE, for local SEO internal linking. Each city currently points to the same generic /courses URL. --}}
+
 @php
 $courses = App\Models\Course::where(function ($query) {
     $query->whereNull('city')
@@ -113,12 +127,6 @@ Trending Courses
 
 
 
-
-
-
-
-
-        {{-- Courses in Top Cities — kept ONCE, for local SEO internal linking. Each city currently points to the same generic /courses URL. --}}
           @php
             $noidas = App\Models\Course::where('city','noida')->where('show_on_footer','1')->get();
              

@@ -49,22 +49,28 @@
                         <div class="p-5">
                             <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">{{ t('navX.popularCategories') }}</p>
                             <div class="grid grid-cols-2 gap-1.5">
-                                @foreach ([
-                                    ['navX.catData',route('courses.show','data-science-training')],
-                                    ['navX.catAI', route('courses.show','artificial-intelligence-training')],
-                                    ['navX.catML', route('courses.show','machine-learning-training')],
-                                    ['navX.catWorkday', route('courses.show','workday-training')],
-                                    ['navX.catServiceNow', route('courses.show','servicenow-training')],
-                                    ['navX.catSalesforce', route('courses.show','salesforce-training')],
-                                    ['navX.catSixSigma', route('courses.show','six-sigma-training')],
-                                ] as [$labelKey, $href])
-                                    <a href="{{ $href }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group">
+                                 @php
+                                $coursesMenuList = App\Models\Course::where(function ($query) {
+                                $query->whereNull('city')
+                                ->orWhere('city', '');
+                                })
+                                ->select('slug','title','course_name')
+                                ->where('show_top_menu', '1')->limit('10')
+                                ->get();
+
+                                @endphp
+
+                                @if($coursesMenuList)
+                                @foreach($coursesMenuList as $coursesMenu)
+
+                                    <a href="{{ route('courses.show',$coursesMenu->slug)}}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group">
                                         <div class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                                             <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                                         </div>
-                                        <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{{ t($labelKey) }}</span>
+                                        <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{{ $coursesMenu->course_name }}</span>
                                     </a>
                                 @endforeach
+                                @endif
                             </div>
                         </div>
                         <div class="border-t border-gray-50 bg-gradient-to-r from-primary/5 to-violet-50 px-5 py-3 flex items-center justify-between">

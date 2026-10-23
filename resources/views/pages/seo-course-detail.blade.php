@@ -2251,7 +2251,7 @@ margin-bottom: .5rem !important;
                     <section id="faq" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="h-8 w-1 rounded-full bg-gradient-to-b from-orange-500 to-pink-500"></div>
-                            <h2 class="text-2xl font-display font-bold text-gray-900">FAQ's of {{ $course->title }}</h2>
+                            <h2 class="text-2xl font-display font-bold text-gray-900">FAQs for {{ $course->course_name }}</h2>
                         </div>
                         <div class="space-y-3">
 
