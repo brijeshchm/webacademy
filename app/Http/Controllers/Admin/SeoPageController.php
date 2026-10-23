@@ -701,9 +701,9 @@ public function editSaveCourseRelated(Request $request, $id)
         'footer_top_course'      => $request->input('footer_top_course'),
         'show_front_second'      => $request->input('show_front_second'),
         'show_trending_courses'  => $request->input('show_trending_courses'),
-        // 'show_top_menu'      => $request->input('show_top_menu'),
-        // 'show_on_footer'     => $request->input('show_on_footer'),
-        // 'footer_city'        => $request->input('footer_city'),
+        'show_top_menu'      => $request->input('show_top_menu'),
+        'show_on_footer'     => $request->input('show_on_footer'),
+   
         'updated_by'              => auth()->id(),
     ];
 
@@ -841,7 +841,128 @@ public function editSaveCourseRelated(Request $request, $id)
      *
      * @return \Illuminate\Http\Response
      */
-    public function editSaveTestimonial(Request $request,$id)
+
+	 public function editSaveSeoTestimonial_olsadsadsad(Request $request, $id)
+{
+
+// dd($request->all());
+    $validator = Validator::make($request->all(), [
+        'name'               => ['required', 'array', 'min:1'],
+        'name.*'             => ['required', 'string', 'max:255'],
+
+        'comment'            => ['required', 'array', 'min:1'],
+        'comment.*'          => ['required', 'string'],
+
+        'company'            => ['nullable', 'array'],
+        'company.*'          => ['nullable', 'string', 'max:255'],
+
+        'rating'             => ['nullable', 'array'],
+        'rating.*'           => ['nullable', 'numeric', 'between:1,5'],
+
+        'linkedinurl'        => ['nullable', 'array'],
+        'linkedinurl.*'      => ['nullable', 'max:2048'],
+
+        'reviews_visibility' => ['required', 'in:0,1'],
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'status'  => 0,
+            'message' => 'Please check the testimonial fields.',
+            'errors'  => $validator->errors(),
+        ], 422);
+    }
+
+    $data = $validator->validated();
+
+    $course = Course::find($id);
+
+    if (!$course) {
+        return response()->json([
+            'success' => false,
+            'status'  => 0,
+            'message' => 'Course not found.',
+        ], 404);
+    }
+
+    // Keep all testimonial fields aligned with each name.
+    $reviews = [
+        'name'        => [],
+        'comment'     => [],
+        'company'     => [],
+        'rating'      => [],
+        'linkedinurl' => [],
+    ];
+
+    foreach ($data['name'] as $key => $name) {
+        if (
+            !array_key_exists($key, $data['comment']) ||
+            trim($data['comment'][$key]) === ''
+        ) {
+            return response()->json([
+                'success' => false,
+                'status'  => 0,
+                'message' => 'Each testimonial must have a comment.',
+                'errors'  => [
+                    "comment.{$key}" => [
+                        'Please enter a comment for this testimonial.',
+                    ],
+                ],
+            ], 422);
+        }
+
+        $reviews['name'][] = trim($name);
+        $reviews['comment'][] = $data['comment'][$key];
+        $reviews['company'][] = $data['company'][$key] ?? '';
+        $reviews['rating'][] = $data['rating'][$key] ?? '';
+        $reviews['linkedinurl'][] = $data['linkedinurl'][$key] ?? '';
+    }
+
+    try {
+        // Preserve your existing format: JSON strings inside reviews JSON.
+        foreach ($reviews as $field => $values) {
+            $reviews[$field] = json_encode(
+                $values,
+                JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR
+            );
+        }
+
+        // Supports a model with or without an array/json cast.
+        $course->reviews = $course->hasCast('reviews', ['array', 'json'])
+            ? $reviews
+            : json_encode(
+                $reviews,
+                JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR
+            );
+
+        $course->reviews_visibility = $data['reviews_visibility'];
+
+       
+// dd($course);
+        if ($course->save()) {
+              return response()->json([
+            'success' => true,
+            'status'  => 1,
+            'message' => 'Course testimonials saved successfully!',
+            'msg'     => 'Course testimonials saved successfully!',
+        ], 200);
+        }
+
+      
+
+    } catch (\Throwable $exception) {
+        report($exception);
+
+        return response()->json([
+            'success' => false,
+            'status'  => 0,
+            'message' => 'Unable to save testimonials. Please retry.',
+            'msg'     => 'Unable to save testimonials. Please retry.',
+        ], 500);
+    }
+}
+    public function editSaveSeoTestimonial(Request $request,$id)
     {	  
 
         if($request->ajax()){ 		
@@ -858,36 +979,32 @@ public function editSaveCourseRelated(Request $request, $id)
 
 				
 			$courses = Course::findOrFail($id);
+
+			$name ="";
+			$comment ="";
+			$company ="";
+			$rating ="";
+			$linkedinurl ="";
 			if(!empty($request->input('name'))){
 				$name= json_encode($request->input('name'));
-			}else{
-				$name="";
-			}
+			} 
 			
 			if(!empty($request->input('comment'))){
 				$comment= json_encode($request->input('comment'));
-			}else{
-				$comment="";
-			}
+			} 
 			
 			if(!empty($request->input('company'))){
 				$company= json_encode($request->input('company'));
-			}else{
-				$company="";
-			}
+			} 
 			
 			if(!empty($request->input('rating'))){
 				$rating= json_encode($request->input('rating'));
-			}else{
-				$rating="";
-			}
+			} 
 			
 			
 			if(!empty($request->input('linkedinurl'))){
 				$linkedinurl= json_encode($request->input('linkedinurl'));
-			}else{
-				$linkedinurl="";
-			}
+			} 
 			$reviews= array(
 			'name'=>$name,
 			'comment'=>$comment,

@@ -45,7 +45,7 @@ Add Placement
 							if(!empty($course_list)){						
 							foreach($course_list as $course){
 							?>
-							<option value="<?php echo $course->id ?>"><?php  echo $course->course_name; ?></option>
+							<option value="<?php echo $course->id ?>"><?php  echo $course->title; ?></option>
 							<?php } } ?>
 							</select>
                         </div>

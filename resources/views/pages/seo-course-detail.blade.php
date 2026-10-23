@@ -1244,82 +1244,109 @@ margin-bottom: .5rem !important;
 </section>
 @endif
 
-@if($course->trainer_about)
-<section id="aboutTrainer" class="w-full bg-gradient-to-b from-slate-50 via-white to-slate-50 py-2 md:py-2 overflow-hidden bg-white rounded-xl border shadow-sm p-2">
-    <div class="max-w-7xl mx-auto px-2">
-        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+ 
 
-            {{-- Left: Trainer info card --}}
-            <div
-                x-data="{ shown: false }"
-                x-intersect.once="shown = true"
-                :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
-                class="lg:w-7/12 w-full transition-all duration-700 ease-out relative"
-            >
-                {{-- Ambient glow blobs --}}
-                <div class="absolute -top-12 -left-12 w-48 h-48 bg-blue-400/25 rounded-full blur-3xl animate-pulse-slow pointer-events-none"></div>
-                <div class="absolute -bottom-12 right-4 w-40 h-40 bg-indigo-400/20 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style="animation-delay: 1.5s;"></div>
+@if(filled($course->trainer_about))
+    
 
-                {{-- Gradient border wrapper (creates a soft glowing edge) --}}
-                <div class="relative rounded-[25px] p-[1.5px] bg-gradient-to-br from-blue-200 via-white to-indigo-200 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                    <div class="relative bg-white rounded-[25px] p-4 md:p-6
-                                shadow-[0_1px_2px_rgba(16,24,40,0.04),0_4px_12px_rgba(16,24,40,0.06),0_20px_40px_-8px_rgba(37,99,235,0.10)]
-                                hover:shadow-[0_2px_4px_rgba(16,24,40,0.05),0_12px_24px_rgba(16,24,40,0.08),0_32px_64px_-12px_rgba(37,99,235,0.22)]
-                                hover:-translate-y-1.5
-                                transition-all duration-500 ease-out">
+    <section
+        id="aboutTrainer"
+        aria-labelledby="trainer-heading"
+        class="relative about-item isolate overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-3 shadow-sm sm:p-5"
+    >
+        {{-- Ambient glow --}}
+        <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-blue-400/20 blur-3xl"
+        ></div>
 
-                        {{-- Eyebrow badge --}}
-                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wide mb-4 shadow-[0_1px_2px_rgba(37,99,235,0.1)]">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                            Certified Expert
-                        </span>
+        <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -bottom-12 right-4 h-40 w-40 rounded-full bg-indigo-400/20 blur-3xl"
+        ></div>
 
-                        <h5 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
-                            Trainer Experience &amp; Expertise
-                        </h5>
+        <div class="relative mx-auto w-full max-w-7xl">
+            {{-- Gradient border --}}
+            <div class="rounded-[25px] from-blue-200 to-indigo-200 p-px">
+                <div class="rounded-[24px] p-5 transition-shadow duration-300 sm:p-7 lg:p-8">
 
-                        <p class="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
-                            {!! $course->trainer_about !!}
-                        </p>
+                    {{-- Badge --}}
+                    <span class="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-blue-600 ring-1 ring-blue-100">
+                        <svg
+                            class="h-4 w-4"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="m12 3 2.78 5.63L21 9.54l-4.5 4.39 1.06 6.2L12 17.2l-5.56 2.93 1.06-6.2L3 9.54l6.22-.91L12 3Z"/>
+                        </svg>
 
-                        <ul class="space-y-2">
-                            @php
-                                $trainerPoints = json_decode($course->trainer_paragraph); 
-                            //    dd($trainerPoints);
-                            @endphp
+                        Certified Expert
+                    </span>
+
+                    <h2
+                        id="trainer-heading"
+                        class="mb-4 text-2xl font-bold leading-tight text-slate-900 md:text-3xl"
+                    >
+                        Trainer Experience &amp; Expertise
+                    </h2>
+
+                    {{-- Rich text: use a div instead of a p --}}
+                    <div class="break-words text-sm leading-7 text-slate-600 md:text-base [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-blue-600 [&_a]:underline [&_strong]:font-semibold [&_strong]:text-slate-900">
+                        {!! $course->trainer_about !!}
+                    </div>
+
+                    @if(!empty($course->trainer_paragraph))
+                    @php
+
+
+                            $trainerPoints = $course->trainer_paragraph ?? [];
+
+                            if (is_string($trainerPoints)) {
+                                $trainerPoints = json_decode($trainerPoints, true) ?? [];
+                            }
+
+                     
+                            
+                        @endphp
+
+                        <ul class="mt-6 space-y-2 border-t border-slate-100 pt-5">
                             @if($trainerPoints)
-                            @foreach($trainerPoints as $i => $point)
-                            @if($point)
-                            <li
-                                x-data="{ show: false }"
-                                x-intersect.once="setTimeout(() => show = true, {{ $i * 90 }})"
-                                :class="show ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'"
-                                class="flex items-start gap-3 text-sm md:text-base text-gray-700 transition-all duration-500 ease-out group/item hover:bg-blue-50/70 rounded-[14px] px-3 py-2 -mx-3 cursor-default"
-                            >
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mt-0.5 shadow-[0_2px_4px_rgba(37,99,235,0.15)] group-hover/item:bg-blue-600 group-hover/item:text-white group-hover/item:scale-110 group-hover/item:shadow-[0_4px_10px_rgba(37,99,235,0.35)] transition-all duration-300">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                </span>
-                                <span class="group-hover/item:text-gray-900 group-hover/item:font-medium transition-all duration-300">
-                                    {{ $point ??'' }}
-                                </span>
-                            </li>
+                            @foreach($trainerPoints as $point)
+                              @if($point)
+                                <li class="group flex items-start gap-3 rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-blue-50">
+                                    <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors duration-200 group-hover:bg-blue-600 group-hover:text-white">
+                                        <svg
+                                            class="h-3.5 w-3.5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="3"
+                                                d="m5 13 4 4L19 7"
+                                            />
+                                        </svg>
+                                    </span>
+
+                                    <span class="min-w-0 flex-1 break-words text-sm leading-7 text-slate-700 md:text-base">
+                                        {{ $point }}
+                                    </span>
+                                </li>
                             @endif
                             @endforeach
                             @endif
                         </ul>
-                    </div>
+                    @endif
+
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 @endif
-
 
 
 
@@ -1661,6 +1688,11 @@ margin-bottom: .5rem !important;
                     </section>
                 @endif
 
+
+
+
+
+
                 {{-- CAREER OUTCOMES --}}
                 <section class="scroll-mt-36 bg-gradient-to-br from-[#06102a] to-[#0c1f5c] rounded-3xl border border-blue-900/40 shadow-xl p-4 sm:p-6 md:p-8 text-white">
                     <div class="flex items-center gap-3 mb-6">
@@ -1699,9 +1731,50 @@ margin-bottom: .5rem !important;
                 </section>
 
 
-  
 
-               @if($related_courses)
+  @if(filled($course->top_heading))
+    
+
+    <section
+        id="aboutTrainer"
+        aria-labelledby="trainer-heading"
+        class="relative about-item isolate overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-3 shadow-sm sm:p-5"
+    >
+        {{-- Ambient glow --}}
+      
+
+      
+
+        <div class="relative mx-auto w-full max-w-7xl">
+            {{-- Gradient border --}}
+            <div class="rounded-[25px] from-blue-200 to-indigo-200 p-px">
+                <div class="rounded-[24px] p-5 transition-shadow duration-300 sm:p-7 lg:p-8">
+
+                    {{-- Badge --}}
+                   
+
+                    <h2
+                        id="trainer-heading"
+                        class="mb-4 text-2xl font-bold leading-tight text-slate-900 md:text-3xl"
+                    >
+                         {{ $course->top_heading; }}
+                    </h2>
+
+                    {{-- Rich text: use a div instead of a p --}}
+                    <div class="break-words text-sm leading-7 text-slate-600 md:text-base [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-blue-600 [&_a]:underline [&_strong]:font-semibold [&_strong]:text-slate-900">
+                        {!! $course->top_description !!}
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+@endif
+
+
+               @if($related_courses->isNotEmpty())
           <section id="related-course" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
   <div class="flex items-center gap-3 mb-6">
                         <div class="h-8 w-1 rounded-full bg-gradient-to-b from-pink-500 to-violet-500"></div>
@@ -1711,46 +1784,29 @@ margin-bottom: .5rem !important;
 @if($related_courses)
                  
     @foreach($related_courses as $relatedcourse)
-        <a href="{{ route('courses.show', $relatedcourse) }}"
+
+    
+        <a href="{{ route('courses.show', $relatedcourse->slug) }}"
            class="flex items-start gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:shadow-md hover:border-gray-200 transition-all duration-300">
 
 
             {{-- Text --}}
             <div class="flex-1 min-w-0">
                 <h3 class="text-sm font-semibold text-gray-900 leading-snug line-clamp-2">
-                    {{ ucwords(str_replace('-', ' ', $relatedcourse)) }}
+                    {{ ucwords(str_replace('-', ' ', $relatedcourse->title)) }}
                 </h3>
 
                 <div class="flex items-center gap-1 mt-1.5">
                     <div class="flex gap-0.5">
-                        @php $rating = round(5 * 2) / 2; @endphp
-                        @for($i = 1; $i <= 5; $i++)
-                            @if($i <= floor($rating))
-                                {{-- full star --}}
-                                <svg class="w-3.5 h-3.5 fill-amber-400 text-amber-400" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            @elseif($i - 0.5 == $rating)
-                                {{-- half star --}}
-                                <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24">
-                                    <defs>
-                                        <linearGradient id="half-{{ $i }}">
-                                            <stop offset="50%" stop-color="currentColor"/>
-                                            <stop offset="50%" stop-color="transparent"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <polygon fill="url(#half-{{ $i }})" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            @else
-                                {{-- empty star --}}
-                                <svg class="w-3.5 h-3.5 fill-none text-gray-300" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            @endif
-                        @endfor
+                        @for($i = 0; $i < 5; $i++)
+                                    <svg class="h-4 w-4 {{ $i < round($relatedcourse->rating) ? 'fill-amber-400 text-amber-400' : 'fill-white/20 text-white/20' }}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                @endfor
+
+
+                                <span class="font-bold">{{ number_format($relatedcourse->rating, 1) }}</span>
                     </div>
                     <span class="text-xs text-gray-500 font-medium ms-0.5">
-                        {{ number_format(5, 1) }} ({{ number_format(454) }})
+                        ({{ $relatedcourse->total_rating }})
                     </span>
                 </div>
             </div>
@@ -1802,37 +1858,31 @@ margin-bottom: .5rem !important;
 
 <div class="space-y-4">
 @if($reviews)
-    @php
-        $names    = json_decode($reviews->name) ?: [];
-        $companies = json_decode($reviews->company) ?: [];
-        $comments = json_decode($reviews->comment) ?: [];
-        $ratings  = json_decode($reviews->rating) ?: [];
-     
-    @endphp
+   
 
-    @foreach($names as $index => $revName)
+    @foreach($reviews as $revName)
         <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all duration-300">
             <div class="flex items-start gap-4">
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
-                    {{ mb_substr($revName, 0, 1) }}
+                    {{ mb_substr($revName->name, 0, 1) }}
                 </div>
                 <div class="flex-1">
                     <div class="flex items-center justify-between gap-2 mb-1">
-                        <span class="font-semibold text-gray-900 text-sm">{{ $revName }}</span>
+                        <span class="font-semibold text-gray-900 text-sm">{{ $revName->name }}</span>
            
                     </div>
 
-                    @if(!empty($companies[$index]))
-                        <span class="text-xs text-gray-500 block mb-1">{{ $companies[$index] }}</span>
+                    @if(!empty($revName->company))
+                        <span class="text-xs text-gray-500 block mb-1">{{ $revName->company }}</span>
                     @endif
 
                     <div class="flex gap-0.5 mb-2">
-                        @for($i = 0; $i < ($ratings[$index] ?? 0); $i++)
+                        @for($i = 0; $i < ($revName->rating ?? 0); $i++)
                             <svg class="h-3.5 w-3.5 fill-amber-400 text-amber-400" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         @endfor
                     </div>
 
-                    <p class="text-sm text-gray-600 leading-relaxed">{{ $comments[$index] ?? '' }}</p>
+                    <p class="text-sm text-gray-600 leading-relaxed">{{ $revName->comment ?? '' }}</p>
                 </div>
             </div>
         </div>
@@ -1881,12 +1931,327 @@ margin-bottom: .5rem !important;
                     </div>
                 </section>
 
+
+
+
+
+
+
+
+<section class="py-8 md:py-10 relative overflow-hidden bg-gradient-to-br from-[hsl(217_45%_11%)] via-[hsl(220_40%_10%)] to-[hsl(224_50%_8%)] text-white">
+    <div class="absolute -top-24 left-1/4 w-[360px] h-[360px] bg-primary/20 rounded-full blur-3xl pointer-events-none ca-float"></div>
+    <div class="absolute bottom-0 right-0 w-[360px] h-[360px] bg-secondary/15 rounded-full blur-3xl pointer-events-none ca-float-slow"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(255,255,255,0.07),transparent_60%)] pointer-events-none"></div>
+    <div class="px-4 md:px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+            <div class="text-center lg:text-start">
+                <span class="inline-flex items-center gap-1.5 bg-white/10 text-white px-3 py-1 rounded-full text-xs font-medium mb-3 border border-white/20 backdrop-blur-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                     Placed By Corporate Academy
+                </span>
+                <h2 class="text-2xl md:text-3xl font-display font-bold leading-[1.1] mb-2">
+                    Recently Placed Candidates
+                </h2>
+                <p class="text-xs font-semibold uppercase tracking-wider text-primary mb-3">{{ t('home.aboutCategories') }}</p>
+                <p class="text-sm text-white/65 leading-relaxed mb-4 max-w-xl mx-auto lg:mx-0">{{ t('home.aboutParagraph') }}</p>
+                <ul class="space-y-1.5 mb-5 text-start inline-block">
+                    @foreach ([t('home.aboutPoint1'), t('home.aboutPoint2'), t('home.aboutPoint3'), t('home.aboutPoint4')] as $p)
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-primary shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                            <span class="text-sm text-white/80">{{ $p }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+                 
+            </div>
+            @php
+    $facultySlides = [
+        [
+            'label' => 'Workday',
+            'name'  => 'Dr. Anjali Mehta',
+            'title' => 'Industry Mentor',
+            'image' => asset('images/hero/placement.png'),
+        ],
+        [
+            'label' => 'Workday',
+            'name'  => 'Rahul Singh',
+            'title' => 'Data Science Professional',
+            'image' => asset('images/hero/placement.png'),
+        ],
+        [
+            'label' => 'Workday',
+            'name'  => 'Priya Verma',
+            'title' => 'Machine Learning Mentor',
+            'image' => asset('images/hero/placement.png'),
+        ],
+    ];
+@endphp
+
+<div class="flex flex-col items-center" data-faculty-slider>
+
+    
+    <div class="relative mx-auto w-full max-w-[280px]">
+
+        {{-- Decorative stacked cards --}}
+        <div aria-hidden="true"
+             class="absolute inset-0 rotate-6 rounded-2xl border
+                    border-white/10 bg-indigo-500/30"></div>
+
+        <div aria-hidden="true"
+             class="absolute inset-0 -rotate-3 rounded-2xl border
+                    border-white/10 bg-orange-500/20"></div>
+
+        {{-- Slider --}}
+        <div class="relative h-[360px] overflow-hidden rounded-2xl
+                    border border-white/20 bg-slate-800 shadow-2xl"
+             role="region"
+             aria-roledescription="carousel"
+             aria-label="Faculty feedback">
+
+            @foreach($facultySlides as $i => $slide)
+                <div
+                    data-faculty-slide
+                    class="absolute inset-0 duration-500 ease-in-out"
+                    style="opacity: {{ $i === 0 ? '1' : '0' }};
+                           z-index: {{ $i === 0 ? '1' : '0' }};
+                           pointer-events: {{ $i === 0 ? 'auto' : 'none' }};"
+                    aria-hidden="{{ $i === 0 ? 'false' : 'true' }}"
+                >
+                    {{-- Image --}}
+                    <img
+                        src="{{ $slide['image'] }}"
+                        alt="{{ $slide['name'] }}"
+                        width="280"
+                        height="360"
+                        loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
+                        class="h-full w-full object-cover object-top"
+                    >
+
+                    {{-- Image overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t
+                                from-black via-black/10 to-black/20"></div>
+
+                    {{-- Label --}}
+                    <div class="absolute left-4 right-4 top-4">
+                        <span class="inline-block rounded-full border
+                                     border-white/20 bg-black/30 px-3 py-1.5
+                                     text-[10px] font-bold text-black backdrop-blur-md">
+                            {{ $slide['label'] }}
+                        </span>
+                    </div>
+
+                    {{-- Details --}}
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                       
+                        <h3 class="text-lg font-bold text-black">
+                            {{ $slide['name'] }}
+                        </h3>
+
+                        <p class="mt-1 text-xs leading-relaxed text-black">
+                            {{ $slide['title'] }}
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+
+            {{-- Previous --}}
+            <button
+                type="button"
+                data-faculty-prev
+                aria-label="Previous feedback"
+                class="absolute left-2 top-1/2 z-10 flex h-9 w-9
+                       -translate-y-1/2 items-center justify-center rounded-full
+                       border border-white/20 bg-black/30 text-xl text-white
+                       backdrop-blur-md transition hover:bg-black/60
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                ‹
+            </button>
+
+            {{-- Next --}}
+            <button
+                type="button"
+                data-faculty-next
+                aria-label="Next feedback"
+                class="absolute right-2 top-1/2 z-10 flex h-9 w-9
+                       -translate-y-1/2 items-center justify-center rounded-full
+                       border border-white/20 bg-black/30 text-xl text-white
+                       backdrop-blur-md transition hover:bg-black/60
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                ›
+            </button>
+        </div>
+    </div>
+
+    {{-- Dots --}}
+    <div class="mt-6 flex items-center gap-1">
+        @foreach($facultySlides as $i => $slide)
+            <button
+                type="button"
+                data-faculty-dot="{{ $i }}"
+                aria-label="Show feedback {{ $i + 1 }}"
+                aria-current="{{ $i === 0 ? 'true' : 'false' }}"
+                class="flex h-8 w-8 items-center justify-center rounded-full
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                <span
+                    data-faculty-dot-indicator
+                    class="block h-2 rounded-full transition-all duration-300"
+                    style="width: {{ $i === 0 ? '24px' : '8px' }};
+                           background-color: {{ $i === 0 ? '#ffffff' : '#64748b' }};"
+                ></span>
+            </button>
+        @endforeach
+    </div>
+</div>
+
+<script>
+(() => {
+    function initializeFacultySliders() {
+        document.querySelectorAll('[data-faculty-slider]').forEach(root => {
+            // Prevent duplicate initialization.
+            if (root.dataset.initialized === 'true') return;
+            root.dataset.initialized = 'true';
+
+            const slides = [...root.querySelectorAll('[data-faculty-slide]')];
+            const dots = [...root.querySelectorAll('[data-faculty-dot]')];
+            const previous = root.querySelector('[data-faculty-prev]');
+            const next = root.querySelector('[data-faculty-next]');
+
+            if (!slides.length) return;
+
+            let current = 0;
+            let timer = null;
+            let hovered = false;
+            const reducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            );
+
+            function showSlide(index) {
+                current = (index + slides.length) % slides.length;
+
+                slides.forEach((slide, i) => {
+                    const active = i === current;
+
+                    slide.style.opacity = active ? '1' : '0';
+                    slide.style.zIndex = active ? '1' : '0';
+                    slide.style.pointerEvents = active ? 'auto' : 'none';
+                    slide.setAttribute('aria-hidden', String(!active));
+                });
+
+                dots.forEach((dot, i) => {
+                    const active = i === current;
+                    const indicator = dot.querySelector(
+                        '[data-faculty-dot-indicator]'
+                    );
+
+                    dot.setAttribute('aria-current', String(active));
+
+                    if (indicator) {
+                        indicator.style.width = active ? '24px' : '8px';
+                        indicator.style.backgroundColor =
+                            active ? '#ffffff' : '#64748b';
+                    }
+                });
+            }
+
+            function stopAutoplay() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+
+                if (
+                    slides.length < 2 ||
+                    document.hidden ||
+                    hovered ||
+                    root.contains(document.activeElement) ||
+                    reducedMotion.matches
+                ) return;
+
+                timer = setInterval(() => {
+                    showSlide(current + 1);
+                }, 5000);
+            }
+
+            previous?.addEventListener('click', () => {
+                showSlide(current - 1);
+                startAutoplay();
+            });
+
+            next?.addEventListener('click', () => {
+                showSlide(current + 1);
+                startAutoplay();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    startAutoplay();
+                });
+            });
+
+            root.addEventListener('mouseenter', () => {
+                hovered = true;
+                stopAutoplay();
+            });
+
+            root.addEventListener('mouseleave', () => {
+                hovered = false;
+                startAutoplay();
+            });
+
+            root.addEventListener('focusin', stopAutoplay);
+
+            root.addEventListener('focusout', () => {
+                setTimeout(startAutoplay, 0);
+            });
+
+            document.addEventListener('visibilitychange', startAutoplay);
+            reducedMotion.addEventListener('change', startAutoplay);
+
+            previous.hidden = slides.length < 2;
+            next.hidden = slides.length < 2;
+
+            showSlide(0);
+            startAutoplay();
+        });
+    }
+
+    // Works whether the script runs before or after DOMContentLoaded.
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initializeFacultySliders,
+            { once: true }
+        );
+    } else {
+        initializeFacultySliders();
+    }
+})();
+</script>
+  
+ 
+            
+
+            
+        </div>
+    </div>
+</section>
+
+
                 {{-- FAQ --}}
                 @if(!empty($faqs))
                     <section id="faq" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="h-8 w-1 rounded-full bg-gradient-to-b from-orange-500 to-pink-500"></div>
-                            <h2 class="text-2xl font-display font-bold text-gray-900">{{ t('courseDetail.faq') }}</h2>
+                            <h2 class="text-2xl font-display font-bold text-gray-900">FAQ's of {{ $course->title }}</h2>
                         </div>
                         <div class="space-y-3">
 
@@ -1905,7 +2270,7 @@ margin-bottom: .5rem !important;
                                             <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
                                                 <svg class="h-3.5 w-3.5" {!! $iconStroke !!}><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                                             </div>
-                                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">{{ $faqq[$index] ??'' }}</span>
+                                            <h3 class="font-semibold text-gray-900 text-sm leading-snug flex-1">{{ $faqq[$index] ??'' }}</h3>
                                             <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" {!! $iconStroke !!}><polyline points="6 9 12 15 18 9"></polyline></svg>
                                         </div>
                                     </summary>

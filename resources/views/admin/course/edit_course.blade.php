@@ -1384,148 +1384,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
                 </div>
               </div>
 			  
-
-			  <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h3>Reviews<small></small></h3>
-                    <div class="successFAQs"></div><div class="errorFAQs"></div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    
-                    <form id="course-reviews-form"  class="form-horizontal form-label-left" action="{{ route('admin.editSaveTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="Testimonial" method="post" >
-@csrf
-					 <?php if(!empty($edit_data->reviews)){
-					 $reviewData = json_decode($edit_data->reviews ?? '{}', true);
-                     $reviewData = is_array($reviewData) ? $reviewData : [];
-                     $reviewArray = static function ($value) {
-                         if (is_array($value)) return $value;
-                         $decoded = json_decode($value ?? '[]', true);
-                         return is_array($decoded) ? $decoded : [];
-                     };
-                     $name = $reviewArray($reviewData['name'] ?? []);
-                     $comment = $reviewArray($reviewData['comment'] ?? []);
-                     $company = $reviewArray($reviewData['company'] ?? []);
-                     $rating = $reviewArray($reviewData['rating'] ?? []);
-                     $linkedinurl = $reviewArray($reviewData['linkedinurl'] ?? []);
-                     for($i=0; $i<count($name); $i++){						 
-					 ?>
-					 <div>
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Name <?php echo $i+1; ?> <span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="name[]" value="<?php echo (isset($name[$i])? $name[$i]:""); ?>" placeholder="Enter Name"> 			 
-					</div>
-					</div>
-				 
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Comment <?php echo $i+1; ?><span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<textarea class="form-control col-md-7 col-xs-12" type="text" name="comment[]" placeholder="Enter Comment" ><?php echo (isset($comment[$i])? $comment[$i]:""); ?></textarea>
-					</div>
-					</div>	
-					
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">company <?php echo $i+1; ?><span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="company[]" placeholder="Enter company" value="<?php echo (isset($company[$i])? $company[$i]:""); ?>">
-					</div>
-					</div>	
-
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">rating <?php echo $i+1; ?><span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="tel" name="rating[]" placeholder="Enter rating" value="<?php echo (isset($rating[$i])? $rating[$i]:""); ?>">
-					</div>
-					</div>	
-
-
-
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Linkedin <?php echo $i+1; ?> <span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="linkedinurl[]" value="<?php echo (isset($linkedinurl[$i])? $linkedinurl[$i]:""); ?>" placeholder="Enter linkedin url"> 							 
-					</div>
-					</div>
-					
-					<span class="btn btn-inverse btn-circle m-b-5" onclick="removefaq(this)" style="margin-right: 132px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span>
-					</div>	
-										
-					 <?php   }  }else{ ?> 
-					 <div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Name<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="name[]" value="" placeholder="Enter Name"> 
-					@if ($errors->has('name[]'))
-								<small class="error alert-danger">{{ $errors->first('name[]') }}</small>
-								@endif
-					</div>
-					</div>
-				 
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Comment<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<textarea class="form-control col-md-7 col-xs-12" type="text" name="comment[]" placeholder="Enter Comment"></textarea>
-					</div>
-					</div>	
-
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Company Name<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="company[]" placeholder="Enter company">
-					</div>
-					</div>	
-					
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Rating<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="rating[]" placeholder="Enter rating">
-					</div>
-					</div>	
- 					
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Linkedin <span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="linkedinurl[]" placeholder="Enter linkedin url"> 							 
-					</div>
-					</div>
-					 <?php  } ?>
-					<div class="addtestimonial">					
-					</div>					
-					<button class="add_more_testimonial" type="button" style="margin-top: 0px;float: right;margin-right: 5px;">Add More</button> 
-					<div class="form-group">
-						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Reviews Visibility*<span class="required">*</span></label></div>
-						<div class="col-12 col-md-3">
-						Yes
-						<input type="radio" name="reviews_visibility" value="1"  @if (1== old('reviews_visibility'))
-								checked="checked"	
-							@else
-							{{ (isset($edit_data) && $edit_data->reviews_visibility == 1 ) ? "checked":"" }} @endif>	
-						</div>
-						<div class="col-12 col-md-3">
-						No
-						<input type="radio" name="reviews_visibility" value="0"  @if ('0'== old('reviews_visibility'))
-								checked="checked"	
-							@else
-							{{ (isset($edit_data) && $edit_data->reviews_visibility == '0' ) ? "checked":"" }} @endif>
-						</div>
-					</div> 	
-					
-					
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          
-						  
-                          <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
-			  
+ 
 			   
 			  
 			  
@@ -1669,6 +1528,45 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
 						
 						
 						
+						<div class="form-group">
+						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Top Menu?</label></div>
+						<div class="col-12 col-md-3">
+						Yes
+						<input type="radio" name="show_top_menu" value="1"  @if (1== old('show_top_menu'))
+								selected="selected"	
+							@else
+							{{ (isset($edit_data) && $edit_data->show_top_menu == 1 ) ? "checked":"" }} @endif>	
+						</div>
+						<div class="col-12 col-md-3">
+						No
+						<input type="radio" name="show_top_menu" value="0"  @if ('0'== old('show_top_menu'))
+								selected="selected"	
+							@else
+							{{ (isset($edit_data) && $edit_data->show_top_menu == '0' ) ? "checked":"" }} @endif>
+						</div>
+						</div>   
+
+						<div class="form-group">
+						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Footer?</label></div>
+						<div class="col-12 col-md-2">
+						Yes
+						<input type="radio" name="show_on_footer"  value="1"  @if (1== old('show_on_footer'))
+								selected="selected"	
+							@else
+							{{ (isset($edit_data) && $edit_data->show_on_footer == 1 ) ? "checked":"" }} @endif>	
+						</div>
+						 
+						<div class="col-12 col-md-2">
+						No 
+						<input type="radio" name="show_on_footer" value="0"  @if ('0'== old('show_on_footer'))
+								checked="checked"	
+							@else
+							{{ (isset($edit_data) && $edit_data->show_on_footer == '0' ) ? "checked":"" }} @endif>
+						</div>
+						</div>  
+						 
+						
+						
 						
 					 
                      	<div class="form-group">
@@ -1750,19 +1648,8 @@ $(a).parent("div").remove();
 }
 
 </script>
-<script>	  
-	  var maxtest = 2;
-$(".add_more_testimonial").click(function(){
-    if (maxtest >= 11) return;
 
-    var testimonialinput = $(
-        '<div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Name'+maxtest+' <span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="name[]" placeholder="Enter Name '+maxtest+'"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Comment '+maxtest+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><textarea class="form-control col-md-7 col-xs-12" type="text" name="comment[]" placeholder="Enter Comment" multiple="true"></textarea></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Company '+maxtest+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="company[]" placeholder="Enter company" multiple="true"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Rating '+maxtest+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="rating[]" placeholder="Enter rating" multiple="true"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Linkedin '+maxtest+' <span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="linkedinurl[]" value="" placeholder="Enter linkedin url"></div></div><span class="btn btn-inverse btn-circle m-b-5" onclick="removetestimonial(this)" style="margin-right: 132px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span></div><br />');
-    maxtest++;
-
-    $(".addtestimonial").append(testimonialinput);
-});
-	  
-</script>
+ 
 
 <script>
 function removetestimonial(a){
@@ -2243,223 +2130,7 @@ function showfooter(gst){
 </script>
 
 
-
-
-<!-- 
- <script>
-(function () {
-    function initializeQuillEditors() {
-        if (typeof Quill === 'undefined') {
-            console.error('Quill library did not load.');
-            return;
-        }
-
-        document.querySelectorAll('textarea[data-quill-editor]')
-            .forEach(function (textarea) {
-                if (textarea.dataset.quillReady === 'true') return;
-
-                const editor = textarea.nextElementSibling;
-
-                if (!editor || !editor.classList.contains('quill-editor')) {
-                    console.error('Quill editor container missing:', textarea);
-                    return;
-                }
-
-                const savedHTML = textarea.value || '';
-                let htmlMode = false;
-
-                const quill = new Quill(editor, {
-                    theme: 'snow',
-                    placeholder: textarea.dataset.placeholder || 'Write here...',
-                    modules: {
-                        toolbar: [
-                            [{ header: [2, 3, 4, 5, false] }],
-                            [{ font: [] }],
-                            [{ size: ['small', false, 'large', 'huge'] }],
-                            ['bold', 'italic', 'underline', 'strike'],
-                            [{ color: [] }, { background: [] }],
-                            [{ align: [] }],
-                            [{ list: 'ordered' }, { list: 'bullet' }],
-                            [{ indent: '-1' }, { indent: '+1' }],
-                            ['blockquote', 'code-block'],
-                            ['link'],
-                            ['clean']
-                        ]
-                    }
-                });
-
-                quill.clipboard.dangerouslyPasteHTML(savedHTML, 'silent');
-
-                textarea.dataset.quillReady = 'true';
-                textarea.hidden = true;
-
-                // Allows other scripts to access this editor.
-                textarea.quillInstance = quill;
-
-                const toolbar = quill.getModule('toolbar').container;
-
-                const htmlEditor = document.createElement('textarea');
-                htmlEditor.className =
-                    'form-control w-full rounded-lg border border-gray-300 p-4 font-mono text-sm';
-                htmlEditor.rows = 12;
-                htmlEditor.hidden = true;
-                htmlEditor.spellcheck = false;
-                htmlEditor.setAttribute('aria-label', 'Edit HTML source');
-                htmlEditor.style.minHeight = '220px';
-
-                editor.insertAdjacentElement('afterend', htmlEditor);
-
-                const toggleButton = document.createElement('button');
-                toggleButton.type = 'button';
-                toggleButton.className =
-                    'btn btn-default mb-2 rounded-lg border border-gray-300 px-3 py-2 text-sm';
-                toggleButton.textContent = '</> Edit HTML';
-                toggleButton.setAttribute('aria-pressed', 'false');
-
-                toolbar.parentNode.insertBefore(toggleButton, toolbar);
-
-                function updateTextarea(html) {
-                    if (textarea.value === html) return;
-
-                    textarea.value = html;
-
-                    // Existing common autosave receives this event.
-                    textarea.dispatchEvent(new Event('input', {
-                        bubbles: true
-                    }));
-                }
-
-                function getEditorHTML() {
-                    // Preserve embedded content as well as text.
-                    const isEmpty =
-                        quill.getLength() === 1 &&
-                        quill.getText() === '\n' &&
-                        quill.getContents().ops.every(function (operation) {
-                            return typeof operation.insert === 'string';
-                        });
-
-                    return isEmpty ? '' : quill.root.innerHTML;
-                }
-
-                quill.on('text-change', function (delta, oldDelta, source) {
-                    if (htmlMode || source === 'silent') return;
-
-                    updateTextarea(getEditorHTML());
-                });
-
-                htmlEditor.addEventListener('input', function () {
-                    updateTextarea(htmlEditor.value);
-                });
-
-                toggleButton.addEventListener('click', function () {
-                    if (!htmlMode) {
-                        // Preserve original HTML until explicitly converted
-                        // back to the visual editor.
-                        htmlEditor.value = textarea.value;
-                        htmlMode = true;
-
-                        editor.style.display = 'none';
-                        toolbar.style.display = 'none';
-                        htmlEditor.hidden = false;
-
-                        toggleButton.textContent = 'Visual Editor';
-                        toggleButton.setAttribute('aria-pressed', 'true');
-                        htmlEditor.focus();
-                    } else {
-                        quill.clipboard.dangerouslyPasteHTML(
-                            htmlEditor.value,
-                            'silent'
-                        );
-
-                        htmlMode = false;
-                        htmlEditor.hidden = true;
-                        editor.style.display = '';
-                        toolbar.style.display = '';
-
-                        toggleButton.textContent = '</> Edit HTML';
-                        toggleButton.setAttribute('aria-pressed', 'false');
-
-                        updateTextarea(getEditorHTML());
-                    }
-                });
-            });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener(
-            'DOMContentLoaded',
-            initializeQuillEditors,
-            { once: true }
-        );
-    } else {
-        initializeQuillEditors();
-    }
-
-    // Call after adding textarea/editor pairs dynamically.
-    window.initializeQuillEditors = initializeQuillEditors;
-})();
-</script> -->
-
-<!-- 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Quill === 'undefined') {
-        console.error('Quill library did not load.');
-        return;
-    }
-
-    document.querySelectorAll('textarea[data-quill-editor]').forEach(function (textarea) {
-        const editor = textarea.nextElementSibling;
-
-        if (!editor || !editor.classList.contains('quill-editor')) {
-            console.error('Quill editor container missing after:', textarea);
-            return;
-        }
-
-        const quill = new Quill(editor, {
-            theme: 'snow',
-            placeholder: textarea.dataset.placeholder || 'Write here...',
-            modules: {
-                toolbar: [
-                
-					[{ header: [2, 3, 4, 5, false] }],
-                            [{ font: [] }],
-                            [{ size: ['small', false, 'large', 'huge'] }],
-                            ['bold', 'italic', 'underline', 'strike'],
-                            [{ color: [] }, { background: [] }],
-                            [{ align: [] }],
-                            [{ list: 'ordered' }, { list: 'bullet' }],
-                            [{ indent: '-1' }, { indent: '+1' }],
-                            ['blockquote', 'code-block'],
-                            ['link'],
-							 ['table'], 
-                            ['clean']
-                ]
-            }
-        });
-
-        // Existing saved HTML.
-        if (textarea.value.trim()) {
-            quill.clipboard.dangerouslyPasteHTML(textarea.value, 'silent');
-        }
-
-        // Keep the original textarea in sync for Laravel and autosave.
-        quill.on('text-change', function (delta, oldDelta, source) {
-            if (source !== 'user') return;
-
-            textarea.value = quill.getText().trim()
-                ? quill.root.innerHTML
-                : '';
-
-            textarea.dispatchEvent(new Event('input', {
-                bubbles: true
-            }));
-        });
-    });
-});
-</script>
-  -->
-   
+ 
 
 
 {{-- ======================= PART 2: AUTOSAVE ======================= --}}

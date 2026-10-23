@@ -80,9 +80,47 @@
             </div>
         </div>
 
+{{-- Courses in Top Cities — kept ONCE, for local SEO internal linking. Each city currently points to the same generic /courses URL. --}}
+@php
+$courses = App\Models\Course::where(function ($query) {
+    $query->whereNull('city')
+          ->orWhere('city', '');
+})
+->where('show_on_footer', '1')->limit('10')
+->get();
+
+@endphp
+@if($courses->isNotEmpty())
+<div class="border-t border-primary/10 pt-8 mb-8">
+
+<h4 class="text-sm font-bold mb-4 uppercase tracking-wide text-foreground flex items-center gap-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 text-primary" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+Trending Courses 
+</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+
+
+@if($courses)
+@foreach($courses as $course)
+
+<a href="{{ route('courses.show',$course->slug) }}" class="hover:text-primary transition-colors">{{ $course->title }}</a> I
+@endforeach
+@endif
+
+</div>
+</div>
+@endif
+
+
+
+
+
+
+
+
         {{-- Courses in Top Cities — kept ONCE, for local SEO internal linking. Each city currently points to the same generic /courses URL. --}}
           @php
-            $noidas = App\Models\Course::where('city','noida')->get();
+            $noidas = App\Models\Course::where('city','noida')->where('show_on_footer','1')->get();
              
             @endphp
 @if($noidas->isNotEmpty())
@@ -90,7 +128,7 @@
 
             <h4 class="text-sm font-bold mb-4 uppercase tracking-wide text-foreground flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 text-primary" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Courses in Top Noida hh
+                Courses in Top Noida
             </h4>
             <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
 
@@ -107,7 +145,7 @@
 @endif
 
   @php
-            $delhis = App\Models\Course::where('city','delhi')->get();
+            $delhis = App\Models\Course::where('city','delhi')->where('show_on_footer','1')->get();
             @endphp
             @if($delhis->isNotEmpty())
          <div class="border-t border-primary/10 pt-8 mb-8">
@@ -129,7 +167,7 @@
         </div>
 @endif
   @php
-            $bangalores  = App\Models\Course::where('city','bangalore')->get();
+            $bangalores  = App\Models\Course::where('city','bangalore')->where('show_on_footer','1')->get();
             @endphp
             @if($bangalores->isNotEmpty())
          <div class="border-t border-primary/10 pt-8 mb-8">
@@ -150,6 +188,8 @@
             </div>
         </div>
 @endif
+
+
         <div class="flex flex-col items-center justify-between gap-4 pt-7 text-center md:flex-row md:text-left">
             <p class="text-xs text-muted-foreground">&copy; {{ $year }} {{ t('footer.rightsReserved') }}</p>
             <div class="flex gap-5 text-xs text-muted-foreground">

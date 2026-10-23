@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseAbout;
 use App\Models\Placement;
+use App\Models\Reviews;
 use App\Models\ToolsCovered;
 use App\Models\CourseCurriculumExcel;
 
@@ -133,8 +134,48 @@ class CoursesController extends Controller
         $faq        = is_array($course->faq) ? $course->faq : [];
         $skills     = $course->skills ? json_decode($course->skills) : [];
         $whyLearns     = $course->why_learn ? json_decode($course->why_learn) : [];
-        $related_courses     = $course->related_courses ? json_decode($course->related_courses) : [];
-        $reviews     = $course->reviews ? json_decode($course->reviews) : [];
+         
+        $relatedCourses = $course->related_courses ?? [];
+
+        if (is_string($relatedCourses)) {
+            $relatedCourses = json_decode($relatedCourses, true);
+        }
+
+        $relatedCourses = is_array($relatedCourses)
+            ? array_values(array_filter(
+                $relatedCourses,
+                fn ($slug) => is_string($slug) && trim($slug) !== ''
+            ))
+            : [];
+
+        $related_courses = collect();
+
+        if (!empty($relatedCourses)) {
+            $related_courses = Course::select(
+                'id',
+                'title',
+                'slug',
+                'rating',
+                'total_rating'
+            )
+                ->whereIn('slug', $relatedCourses)
+                ->get();
+        }
+
+
+ 
+        
+        
+        $reviews     = [];
+        
+        if($course->id && !$course->course_clone_id){
+            $reviews = Reviews::where('course',$course->id)->where('status','1')->get();
+        }else if($course->course_clone_id){
+        
+        $reviews = Reviews::where('course',$course->course_clone_id)->where('status','1')->get();
+
+        }
+
         $FAQs     = $course->FAQs ? json_decode($course->FAQs) : [];
     
         $aboutHeading =[];
@@ -144,9 +185,12 @@ class CoursesController extends Controller
         
       $placementStories = collect();
 
-    if (!empty($course?->id)) {
-        $placementStories = Placement::where('course', $course->id)->get();
-    }
+        if (!empty($course->id) && !$course->course_clone_id) {
+            $placementStories = Placement::where('course', $course->id)->where('status','1')->get();
+        }elseif(!empty($course->course_clone_id)){
+
+            $placementStories = Placement::where('course', $course->course_clone_id)->where('status','1')->get();
+        }
 
 
     
@@ -384,7 +428,36 @@ class CoursesController extends Controller
         $faq        = is_array($course->faq) ? $course->faq : [];
         $skills     = $course->skills ? json_decode($course->skills) : [];
         $whyLearns     = $course->why_learn ? json_decode($course->why_learn) : [];
-        $related_courses     = $course->related_courses ? json_decode($course->related_courses) : [];
+       $relatedCourses = $course->related_courses ?? [];
+
+if (is_string($relatedCourses)) {
+    $relatedCourses = json_decode($relatedCourses, true);
+}
+
+$relatedCourses = is_array($relatedCourses)
+    ? array_values(array_filter(
+        $relatedCourses,
+        fn ($slug) => is_string($slug) && trim($slug) !== ''
+    ))
+    : [];
+
+$related_courses = collect();
+
+if (!empty($relatedCourses)) {
+    $related_courses = Course::select(
+        'id',
+        'title',
+        'slug',
+        'rating',
+        'total_rating'
+    )
+        ->whereIn('slug', $relatedCourses)
+        ->get();
+}
+
+
+ 
+
         $reviews     = $course->reviews ? json_decode($course->reviews) : [];
         $FAQs     = $course->FAQs ? json_decode($course->FAQs) : [];
         

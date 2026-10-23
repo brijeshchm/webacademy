@@ -1601,7 +1601,7 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
 						
 						
 						
-						<!--<div class="form-group">
+						<div class="form-group">
 						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Top Menu?</label></div>
 						<div class="col-12 col-md-3">
 						Yes
@@ -1623,38 +1623,24 @@ document.querySelectorAll('.learn-panel').forEach(function (panel) {
 						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Footer?</label></div>
 						<div class="col-12 col-md-2">
 						Yes
-						<input type="radio" name="show_on_footer" onchange="showfooter(this.value)" value="1"  @if (1== old('show_on_footer'))
+						<input type="radio" name="show_on_footer"  value="1"  @if (1== old('show_on_footer'))
 								selected="selected"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_on_footer == 1 ) ? "checked":"" }} @endif>	
 						</div>
-						<div class="show_footer_city">
 						 
-						<div class="col-12 col-md-2">
-						<select name="city" class="form-control col-md-3 col-xs-12">
-						<option value="">Select City</option>
-						@if(!empty($citys))
-							@foreach($citys as $city)
-						<option value="{{$city->city}}" @if($city->city ==old('city'))
-							selected="selected"
-						@else 
-						{{(isset($edit_data) && $edit_data->city==$city->city)?"selected":""}} @endif  >{{$city->city}}</option>
-						@endforeach
-						@endif
-						</select>						 	
-						</div>
-						 
-						
-						</div>
 						<div class="col-12 col-md-2">
 						No 
-						<input type="radio" name="show_on_footer" onchange="nofooter(this.value)" value="0"  @if ('0'== old('show_on_footer'))
+						<input type="radio" name="show_on_footer" value="0"  @if ('0'== old('show_on_footer'))
 								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_on_footer == '0' ) ? "checked":"" }} @endif>
 						</div>
 						</div>  
-						 -->
+						 
+
+
+
                      	<div class="form-group">
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Related Courses</label>
 					<div class="col-md-8 col-sm-8 col-xs-12">Please Select 4 Or  8

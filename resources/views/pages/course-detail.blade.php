@@ -2013,9 +2013,9 @@ margin-bottom: .5rem !important;
                 </section>
 
 
-  
+ 
 
-               @if($related_courses)
+               @if(!empty($related_courses->isNotEmpty()))
           <section id="related-course" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
   <div class="flex items-center gap-3 mb-6">
                         <div class="h-8 w-1 rounded-full bg-gradient-to-b from-pink-500 to-violet-500"></div>
@@ -2025,46 +2025,26 @@ margin-bottom: .5rem !important;
 @if($related_courses)
                  
     @foreach($related_courses as $relatedcourse)
-        <a href="{{ route('courses.show', $relatedcourse) }}"
+        <a href="{{ route('courses.show', $relatedcourse->slug) }}"
            class="flex items-start gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:shadow-md hover:border-gray-200 transition-all duration-300">
 
 
             {{-- Text --}}
             <div class="flex-1 min-w-0">
                 <h3 class="text-sm font-semibold text-gray-900 leading-snug line-clamp-2">
-                    {{ ucwords(str_replace('-', ' ', $relatedcourse)) }}
+                    {{ ucwords(str_replace('-', ' ', $relatedcourse->title)) }}
                 </h3>
 
                 <div class="flex items-center gap-1 mt-1.5">
                     <div class="flex gap-0.5">
-                        @php $rating = round(5 * 2) / 2; @endphp
-                        @for($i = 1; $i <= 5; $i++)
-                            @if($i <= floor($rating))
-                                {{-- full star --}}
-                                <svg class="w-3.5 h-3.5 fill-amber-400 text-amber-400" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            @elseif($i - 0.5 == $rating)
-                                {{-- half star --}}
-                                <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24">
-                                    <defs>
-                                        <linearGradient id="half-{{ $i }}">
-                                            <stop offset="50%" stop-color="currentColor"/>
-                                            <stop offset="50%" stop-color="transparent"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <polygon fill="url(#half-{{ $i }})" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            @else
-                                {{-- empty star --}}
-                                <svg class="w-3.5 h-3.5 fill-none text-gray-300" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            @endif
-                        @endfor
+                         @for($i = 0; $i < 5; $i++)
+                                    <svg class="h-4 w-4 {{ $i < round($relatedcourse->rating) ? 'fill-amber-400 text-amber-400' : 'fill-white/20 text-white/20' }}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                @endfor
+
+                                <span class="font-bold">{{ number_format($relatedcourse->rating, 1) }}</span>
                     </div>
                     <span class="text-xs text-gray-500 font-medium ms-0.5">
-                        {{ number_format(5, 1) }} ({{ number_format(454) }})
+                         ({{ $relatedcourse->total_rating }})
                     </span>
                 </div>
             </div>
@@ -2114,50 +2094,39 @@ margin-bottom: .5rem !important;
                         </div>
                     </div>
 
-<div class="space-y-4">
- @if($reviews)
-    @php
-        $names     = $reviews->name    ? (json_decode($reviews->name) ?: [])    : [];
-        $companies = $reviews->company ? (json_decode($reviews->company) ?: []) : [];
-        $comments  = $reviews->comment ? (json_decode($reviews->comment) ?: []) : [];
-        $ratings   = $reviews->rating  ? (json_decode($reviews->rating) ?: [])  : [];
-    @endphp
+                    <div class="space-y-4">
+                    @if($reviews)
+                    
+                        
+                        @foreach($reviews as $revName)
+                            <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all duration-300">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                                        {{ mb_substr($revName->name, 0, 1) }}
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between gap-2 mb-1">
+                                            <span class="font-semibold text-gray-900 text-sm">{{ $revName->name }}</span>
+                            
+                                        </div>
 
-    @foreach($names as $index => $revName)
-        @php
-            $revComment = $comments[$index] ?? '';
-        @endphp
+                                        @if(!empty($revName->company))
+                                            <span class="text-xs text-gray-500 block mb-1">{{ $revName->company }}</span>
+                                        @endif
 
-        {{-- Skip this review entirely if name or comment is empty --}}
-        @continue(empty(trim((string) $revName)) || empty(trim((string) $revComment)))
+                                        <div class="flex gap-0.5 mb-2">
+                                            @for($i = 0; $i < ($revName->rating ?? 0); $i++)
+                                                <svg class="h-3.5 w-3.5 fill-amber-400 text-amber-400" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                            @endfor
+                                        </div>
 
-        <div class="p-5 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all duration-300">
-            <div class="flex items-start gap-4">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
-                    {{ mb_substr($revName, 0, 1) }}
-                </div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between gap-2 mb-1">
-                        <span class="font-semibold text-gray-900 text-sm">{{ $revName }}</span>
-                    </div>
-
-                    @if(!empty($companies[$index]))
-                        <span class="text-xs text-gray-500 block mb-1">{{ $companies[$index] }}</span>
+                                        <p class="text-sm text-gray-600 leading-relaxed">{{ $revName->comment ?? '' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     @endif
-
-                    <div class="flex gap-0.5 mb-2">
-                        @for($i = 0; $i < ($ratings[$index] ?? 0); $i++)
-                            <svg class="h-3.5 w-3.5 fill-amber-400 text-amber-400" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        @endfor
                     </div>
-
-                    <p class="text-sm text-gray-600 leading-relaxed">{{ $revComment }}</p>
-                </div>
-            </div>
-        </div>
-    @endforeach
-@endif
-</div>
 
                          </section>
 
@@ -2206,7 +2175,7 @@ margin-bottom: .5rem !important;
                     <section id="faq" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="h-8 w-1 rounded-full bg-gradient-to-b from-orange-500 to-pink-500"></div>
-                            <h2 class="text-2xl font-display font-bold text-gray-900">{{ t('courseDetail.faq') }}</h2>
+                            <h2 class="text-2xl font-display font-bold text-gray-900">FAQ's of {{ $course->title }}</h2>
                         </div>
                         <div class="space-y-3">
 
@@ -2225,7 +2194,7 @@ margin-bottom: .5rem !important;
                                             <div class="mt-0.5 bg-orange-50 text-orange-600 rounded-lg p-1.5 shrink-0 border border-orange-100">
                                                 <svg class="h-3.5 w-3.5" {!! $iconStroke !!}><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                                             </div>
-                                            <span class="font-semibold text-gray-900 text-sm leading-snug flex-1">{{ $faqq[$index] ??'' }}</span>
+                                            <h3 class="font-semibold text-gray-900 text-sm leading-snug flex-1">{{ $faqq[$index] ??'' }}</h3>
                                             <svg class="h-4 w-4 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" {!! $iconStroke !!}><polyline points="6 9 12 15 18 9"></polyline></svg>
                                         </div>
                                     </summary>

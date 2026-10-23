@@ -51,7 +51,7 @@ class PlacementController extends Controller
      */
     public function create(Request $request)
     {		
-		$course_list= Course::select('id','title','course_name')->where('course_type','1')->get();	
+		$course_list= Course::select('id','title','course_name')->where('course_type','1')->where('status','1')->get();	
 		
         return view('admin.placement.add_placement',['course_list'=>$course_list]);
     } 
@@ -170,7 +170,7 @@ class PlacementController extends Controller
     public function edit(Request $request,$id)
     {	  
 		$edit_data= Placement::findOrFail(base64_decode($id)); 
-		$course_list= Course::select('id','title','course_name')->where('course_type','1')->get();
+		$course_list= Course::select('id','title','course_name')->where('course_type','1')->where('status','1')->get();
         return view('admin.placement.edit_placement',['edit_data'=>$edit_data,'course_list'=>$course_list]);
     } 
 	
@@ -219,33 +219,9 @@ class PlacementController extends Controller
 				$placement->designation = $request->input('designation');	
 				$placement->related_courses = json_encode($request->input('related_courses'));				 			 
 			 	$image = "";				
-				// if ($request->hasFile('placement_image')) {
-			
-				// $alt= $request->input('alt');
-			
 				 
-				// $file =  $request->file('placement_image');
-				// $filename = str_replace(' ', '_', $file->getClientOriginalName());			 
-				// $destinationPath = public_path($filePath);
-				// $nameArr = explode('.',$filename);
-				// $ext = array_pop($nameArr);
-				// $name = implode('_',$nameArr);
-				// if(file_exists($destinationPath.'/'.$filename)){
-				// 	$filename = $name."_".time().'.'.$ext;
-				// }
-				// //  dd($filePath);	
-				// $file->move($destinationPath,$filename);				 
-				// $image['placement_image'] = array(
-				// 	'name'=>$filename,
-				// 	'alt'=>$alt,						
-				// 	'src'=>$filePath."/".$filename
-				// 	);	
-				// 	dd($image);
-				// $placement->placement_image = json_encode($image);		
-				// } 				
-
 				 
- 				$oldLogoImages = [];
+ 				 
 				if ($request->hasFile('placement_image')) {
 						$filePath = $this->getPlacementFolderStructure();
 					if (!empty($placement->placement_image)) {

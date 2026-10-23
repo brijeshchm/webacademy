@@ -77,7 +77,7 @@ Edit Placement
 							<option value="<?php echo $course->id; ?>" @if ($course->id== old('course'))
 								selected="selected"	
 							@else
-							{{ (isset($edit_data) && $edit_data->course == $course->id ) ? "selected":"" }} @endif><?php  echo $course->course_name; ?></option>
+							{{ (isset($edit_data) && $edit_data->course == $course->id ) ? "selected":"" }} @endif><?php  echo $course->title; ?></option>
 							<?php } } ?>
 							</select>
                         </div>

@@ -1000,148 +1000,7 @@ SEO Edit Course
                 </div>
               </div>
 			  
-
-			  <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h3>Reviews<small></small></h3>
-                    <div class="successFAQs"></div><div class="errorFAQs"></div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    
-                    <form class="form-horizontal form-label-left" method="post"  
-					action="{{ route('admin.editSaveSeoTestimonial',(isset($edit_data->id)? $edit_data->id:'')) }}" data-ajax-autosave data-section-name="CourseTitle">
-					 <?php if(!empty($edit_data->reviews)){
-					 $reviews = json_decode($reviews->reviews ?? '[]', true) ?? [];              
-					 $name  = json_decode($reviews->name ?? '[]', true) ?? []; 
-					 
-					 $comment  = json_decode($reviews->comment ?? '[]', true) ?? [];
-					 $company  = json_decode($reviews->company ?? '[]', true) ?? [];
-					 $rating  = json_decode($reviews->rating ?? '[]', true) ?? []; 
-				 
- 					 if(!empty($testimonials->linkedinurl)){
-					$linkedinurl  = json_decode($testimonials->linkedinurl);
-					}else{
-						$linkedinurl="";
-					}
-					 for($i=0; $i<count($name); $i++){						 
-					 ?>
-					 <div>
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Name <?php echo $i+1; ?> <span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="name[]" value="<?php echo (isset($name[$i])? $name[$i]:""); ?>" placeholder="Enter Name"> 			 
-					</div>
-					</div>
-				 
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Comment <?php echo $i+1; ?><span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<textarea class="form-control col-md-7 col-xs-12" type="text" name="comment[]" placeholder="Enter Comment" ><?php echo (isset($comment[$i])? $comment[$i]:""); ?></textarea>
-					</div>
-					</div>	
-					
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">company <?php echo $i+1; ?><span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="company[]" placeholder="Enter company" value="<?php echo (isset($company[$i])? $company[$i]:""); ?>">
-					</div>
-					</div>	
-
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">rating <?php echo $i+1; ?><span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="tel" name="rating[]" placeholder="Enter rating" value="<?php echo (isset($rating[$i])? $rating[$i]:""); ?>">
-					</div>
-					</div>	
-
-
-
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Linkedin <?php echo $i+1; ?> <span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="linkedinurl[]" value="<?php echo (isset($linkedinurl[$i])? $linkedinurl[$i]:""); ?>" placeholder="Enter linkedin url"> 							 
-					</div>
-					</div>
-					
-					<span class="btn btn-inverse btn-circle m-b-5" onclick="removefaq(this)" style="margin-right: 132px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span>
-					</div>	
-										
-					 <?php   }  }else{ ?> 
-					 <div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Name<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="name[]" value="" placeholder="Enter Name"> 
-					@if ($errors->has('name[]'))
-								<small class="error alert-danger">{{ $errors->first('name[]') }}</small>
-								@endif
-					</div>
-					</div>
-				 
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Comment<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<textarea class="form-control col-md-7 col-xs-12" type="text" name="comment[]" placeholder="Enter Comment"></textarea>
-					</div>
-					</div>	
-
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Company Name<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="company[]" placeholder="Enter company">
-					</div>
-					</div>	
-					
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Rating<span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="rating[]" placeholder="Enter rating">
-					</div>
-					</div>	
- 					
-					<div class="form-group">
-					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Linkedin <span class="required">*</span></label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-					<input class="form-control col-md-7 col-xs-12" type="text" name="linkedinurl[]" placeholder="Enter linkedin url"> 							 
-					</div>
-					</div>
-					 <?php  } ?>
-					<div class="addtestimonial">					
-					</div>					
-					<button class="add_more_testimonial" type="button" style="margin-top: 0px;float: right;margin-right: 5px;">Add More</button> 
-					<div class="form-group">
-						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Reviews Visibility*<span class="required">*</span></label></div>
-						<div class="col-12 col-md-3">
-						Yes
-						<input type="radio" name="reviews_visibility" value="1"  @if (1== old('reviews_visibility'))
-								selected="selected"	
-							@else
-							{{ (isset($edit_data) && $edit_data->reviews_visibility == 1 ) ? "checked":"" }} @endif>	
-						</div>
-						<div class="col-12 col-md-3">
-						No
-						<input type="radio" name="reviews_visibility" value="0"  @if ('0'== old('reviews_visibility'))
-								selected="selected"	
-							@else
-							{{ (isset($edit_data) && $edit_data->reviews_visibility == '0' ) ? "checked":"" }} @endif>
-						</div>
-					</div> 	
-					
-					
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          
-						  
-                          <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
-			  
+ 
 			   
 			  
 			  
@@ -1285,7 +1144,7 @@ SEO Edit Course
 						
 						
 						
-						<!--<div class="form-group">
+						<div class="form-group">
 						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Top Menu?</label></div>
 						<div class="col-12 col-md-3">
 						Yes
@@ -1307,39 +1166,24 @@ SEO Edit Course
 						<div class="control-label col col-md-2"><label for="text-input" class=" form-control-label">Show on Footer?</label></div>
 						<div class="col-12 col-md-2">
 						Yes
-						<input type="radio" name="show_on_footer" onchange="showfooter(this.value)" value="1"  @if (1== old('show_on_footer'))
+						<input type="radio" name="show_on_footer" value="1"  @if (1== old('show_on_footer'))
 								selected="selected"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_on_footer == 1 ) ? "checked":"" }} @endif>	
 						</div>
-						<div class="show_footer_city">
-						 
-						<div class="col-12 col-md-2">
-						<select name="city" class="form-control col-md-3 col-xs-12">
-						<option value="">Select City</option>
-						@if(!empty($citys))
-							@foreach($citys as $city)
-						<option value="{{$city->city}}" @if($city->city ==old('city'))
-							selected="selected"
-						@else 
-						{{(isset($edit_data) && $edit_data->city==$city->city)?"selected":""}} @endif  >{{$city->city}}</option>
-						@endforeach
-						@endif
-						</select>						 	
-						</div>
-						 
-						
-						</div>
+						 						
+					 
+
 						<div class="col-12 col-md-2">
 						No 
-						<input type="radio" name="show_on_footer" onchange="nofooter(this.value)" value="0"  @if ('0'== old('show_on_footer'))
+						<input type="radio" name="show_on_footer" value="0"  @if ('0'== old('show_on_footer'))
 								checked="checked"	
 							@else
 							{{ (isset($edit_data) && $edit_data->show_on_footer == '0' ) ? "checked":"" }} @endif>
 						</div>
 						</div>  
-						 -->
-                     	<div class="form-group">
+						
+                    <div class="form-group">
 					<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Related Courses</label>
 					<div class="col-md-8 col-sm-8 col-xs-12">Please Select 4 Or  8
 					<select class="form-control col-md-7 col-xs-12 select_related_courses" name="related_courses[]" multiple>
@@ -1419,26 +1263,7 @@ $(a).parent("div").remove();
 }
 
 </script>
-<script>	  
-	  var maxtest = 2;
-$(".add_more_testimonial").click(function(){
-    if (maxtest >= 11) return;
 
-    var testimonialinput = $(
-        '<div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Name'+maxtest+' <span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="name[]" placeholder="Enter Name '+maxtest+'"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Comment '+maxtest+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><textarea class="form-control col-md-7 col-xs-12" type="text" name="comment[]" placeholder="Enter Comment" multiple="true"></textarea></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Company '+maxtest+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="company[]" placeholder="Enter company" multiple="true"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Rating '+maxtest+'<span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="rating[]" placeholder="Enter rating" multiple="true"></div></div><div class="form-group"><label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Linkedin '+maxtest+' <span class="required">*</span></label><div class="col-md-8 col-sm-8 col-xs-12"><input class="form-control col-md-7 col-xs-12" type="text" name="linkedinurl[]" value="" placeholder="Enter linkedin url"></div></div><span class="btn btn-inverse btn-circle m-b-5" onclick="removetestimonial(this)" style="margin-right: 132px;color: red;float: right;margin-top: -25px;"><i class="glyphicon glyphicon-trash"></i></span></div><br />');
-    maxtest++;
-
-    $(".addtestimonial").append(testimonialinput);
-});
-	  
-</script>
-
-<script>
-function removetestimonial(a){
-$(a).parent("div").remove();
-}
-
-</script>
 
 <script>	
 	window.onload = function()

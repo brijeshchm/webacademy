@@ -220,7 +220,7 @@ Route::post('seopage/editSaveCourseCurriculum/{id}',[App\Http\Controllers\Admin\
 Route::post('seopage/editSaveCourseRelated/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseRelated'])->name('editSaveCourseSeoRelated');
 Route::post('seopage/editSaveCourseCertificate/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveCourseCertificate'] );
 Route::post('seopage/editSaveFAQ/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveFAQ'])->name('editSaveSeoFAQ');
-Route::post('seopage/editSaveTestimonial/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveTestimonial'])->name('editSaveSeoTestimonial');
+Route::post('seopage/editSaveTestimonial/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'editSaveSeoTestimonial'])->name('editSaveSeoTestimonial');
 Route::get('/seopage/get-seopage',[App\Http\Controllers\Admin\SeoPageController::class, 'getCoursePagination'])->middleware('auth');
 Route::get('/seopage/del_icon/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'del_icon']);
 Route::get('/seopage/del_image/{id}',[App\Http\Controllers\Admin\SeoPageController::class, 'del_image']);

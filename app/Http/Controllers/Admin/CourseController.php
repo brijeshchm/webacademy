@@ -1135,9 +1135,9 @@ public function editSaveCourseRelated(Request $request, $id)
         'footer_top_course'      => $request->input('footer_top_course'),
         'show_front_second'      => $request->input('show_front_second'),
         'show_trending_courses'  => $request->input('show_trending_courses'),
-        // 'show_top_menu'      => $request->input('show_top_menu'),
-        // 'show_on_footer'     => $request->input('show_on_footer'),
-        // 'footer_city'        => $request->input('footer_city'),
+        'show_top_menu'      => $request->input('show_top_menu'),
+        'show_on_footer'     => $request->input('show_on_footer'),
+       
         'updated_by'              => auth()->id(),
     ];
 

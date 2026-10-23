@@ -51,14 +51,9 @@ class ReviewsController extends Controller
     {		
 		 
 		
-		$course_list = Course::select('id', 'title', 'course_name')
-    ->whereIn('id', function ($query) {
-        $query->selectRaw('MIN(id)')
-            ->from((new Course)->getTable())
-            ->groupBy('course_name');
-    })
-    ->orderBy('course_name', 'asc')
-    ->get();
+		$course_list = Course::select('id', 'title', 'course_name')->where('course_type','1')	 
+		->orderBy('title', 'asc')
+		->get();
 
         return view('admin.reviews.add_reviews',['course_list'=>$course_list]);
     } 
@@ -93,8 +88,27 @@ class ReviewsController extends Controller
 			}	  
 			$alt= $request->input('alt');		
 				 
-$image = [];
-			if ($request->hasFile('review_image')) {
+			$image = "";
+			
+				$reviews = New Reviews;
+				$reviews->name = ucwords(trim($request->input('name')));		
+				$reviews->email = $request->input('email');	
+				$reviews->gender = $request->input('gender');	
+				$coursename= Course::where('id',$request->input('course'))->first()->course_name;	 
+				$reviews->course =$request->input('course');					 
+				$reviews->coursename =$coursename;					 
+				$reviews->rating = trim($request->input('rating'));		 
+					 
+				$reviews->comment = $request->input('comment');					 
+				$reviews->company_name = $request->input('company_name');					 
+				$reviews->designation = $request->input('designation');	
+				$reviews->related_courses = json_encode($request->input('related_courses'));									
+												
+				$reviews->created_by = '1';				 
+				$reviews->updated_by = '1';				 
+				$reviews->status = '1';		
+
+				if ($request->hasFile('review_image')) {
 				
 				$filePath = $this->getReviewsFolderStructure();
 			//	$file = Input::file('course_image');
@@ -115,26 +129,11 @@ $image = [];
 							'src'    => $filePath . '/' . $filename,
 						],
 					];
+					$reviews->review_image = json_encode($image);	
 				} 
 				
-				$reviews = New Reviews;
-				$reviews->name = ucwords(trim($request->input('name')));		
-				$reviews->email = $request->input('email');	
-				$reviews->gender = $request->input('gender');	
-				$coursename= Course::where('id',$request->input('course'))->first()->course_name;	 
-				$reviews->course =$request->input('course');					 
-				$reviews->coursename =$coursename;					 
-				$reviews->rating = trim($request->input('rating'));		 
-					 
-				$reviews->comment = $request->input('comment');					 
-				$reviews->company_name = $request->input('company_name');					 
-				$reviews->designation = $request->input('designation');	
-				$reviews->related_courses = json_encode($request->input('related_courses'));									
-				$reviews->review_image = json_encode($image);									
-				$reviews->created_by = '1';				 
-				$reviews->updated_by = '1';				 
-				$reviews->status = '1';		
-				
+
+
 				$course= Course::findOrFail($request->input('course'));
 				$course->total_rating = $course->total_rating+1;
 				$course->save();	
@@ -166,14 +165,9 @@ $image = [];
     public function edit(Request $request,$id)
     {	  
 		$edit_data= Reviews::findOrFail(base64_decode($id)); 
-			$course_list = Course::select('id', 'title', 'course_name')
-    ->whereIn('id', function ($query) {
-        $query->selectRaw('MIN(id)')
-            ->from((new Course)->getTable())
-            ->groupBy('course_name');
-    })
-    ->orderBy('course_name', 'asc')
-    ->get();
+		$course_list = Course::select('id', 'title', 'course_name')->where('course_type','1')		 
+		->orderBy('title', 'asc')
+		->get();
         return view('admin.reviews.edit_reviews',['edit_data'=>$edit_data,'course_list'=>$course_list]);
     } 
 	
