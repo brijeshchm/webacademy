@@ -32,7 +32,7 @@ use DateTime;
  */
 class HomeController extends Controller
 {
-    public function __invoke(): View
+    public function index()
     {
         $allCourses = Course::select('title','show_front_page','featured','live_project','level','mode','enrolled','duration_hours','professional_trained','course_name','category_name','category_slug','batches_every_month','course_clone_id','slug','description','rating','total_rating')->where('course_type','1')->orderBy('id')->get();
        $categories = Course::select('category_name', 'category_slug')
@@ -98,7 +98,7 @@ class HomeController extends Controller
         // English JSON-LD (SEO) uses the untranslated FAQ source.
         $faqsEn = Faqs::HOME;
           $blogPageList       = $this->getBlogList();
-    // dd($bannerCourses);
+    
         return view('pages.home', [
             'allCourses'      => $allCourses,
             'blogPageList'      => $blogPageList,

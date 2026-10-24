@@ -2256,13 +2256,13 @@ margin-bottom: .5rem !important;
                         <div class="space-y-3">
 
 
-  @php
-        $faqq    = json_decode($faqs->faqq) ?: [];
-        $faqa = json_decode($faqs->faqa) ?: [];
-      
-    @endphp
+                            @php
+                                    $faqq    = json_decode($faqs->faqq) ?: [];
+                                    $faqa = json_decode($faqs->faqa) ?: [];
+                                
+                                @endphp
 
-    @foreach($faqq as $index => $faqItem)
+                                @foreach($faqq as $index => $faqItem)
 
                                 <details class="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow open:border-orange-200 open:bg-white">
                                     <summary class="px-5 py-4 cursor-pointer list-none text-left [&::-webkit-details-marker]:hidden">

@@ -25,7 +25,8 @@ Route::get('/cache-clear/', function () {
 });
 
 
-Route::get('/', HomeController::class)->name('home');
+// Route::get('/', HomeController::class)->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/privacy-policy', [PageController::class,'privacyPolicy'])->name('privacy.policy');
 Route::get('/terms-conditions', [PageController::class,'termsConditions'])->name('terms.conditions');
 Route::get('/refund-cancellation-policy',[PageController::class,'refundCancellationPolicy'])->name('refund.cancellation.policy');
@@ -83,7 +84,7 @@ Route::get('login',function(){
 		return view('admin.user.login');		
 	}
 }); 
-//Route::get('/login', [AdminController::class, 'loginForm'])->name('login');
+
 Route::get('check',[App\Http\Controllers\Auth\AuthController::class, 'check']);
 Route::post('otp', [App\Http\Controllers\Auth\AuthController::class, 'authenticate']);
 Route::get('/otp',[App\Http\Controllers\Auth\AuthController::class, 'getOTP']);
@@ -199,7 +200,7 @@ Route::get('/course/get_course_releted_edit',[App\Http\Controllers\Admin\CourseC
 
 Route::get('seopage',[App\Http\Controllers\Admin\SeoPageController::class, 'index'])->middleware('auth');
 
-//Route::get('seopage', 'Admin\SeoPageController@index')->middleware('auth');
+ 
 
 Route::get('/seopage/add',[App\Http\Controllers\Admin\SeoPageController::class, 'add'])->middleware('auth');
 
@@ -329,16 +330,16 @@ Route::get('/city/delete/{id}',[App\Http\Controllers\Admin\CityController::class
 Route::get('/city/get-city',[App\Http\Controllers\Admin\CityController::class, 'getCityPagination']);
 Route::get('/city/status/{id}/{val}',[App\Http\Controllers\Admin\CityController::class, 'status']);
 //
-//Payment Mode
-Route::get('payment-mode',[App\Http\Controllers\Admin\PaymentModeController::class, 'index'])->middleware('auth');
-Route::get('payment-mode/add',[App\Http\Controllers\Admin\PaymentModeController::class, 'create']);
-Route::post('payment-mode/save',[App\Http\Controllers\Admin\PaymentModeController::class, 'savePayMode']); 
-Route::get('/payment-mode/edit/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'edit']);
-Route::post('/payment-mode/editSavepayMode/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'editSavePayMode']);
-Route::get('/payment-mode/delete/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'delete']);
-Route::get('/payment-mode/get-payment-mode',[App\Http\Controllers\Admin\PaymentModeController::class, 'getPayModePagination']);
-Route::get('/payment-mode/status/{id}/{val}',[App\Http\Controllers\Admin\PaymentModeController::class, 'status']);
-Route::get('/payment-mode/del_icon/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'del_icon']);
+// //Payment Mode
+// Route::get('payment-mode',[App\Http\Controllers\Admin\PaymentModeController::class, 'index'])->middleware('auth');
+// Route::get('payment-mode/add',[App\Http\Controllers\Admin\PaymentModeController::class, 'create']);
+// Route::post('payment-mode/save',[App\Http\Controllers\Admin\PaymentModeController::class, 'savePayMode']); 
+// Route::get('/payment-mode/edit/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'edit']);
+// Route::post('/payment-mode/editSavepayMode/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'editSavePayMode']);
+// Route::get('/payment-mode/delete/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'delete']);
+// Route::get('/payment-mode/get-payment-mode',[App\Http\Controllers\Admin\PaymentModeController::class, 'getPayModePagination']);
+// Route::get('/payment-mode/status/{id}/{val}',[App\Http\Controllers\Admin\PaymentModeController::class, 'status']);
+// Route::get('/payment-mode/del_icon/{id}',[App\Http\Controllers\Admin\PaymentModeController::class, 'del_icon']);
  
  
 // Tools Covered
@@ -486,13 +487,6 @@ Route::get('/mobilebanner/status/{id}/{val}',[App\Http\Controllers\Admin\Homesli
 Route::get('/mobilebanner/del_icon/{id}',[App\Http\Controllers\Admin\HomesliderController::class, 'del_icon_banner']);
 
  
-    // Auth (public)
-    // Route::get('/login', [AdminController::class, 'loginForm'])->name('login');
-    // Route::middleware('throttle:admin-auth')->post('/login', [AdminController::class, 'login'])->name('login.submit');
-    //Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
-    //Route::middleware('throttle:admin-forgot')->post('/forgot-password', [AdminController::class, 'forgotPassword'])->name('forgot');
-    // Route::middleware('throttle:admin-auth')->post('/reset-password', [AdminController::class, 'resetPassword'])->name('reset');
-
     // Authenticated area
     Route::middleware('admin.web')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
@@ -518,14 +512,4 @@ Route::get('/mobilebanner/del_icon/{id}',[App\Http\Controllers\Admin\HomesliderC
         Route::post('/reviews/{id}/visibility', [AdminController::class, 'toggleReview'])->name('reviews.toggle');
         Route::delete('/reviews/{id}', [AdminController::class, 'destroyReview'])->name('reviews.destroy');
     });
-});
-
-// Wildcard 404 — must be last. Anything under /api falls through to the
-// API exception handler (JSON), preserving existing API behaviour.
-Route::fallback(function (\Illuminate\Http\Request $request) {
-    if ($request->is('api/*')) {
-        abort(410);
-    }
-
-    return response()->view('errors.410', [], 410);
 });

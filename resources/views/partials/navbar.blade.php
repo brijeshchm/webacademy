@@ -63,7 +63,7 @@
                                 @if($coursesMenuList)
                                 @foreach($coursesMenuList as $coursesMenu)
 
-                                    <a href="{{ route('courses.show',$coursesMenu->slug)}}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group">
+                                    <a href="{{ route('courses.show', ['slug' => $coursesMenu->slug]) }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group">
                                         <div class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                                             <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                                         </div>
