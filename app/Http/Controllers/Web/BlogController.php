@@ -185,6 +185,14 @@ function get_time($time)
         ->orderByDesc('blog.id')
         ->first();
 
+        if($blogDetails->slug){
+        $blog = Blog::where('slug', $blogDetails->slug)->firstOrFail();
+
+        if (!session()->has('blog_view_' . $blog->id)) {
+        $blog->increment('views');
+        session()->put('blog_view_' . $blog->id, true);
+        }
+        }
 
 
     abort_if(!$blogDetails, 404);
