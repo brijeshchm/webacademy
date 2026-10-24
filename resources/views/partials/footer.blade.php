@@ -117,7 +117,7 @@ Trending Courses
 @if($courses)
 @foreach($courses as $course)
 
-<a href="{{ route('courses.show',$course->slug) }}" class="hover:text-primary transition-colors">{{ $course->title }}</a> I
+<a href="{{ route('courses.show',$course->slug) }}" class="hover:text-primary transition-colors">{{ $course->course_name }}</a> I
 @endforeach
 @endif
 
