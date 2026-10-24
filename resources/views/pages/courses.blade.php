@@ -72,7 +72,7 @@
         <div class="flex flex-col md:flex-row gap-8">
             {{-- Filters Sidebar --}}
             <div class="w-full md:w-64 shrink-0 space-y-6">
-                <form method="GET" action="/courses" class="space-y-4 bg-white/40 backdrop-blur-md border border-white/60 p-6 rounded-2xl shadow-sm">
+                <form method="GET" action="{{ route('courses') }}" class="space-y-4 bg-white/40 backdrop-blur-md border border-white/60 p-6 rounded-2xl shadow-sm">
                     @if($category !== '')
                         <input type="hidden" name="category" value="{{ $category }}">
                     @endif
@@ -87,32 +87,13 @@
                         >
                     </div>
                     <div>
-                        <button
-                            type="button"
-                            data-accordion-trigger="course-filters"
-                            aria-expanded="false"
-                            class="font-medium mb-3 flex items-center gap-2 w-full min-h-[44px] md:min-h-0 md:cursor-default"
-                        >
-                            <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="4" x2="14" y2="4"></line><line x1="10" y1="4" x2="3" y2="4"></line><line x1="21" y1="12" x2="12" y2="12"></line><line x1="8" y1="12" x2="3" y2="12"></line><line x1="21" y1="20" x2="16" y2="20"></line><line x1="12" y1="20" x2="3" y2="20"></line><line x1="14" y1="2" x2="14" y2="6"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="16" y1="18" x2="16" y2="22"></line></svg>
-                            {{ t('courses.categories') }}
-                            <svg class="h-4 w-4 text-muted-foreground ml-auto md:hidden transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+
+                      <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl h-10 px-5 shrink-0 shadow-md shadow-primary/20 bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0">
+                            <svg class="h-4 w-4 sm:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            <span class="hidden sm:inline">{{ t('home.search') }}</span>
                         </button>
-                        <div data-accordion-panel="course-filters" class="space-y-2 hidden md:block">
-                            <a
-                                href="/courses{{ $search !== '' ? '?search=' . urlencode($search) : '' }}"
-                                class="block w-full text-left rtl:text-right px-3 py-2 rounded-xl text-sm transition-all hover:translate-x-0.5 rtl:hover:-translate-x-0.5 {{ $category === '' ? 'bg-primary text-white shadow-md shadow-primary/20' : 'hover:bg-white/60 text-muted-foreground hover:text-foreground' }}"
-                            >
-                                {{ t('courses.allCategories') }}
-                            </a>
-                            @foreach($categories as $cat)
-                                <a
-                                    href="/courses?category={{ urlencode($cat->slug) }}{{ $search !== '' ? '&search=' . urlencode($search) : '' }}"
-                                    class="block w-full text-left rtl:text-right px-3 py-2 rounded-xl text-sm transition-all hover:translate-x-0.5 rtl:hover:-translate-x-0.5 {{ $category === $cat->slug ? 'bg-primary text-white shadow-md shadow-primary/20' : 'hover:bg-white/60 text-muted-foreground hover:text-foreground' }}"
-                                >
-                                    {{ $tCat($cat->name) }}
-                                </a>
-                            @endforeach
-                        </div>
+                        
+                        
                     </div>
                 </form>
             </div>
@@ -123,7 +104,7 @@
                     <div class="text-center py-20 bg-white/40 backdrop-blur-md rounded-2xl border border-dashed border-primary/20">
                         <p class="text-lg text-muted-foreground">{{ t('courses.noCoursesFound') }}</p>
                         <a
-                            href="/courses"
+                            href="{{ route('courses') }}"
                             class="mt-4 inline-block text-primary font-medium hover:underline bg-white/50 px-4 py-2 rounded-xl border border-white/80 transition-all hover:bg-white/80"
                         >
                             {{ t('courses.clearFilters') }}

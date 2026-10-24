@@ -3,7 +3,7 @@
 use App\Http\Controllers\Web\AdminController;
 use App\Http\Controllers\Web\CategoriesController;
 use App\Http\Controllers\Web\CoursesController;
-use App\Http\Controllers\Web\DoctorateController;
+ 
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\LeadController;
 use App\Http\Controllers\Web\PageController;
@@ -53,7 +53,7 @@ Route::get('/corporate-training', [StaticPageController::class, 'corporateTraini
  
 Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
  
-Route::get('/universities/{slug}', [DoctorateController::class, 'university'])->name('universities.show');
+ 
 Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
 Route::get('/courses/{slug}', [CoursesController::class, 'coursesDetails'])->name('courses.show');
 

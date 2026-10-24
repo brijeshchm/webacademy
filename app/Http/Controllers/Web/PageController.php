@@ -63,20 +63,9 @@ class PageController extends Controller
         return $this->page('corporate-training', 'navX.corporateTraining');
     }
 
-    public function doctorate(): View
-    {
-        return $this->page('doctorate', 'navX.doctorateDba');
-    }
+  
 
-    public function doctorateShow(string $slug): View
-    {
-        return $this->page('doctorate-detail', 'navX.doctorateDba', ['slug' => $slug]);
-    }
-
-    public function universityShow(string $slug): View
-    {
-        return $this->page('university-detail', 'nav.about', ['slug' => $slug]);
-    }
+   
 
     public function admin(): View
     {

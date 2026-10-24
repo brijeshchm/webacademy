@@ -195,7 +195,7 @@
                         </div>
 
                         <div class="mt-5 space-y-2 border-t border-dashed border-gray-100 pt-4">
-                            <a href="{{ url('/enquiry') }}" class="inline-flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold border border-gray-200 hover:border-[#e53935] hover:text-[#e53935]">
+                            <a href="{{ route('enquiry') }}" class="inline-flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold border border-gray-200 hover:border-[#e53935] hover:text-[#e53935]">
                                 @include('partials.lucide', ['icon' => 'message-square', 'class' => 'h-4 w-4 mr-2']){{ t('doctorateDetail.card.requestCounselling') }}
                             </a>
                             <button type="button" class="inline-flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold text-gray-500 hover:text-[#e53935]">
