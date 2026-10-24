@@ -141,14 +141,7 @@
         $articleParagraphs->implode(' '),
     ]);
 
-    $words = preg_split(
-        '/\s+/u',
-        trim(html_entity_decode(strip_tags($readingText))),
-        -1,
-        PREG_SPLIT_NO_EMPTY
-    );
-
-    $readMinutes = max(1, (int) ceil(count($words ?: []) / 200));
+    
 
     $previousArticle = $previous ?? null;
     $nextArticle = $next ?? null;
@@ -326,8 +319,7 @@
                                 {{ $publishedLabel }}
                             </time>
                         @endif
-
-                        <span>{{ $readMinutes }} min read</span>
+ 
 
                         <span>
                             {{ number_format((int) data_get($article, 'views', 0)) }}

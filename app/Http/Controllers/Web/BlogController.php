@@ -334,10 +334,10 @@ $bgImage = $image->blog_image->src;
 		$blog_category =Category::where('category',$url)->first();
  
 
-		$bloglists = Blog::where('category', '=', $blog_category->id)->orderBy('id','desc')->get();
-		
+		$blogs = Blog::where('category', '=', $blog_category->id)->orderBy('id','desc')->get();
+		// dd($blogs);
 	 
-        return view('site.blog-category',['bloglists'=>$bloglists,'url'=>$url]);
+        return view('pages.blog-category',['blogs'=>$blogs,'url'=>$url,'blog_category'=>$blog_category]);
     } 
 	 
  

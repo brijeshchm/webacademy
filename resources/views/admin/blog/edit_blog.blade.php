@@ -49,6 +49,39 @@ Edit Blog
                   <div class="x_content">                    
                     <form  data-parsley-validate class="form-horizontal form-label-left" autocomplete="off" action="" onsubmit="return blogController.editSaveBlog(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)">
 
+                    <div class="form-group">
+                              <label for="name" class="col-md-2 control-label">Author</label>
+                              <div class="col-md-8">
+                                <select type="text" class="form-control" name="author_name" >
+                                  <option value="">Select Author</option>
+                                  @if($authors)
+                                    @foreach($authors as $author)
+
+                                    <option value="{{ $author->name}}" @if ($author->id== old('author_name'))
+                                      selected="selected"	
+                                      @else
+                                      {{ (isset($edit_data) && $edit_data->author_name ==$author->name ) ? "selected":"" }} @endif>{{ $author->name}}</option>
+                                    @endforeach
+                                    @endif
+                                  
+
+                                </select>
+                                @if ($errors->has('author_name'))
+                                  <span class="error alert-danger">
+                                    <strong>{{ $errors->first('author_name') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                            </div>	
+
+
+                      <div class="form-group">
+                      <label class="col-md-2 control-label">Name</label>
+                      <div class="col-md-8">
+                      <input type="text" class="form-control" name="name" value="{{ old('name',(isset($edit_data)) ? $edit_data->name:"")}}" placeholder="Enter "> 
+                      </div>
+                      </div>
+
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12" for="title">Titile <span class="required">*</span>
                         </label>

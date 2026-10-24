@@ -15,7 +15,7 @@ use App\Models\ToolsCovered;
 use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-
+use DateTime;
 /**
  * Home page (/) — server-rendered port of
  * artifacts/corporate-academy/src/pages/Home.tsx and every section component it
@@ -34,12 +34,23 @@ class HomeController extends Controller
 {
     public function __invoke(): View
     {
-        $allCourses = Course::orderBy('id')->get();
-      $categories = Course::select('category_name', 'category_slug')
+        $allCourses = Course::select('title','show_front_page','featured','live_project','level','mode','enrolled','duration_hours','professional_trained','course_name','category_name','category_slug','batches_every_month','course_clone_id','slug','description','rating','total_rating')->where('course_type','1')->orderBy('id')->get();
+       $categories = Course::select('category_name', 'category_slug')
     ->distinct()
     ->whereNotNull('category_slug')
+    ->where('category_slug', '<>', '')
+    ->orderByRaw(
+        'CASE
+            WHEN category_slug = ? THEN 0
+            WHEN category_slug = ? THEN 1
+            ELSE 2
+        END',
+        ['workday', 'artificial-intelligence']
+    )
     ->orderBy('category_name', 'asc')
     ->get();
+
+
         $testimonials = Testimonial::where('status', true)->orderBy('id')->get();
 
         $whatsappChats = WhatsappChat::orderBy('id')->get();
@@ -47,6 +58,7 @@ class HomeController extends Controller
         $videoStories = VideoStory::orderBy('sort_order')->orderBy('id')->get();
  
         $featuredCourses = $allCourses->where('featured', true)->values();
+        $bannerCourses = $allCourses->where('show_front_page', true)->take(8)->values();
 
         // Stats — mirrors StatsController@index (static marketing numbers).
         $stats = [
@@ -55,13 +67,7 @@ class HomeController extends Controller
             'averageRating'      => 4.8,
         ];
 
-        // ── Batch-translate ALL dynamic DB strings up front ─────────────
-        // Instead of calling ServerTranslator::translate() inside the view
-        // loops (which fired one query per course card / course chip / review
-        // field), we collect EVERY dynamic string once, dedupe it, and resolve
-        // the whole set through a single translateMany() call — that call is
-        // exactly ONE whereIn query. The views then do plain array lookups
-        // against the resulting "original => translated" map.
+        
 
         $faqSource = Faqs::HOME;
 
@@ -92,12 +98,13 @@ class HomeController extends Controller
         // English JSON-LD (SEO) uses the untranslated FAQ source.
         $faqsEn = Faqs::HOME;
           $blogPageList       = $this->getBlogList();
-    
+    // dd($bannerCourses);
         return view('pages.home', [
             'allCourses'      => $allCourses,
             'blogPageList'      => $blogPageList,
             'categories'      => $categories,
             'testimonials'    => $testimonials,
+            'bannerCourses'    => $bannerCourses,
             'featuredCourses' => $featuredCourses,
             'whatsappChats'   => $whatsappChats,
             'proofs'          => $proofs,
@@ -152,14 +159,27 @@ class HomeController extends Controller
                 }
             }
  
-            $description = strip_tags($blog->description ?? '');
+            $description = strip_tags($blog->blog_defination ?? '');
             $description = Str::limit($description, 220, '...');
  
+
+            $name = $blog->name ?? 'Blog Name';
+            $words = explode(' ', $name);
+            $avatarBlog = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
+
+         
+
+
             $blogPageList[$key] = [
-                'url'         => $blog->slug,
+                'slug'         => $blog->slug,
                 'img'         => $image,
-                'alt'         => $alt,
-                'title'       => $blog->name,
+                'avatarBlog'         => $avatarBlog,
+                'alt'         => $blog->title,
+                'title'       => $blog->title,
+                'name'       => $blog->name,
+                'author_name'       => $blog->author_name,
+                'created_at' => date('d, M Y', strtotime($blog->created_at)),
+                'updated_at'       =>  $this->get_time(strtotime($blog->created_at)),
                 'description' => ucfirst($description),
             ];
         }
@@ -169,5 +189,54 @@ class HomeController extends Controller
 
 
 
+
+
+function get_time($time)
+{
+
+	date_default_timezone_set('Asia/Kolkata');
+
+	$start_date = date('Y-m-d H:i:s');
+
+	$diff = abs(strtotime($start_date) - $time);
+
+	$totalyear = floor($diff / (365 * 60 * 60 * 24));
+	$totalmonths = floor(($diff - $totalyear * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+	$days = floor(($diff - $totalyear * 365 * 60 * 60 * 24 - $totalmonths * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+
+
+
+	$create_time = $time;
+	$current_time = time();
+	$dtCurrent = DateTime::createFromFormat('U', $current_time);
+	$dtCreate = DateTime::createFromFormat('U', $create_time);
+	$diff = $dtCurrent->diff($dtCreate);
+
+	if ($days < 1 && $totalmonths == 0) {
+		$interval = $diff->format("%h hrs %i minutes");
+		$interval = preg_replace('/(^0| 0) (hrs|minutes)/', '', $interval);
+
+	} else if ($days > 0 && $totalmonths == 0) {
+		$interval = $diff->format("%d days %h hrs");
+		$interval = preg_replace('/(^0| 0) (days|hrs)/', '', $interval);
+	} else if ($totalmonths > 0 && $days > 1 && $totalyear == '0') {
+
+		$interval = $diff->format("%m months %d days");
+		$interval = preg_replace('/(^0| 0) (months|days)/', '', $interval);
+
+	} else if ($totalmonths >= 12 && $totalyear > 0) {
+		$interval = $diff->format("%y years %m months");
+		$interval = preg_replace('/(^0| 0) (years|months)/', '', $interval);
+	} else {
+
+		$interval = $diff->format("%h hours %i minutes");
+		$interval = preg_replace('/(^0| 0) (hours|minutes)/', '', $interval);
+	}
+
+	return $interval;
+
+
+
+}
    
 }

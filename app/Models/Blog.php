@@ -11,10 +11,12 @@ class Blog extends Authenticatable
  
 protected $fillable = [
     'title',
+    'name',
+    'author_name',
     'sub_title',
     'slug',
     'category',
-    'subcategory',
+    'category_name',
     'blog_image',
     'image_banner',
     'rating',
@@ -29,23 +31,17 @@ protected $fillable = [
     'top_content',
     'bottom_heading',
     'bottom_content',
-    'status',
     'faqq1',
     'faqa1',
-	 'faqq2',
+    'faqq2',
     'faqa2',
-	
-	 'faqq3',
+    'faqq3',
     'faqa3',
-	
-	 'faqq4',
+    'faqq4',
     'faqa4',
-	
-	
-	 'faqq5',
+    'faqq5',
     'faqa5',
-	
-	
+    'status',
     'created_by',
     'updated_by',
 ];

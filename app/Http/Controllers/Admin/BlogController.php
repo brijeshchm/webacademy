@@ -15,6 +15,7 @@ use Image;
 use App\Models\City;
 use App\Models\FAQs;
 use App\Models\Blog;
+use App\Models\Author;
 use App\Helpers;
 use App\Models\Category;
 class BlogController extends Controller
@@ -65,13 +66,12 @@ class BlogController extends Controller
 		  $validator = Validator::make($request->all(),[	
 			 
 				'title' => 'required|min:20|max:75',				
-				'sub_title'=>'required|min:28|max:48',			
+				'sub_title'=>'required|min:28|max:300',			
 				'rating' => 'required',				
 				'total_rating' => 'required',				
 				'category' => 'required',					 			
-				'meta_title'=>'required|min:20|max:300',	
-				 
-				'meta_description'=>'required|min:45|max:160',			 				
+				'meta_title'=>'required|min:45|max:61',					 
+				'meta_description'=>'required|min:120|max:171',			 				
 				 				
 			]);
 			
@@ -151,9 +151,10 @@ class BlogController extends Controller
     public function edit(Request $request,$id)
     {	  
 		$edit_data= Blog::findOrFail(base64_decode($id)); 
+		$authors = Author::where('status','1')->get();
 		$cetegories= Category::select('id','category')->where('status',1)->get();	
 		//dd($edit_data);
-        return view('admin.blog.edit_blog',['edit_data'=>$edit_data,'cetegories'=>$cetegories]);
+        return view('admin.blog.edit_blog',['edit_data'=>$edit_data,'authors'=>$authors,'cetegories'=>$cetegories]);
     } 
 	
  /**
@@ -170,15 +171,15 @@ class BlogController extends Controller
 		  $validator = Validator::make($request->all(),[	
 				
 				'title' => 'required|min:20|max:75',				
-				'sub_title'=>'required|min:28|max:48',			
+				'sub_title'=>'required|min:28|max:300',			
 				'rating' => 'required',				
 				'total_rating' => 'required',				
 				'category' => 'required',					 
+				'name' => 'required',					 
+				'author_name' => 'required',					 
 				'slug' => 'required',
-				'meta_title'=>'required|min:30|max:160',	
-			 
-				'meta_description'=>'required|min:70|max:155',	
-		 				 				
+				'meta_title'=>'required|min:45|max:61',					 
+				'meta_description'=>'required|min:120|max:161',	 				
 				 			
 			]);
 			
@@ -189,6 +190,8 @@ class BlogController extends Controller
 			}	  
 				 
 				$blog = Blog::findOrFail($id);
+				$blog->name = $request->input('name');
+				$blog->author_name = $request->input('author_name');
 				$blog->title = ucfirst(trim($request->input('title')));		
 				$blog->slug  =trim(str_replace('?','',$request->input('slug')));			
 				$blog->sub_title = ucfirst($request->input('sub_title'));					 

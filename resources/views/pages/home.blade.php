@@ -343,56 +343,228 @@
                                 <svg class="w-3.5 h-3.5 fill-amber-400 text-amber-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                             @endfor
                         </div>
-                        <p class="text-xs text-white/50 mt-0.5">{{ t('home.trustedBy') }} jj</p>
+                        <p class="text-xs text-black mt-0.5">{{ t('home.trustedBy') }}</p>
                     </div>
                 </div>
             </div>
+@php
+    $courses = collect($bannerCourses ?? [])
+        ->filter(fn ($course) => !empty($course->slug))
+        ->take(6)
+        ->values();
 
-            {{-- Right: floating image collage --}}
-            <div class="relative hidden lg:block h-[460px]">
-                <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-[#7c3aed]/20 rounded-[3rem] blur-3xl"></div>
+    // $gradients = [
+    //     'from-blue-100 to-indigo-200',
+    //     'from-orange-100 to-rose-200',
+    //     'from-emerald-100 to-teal-200',
+    // ];
 
-                <div class="absolute top-6 right-6 w-64 h-80 rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 border-4 border-white ca-float-slow">
-                    <a href="{{route('courses.show','six-sigma-training')}}">
-                    <img loading="lazy" decoding="async" width="256" height="320" src="/images/courses/six-sigma.png" alt="" aria-hidden="true" class="w-full h-full object-cover">
-                    <div class="absolute bottom-3 left-3 right-3 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-3 py-2 shadow-md">
-                        <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/15 text-primary shrink-0">
-                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+  $gradientsTop = [
+    'from-blue-500 to-indigo-600',
+    'from-orange-500 to-red-600',
+    'from-emerald-500 to-teal-600',
+    'from-purple-500 to-fuchsia-600',
+    'from-pink-500 to-rose-600',
+    'from-cyan-500 to-sky-600',
+];
+
+    $offsets = [
+        'sm:mt-8',
+        'sm:mt-0',
+        'sm:mt-12',
+        'sm:mt-8',
+        'sm:mt-0',
+        'sm:mt-12',
+    ];
+@endphp
+
+@if($courses->isNotEmpty())
+    <div class="relative isolate mx-auto w-full max-w-2xl px-3 py-10 sm:px-6">
+
+        {{-- Soft background --}}
+        <div
+            class="pointer-events-none absolute inset-10 -z-10 rounded-full bg-gradient-to-br from-blue-100 via-indigo-50 to-cyan-100 opacity-80 blur-3xl"
+            aria-hidden="true"
+        ></div>
+
+        <div class="grid grid-cols-2 items-start gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-2">
+            @foreach($courses as $bannerC)
+                @php
+                
+                    $courseName = $bannerC->course_name
+                        ?? $bannerC->title
+                        ?? 'View course';
+
+                    $imagePath = $bannerC->image ?? '';
+
+                    $imageUrl = $imagePath
+                        ? (
+                            \Illuminate\Support\Str::startsWith(
+                                $imagePath,
+                                ['https://', 'http://']
+                            )
+                                ? $imagePath
+                                : asset(ltrim($imagePath, '/'))
+                        )
+                        : null;
+
+                    $gradientColor = $gradientsTop[$loop->index];
+
+                    
+                @endphp
+
+                {{-- Animate wrapper separately from hover effect --}}
+                <div
+                    class="course-float-card {{ $offsets[$loop->index] }}"
+                    style="--float-delay: -{{ $loop->index }}s; --float-duration: {{ 5 + ($loop->index % 3) }}s;"
+                >
+                    <a
+                        href="{{ route('courses.show', $bannerC->slug) }}"
+                        class="group relative block aspect-[3/4] overflow-hidden rounded-3xl border-4 border-white bg-white shadow-xl shadow-blue-950/10 transition duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
+                    >
+                        @if($imageUrl)
+                            <img
+                                src="{{ $imageUrl }}"
+                                alt="{{ $courseName }}"
+                                loading="lazy"
+                                decoding="async"
+                                width="240"
+                                height="320"
+                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            >
+                        @else
+                            <div class="flex h-full items-center justify-center bg-gradient-to-br p-5 pb-20 {{ $gradientColor }}">
+                                <svg
+                                    class="h-14 w-14 text-blue-900/40"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="m2 10 10-5 10 5-10 5z"/>
+                                    <path d="M22 10v6"/>
+                                    <path d="M6 12v4c0 4 12 4 12 0v-4"/>
+                                </svg>
+                            </div>
+                        @endif
+
+                        <div
+                            class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"
+                            aria-hidden="true"
+                        ></div>
+
+                        <span class="absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-[10px] font-bold text-blue-800 shadow-sm">
+                            {{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}
                         </span>
-                        <span class="text-xs font-semibold text-foreground leading-tight">Six Sigma dfdsfsdf</span>
-                    </div>
+
+                        <div class="absolute bottom-2 left-2 right-2 flex items-center gap-2 rounded-xl border border-white/60 bg-white/95 px-2.5 py-3 shadow-md backdrop-blur-md">
+                            <span class="min-w-0 flex-1 line-clamp-2 text-[11px] font-bold leading-snug text-slate-900">
+                                {{ $courseName }}
+                            </span>
+
+                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-700 transition-colors group-hover:bg-blue-700 group-hover:text-white">
+                                <svg
+                                    class="h-3.5 w-3.5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M7 17 17 7"/>
+                                    <path d="M7 7h10v10"/>
+                                </svg>
+                            </span>
+                        </div>
                     </a>
                 </div>
+            @endforeach
+        </div>
 
-                <div class="absolute top-0 left-0 w-44 h-56 rounded-3xl overflow-hidden shadow-xl shadow-secondary/20 border-4 border-white ca-float">
-                     <a href="{{route('courses.show','workday-hcm-functional-course')}}">
-                    <img loading="lazy" decoding="async" width="176" height="224" src="/images/courses/images-hcm.png" alt="" aria-hidden="true" class="w-full h-full object-cover">
-                    <div class="absolute bottom-2 left-2 right-2 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-md">
-                        <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-secondary/20 text-secondary shrink-0">
-                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-                        </span>
-                        <span class="text-[11px] font-semibold text-foreground leading-tight">Workday HCM</span>
-                    </div>
-                        </a>
-                </div>
-                <div class="absolute bottom-0 left-10 w-48 h-60 rounded-3xl overflow-hidden shadow-xl shadow-primary/20 border-4 border-white ca-float-slow">
-                     <a href="{{route('courses.show','data-science-training')}}">
-                    <img loading="lazy" decoding="async" width="192" height="240" src="/images/courses/data-science.png" alt="" aria-hidden="true" class="w-full h-full object-cover">
-                    <div class="absolute bottom-2 left-2 right-2 flex items-center gap-2 bg-white/90 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-md">
-                        <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-primary/15 text-primary shrink-0">
-                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-                        </span>
-                        <span class="text-[11px] font-semibold text-foreground leading-tight">Data Science</span>
-                    </div>
-                        </a>
-                </div>
-                <div class="absolute top-1/2 right-0 flex items-center justify-center w-14 h-14 rounded-2xl bg-white/70 backdrop-blur-md border border-white/70 shadow-lg text-primary ca-float">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-                </div>
-                <div class="absolute bottom-16 right-16 flex items-center justify-center w-12 h-12 rounded-2xl bg-white/70 backdrop-blur-md border border-white/70 shadow-lg text-secondary ca-float-slow">
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                </div>
-            </div>
+        {{-- Decorative icons: outside the loop --}}
+        <div
+            class="pointer-events-none absolute right-0 top-2 flex h-11 w-11 items-center justify-center rounded-2xl border border-white bg-white/90 text-blue-600 shadow-lg"
+            aria-hidden="true"
+        >
+            <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="m2 10 10-5 10 5-10 5z"/>
+                <path d="M22 10v6"/>
+                <path d="M6 12v4c0 4 12 4 12 0v-4"/>
+            </svg>
+        </div>
+
+        <div
+            class="pointer-events-none absolute bottom-0 left-0 flex h-10 w-10 items-center justify-center rounded-2xl border border-white bg-white/90 text-emerald-600 shadow-lg"
+            aria-hidden="true"
+        >
+            <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+                <path d="M8 17v-3"/>
+                <path d="M13 17V8"/>
+                <path d="M18 17V4"/>
+            </svg>
+        </div>
+    </div>
+@endif
+
+<style>
+    @keyframes course-card-float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-12px);
+        }
+    }
+
+    .course-float-card {
+        animation: course-card-float
+            var(--float-duration, 6s)
+            ease-in-out
+            var(--float-delay, 0s)
+            infinite;
+    }
+
+    .course-float-card:hover,
+    .course-float-card:focus-within {
+        animation-play-state: paused;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .course-float-card {
+            animation: none;
+        }
+    }
+</style>
+
+ 
+
         </div>
     </div>
 </section>
@@ -436,7 +608,7 @@
 </section>
 
 @include('partials.home.global-impact')
-
+@include('partials.home.alumni', ['alumniRows' => $alumniRows, 'alumni' => $alumni])
 {{-- ── CATEGORIES / LEARNING PATHS ─────────────────────────── --}}
 <section class="py-24 bg-gray-50/60 relative">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(59,130,246,0.06),transparent_60%)] pointer-events-none"></div>
@@ -451,7 +623,7 @@
                 <p class="text-lg text-gray-500">{{ t('home.chooseYourPathDesc') }}</p>
             </div>
             <a href="{{ route('courses') }}" class="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 font-semibold whitespace-nowrap group bg-primary/5 px-5 py-2.5 rounded-xl hover:bg-primary/10 transition-colors">
-                {{ t('home.viewAllPaths') }} hh
+                {{ t('home.viewAllPaths') }} 
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
         </div>
@@ -613,7 +785,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
 </section>
 
-@include('partials.home.alumni', ['alumniRows' => $alumniRows, 'alumni' => $alumni])
+
 
 {{-- ── FEATURED PROGRAMS ────────────────────────────────────── --}}
 <section class="py-24 bg-white relative overflow-hidden">
@@ -1134,11 +1306,149 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 
 
-<section class="py-20 bg-white"><div class="container mx-auto px-4 lg:px-8"><div class="flex items-end justify-between mb-10 max-w-6xl mx-auto flex-wrap gap-4"><div><span class="inline-block bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full mb-3 uppercase tracking-wider">From the Blog</span><h2 class="text-3xl md:text-4xl font-extrabold text-[#272C37]">Read Our <span class="text-primary">Latest Blogs</span></h2><p class="text-muted-foreground mt-2">Insights, tutorials, and career advice from industry experts.</p></div><a href=""><button class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">View All Articles <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button></a></div><div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto"><a href="/blog/top-data-science-skills-2026"><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:border-primary/25 transition-all group cursor-pointer flex flex-col h-full" style="opacity: 1; transform: none;"><div class="h-44 bg-gradient-to-br from-blue-500 to-indigo-600 relative flex items-center justify-center overflow-hidden flex-shrink-0"><div class="absolute -top-6 -right-6 w-28 h-28 bg-white/10 rounded-full"></div><div class="absolute -bottom-6 -left-4 w-24 h-24 bg-black/10 rounded-full"></div><div class="text-white text-7xl font-black opacity-15 select-none">DS</div><span class="absolute top-3 left-3 bg-white/95 text-[#272C37] text-xs font-bold px-2.5 py-1 rounded-lg">Data Science</span><span class="absolute top-3 right-3 bg-black/25 backdrop-blur border border-white/20 text-white text-[10px] font-semibold px-2 py-1 rounded-lg">7 min read</span></div><div class="p-5 flex flex-col flex-1"><div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-black text-white text-[9px] flex-shrink-0">DS</div><div class="min-w-0"><p class="text-xs font-bold text-[#272C37] truncate">Priya Sharma</p><p class="text-[10px] text-gray-400 truncate">Sr. Data Scientist · Google</p></div></div><h3 class="font-bold text-[#272C37] text-base mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">Top 10 Data Science Skills You Need in 2026</h3><p class="text-sm text-gray-500 mb-4 leading-relaxed line-clamp-2 flex-1">From LLM engineering to causal inference, here's what hiring managers are screening for this year.</p><div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-3"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 18, 2026</span><span class="flex items-center gap-1 text-primary font-bold group-hover:gap-2 transition-all">Read more <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3 h-3" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></div><div class="h-[3px] bg-gradient-to-br from-blue-500 to-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div></article></a><a href="/blog/aws-vs-azure-vs-gcp-2026"><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:border-primary/25 transition-all group cursor-pointer flex flex-col h-full" style="opacity: 1; transform: none;"><div class="h-44 bg-gradient-to-br from-orange-500 to-red-600 relative flex items-center justify-center overflow-hidden flex-shrink-0"><div class="absolute -top-6 -right-6 w-28 h-28 bg-white/10 rounded-full"></div><div class="absolute -bottom-6 -left-4 w-24 h-24 bg-black/10 rounded-full"></div><div class="text-white text-7xl font-black opacity-15 select-none">CL</div><span class="absolute top-3 left-3 bg-white/95 text-[#272C37] text-xs font-bold px-2.5 py-1 rounded-lg">Cloud</span><span class="absolute top-3 right-3 bg-black/25 backdrop-blur border border-white/20 text-white text-[10px] font-semibold px-2 py-1 rounded-lg">9 min read</span></div><div class="p-5 flex flex-col flex-1"><div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center font-black text-white text-[9px] flex-shrink-0">CL</div><div class="min-w-0"><p class="text-xs font-bold text-[#272C37] truncate">Rahul Mehta</p><p class="text-[10px] text-gray-400 truncate">Cloud Architect · Amazon</p></div></div><h3 class="font-bold text-[#272C37] text-base mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">AWS vs Azure vs GCP: A 2026 Career Roadmap</h3><p class="text-sm text-gray-500 mb-4 leading-relaxed line-clamp-2 flex-1">Which cloud certification pays the most, hires the fastest, and future-proofs your role? Full breakdown.</p><div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-3"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 14, 2026</span><span class="flex items-center gap-1 text-primary font-bold group-hover:gap-2 transition-all">Read more <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3 h-3" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></div><div class="h-[3px] bg-gradient-to-br from-orange-500 to-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div></article></a><a href="/blog/crack-faang-interviews-90-days"><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:border-primary/25 transition-all group cursor-pointer flex flex-col h-full" style="opacity: 1; transform: none;"><div class="h-44 bg-gradient-to-br from-emerald-500 to-teal-600 relative flex items-center justify-center overflow-hidden flex-shrink-0"><div class="absolute -top-6 -right-6 w-28 h-28 bg-white/10 rounded-full"></div><div class="absolute -bottom-6 -left-4 w-24 h-24 bg-black/10 rounded-full"></div><div class="text-white text-7xl font-black opacity-15 select-none">CR</div><span class="absolute top-3 left-3 bg-white/95 text-[#272C37] text-xs font-bold px-2.5 py-1 rounded-lg">Career</span><span class="absolute top-3 right-3 bg-black/25 backdrop-blur border border-white/20 text-white text-[10px] font-semibold px-2 py-1 rounded-lg">12 min read</span></div><div class="p-5 flex flex-col flex-1"><div class="flex items-center gap-2 mb-3"><div class="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center font-black text-white text-[9px] flex-shrink-0">CR</div><div class="min-w-0"><p class="text-xs font-bold text-[#272C37] truncate">Anjali Verma</p><p class="text-[10px] text-gray-400 truncate">Software Engineer · Meta</p></div></div><h3 class="font-bold text-[#272C37] text-base mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">How to Crack Tech Interviews at FAANG in 90 Days</h3><p class="text-sm text-gray-500 mb-4 leading-relaxed line-clamp-2 flex-1">A week-by-week plan from engineers who've cleared Google, Amazon, and Meta interviews.</p><div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-3"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 10, 2026</span><span class="flex items-center gap-1 text-primary font-bold group-hover:gap-2 transition-all">Read more <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-3 h-3" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></div><div class="h-[3px] bg-gradient-to-br from-emerald-500 to-teal-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div></article></a></div></div></section>
+<section class="py-20 bg-white"><div class="container mx-auto px-4 lg:px-8">
+    
+<div class="flex items-end justify-between mb-10 max-w-6xl mx-auto flex-wrap gap-4"><div>
+    
+<span class="inline-block bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full mb-3 uppercase tracking-wider">From the Blog</span><h2 class="text-3xl md:text-4xl font-extrabold text-[#272C37]">Read Our <span class="text-primary">Latest Blogs</span></h2><p class="text-muted-foreground mt-2">Insights, tutorials, and career advice from industry experts.</p></div>
+
+<a href="{{ route('blog') }}"><button class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">View All Articles <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button></a>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+   
+@php
+    $gradients = [
+        'from-blue-500 to-indigo-600',
+        'from-orange-500 to-red-600',
+        'from-emerald-500 to-teal-600',
+    ];
+
+   
+@endphp
+@if($blogPageList)
+@foreach(($blogPageList ?? []) as $blogPage)
+    @php
+        $gradient = $gradients[$loop->index % count($gradients)];
+    @endphp
+
+    <a
+        href="{{ route('blog.details', $blogPage['slug']) }}"
+        class="block h-full"
+    >
+        <article class="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all hover:border-primary/25 hover:shadow-2xl">
+
+            {{-- Three repeating gradient backgrounds --}}
+            <div class="relative flex h-44 shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br {{ $gradient }}">
+                <div class="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10"></div>
+
+                <div class="absolute -bottom-6 -left-4 h-24 w-24 rounded-full bg-black/10"></div>
+
+                <div class="select-none text-7xl font-black text-white opacity-[0.15]">
+                    {{ $blogPage['avatarBlog'] ?? '' }}
+                </div>
+
+                <span class="absolute left-3 top-3 max-w-[55%] truncate rounded-lg bg-white/95 px-2.5 py-1 text-xs font-bold text-[#272C37]">
+                    {{ $blogPage['name'] ?? '' }}
+                </span>
+
+                <span class="absolute right-3 top-3 rounded-lg border border-white/20 bg-black/25 px-2 py-1 text-[10px] font-semibold text-white backdrop-blur">
+                    {{ $blogPage['updated_at'] ?? '' }}
+                </span>
+            </div>
+
+            <div class="flex flex-1 flex-col p-5">
+                <div class="mb-3 flex items-center gap-2">
+                    <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-[9px] font-black text-white {{ $gradient }}">
+                        {{ $blogPage['avatarBlog'] ?? '' }}
+                    </div>
+
+                    <div class="min-w-0">
+                        <p class="truncate text-xs font-bold text-[#272C37]">
+                            {{ $blogPage['author_name'] ?? '' }}
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="mb-2 line-clamp-2 text-base font-bold leading-snug text-[#272C37] transition-colors group-hover:text-primary">
+                    {{ $blogPage['title'] ?? '' }}
+                </h3>
+
+                <p class="mb-4 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-500">
+                    {{ strip_tags($blogPage['description'] ?? '') }}
+                </p>
+
+                <div class="flex items-center justify-between gap-3 border-t border-gray-100 pt-3 text-xs text-gray-400">
+                    <span class="flex items-center gap-1.5">
+                        <svg
+                            class="h-3 w-3 shrink-0"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M8 2v4"></path>
+                            <path d="M16 2v4"></path>
+                            <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                            <path d="M3 10h18"></path>
+                        </svg>
+
+                        {{ $blogPage['created_at'] ?? '' }}
+                    </span>
+
+                    <span class="flex shrink-0 items-center gap-1 font-bold text-primary transition-all group-hover:gap-2">
+                        Read more
+
+                        <svg
+                            class="h-3 w-3"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="h-[3px] origin-left scale-x-0 bg-gradient-to-br transition-transform duration-300 group-hover:scale-x-100 {{ $gradient }}"></div>
+        </article>
+    </a>
+@endforeach 
+
+    @endif
+
+    
+     
 
 
 
-    <section class="py-20 bg-gradient-to-b from-gray-50 to-white"><div class="container mx-auto px-4 lg:px-8"><div class="text-center mb-12" style="opacity: 1; transform: none;"><span class="inline-block bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full mb-3 uppercase tracking-wider">In the Press</span><h2 class="text-3xl md:text-4xl font-extrabold text-[#272C37] mb-3">News <span class="text-primary">Highlights</span></h2><p class="text-muted-foreground max-w-2xl mx-auto">What top publications are saying about TrailFuture.</p></div><div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto"><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer flex flex-col" style="opacity: 1; transform: none;"><div class="h-48 bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 relative overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1.5px, transparent 1.5px); background-size: 30px 30px, 50px 50px;"></div><div class="absolute -top-8 -right-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div><div class="absolute -bottom-10 -left-10 w-44 h-44 bg-black/10 rounded-full blur-2xl"></div><div class="absolute top-4 left-4 bg-white/95 backdrop-blur text-[#272C37] text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper w-3 h-3 text-primary" aria-hidden="true"><path d="M15 18h-5"></path><path d="M18 14h-8"></path><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="10" y="6" rx="1"></rect></svg>Forbes</div><div class="absolute bottom-4 left-4 text-white"><div class="text-4xl font-black leading-none drop-shadow">4M+</div><div class="text-xs uppercase tracking-widest opacity-90 mt-1">Learners</div></div><div class="absolute top-1/2 right-6 -translate-y-1/2 w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20" style="transform: translateY(-6.13697px);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-8 h-8 text-white" aria-hidden="true"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg></div></div><div class="p-6 flex-1 flex flex-col"><div class="flex items-center justify-between text-[11px] text-gray-500 mb-3 uppercase tracking-wider"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 22, 2026</span><span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-3 h-3" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>12.4K</span></div><h3 class="font-bold text-[#272C37] text-lg mb-3 leading-snug group-hover:text-primary transition-colors flex-1">TrailFuture Crosses 4 Million Learners Globally, Expands Into Generative AI Programs</h3><p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">The bootcamp leader announced a major curriculum overhaul focused on LLMs, RAG, and agentic AI workflows for working professionals.</p><span class="text-primary text-sm font-bold inline-flex items-center gap-1.5 group-hover:gap-2 transition-all border-t pt-3">Read full story <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></article><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer flex flex-col" style="opacity: 1; transform: none;"><div class="h-48 bg-gradient-to-br from-orange-500 via-rose-500 to-pink-600 relative overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1.5px, transparent 1.5px); background-size: 30px 30px, 50px 50px;"></div><div class="absolute -top-8 -right-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div><div class="absolute -bottom-10 -left-10 w-44 h-44 bg-black/10 rounded-full blur-2xl"></div><div class="absolute top-4 left-4 bg-white/95 backdrop-blur text-[#272C37] text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper w-3 h-3 text-primary" aria-hidden="true"><path d="M15 18h-5"></path><path d="M18 14h-8"></path><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="10" y="6" rx="1"></rect></svg>Economic Times</div><div class="absolute bottom-4 left-4 text-white"><div class="text-4xl font-black leading-none drop-shadow">IIT-K</div><div class="text-xs uppercase tracking-widest opacity-90 mt-1">Partner</div></div><div class="absolute top-1/2 right-6 -translate-y-1/2 w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20" style="transform: translateY(-2.64444px);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap w-8 h-8 text-white" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg></div></div><div class="p-6 flex-1 flex flex-col"><div class="flex items-center justify-between text-[11px] text-gray-500 mb-3 uppercase tracking-wider"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 16, 2026</span><span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-3 h-3" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>8.9K</span></div><h3 class="font-bold text-[#272C37] text-lg mb-3 leading-snug group-hover:text-primary transition-colors flex-1">TrailFuture Partners With IIT Kanpur for New AI &amp; Robotics Bootcamp</h3><p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">Joint program offers 9-month bootcamp with industry capstones, IIT certification, and guaranteed interviews with 200+ partners.</p><span class="text-primary text-sm font-bold inline-flex items-center gap-1.5 group-hover:gap-2 transition-all border-t pt-3">Read full story <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></article><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer flex flex-col" style="opacity: 1; transform: none;"><div class="h-48 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 relative overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1.5px, transparent 1.5px); background-size: 30px 30px, 50px 50px;"></div><div class="absolute -top-8 -right-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div><div class="absolute -bottom-10 -left-10 w-44 h-44 bg-black/10 rounded-full blur-2xl"></div><div class="absolute top-4 left-4 bg-white/95 backdrop-blur text-[#272C37] text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper w-3 h-3 text-primary" aria-hidden="true"><path d="M15 18h-5"></path><path d="M18 14h-8"></path><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="10" y="6" rx="1"></rect></svg>TechCrunch</div><div class="absolute bottom-4 left-4 text-white"><div class="text-4xl font-black leading-none drop-shadow">AI</div><div class="text-xs uppercase tracking-widest opacity-90 mt-1">Coach</div></div><div class="absolute top-1/2 right-6 -translate-y-1/2 w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20" style="transform: translateY(-0.281203px);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-8 h-8 text-white" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg></div></div><div class="p-6 flex-1 flex flex-col"><div class="flex items-center justify-between text-[11px] text-gray-500 mb-3 uppercase tracking-wider"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 09, 2026</span><span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-3 h-3" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>15.2K</span></div><h3 class="font-bold text-[#272C37] text-lg mb-3 leading-snug group-hover:text-primary transition-colors flex-1">How TrailFuture's AI-Powered Career Coach Is Reshaping Online Learning</h3><p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">The new AI coach personalizes learning paths, predicts skill gaps, and matches learners to roles in real-time across the platform.</p><span class="text-primary text-sm font-bold inline-flex items-center gap-1.5 group-hover:gap-2 transition-all border-t pt-3">Read full story <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></article></div></div></section>
+
+</div></div></section>
+
+
+
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white"><div class="container mx-auto px-4 lg:px-8"><div class="text-center mb-12" style="opacity: 1; transform: none;"><span class="inline-block bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full mb-3 uppercase tracking-wider">In the Press</span><h2 class="text-3xl md:text-4xl font-extrabold text-[#272C37] mb-3">News <span class="text-primary">Highlights</span></h2><p class="text-muted-foreground max-w-2xl mx-auto">What top publications are saying about TrailFuture.</p></div><div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        
+    <article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer flex flex-col" style="opacity: 1; transform: none;"><div class="h-48 bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 relative overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1.5px, transparent 1.5px); background-size: 30px 30px, 50px 50px;"></div><div class="absolute -top-8 -right-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div><div class="absolute -bottom-10 -left-10 w-44 h-44 bg-black/10 rounded-full blur-2xl"></div><div class="absolute top-4 left-4 bg-white/95 backdrop-blur text-[#272C37] text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper w-3 h-3 text-primary" aria-hidden="true"><path d="M15 18h-5"></path><path d="M18 14h-8"></path><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="10" y="6" rx="1"></rect></svg>Forbes</div>
+        
+        <div class="absolute bottom-4 left-4 text-white">
+        
+        <div class="text-4xl font-black leading-none drop-shadow">4M+</div><div class="text-xs uppercase tracking-widest opacity-90 mt-1">Learners</div></div><div class="absolute top-1/2 right-6 -translate-y-1/2 w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20" style="transform: translateY(-6.13697px);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-8 h-8 text-white" aria-hidden="true"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg></div></div><div class="p-6 flex-1 flex flex-col"><div class="flex items-center justify-between text-[11px] text-gray-500 mb-3 uppercase tracking-wider"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 22, 2026</span><span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-3 h-3" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>12.4K</span></div><h3 class="font-bold text-[#272C37] text-lg mb-3 leading-snug group-hover:text-primary transition-colors flex-1">TrailFuture Crosses 4 Million Learners Globally, Expands Into Generative AI Programs</h3><p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">The bootcamp leader announced a major curriculum overhaul focused on LLMs, RAG, and agentic AI workflows for working professionals.</p><span class="text-primary text-sm font-bold inline-flex items-center gap-1.5 group-hover:gap-2 transition-all border-t pt-3">Read full story <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></article>
+            
+            
+            <article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer flex flex-col" style="opacity: 1; transform: none;"><div class="h-48 bg-gradient-to-br from-orange-500 via-rose-500 to-pink-600 relative overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1.5px, transparent 1.5px); background-size: 30px 30px, 50px 50px;"></div><div class="absolute -top-8 -right-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div><div class="absolute -bottom-10 -left-10 w-44 h-44 bg-black/10 rounded-full blur-2xl"></div><div class="absolute top-4 left-4 bg-white/95 backdrop-blur text-[#272C37] text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper w-3 h-3 text-primary" aria-hidden="true"><path d="M15 18h-5"></path><path d="M18 14h-8"></path><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="10" y="6" rx="1"></rect></svg>Economic Times</div><div class="absolute bottom-4 left-4 text-white"><div class="text-4xl font-black leading-none drop-shadow">IIT-K</div><div class="text-xs uppercase tracking-widest opacity-90 mt-1">Partner</div></div><div class="absolute top-1/2 right-6 -translate-y-1/2 w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20" style="transform: translateY(-2.64444px);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap w-8 h-8 text-white" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg></div></div><div class="p-6 flex-1 flex flex-col"><div class="flex items-center justify-between text-[11px] text-gray-500 mb-3 uppercase tracking-wider"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 16, 2026</span><span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-3 h-3" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>8.9K</span></div><h3 class="font-bold text-[#272C37] text-lg mb-3 leading-snug group-hover:text-primary transition-colors flex-1">TrailFuture Partners With IIT Kanpur for New AI &amp; Robotics Bootcamp</h3><p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">Joint program offers 9-month bootcamp with industry capstones, IIT certification, and guaranteed interviews with 200+ partners.</p><span class="text-primary text-sm font-bold inline-flex items-center gap-1.5 group-hover:gap-2 transition-all border-t pt-3">Read full story <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></article><article class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer flex flex-col" style="opacity: 1; transform: none;"><div class="h-48 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 relative overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 80% 70%, white 1.5px, transparent 1.5px); background-size: 30px 30px, 50px 50px;"></div><div class="absolute -top-8 -right-8 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div><div class="absolute -bottom-10 -left-10 w-44 h-44 bg-black/10 rounded-full blur-2xl"></div><div class="absolute top-4 left-4 bg-white/95 backdrop-blur text-[#272C37] text-xs font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper w-3 h-3 text-primary" aria-hidden="true"><path d="M15 18h-5"></path><path d="M18 14h-8"></path><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="10" y="6" rx="1"></rect></svg>TechCrunch</div><div class="absolute bottom-4 left-4 text-white"><div class="text-4xl font-black leading-none drop-shadow">AI</div><div class="text-xs uppercase tracking-widest opacity-90 mt-1">Coach</div></div><div class="absolute top-1/2 right-6 -translate-y-1/2 w-16 h-16 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20" style="transform: translateY(-0.281203px);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-8 h-8 text-white" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg></div></div><div class="p-6 flex-1 flex flex-col"><div class="flex items-center justify-between text-[11px] text-gray-500 mb-3 uppercase tracking-wider"><span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-3 h-3" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Apr 09, 2026</span><span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-3 h-3" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>15.2K</span></div><h3 class="font-bold text-[#272C37] text-lg mb-3 leading-snug group-hover:text-primary transition-colors flex-1">How TrailFuture's AI-Powered Career Coach Is Reshaping Online Learning</h3><p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">The new AI coach personalizes learning paths, predicts skill gaps, and matches learners to roles in real-time across the platform.</p><span class="text-primary text-sm font-bold inline-flex items-center gap-1.5 group-hover:gap-2 transition-all border-t pt-3">Read full story <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></div></article></div></div></section>
 
 {{-- ── FAQ ─────────────────────────────────────────────────── --}}
 @if (count($faqs))
