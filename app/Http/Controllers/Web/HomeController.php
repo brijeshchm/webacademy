@@ -98,7 +98,7 @@ class HomeController extends Controller
         // English JSON-LD (SEO) uses the untranslated FAQ source.
         $faqsEn = Faqs::HOME;
           $blogPageList       = $this->getBlogList();
-    
+    // dd($testimonials);
         return view('pages.home', [
             'allCourses'      => $allCourses,
             'blogPageList'      => $blogPageList,

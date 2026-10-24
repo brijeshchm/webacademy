@@ -96,7 +96,7 @@
                 <h1 class="max-w-4xl font-display text-[3.3rem] font-bold leading-[0.96] tracking-[-0.065em] text-[#12223e] sm:text-6xl md:text-7xl lg:text-[5.6rem]">{{ t('corporateTraining.hero.title1') }}<span class="block text-primary">{{ t('corporateTraining.hero.title2') }}</span></h1>
                 <p class="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">{{ t('corporateTraining.hero.subtitle') }}</p>
                 <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <a href="#enquiry" class="inline-flex h-13 items-center justify-center gap-2 rounded-full px-7 text-base font-bold shadow-xl shadow-primary/25 bg-primary text-primary-foreground">{{ t('corporateTraining.hero.ctaPrimary') }} {!! $icon('arrow-right', 'h-4 w-4 rtl:rotate-180') !!}</a>
+                    
                     <a href="{{ route('courses.enquiry') }}" class="inline-flex h-13 items-center justify-center gap-2 rounded-full border border-primary/20 bg-card/60 px-7 text-base font-bold">{{ t('corporateTraining.hero.ctaSecondary') }} {!! $icon('chevron-right', 'h-4 w-4 rtl:rotate-180') !!}</a>
                 </div>
                 <div class="mt-11 flex flex-wrap items-center gap-x-7 gap-y-3 text-xs font-bold uppercase tracking-[0.13em] text-muted-foreground"><span class="inline-flex items-center gap-2">{!! $icon('badge-check', 'h-4 w-4 text-primary') !!} {{ t('corporateTraining.hero.trust1') }}</span><span class="inline-flex items-center gap-2">{!! $icon('globe', 'h-4 w-4 text-primary') !!} {{ t('corporateTraining.hero.trust2') }}</span></div>
@@ -180,7 +180,7 @@
                         <div class="flex h-16 w-16 items-center justify-center rounded-full bg-[#d9f2e5] text-[#13804a]">{!! $icon('check-circle', 'h-8 w-8') !!}</div>
                         <h3 class="mt-7 font-display text-3xl font-bold tracking-[-0.04em] text-[#12223e]">{{ t('corporateTraining.form.successTitle') }}</h3>
                         <p class="mt-3 max-w-sm text-sm leading-7 text-muted-foreground">{{ t('corporateTraining.form.successBody') }}</p>
-                        <a href="/corporate-training#enquiry" class="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-primary/20 px-6 text-sm font-semibold">{{ t('corporateTraining.form.sendAnother') }}</a>
+                        <a href="{{ route('corporate-training') }}" class="mt-8 inline-flex h-11 items-center justify-center rounded-full border border-primary/20 px-6 text-sm font-semibold">{{ t('corporateTraining.form.sendAnother') }}</a>
                     </div>
                 @else
 

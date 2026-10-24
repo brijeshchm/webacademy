@@ -1082,46 +1082,7 @@ margin-bottom: .5rem !important;
    details.forEach(item => item.addEventListener('toggle', () => {
     if (item.open) details.forEach(other => { if (other !== item) other.open = false; });
    }));
-   //const box = root.querySelector('[data-course-highlights]');
-//    const slides = [...box.querySelectorAll('[data-highlight]')];
-//    const dots = [...box.querySelectorAll('[data-highlight-dot]')];
-//    let current = 0, timer, hovered = false;
-//    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-//    function show(index) {
-//     if (!slides.length) return;
-//     current = (index + slides.length) % slides.length;
-//     slides.forEach((slide, i) => slide.hidden = i !== current);
-//     dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
-//    }
-//    function autoplay() {
-//     clearInterval(timer);
-//     if (document.hidden || hovered || reduced.matches || box.contains(document.activeElement) || slides.length < 2) return;
-//     timer = setInterval(() => show(current + 1), 5000);
-//    }
-//    box.querySelector('[data-highlight-prev]').addEventListener('click', () => { show(current - 1); autoplay(); });
-//    box.querySelector('[data-highlight-next]').addEventListener('click', () => { show(current + 1); autoplay(); });
-//    dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); autoplay(); }));
-//    box.addEventListener('mouseenter', () => { hovered = true; clearInterval(timer); });
-//    box.addEventListener('mouseleave', () => { hovered = false; autoplay(); });
-//    box.addEventListener('focusin', () => clearInterval(timer));
-//    box.addEventListener('focusout', () => setTimeout(autoplay, 0));
-//    document.addEventListener('visibilitychange', autoplay);
-//    reduced.addEventListener('change', autoplay);
-//    show(0); autoplay();
-   // Keep the supplied application's existing enquiry handler.
-//    const form = root.querySelector('[data-course-enquiry]');
-//    form.addEventListener('submit', event => {
-//     event.preventDefault();
-//     const error = form.querySelector('[data-enquiry-error]');
-//     error.hidden = true;
-//     if (window.sidehomeController && typeof window.sidehomeController.saveEnquirySide === 'function') {
-//      window.sidehomeController.saveEnquirySide(form);
-//     } else {
-//      error.textContent = 'Enquiry service is unavailable. Please try again later.';
-//      error.hidden = false;
-//     }
-//    });
-
+   
 
   });
  }

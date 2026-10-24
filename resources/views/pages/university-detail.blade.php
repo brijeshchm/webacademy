@@ -144,10 +144,8 @@
                 @endforeach
             </div>
             <div class="mt-10 flex flex-wrap gap-4">
-                <a href="{{ url('/doctorate') }}" class="inline-flex items-center justify-center rounded-xl bg-[#e53935] hover:bg-[#c62828] text-white shadow-lg shadow-red-500/25 font-semibold px-4 h-10 text-sm">
-                    @include('partials.lucide', ['icon' => 'book-open', 'class' => 'h-4 w-4 mr-2']) {{ t('universityDetail.viewProgrammes') }}
-                </a>
-                <a href="{{ url('/enquiry') }}" class="inline-flex items-center justify-center rounded-xl border border-gray-300 text-gray-700 hover:border-[#e53935] hover:text-[#e53935] px-4 h-10 text-sm font-semibold">
+                
+                <a href="{{ route('courses.enquiry') }}" class="inline-flex items-center justify-center rounded-xl border border-gray-300 text-gray-700 hover:border-[#e53935] hover:text-[#e53935] px-4 h-10 text-sm font-semibold">
                     {{ t('universityDetail.enquireNow') }} @include('partials.lucide', ['icon' => 'arrow-right', 'class' => 'h-4 w-4 ml-1'])
                 </a>
             </div>

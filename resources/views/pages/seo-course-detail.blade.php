@@ -336,7 +336,7 @@
                         @if(session('success'))
                             <div class="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm text-green-700 font-semibold text-center">✓ {{ session('success') }}</div>
                         @else
-                            <form method="POST" action="/courses/{{ $course->slug }}/enquiry" class="space-y-2.5">
+                            <form method="POST" action="{{ route('courses.enquiry') }}" class="space-y-2.5">
                                 @csrf
                                 <input required name="name" placeholder="{{ t('courseDetailX.yourNamePlaceholder') }}" value="{{ old('name') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                                 @include('partials.phone-input', ['value' => old('phone'), 'inputClass' => 'flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary', 'selectClass' => 'border-gray-200 bg-white'])
@@ -2390,7 +2390,7 @@ margin-bottom: .5rem !important;
                         @if(session('success'))
                             <div class="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm text-green-700 font-semibold text-center">✓ {{ session('success') }}</div>
                         @else
-                            <form method="POST" action="/courses/{{ $course->slug }}/enquiry" class="space-y-2.5">
+                            <form method="POST" action="{{ route('courses.enquiry') }}" class="space-y-2.5">
                                 @csrf
                                 <input required name="name" placeholder="{{ t('courseDetailX.yourNamePlaceholder') }}" value="{{ old('name') }}" class="flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                                 @include('partials.phone-input', ['value' => old('phone'), 'inputClass' => 'flex w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary', 'selectClass' => 'border-gray-200 bg-white'])

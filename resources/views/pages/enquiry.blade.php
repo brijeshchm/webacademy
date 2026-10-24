@@ -38,30 +38,7 @@
 
     $fieldsRequired = t('enquiryX.fieldsRequiredNote');
 @endphp
-
-@push('seo')
-    <title>{{ $title }} | Corporate Academy</title>
-    <meta name="description" content="{{ $desc }}">
-    <meta name="keywords" content="course enquiry, corporate academy enquiry, training enquiry India, group training pricing">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <link rel="canonical" href="{{ $canonical }}">
-    <meta property="og:title" content="{{ $title }} | Corporate Academy">
-    <meta property="og:description" content="{{ $desc }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ $canonical }}">
-    <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="{{ $title }} | Corporate Academy">
-    <meta property="og:site_name" content="Corporate Academy">
-    <meta property="og:locale" content="en_IN">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $title }} | Corporate Academy">
-    <meta name="twitter:description" content="{{ $desc }}">
-    <meta name="twitter:image" content="{{ $ogImage }}">
-    <meta name="twitter:image:alt" content="{{ $title }} | Corporate Academy">
-    <script type="application/ld+json">{!! json_ld($organizationJsonLd) !!}</script>
-@endpush
+ 
 
 @section('content')
 <div class="min-h-screen bg-background pb-24 relative overflow-hidden">

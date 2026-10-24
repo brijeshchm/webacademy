@@ -202,7 +202,7 @@
     $reviewAggregates = [
         ['name' => 'Google', 'rating' => '4.8', 'count' => '6,933', 'color' => '#4285F4'],
         ['name' => 'Facebook', 'rating' => '4.7', 'count' => '1,212', 'color' => '#1877F2'],
-        ['name' => 'Switchup', 'rating' => '4.9', 'count' => '209', 'color' => '#ef4444'],
+       
         ['name' => 'Course Report', 'rating' => '4.8', 'count' => '403', 'color' => '#f59e0b'],
     ];
 
@@ -1245,7 +1245,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     </div>
 </section>
-
+ 
 @include('partials.home.social-proof', ['hasWA' => $hasWA, 'hasProofs' => $hasProofs, 'whatsappChats' => $whatsappChats, 'proofs' => $proofs])
 
  
@@ -1427,7 +1427,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </a>
 @endforeach 
 
-    @endif
+@endif
 
     
      

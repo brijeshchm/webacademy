@@ -28,14 +28,14 @@ https://corporateacademy.com/api/sitemap.xml
 
 - Website: https://corporateacademy.com
 - Enquiry form: https://corporateacademy.com/enquiry
-- Contact page: https://corporateacademy.com/contact
+- Contact page: https://corporateacademy.com/about-us
 - Phone: +91 88001 82225
 
 ## Key Pages
 
 - All Courses: https://corporateacademy.com/courses
-- Browse by Category: https://corporateacademy.com/categories
-- About Us: https://corporateacademy.com/about
+ 
+- About Us: https://corporateacademy.com/about-us
 - Scholarships: https://corporateacademy.com/scholarship
 - Corporate Training: https://corporateacademy.com/corporate-training
-- Doctorate / DBA: https://corporateacademy.com/doctorate
+ 
