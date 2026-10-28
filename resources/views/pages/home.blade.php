@@ -353,12 +353,7 @@
         ->take(6)
         ->values();
 
-    // $gradients = [
-    //     'from-blue-100 to-indigo-200',
-    //     'from-orange-100 to-rose-200',
-    //     'from-emerald-100 to-teal-200',
-    // ];
-
+   
   $gradientsTop = [
     'from-blue-500 to-indigo-600',
     'from-orange-500 to-red-600',
