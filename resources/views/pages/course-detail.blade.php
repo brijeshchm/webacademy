@@ -877,7 +877,7 @@ margin-bottom: .5rem !important;
             loading="lazy"
         >
 
-        <div class="absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-slate-950/90 to-transparent px-4 pb-10 pt-4 sm:px-6 sm:pt-6" style="width:528px">
+        <div class="absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-slate-950/90 to-transparent px-4 pb-10 pt-4 sm:px-6 sm:pt-6" style="width:555px">
             <h3 class="text-lg font-bold leading-snug text-white drop-shadow-lg sm:text-2xl lg:text-3xl">
                 {{ $course->course_name }} 
             </h3>
