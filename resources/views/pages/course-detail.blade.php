@@ -879,7 +879,7 @@ margin-bottom: .5rem !important;
 
         <div class="absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-slate-950/90 to-transparent px-4 pb-10 pt-4 sm:px-6 sm:pt-6">
             <h3 class="text-lg font-bold leading-snug text-white drop-shadow-lg sm:text-2xl lg:text-3xl">
-                {{ $course->title }}
+                {{ $course->course_name }}
             </h3>
         </div>
     </div>
