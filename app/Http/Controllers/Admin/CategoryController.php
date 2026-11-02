@@ -148,11 +148,11 @@ class CategoryController extends Controller
         if($request->ajax()){ 		 
 		  $validator = Validator::make($request->all(),[					 
 			'category' 	=> 'required|max:255|unique:web_categories,category,'.$id.',id',	
-			'category_icons' => 'required',			
+			'category_icons' => 'nullable',			
 			]);
 			if($request->hasFile('category_icons')){
-				 $validator = Validator::make($request->all(),[					 
-				'category_icons' => 'required|mimes:jpeg,png,jpg,svg|max:2|dimensions:min_width=40,min_height=38,max_width=55,max_height=55',		 			
+				$validator = Validator::make($request->all(),[					 
+				'category_icons' => 'nullable|mimes:jpeg,png,jpg,svg|max:20|dimensions:min_width=40,min_height=38,max_width=55,max_height=55',		 			
 			]);
 			} 
 			if($validator->fails()){
@@ -357,7 +357,7 @@ public function getCategoryPagination(Request $request)
 		$delet_data = Category::findOrFail($id);	 
 		if($delet_data->category_icons!='')
 		{				 
-			$image = json_decode($delet_data->category_icons);			
+			$image = unserialize($delet_data->category_icons);			
 			$large = $image['category_icons']['src'];
 			if(!empty($image['category_icons']['src'])){
 			$thumbnail = $image['category_icons']['src'];
@@ -416,7 +416,7 @@ public function getCategoryPagination(Request $request)
 	
 		if($category->category_icons!='')
 			{				 
-			$image = json_decode($category->category_icons);			
+			$image = unserialize($category->category_icons);			
 			$large = $image['category_icons']['src'];
 			if(!empty($image['category_icons']['src'])){
 			$thumbnail = $image['category_icons']['src'];

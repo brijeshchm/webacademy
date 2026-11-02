@@ -1387,7 +1387,7 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 					type:"POST",					   
 					dataType:"json",	
 					data:form,
-					 cache: false,
+					cache: false,
 					contentType: false, 
                     processData: false,                      
 					success:function(data){

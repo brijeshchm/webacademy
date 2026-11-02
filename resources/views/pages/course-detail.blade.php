@@ -1599,11 +1599,11 @@ margin-bottom: .5rem !important;
 >
     {{-- Header --}}
     <div class="relative mb-14 text-center">
-        <span class="mb-3 inline-flex items-center rounded-full bg-red-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#7f1d1d]">
+        <span class="mb-3 inline-flex items-center rounded-full px-4 py-1.5 text-white font-semibold uppercase tracking-wider bg-primary">
             Your Learning Journey
         </span>
 
-        <h2 class="text-2xl font-bold text-[#7f1d1d] md:text-3xl">
+        <h2 class="text-2xl font-bold text-blue-600 md:text-3xl">
             Training Roadmap
         </h2>
 
@@ -1616,7 +1616,7 @@ margin-bottom: .5rem !important;
         >
             <path
                 d="M0 3 Q170 0 340 3 Q170 6 0 3 Z"
-                fill="#7f1d1d"
+                fill="#7e54f1"
             ></path>
         </svg>
 
@@ -1626,7 +1626,7 @@ margin-bottom: .5rem !important;
         </p>
 
         <div class="mt-5 flex justify-center">
-            <div class="h-1 w-20 rounded-full bg-gradient-to-r from-red-800 to-red-500"></div>
+            <div class="h-1 w-20 rounded-full bg-gradient-to-r from-blue-800 to-blue-500"></div>
         </div>
     </div>
       

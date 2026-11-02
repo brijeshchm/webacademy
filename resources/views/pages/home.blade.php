@@ -268,7 +268,13 @@
     <script type="application/ld+json">{!! json_ld($websiteJsonLd) !!}</script>
     <script type="application/ld+json">{!! json_ld($faqJsonLd) !!}</script>
  @endpush
+
+
 {{-- ── HERO ─────────────────────────────────────────────────── --}}
+
+ 
+
+
 <section class="bg-gradient-to-br from-blue-50 via-white to-indigo-50">
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
@@ -371,6 +377,8 @@
         'sm:mt-0',
         'sm:mt-12',
     ];
+
+     
 @endphp
 
 @if($courses->isNotEmpty())
@@ -386,26 +394,24 @@
             @foreach($courses as $bannerC)
                 @php
                 
+
                     $courseName = $bannerC->course_name
                         ?? $bannerC->title
                         ?? 'View course';
 
-                    $imagePath = $bannerC->image ?? '';
-
-                    $imageUrl = $imagePath
-                        ? (
-                            \Illuminate\Support\Str::startsWith(
-                                $imagePath,
-                                ['https://', 'http://']
-                            )
-                                ? $imagePath
-                                : asset(ltrim($imagePath, '/'))
-                        )
-                        : null;
-
-                    $gradientColor = $gradientsTop[$loop->index];
+                    $imagePath = '';
 
                     
+                        $imageUrl="";
+
+                   $gradientColor = $gradientsTop[$loop->index];
+                    /*
+                     if($bannerC->categoryData?->category_icons){
+                        $imagePath = unserialize($bannerC->categoryData?->category_icons);
+                        if($imagePath['category_icons']['src']){
+                        $imageUrl= $imagePath['category_icons']['src'];
+                        }
+                    } */
                 @endphp
 
                 {{-- Animate wrapper separately from hover effect --}}
@@ -418,15 +424,17 @@
                         class="group relative block aspect-[3/4] overflow-hidden rounded-3xl border-4 border-white bg-white shadow-xl shadow-blue-950/10 transition duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
                     >
                         @if($imageUrl)
+                            <div class="flex h-48 items-center justify-center bg-gradient-to-br p-5 pb-18 {{ $gradientColor }}">
                             <img
                                 src="{{ $imageUrl }}"
                                 alt="{{ $courseName }}"
                                 loading="lazy"
                                 decoding="async"
-                                width="240"
-                                height="320"
-                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                width="100"
+                                height="100"
+                                class="h-24 w-24 max-h-full w-full max-w-[140px] object-contain transition-transform duration-500 group-hover:scale-110"
                             >
+                            </div>
                         @else
                             <div class="flex h-full items-center justify-center bg-gradient-to-br p-5 pb-20 {{ $gradientColor }}">
                                 <svg

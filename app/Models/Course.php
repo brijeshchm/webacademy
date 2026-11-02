@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Course extends Model
 {
@@ -110,4 +111,10 @@ class Course extends Model
         'curriculum'     => 'array',
         'faq'            => 'array',
     ];
+
+  public function categoryData(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category', 'id');
+    }
+    
 }
