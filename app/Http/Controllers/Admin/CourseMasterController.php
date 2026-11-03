@@ -13,14 +13,14 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Image;
 use App\Models\Courses;
-use App\CoursesMaster;
-use App\CourseCity;
+use App\Models\CoursesMaster;
+use App\Models\CourseCity;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Helpers;
 use App\Models\ToolsCovered;
 use App\Models\Client;
-use App\MasterCurriculumExcel;
+use App\Models\MasterCurriculumExcel;
 class CourseMasterController extends Controller
 {
     /**
