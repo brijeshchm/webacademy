@@ -52,7 +52,7 @@ class User extends Authenticatable
 
 	
 	public function capability(){
-		return $this->hasOne('App\Capability');
+		return $this->hasOne('App\Models\Capability');
 	}
 	
 	public function current_user_can($role_cap=NULL){
