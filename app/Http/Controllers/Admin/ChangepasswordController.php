@@ -32,6 +32,7 @@ class ChangepasswordController extends Controller
     public function index()
     {   
         $id= Auth::user()->id ; 
+		// dd($id);
 		$title = "Change password";
 		$edit_data = User::where('id',$id)->get()->first();
 	 
@@ -48,20 +49,36 @@ class ChangepasswordController extends Controller
      */
     public function edit(Request $request)
     {	
-		$id= Auth::user()->id ; 
+		// dd($request);
+		 $id= Auth::user()->id; 
+		//  dd($id);
 		$title = "Change password";
 		 
 		if($request->isMethod('post') && $request->input('submit')=="Update")
 		{	 
 	
 	//echo "<pre>";print_r($_POST);die;
-				 $this->validate($request, [
-					'oldpwd'=>'required',
-					'newpwd'=>'required|min:8|max:255',
-					'cpwd' => 'required|min:8|max:255',					 
+				//  $this->validate($request, [
+				// 	'oldpwd'=>'required',
+				// 	'newpwd'=>'required|min:8|max:255',
+				// 	'cpwd' => 'required|min:8|max:255',					 
 					
-					]); 
+				// 	]); 
 			 		
+
+					 $validator = Validator::make($request->all(),[				 
+				'oldpwd'=>'required',
+					'newpwd'=>'required|min:8|max:255',
+					'cpwd' => 'required|min:8|max:255',		
+				 				
+			]);
+			
+			if($validator->fails()){
+				$errorsBag = $validator->getMessageBag()->toArray();
+				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+			}
+
+
 					$edit_data = User::where('id',$id)->get()->first();	
 					$newpwd = bcrypt($request->input('newpwd')); 
 			 

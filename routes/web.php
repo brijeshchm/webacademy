@@ -140,7 +140,7 @@ Route::get('/profile/delete/{id}',[App\Http\Controllers\Admin\ProfileController:
 Route::get('/profile/status/{id}/{val}',[App\Http\Controllers\Admin\ProfileController::class, 'status']);
 
 
-Route::get('/change-password/',[App\Http\Controllers\Admin\ChangepasswordController::class, 'index'])->middleware('auth');
+Route::get('/change-password/',[App\Http\Controllers\Admin\ChangepasswordController::class, 'index']);
 Route::post('/change-password/',[App\Http\Controllers\Admin\ChangepasswordController::class, 'edit']);
  
 // users
@@ -490,7 +490,7 @@ Route::get('/mobilebanner/del_icon/{id}',[App\Http\Controllers\Admin\HomesliderC
     // Authenticated area
     Route::middleware('admin.web')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-        Route::middleware('throttle:admin-auth')->post('/change-password', [AdminController::class, 'changePassword'])->name('change-password');
+        // Route::middleware('throttle:admin-auth')->post('/change-password', [AdminController::class, 'changePassword'])->name('change-password');
 
         // WhatsApp chats
         Route::post('/whatsapp', [AdminController::class, 'storeWhatsapp'])->name('whatsapp.store');
