@@ -92,7 +92,7 @@ $menuCategories = $coursesMenuList
         aria-expanded="false"
         class="ca-course-menu__toggle rounded-xl px-3 py-2.5
                text-sm font-semibold transition-colors
-               {{ $isActive('/courses') || $isActive('/categories')
+               {{ $isActive('/courses')
                     ? $navLinkOn
                     : $navLinkOff }}"
     >

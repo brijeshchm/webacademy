@@ -335,15 +335,11 @@ $bgImage = $image->blog_image->src;
      */
     public function blogCategory(Request $reques,$url)
     {	 
-		//echo $url;die;
-		
-		$url =str_replace('-',' ',$url);
- 
-		$blog_category =Category::where('category',$url)->first();
- 
+		 
+		$blog_category =Category::where('category_slug',$url)->first();
 
 		$blogs = Blog::where('category', '=', $blog_category->id)->orderBy('id','desc')->get();
-		// dd($blogs);
+		 
 	 
         return view('pages.blog-category',['blogs'=>$blogs,'url'=>$url,'blog_category'=>$blog_category]);
     } 

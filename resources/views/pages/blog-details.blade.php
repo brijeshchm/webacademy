@@ -539,19 +539,22 @@
 
                         <ul class="divide-y divide-slate-100">
                             @foreach($categoryItems as $category)
-                                @php
-                                    $categorySlug = data_get($category, 'category_slug');
-                                    $categoryName = data_get($category, 'category', '');
+                                @php                                 
+                                   
+                                    $categorySlug = $category->category_slug;
+                                    $categoryName = data_get($category, 'category', '');  
+                                 
+                                    
                                 @endphp
 
                                 @if(filled($categoryName))
                                     <li class="py-3 text-sm text-slate-600">
-                                        @if(filled($categorySlug))
+                                        @if($categorySlug)
                                             <a
-                                                href="{{ route('blog.blogCategory', $categorySlug) }}"
+                                                href="{{ route('blog.blogCategory', ['slug' => $categorySlug]) }}"
                                                 class="hover:text-blue-700"
                                             >
-                                                {{ $categoryName }}
+                                                {{ $categoryName }} 
                                             </a>
                                         @else
                                             {{ $categoryName }}

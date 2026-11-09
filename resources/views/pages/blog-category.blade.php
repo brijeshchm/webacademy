@@ -127,7 +127,7 @@ $city = '';
                                 rounded-xl overflow-hidden flex flex-col"
                          data-title="{{ $blog->title ?? '' }}"
                          data-name="{{ strtolower($blog->name ?? '') }}"
-                         data-slug="{{ $blog->category_slug ?? '' }}"
+                        
                          data-rating="{{ $blog->rating ?? 0 }}"
                          data-count="{{ $blog->total_rating ?? 0 }}">
                         <a href="{{ route('blog.details', $blog->slug) }}" class="block h-full flex flex-col">

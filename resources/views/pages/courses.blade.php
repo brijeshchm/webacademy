@@ -55,6 +55,7 @@
         @endforeach
         @endif
 @endpush
+
 @section('content')
 <div class="py-12 bg-background min-h-screen relative overflow-hidden">
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none ca-float"></div>
