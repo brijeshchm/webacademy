@@ -117,4 +117,10 @@ class Course extends Model
         return $this->belongsTo(Category::class, 'category', 'id');
     }
     
+
+    public function categoryIcon(): BelongsTo
+{
+    return $this->belongsTo(Category::class, 'category', 'id');
+}
+    
 }

@@ -36,52 +36,751 @@
                 <img loading="eager" decoding="async" src="{{ asset('images/logo-academy.webp') }}" alt="Corporates Academy" width="802" height="205" class="h-10 w-auto max-w-[200px] object-contain transition-all duration-300 group-hover:scale-[1.04]">
             </a>
 
-            {{-- DESKTOP NAV --}}
+            {{-- DESKTOP NAV hidden --}}
             <nav class="hidden xl:flex items-center gap-1 flex-1">
 
                 {{-- Courses (dropdown) --}}
-                <div class="relative" data-dropdown>
-                    <button type="button" data-dropdown-toggle class="flex items-center gap-1 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 {{ $isActive('/courses') || $isActive('/categories') ? $navLinkOn : $navLinkOff }}">
-                        {{ t('nav.courses') }}
-                        <svg class="h-3.5 w-3.5 transition-transform duration-200" data-dropdown-caret viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    <div data-dropdown-panel class="hidden absolute top-full left-0 mt-2 w-[520px] bg-white rounded-2xl shadow-2xl shadow-black/30 border border-gray-100 overflow-hidden z-50">
-                        <div class="p-5">
-                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">{{ t('navX.popularCategories') }}</p>
-                            <div class="grid grid-cols-2 gap-1.5">
-                                 @php
-                                $coursesMenuList = App\Models\Course::where(function ($query) {
-                                $query->whereNull('city')
-                                ->orWhere('city', '');
-                                })
-                                ->select('slug','title','course_name')
-                                ->where('show_top_menu', '1')->limit('10')
-                                ->get();
 
-                                @endphp
+  @php
+    $coursesMenuList = \App\Models\Course::query()
+    ->where(function ($query) {
+        $query->whereNull('city')
+              ->orWhere('city', '');
+    })
+    ->with('categoryIcon')
+    ->where('show_top_menu', '1')
+    ->select(
+        'id',
+        'slug',
+        'title',
+        'course_name',
+        'category',
+        'category_name'
+    )
+    ->orderBy('course_name')
+    ->get();
 
-                                @if($coursesMenuList)
-                                @foreach($coursesMenuList as $coursesMenu)
+$menuCategories = $coursesMenuList
+    ->filter(function ($course) {
+        return trim((string) $course->category) !== '';
+    })
+    ->groupBy('category')
+    ->map(function ($courses, $categoryId) {
+        $categoryName = $courses
+            ->pluck('category_name')
+            ->first(function ($name) {
+                return trim((string) $name) !== '';
+            });
 
-                                    <a href="{{ route('courses.show', ['slug' => $coursesMenu->slug]) }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group">
-                                        <div class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                            <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                                        </div>
-                                        <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">{{ $coursesMenu->course_name }}</span>
-                                    </a>
-                                @endforeach
-                                @endif
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-50 bg-gradient-to-r from-primary/5 to-violet-50 px-5 py-3 flex items-center justify-between">
-                            <span class="text-xs text-gray-400 font-medium">{{ t('navX.programmesCount') }}</span>
-                            <a href="{{ route('courses')}}" class="flex items-center gap-1 text-xs font-bold text-primary hover:text-primary/80 transition-colors text-sm font-semibold text-slate-700 transition-colors hover:text-blue-600">
-                                {{ t('navX.viewAll') }}
-                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
+        return [
+            'category'     => $categoryId,
+            'categoryName' => $categoryName ?: 'Other Courses',
+            'courses'      => $courses->values(),
+            'categoryIcon' => $courses->first()?->categoryIcon,
+        ];
+    })
+    ->sortBy('categoryName', SORT_NATURAL | SORT_FLAG_CASE)
+    ->values();
+        
+@endphp
+
+
+<div class="ca-course-menu" data-ca-course-menu>
+    <button
+        type="button"
+        data-ca-toggle
+        aria-expanded="false"
+        class="ca-course-menu__toggle rounded-xl px-3 py-2.5
+               text-sm font-semibold transition-colors
+               {{ $isActive('/courses') || $isActive('/categories')
+                    ? $navLinkOn
+                    : $navLinkOff }}"
+    >
+        {{ t('nav.courses') }}
+
+        <svg
+            class="ca-course-menu__caret"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+        >
+            <path d="m6 9 6 6 6-6" />
+        </svg>
+    </button>
+
+    <div class="ca-course-menu__panel" data-ca-panel hidden>
+        @if ($menuCategories->isNotEmpty())
+            <div class="ca-course-menu__layout">
+
+                {{-- Left categories --}}
+                <div class="ca-course-menu__categories">
+                    <div
+                        role="tablist"
+                        aria-label="Course categories"
+                        aria-orientation="vertical"
+                    >
+                        @foreach ($menuCategories as $index => $category)
+                            <button
+                                type="button"
+                                role="tab"
+                                class="ca-course-menu__category"
+                                data-ca-category="{{ $index }}"
+                                aria-selected="{{ $loop->first ? 'true' : 'false' }}"
+                                tabindex="{{ $loop->first ? '0' : '-1' }}"
+                            >
+                                <span class="ca-course-menu__icon" aria-hidden="true">
+                                   
+                            @php
+                                $iconImg = null;
+
+                               
+                                $categoryIcon = $category['categoryIcon'] ?? null;
+
+                                $rawIcons = is_string($categoryIcon)
+                                    ? $categoryIcon
+                                    : data_get($categoryIcon, 'category_icons');
+
+                                $icons = is_array($rawIcons) ? $rawIcons : [];
+
+                                if (is_string($rawIcons) && trim($rawIcons) !== '') {
+                                    $decoded = @unserialize($rawIcons, [
+                                        'allowed_classes' => false,
+                                    ]);
+
+                                    $icons = is_array($decoded) ? $decoded : [];
+                                }
+
+                                $src = data_get($icons, 'category_icons.src');
+
+                                if (is_string($src) && trim($src) !== '') {
+                                    $iconImg = asset(trim($src));
+                                }
+                            @endphp
+
+                            @if ($iconImg)
+                                <img
+                                    src="{{ $iconImg }}"
+                                    alt=""
+                                    width="22"
+                                    height="22"
+                                    style="width:22px;height:22px;object-fit:contain;"
+                                >
+                            @else
+                                <svg
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    aria-hidden="true"
+                                >
+                                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                                    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                                </svg>
+                            @endif
+                
+
+                                   
+                                </span>
+
+                                <span class="ca-course-menu__category-name">
+                                    {{ $category['categoryName'] }}
+                                </span>
+
+                                <span class="ca-course-menu__arrow" aria-hidden="true">
+                                    ›
+                                </span>
+                            </button>
+                        @endforeach
                     </div>
                 </div>
+
+                {{-- Right courses --}}
+                <div class="ca-course-menu__right">
+                    @foreach ($menuCategories as $index => $category)
+                        <div
+                            role="tabpanel"
+                            class="ca-course-menu__content"
+                            data-ca-content="{{ $index }}"
+                            @if (!$loop->first) hidden @endif
+                        >
+                            <h3 class="ca-course-menu__heading">
+                                Popular Courses
+                            </h3>
+
+                            @forelse ($category['courses'] as $course)
+                                <a
+                                    href="{{ route('courses.show', ['slug' => $course->slug]) }}"
+                                    class="ca-course-menu__link"
+                                >
+                                    <svg
+                                        viewBox="0 0 12 12"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M4 1.5 8.5 6 4 10.5z" />
+                                    </svg>
+
+                                    <span>
+                                        {{ trim((string) $course->course_name) !== ''
+                                            ? $course->course_name
+                                            : $course->title }}
+                                    </span>
+                                </a>
+                            @empty
+                                <p class="ca-course-menu__empty">
+                                    No courses available.
+                                </p>
+                            @endforelse
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @else
+            <p class="ca-course-menu__empty">
+                No featured courses available.
+            </p>
+        @endif
+
+        <div class="ca-course-menu__footer">
+            <span>Explore our training programmes</span>
+
+            <a href="{{ route('courses') }}">
+                {{ t('navX.viewAll') }} →
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+(() => {
+    function initializeCourseMenus() {
+        document.querySelectorAll('[data-ca-course-menu]').forEach(menu => {
+            if (menu.dataset.caReady === 'true') return;
+
+            const toggle = menu.querySelector('[data-ca-toggle]');
+            const panel = menu.querySelector('[data-ca-panel]');
+            const buttons = [...menu.querySelectorAll('[data-ca-category]')];
+            const contents = [...menu.querySelectorAll('[data-ca-content]')];
+
+            if (!toggle || !panel) return;
+
+            menu.dataset.caReady = 'true';
+
+            let closeTimer;
+
+            window.caCourseMenuCounter = (window.caCourseMenuCounter || 0) + 1;
+            const prefix = `ca-course-menu-${window.caCourseMenuCounter}`;
+
+            panel.id = `${prefix}-dropdown`;
+            toggle.setAttribute('aria-controls', panel.id);
+
+            buttons.forEach(button => {
+                const key = button.dataset.caCategory;
+                const content = contents.find(
+                    item => item.dataset.caContent === key
+                );
+
+                button.id = `${prefix}-tab-${key}`;
+
+                if (content) {
+                    content.id = `${prefix}-content-${key}`;
+                    content.setAttribute('aria-labelledby', button.id);
+                    button.setAttribute('aria-controls', content.id);
+                }
+            });
+
+            function cancelClose() {
+                clearTimeout(closeTimer);
+            }
+
+            function positionPanel() {
+                panel.style.transform = '';
+
+                const bounds = panel.getBoundingClientRect();
+                const viewportWidth = document.documentElement.clientWidth;
+
+                let shift = 0;
+
+                if (bounds.right > viewportWidth - 12) {
+                    shift = viewportWidth - 12 - bounds.right;
+                }
+
+                if (bounds.left + shift < 12) {
+                    shift += 12 - (bounds.left + shift);
+                }
+
+                panel.style.transform = `translateX(${shift}px)`;
+            }
+
+            function setOpen(open) {
+                cancelClose();
+
+                panel.hidden = !open;
+                toggle.setAttribute('aria-expanded', String(open));
+
+                if (open) positionPanel();
+            }
+
+            function scheduleClose() {
+                cancelClose();
+
+                closeTimer = setTimeout(() => {
+                    setOpen(false);
+                }, 200);
+            }
+
+            function activateCategory(button) {
+                const selected = button.dataset.caCategory;
+
+                buttons.forEach(item => {
+                    const active = item === button;
+
+                    item.setAttribute('aria-selected', String(active));
+                    item.tabIndex = active ? 0 : -1;
+                });
+
+                contents.forEach(content => {
+                    content.hidden = content.dataset.caContent !== selected;
+                });
+            }
+
+            // Mouse hover opens the dropdown.
+            menu.addEventListener('pointerenter', event => {
+                if (event.pointerType === 'mouse') {
+                    setOpen(true);
+                }
+            });
+
+            // Close after leaving the complete menu.
+            menu.addEventListener('pointerleave', event => {
+                if (event.pointerType === 'mouse') {
+                    scheduleClose();
+                }
+            });
+
+            // Cancel any pending close when entering the panel.
+            panel.addEventListener('pointerenter', cancelClose);
+
+            // Click also opens it, including touch and keyboard activation.
+            toggle.addEventListener('click', () => {
+                setOpen(true);
+            });
+
+            toggle.addEventListener('keydown', event => {
+                if (event.key === 'ArrowDown' && buttons.length) {
+                    event.preventDefault();
+                    setOpen(true);
+
+                    const active = buttons.find(
+                        button => button.getAttribute('aria-selected') === 'true'
+                    );
+
+                    (active || buttons[0]).focus();
+                }
+            });
+
+            buttons.forEach((button, index) => {
+                // Category mouse hover.
+                button.addEventListener('pointerenter', event => {
+                    if (event.pointerType === 'mouse') {
+                        activateCategory(button);
+                    }
+                });
+
+                // Category click/touch.
+                button.addEventListener('click', () => {
+                    cancelClose();
+                    activateCategory(button);
+                });
+
+                // Keyboard focus.
+                button.addEventListener('focus', () => {
+                    cancelClose();
+                    activateCategory(button);
+                });
+
+                button.addEventListener('keydown', event => {
+                    let nextIndex;
+
+                    switch (event.key) {
+                        case 'ArrowDown':
+                            nextIndex = (index + 1) % buttons.length;
+                            break;
+
+                        case 'ArrowUp':
+                            nextIndex = (index - 1 + buttons.length) % buttons.length;
+                            break;
+
+                        case 'Home':
+                            nextIndex = 0;
+                            break;
+
+                        case 'End':
+                            nextIndex = buttons.length - 1;
+                            break;
+
+                        default:
+                            return;
+                    }
+
+                    event.preventDefault();
+                    buttons[nextIndex].focus();
+                });
+            });
+
+            // Outside click closes the dropdown.
+            document.addEventListener('click', event => {
+                if (!menu.contains(event.target)) {
+                    setOpen(false);
+                }
+            });
+
+            // Escape closes and restores focus.
+            menu.addEventListener('keydown', event => {
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    setOpen(false);
+                    toggle.focus();
+                }
+            });
+
+            menu.addEventListener('focusin', cancelClose);
+
+            // Close when keyboard focus leaves the menu.
+            menu.addEventListener('focusout', event => {
+                if (!menu.contains(event.relatedTarget)) {
+                    setOpen(false);
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (!panel.hidden) positionPanel();
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCourseMenus);
+    } else {
+        initializeCourseMenus();
+    }
+})();
+</script>
+
+
+<style>
+    .ca-course-menu {
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .ca-course-menu *,
+    .ca-course-menu *::before,
+    .ca-course-menu *::after {
+        box-sizing: border-box;
+    }
+
+    .ca-course-menu [hidden] {
+        display: none !important;
+    }
+
+    .ca-course-menu__toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .ca-course-menu__caret {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        transition: transform .2s ease;
+    }
+
+    .ca-course-menu__toggle[aria-expanded="true"]
+    .ca-course-menu__caret {
+        transform: rotate(180deg);
+    }
+
+    .ca-course-menu .ca-course-menu__panel {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 9999;
+        display: block;
+        width: 820px;
+        max-width: calc(100vw - 24px);
+        margin-top: 10px;
+        padding: 8px;
+        overflow: visible;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 18px 50px rgb(15 23 42 / 20%);
+        text-align: left;
+        white-space: normal;
+    }
+
+    /* Mouse can cross the gap without closing the menu. */
+    .ca-course-menu__panel::before {
+        content: "";
+        position: absolute;
+        top: -11px;
+        left: 0;
+        width: 100%;
+        height: 11px;
+    }
+
+    .ca-course-menu__layout {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 8px;
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .ca-course-menu__categories,
+    .ca-course-menu__content {
+        height: 400px;
+        max-height: 60vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #2563eb #e5e7eb;
+    }
+
+    .ca-course-menu__categories::-webkit-scrollbar,
+    .ca-course-menu__content::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .ca-course-menu__categories::-webkit-scrollbar-thumb,
+    .ca-course-menu__content::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #2563eb;
+    }
+
+    .ca-course-menu__categories {
+        min-width: 0;
+        padding: 8px;
+        background: #f1f1f1;
+    }
+
+    .ca-course-menu .ca-course-menu__category {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        min-height: 42px;
+        margin: 0 0 4px;
+        padding: 9px 10px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: #334155;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.5;
+        text-align: left;
+        cursor: pointer;
+        transition: background .15s ease, color .15s ease;
+    }
+
+    .ca-course-menu__category:hover,
+    .ca-course-menu__category[aria-selected="true"] {
+        background: #dcdcdc;
+        color: #0f172a;
+    }
+
+    .ca-course-menu__category:focus-visible,
+    .ca-course-menu__link:focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: -2px;
+    }
+
+    .ca-course-menu__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        flex: 0 0 22px;
+        color: #2563eb;
+    }
+
+    .ca-course-menu__icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ca-course-menu__category-name {
+        flex: 1;
+        min-width: 0;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .ca-course-menu__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        flex: 0 0 26px;
+        border-radius: 5px;
+        background: #bfc1c4;
+        color: #fff;
+        font-size: 22px;
+        line-height: 1;
+        visibility: hidden;
+    }
+
+    .ca-course-menu__category[aria-selected="true"]
+    .ca-course-menu__arrow {
+        visibility: visible;
+    }
+
+    .ca-course-menu__right {
+        min-width: 0;
+        background: #f0faff;
+    }
+
+    .ca-course-menu__content {
+        padding: 22px;
+    }
+
+    .ca-course-menu__heading {
+        margin: 0 0 14px;
+        color: #0f172a;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .ca-course-menu .ca-course-menu__link {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 3px;
+        padding: 8px;
+        border-radius: 6px;
+        color: #526173;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.6;
+        text-decoration: none;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+        transition: background .15s ease, color .15s ease;
+    }
+
+    .ca-course-menu__link:hover {
+        background: #fff;
+        color: #1d4ed8;
+    }
+
+    .ca-course-menu__link svg {
+        width: 12px;
+        height: 12px;
+        margin-top: 4px;
+        flex: 0 0 12px;
+        color: #8491a0;
+    }
+
+    .ca-course-menu__link span {
+        min-width: 0;
+    }
+
+    .ca-course-menu__empty {
+        margin: 0;
+        padding: 20px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    .ca-course-menu__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 8px 4px;
+        color: #64748b;
+        font-size: 12px;
+    }
+
+    .ca-course-menu__footer a {
+        flex-shrink: 0;
+        color: #2563eb;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+        .ca-course-menu .ca-course-menu__panel {
+            width: calc(100vw - 24px);
+            padding: 5px;
+        }
+
+        .ca-course-menu__layout {
+            grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+            gap: 5px;
+        }
+
+        .ca-course-menu__categories {
+            padding: 4px;
+        }
+
+        .ca-course-menu .ca-course-menu__category {
+            gap: 6px;
+            padding: 9px 6px;
+            font-size: 12px;
+        }
+
+        .ca-course-menu__icon {
+            width: 18px;
+            flex-basis: 18px;
+        }
+
+        .ca-course-menu__icon svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .ca-course-menu__arrow {
+            display: none;
+        }
+
+        .ca-course-menu__content {
+            padding: 14px 8px;
+        }
+
+        .ca-course-menu .ca-course-menu__link {
+            gap: 4px;
+            padding: 7px 3px;
+            font-size: 12px;
+        }
+
+        .ca-course-menu__footer {
+            font-size: 11px;
+        }
+    }
+</style>
+        
 
                 {{-- Simple links --}}
                 

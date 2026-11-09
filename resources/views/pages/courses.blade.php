@@ -55,7 +55,7 @@
         @endforeach
         @endif
 @endpush
-@section('meta_robots')
+@section('meta_robots') 
 <meta name="robots" content="noindex, nofollow">
 @endsection
 @section('content')
@@ -65,7 +65,7 @@
 
     <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="mb-12">
-            <h1 class="text-4xl font-display font-bold mb-4">{{ t('courses.courseCatalog') }}</h1>
+            <h1 class="text-4xl font-display font-bold mb-4">Professional Training Courses & Certification Programs</h1>
             <p class="text-muted-foreground text-lg max-w-2xl">{{ t('courses.catalogDesc') }}</p>
         </div>
 
