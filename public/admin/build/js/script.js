@@ -1116,6 +1116,106 @@ var dataTableAllpaymentMode = $('#datatable-all-paymentMode')
 		}
 	}
 }).api();
+
+
+ var dataTableWhatschats= $('#datatable-all-whatschats')
+.dataTable({
+	"fixedHeader": true,
+	"processing":true,
+	"serverSide":true,
+	"paging":true,
+	"ordering":false,
+	"lengthMenu": [
+            [10,25,50,100,250,500],
+            ['10','25','50','100','250','500']
+        ],
+		 dom: "Blfrtip",
+                buttons: [
+                    {
+                        extend: "copy",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "csv",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "excel",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "pdfHtml5",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "print",
+                        className: "btn-sm"
+                    },
+                ],
+	"ajax":{
+		url:"/admin/whatschats/get-whatschats",
+		data:function(d){		 
+			
+			d.page = (d.start/d.length)+1;			 	
+			d.columns = null;
+			d.order = null;
+		},
+		dataSrc:function(json){
+			recordCollection = json.recordCollection;
+			return json.data;
+		}
+	}
+}).api();
+ 
+    
+ var dataTablePlacementproof= $('#datatable-all-placementproof')
+.dataTable({
+	"fixedHeader": true,
+	"processing":true,
+	"serverSide":true,
+	"paging":true,
+	"ordering":false,
+	"lengthMenu": [
+            [10,25,50,100,250,500],
+            ['10','25','50','100','250','500']
+        ],
+		 dom: "Blfrtip",
+                buttons: [
+                    {
+                        extend: "copy",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "csv",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "excel",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "pdfHtml5",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "print",
+                        className: "btn-sm"
+                    },
+                ],
+	"ajax":{
+		url:"/admin/placementproof/get-placementproof",
+		data:function(d){		 
+			
+			d.page = (d.start/d.length)+1;			 	
+			d.columns = null;
+			d.order = null;
+		},
+		dataSrc:function(json){
+			recordCollection = json.recordCollection;
+			return json.data;
+		}
+	}
+}).api();
  
     
       
@@ -6679,6 +6779,383 @@ var clientController = (function(){
 						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
 						$('#successMessageId').css({'width':'100%'});
 						dataTableAllPlacement.ajax.reload( null, false );   
+					}else{
+							$('#successMessageId .modal-title').text("Status successfully update");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					    mainSpinner.stop();			
+						 alert('some error');
+					}
+				});
+				}
+					
+					
+				}
+				
+			}
+			 
+			
+		 
+			
+			
+	};
+	})();
+	
+ var placementProofController = (function(){
+		return {
+			checked_Ids:[],				  
+			savePlacementProof:function(THIS){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);		
+ 		  mainSpinner.start();
+				$.ajax({
+					url:"/admin/placementproof/save",
+					type:"POST",					   
+					dataType:"json",
+					data:form,
+					cache: false,
+					contentType: false, 
+                    processData: false,             
+					success:function(data){	
+					    mainSpinner.stop();			
+						if(data.status){	
+						 
+						$('#successMessageId .modal-title').text("placementproof");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+							window.location="/admin/placementproof";								
+						}else{
+							$('#successMessageId .modal-title').text("placementproof");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					    mainSpinner.stop();			
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},
+
+			editSavePlacementProof:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+			 mainSpinner.start();
+				$.ajax({
+					url:"/admin/placementproof/editSavePlacementproof/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					    mainSpinner.stop();			
+						if(data.status){	
+						 					
+						$('#successMessageId .modal-title').text("placementproof");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+							window.location="/admin/placementproof";	
+						}else{
+							$('#successMessageId .modal-title').text("Placement Content");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					    mainSpinner.stop();			
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},
+
+		 	 
+			 
+			delete:function(id){
+		 
+			 	if( confirm("Are you sure you want to delete?") ) {	
+				  mainSpinner.start();
+				$.ajax({
+					url:"/admin/placementproof/delete/"+id,
+					type:"GET",
+					success:function(response){	
+					    mainSpinner.stop();			
+					if(response.status){
+						$('#successMessageId .modal-title').text("Placement Delete");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+						dataTablePlacementproof.ajax.reload( null, false );   
+					}else{
+							$('#successMessageId .modal-title').text("Placement Delete");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					    mainSpinner.stop();			
+						 alert('some error');
+					}
+				});
+				}
+			},
+			status:function(id,val){		 
+			 if(val==true){
+				if(confirm("Are you sure you want to change the status to Active?")){		
+				  mainSpinner.start();
+				$.ajax({
+					url:"/admin/placementproof/status/"+id+"/"+val,
+					type:"GET",					
+					success:function(response){	
+					 mainSpinner.stop();			
+					if(response.status){
+						$('#successMessageId .modal-title').text("status successfully update");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+						dataTablePlacementproof.ajax.reload( null, false );   
+					}else{
+							$('#successMessageId .modal-title').text("Status successfully update");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					    mainSpinner.stop();			
+						 alert('some error');
+					}
+				});
+				}
+				
+				}else{
+					if(confirm("Are you sure you want to change the status to Inactive?")){		
+				  mainSpinner.start();
+				$.ajax({
+					url:"/admin/placementproof/status/"+id+"/"+val,
+					type:"GET",					
+					success:function(response){	
+					 mainSpinner.stop();			
+					if(response.status){
+						$('#successMessageId .modal-title').text("status successfully update");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+						dataTablePlacementproof.ajax.reload( null, false );   
+					}else{
+							$('#successMessageId .modal-title').text("Status successfully update");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					    mainSpinner.stop();			
+						 alert('some error');
+					}
+				});
+				}
+					
+					
+				}
+				
+			}
+			 
+			
+		 
+			
+			
+	};
+	})();
+	
+	
+ var WhatschatsController = (function(){
+		return {
+			checked_Ids:[],				  
+			saveWhatschats:function(THIS){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);		
+ 		  mainSpinner.start();
+				$.ajax({
+					url:"/admin/whatschats/save",
+					type:"POST",					   
+					dataType:"json",
+					data:form,
+					cache: false,
+					contentType: false, 
+                    processData: false,             
+					success:function(data){	
+					    mainSpinner.stop();			
+						if(data.status){	
+						 
+						$('#successMessageId .modal-title').text("whatschats");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+							window.location="/admin/whatschats";								
+						}else{
+							$('#successMessageId .modal-title').text("whatschats");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					    mainSpinner.stop();			
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},
+
+			editSaveWhatschats:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+			 mainSpinner.start();
+				$.ajax({
+					url:"/admin/whatschats/editSaveWhatschats/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					    mainSpinner.stop();			
+						if(data.status){	
+						 					
+						$('#successMessageId .modal-title').text("whatschats");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+							window.location="/admin/whatschats";	
+						}else{
+							$('#successMessageId .modal-title').text("whatschats");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					    mainSpinner.stop();			
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},
+
+		 	 
+			 
+			delete:function(id){
+		 
+			 	if( confirm("Are you sure you want to delete?") ) {	
+				  mainSpinner.start();
+				$.ajax({
+					url:"/admin/whatschats/delete/"+id,
+					type:"GET",
+					success:function(response){	
+					    mainSpinner.stop();			
+					if(response.status){
+						$('#successMessageId .modal-title').text("whatschats Delete");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+						dataTableWhatschats.ajax.reload( null, false );   
+					}else{
+							$('#successMessageId .modal-title').text("whatschats Delete");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					    mainSpinner.stop();			
+						 alert('some error');
+					}
+				});
+				}
+			},
+			status:function(id,val){		 
+			 if(val==true){
+				if(confirm("Are you sure you want to change the status to Active?")){		
+				  mainSpinner.start();
+				$.ajax({
+					url:"/admin/whatschats/status/"+id+"/"+val,
+					type:"GET",					
+					success:function(response){	
+					 mainSpinner.stop();			
+					if(response.status){
+						$('#successMessageId .modal-title').text("status successfully update");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+						dataTableWhatschats.ajax.reload( null, false );   
+					}else{
+							$('#successMessageId .modal-title').text("Status successfully update");	
+							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+							$('#successMessageId').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					    mainSpinner.stop();			
+						 alert('some error');
+					}
+				});
+				}
+				
+				}else{
+					if(confirm("Are you sure you want to change the status to Inactive?")){		
+				  mainSpinner.start();
+				$.ajax({
+					url:"/admin/whatschats/status/"+id+"/"+val,
+					type:"GET",					
+					success:function(response){	
+					 mainSpinner.stop();			
+					if(response.status){
+						$('#successMessageId .modal-title').text("status successfully update");	
+						$('#successMessageId .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#successMessageId').modal({keyboard:false,backdrop:'static'});
+						$('#successMessageId').css({'width':'100%'});
+						dataTableWhatschats.ajax.reload( null, false );   
 					}else{
 							$('#successMessageId .modal-title').text("Status successfully update");	
 							$('#successMessageId .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		

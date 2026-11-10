@@ -156,6 +156,27 @@
                     </ul>
                   </li> 
 				    
+				 @endif 
+
+				 @if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('whatschats') )
+				  
+				  <li><a><i class="fa fa-whatsapp"></i>Whatschats <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{url('admin/whatschats/add')}}">Add Whatschats</a></li>
+                      <li><a href="{{url('admin/whatschats')}}">All Whatschats</a></li>                       
+                    </ul>
+                  </li> 
+				    
+				 @endif
+				  @if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('placementproof') )
+				  
+				  <li><a><i class="fa fa-graduation-cap"></i>Placement Proof <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{url('admin/placementproof/add')}}">Add Placementproof</a></li>
+                      <li><a href="{{url('admin/placementproof')}}">All Placementproof</a></li>                       
+                    </ul>
+                  </li> 
+				    
 				 @endif
 				 
 				  @if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('placement') )

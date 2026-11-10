@@ -1,0 +1,626 @@
+<?php
+
+namespace App\Http\Controllers\admin;
+ 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;  
+use Auth;
+use Hash;
+use Validator;
+use DB;
+use Session;
+use Carbon\Carbon; 
+use Illuminate\Support\Facades\Input;
+use Image; 
+use App\Models\City;
+use App\Models\FAQs;
+use App\Models\Blog;
+use App\Models\Proof;
+use App\Models\Course;
+use App\Helpers;
+class PlacementproofController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(Request $request)
+    {
+         //$this->middleware('auth');
+	   
+    }
+
+    /**
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {	  
+        return view('admin.placementproof.index');
+    } 
+	
+ 
+   /**
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {		
+		$course_list= Course::select('id','title','course_name')->where('course_type','1')->where('status','1')->get();	
+		
+        return view('admin.placementproof.add_proof',['course_list'=>$course_list]);
+    } 
+	 /**
+	 add save Course Title with slug
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function savePlacementproof(Request $request)
+    {	  
+	 
+        if($request->ajax()){ 
+		  $validator = Validator::make($request->all(),[	
+			 
+				'caption' => 'required',				
+				'image_data' => 'required',				
+				 			
+				 				
+			]);
+			
+			if($validator->fails()){
+				$errorsBag = $validator->getMessageBag()->toArray();
+				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+			}	  
+			
+				 
+			$image = "";
+			
+				$placement = New Proof;
+				$placement->caption = ucwords(trim($request->input('caption')));		
+			 
+
+				if ($request->hasFile('image_data')) {
+						$filePath = $this->getPlacementFolderStructure();
+					if (!empty($placement->image_data)) {
+						$existing = json_decode($placement->image_data, true);
+						if (!empty($existing->image_data->src)) {
+							$oldLogoImages[] = $existing->image_data;
+						}
+					}
+
+					$destinationPath = public_path($filePath);
+					$filename = $this->saveImageSmart(
+						$request->file('image_data'),
+						$destinationPath,
+						null,
+						null
+					);
+
+					$placementImageData = [
+						'image_data' => [
+							'name'   => $filename,
+							'alt'    => $request->input('caption'),
+							'width'  => '',
+							'height' => '',
+							'src'    => $filePath . '/' . $filename,
+						],
+					];
+
+					$placement->image_data = json_encode($placementImageData);
+        		}
+
+			 			 
+				$placement->status = '1';				 
+				 	
+			if($placement->save()){
+				$status=1;							 
+				$msg="Placement proof submitted successfully!";		
+				
+			}else{
+				$status=0;							 
+				$msg="Placement could not be submitted!";	
+			}
+		
+			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
+			
+		
+		}
+    } 
+
+  
+	
+	 
+   /**
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request,$id)
+    {	  
+		$edit_data= Proof::findOrFail(base64_decode($id)); 
+		$course_list= Course::select('id','title','course_name')->where('course_type','1')->where('status','1')->get();
+        return view('admin.placementproof.edit_proof',['edit_data'=>$edit_data,'course_list'=>$course_list]);
+    } 
+	
+	/**
+	 add save Course Title with slug
+     * Author: Brijesh Chauhan.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editSavePlacementproof(Request $request,$id)
+    {	  
+ 
+        if($request->ajax()){ 
+		
+		  $validator = Validator::make($request->all(),[				 
+				'caption' => 'required',				
+				'image_data' => 'required',			
+			 			
+			]);
+			
+			if($validator->fails()){
+				$errorsBag = $validator->getMessageBag()->toArray();
+				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
+			}	  
+					
+				$placement = Proof::findOrFail($id);				 
+			 	
+				$placement->image_data = $request->input('image_data');				 					
+				 			 			 
+			 	$image = "";				
+				 
+				 
+ 				 
+				if ($request->hasFile('image_data')) {
+						$filePath = $this->getPlacementFolderStructure();
+					if (!empty($placement->image_data)) {
+						$existing = json_decode($placement->image_data, true);
+						if (!empty($existing->image_data->src)) {
+							$oldLogoImages[] = $existing->image_data;
+						}
+					}
+
+					$destinationPath = public_path($filePath);
+					$filename = $this->saveImageSmart(
+						$request->file('image_data'),
+						$destinationPath,
+						null,
+						null
+					);
+
+					$placementImageData = [
+						'image_data' => [
+							'name'   => $filename,
+							'alt'    => $request->input('caption'),
+							'width'  => '',
+							'height' => '',
+							'src'    => $filePath . '/' . $filename,
+						],
+					];
+
+					$placement->image_data = json_encode($placementImageData);
+        		}
+
+			 	 			
+			if($placement->save()){
+				$status=1;							 
+				$msg="Placement updated successfully !";		
+				
+			}else{
+				$status=0;							 
+				$msg="Placement could not be updated!";	
+			}
+		
+			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
+			
+		
+		}
+    } 
+	
+	/*
+	// GET  Course pagination
+	* Author: Brijesh Chauhan.
+	*/
+	public function getPlacementproofPagination(Request $request)
+	{
+		   
+		if($request->ajax()){			 
+		$placements = 	Proof::orderBy('id','desc');		 
+		if($request->input('search.value')!==''){
+				$placements = $placements->where(function($query) use($request){
+					$query->orWhere('caption','LIKE','%'.$request->input('search.value').'%')					     		   
+						  ->orWhere('image_data','LIKE','%'.$request->input('search.value').'%');
+				});
+			}
+			$placements = $placements->paginate($request->input('length'));			
+			$returnLeads = [];
+			$data = [];
+			$returnLeads['draw'] = $request->input('draw');
+			$returnLeads['recordsTotal'] = $placements->total();
+			$returnLeads['recordsFiltered'] = $placements->total();
+			$returnLeads['recordCollection'] = [];
+ 
+			foreach($placements as $placement){				 
+				$action="";
+				$seperate="";				 					 
+				$action .='<a href="/admin/placementproof/edit/'.base64_encode($placement->id).'" title="Edit placement" class="btn btn-success"><i class="fa fa-edit" aria-hidden="true"></i></a>';
+				
+				if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('delete_placement') ){
+				$action .='<a href="javascript:placementProofController.delete('.$placement->id.')" title="Delete placement" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>';					
+				}
+				if(!empty($placement->image_data)){
+				 $vimage= json_decode($placement->image_data); 
+					$image='<img src="'.asset($vimage->image_data->src).'" type="'.$vimage->image_data->alt.'" width="100">'; 	
+				}else{
+					$image="";
+				}
+				
+				$status="";
+				if($placement->status=='1'){
+				$status .='<a href="javascript:placementProofController.status('.$placement->id.',0)" title="Course status" class="btn btn-success">Active</a>';	
+				}else{
+				$status .='<a href="javascript:placementProofController.status('.$placement->id.',1)" title="Course status" class="btn btn-danger">Inactive</a>';	
+				}
+				
+				 
+				$data[] = [		 		 		 
+					$placement->caption,					 			
+				 				 			
+					$image,	 				 			
+					$status,	 				 			
+					$action,					  
+						
+				];
+					$returnLeads['recordCollection'][] = $placement->id;				 
+			}			
+			$returnLeads['data'] = $data;
+			return response()->json($returnLeads);			
+			
+		}  
+		
+	}
+	
+  
+	 /**
+     * Remove the specified resource from storage del_icon.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+		 
+		$placement = Proof::findOrFail($id);			 
+		if($placement->image_data!='')
+		{
+			$image = json_decode($placement->image_data);
+			$large = $image->image_data->src;
+			if(!empty($image->image_data->src)){
+			$thumbnail = $image->image_data->src;
+			if (file_exists($thumbnail))
+			{
+				unlink($thumbnail);
+			}  
+			}
+			if (file_exists($large))
+			{
+				unlink($large);
+			} 
+		}
+	
+		if($placement->delete()){
+		$status=1;							 
+		$msg="Placement deleted successfully!";	
+		}else{
+		$status=0;							 
+		$msg="Placement could not be deleted!";	
+		}
+		return response()->json(['status'=>$status,'msg'=>$msg],200); 
+    }
+  
+ 
+	 /**
+     * Remove the specified resource from storage del_icon.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function del_icon($id)
+    {
+       	 
+		$delet_data = Proof::findOrFail($id);	
+ 	
+		if($delet_data->image_data!='')
+		{		
+			 
+			$image = json_decode($delet_data->image_data);			
+			$large = $image->image_data->src;
+			if(!empty($image->image_data->src)){
+			$thumbnail = $image->image_data->src;
+			if (file_exists($thumbnail))
+			{
+			unlink($thumbnail);
+			}  
+			}
+			if (file_exists($large))
+			{
+			unlink($large);
+			} 
+		 
+		 
+		}
+ 
+		$edit_data = array('image_data' =>"",);	 
+		$del = Proof::where('id',$id)->update($edit_data);			 		
+		return redirect('admin/placementproof/edit/'.base64_encode($id))->with("success","image deleted successfully.");
+			
+    }
+ 
+ 
+  
+	 /**
+     * Remove the specified resource from storage status.
+     * Author: Brijesh Chauhan.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function status(request $request, $id,$val)
+    {
+       	 if($request->ajax()){	
+		 
+		$placement = Proof::findOrFail($id);	 
+		$placement->status=$val;
+	
+		if($placement->save()){
+			$status=1;							 
+			$msg="Placement status updated successfully!";					
+			}else{
+			$status=0;							 
+			$msg="Placement status could not be updated!";	
+			}		
+			return response()->json(['status'=>$status,'msg'=>$msg],200); 
+		 }
+    }
+ 
+ 
+ // FOLDER STRUCTURE GENERATOR
+// **************************
+function getPlacementFolderStructure(){
+	try{
+		$partial_str = '';
+		$day = date('j');
+		$week = '';
+		if($day<11){
+			$week = 'week_1';
+		}
+		else if($day>=11&&$day<21){
+			$week = 'week_2';
+		}
+		else if($day>=21){
+			$week = 'week_3';
+		}
+		$partial_str = 'uploads/Placement/'.date('Y').'/'.date('m').'/'.$week;
+		$structure = public_path($partial_str);
+		if(file_exists($structure)){
+			return $partial_str;
+		}else{
+			if(mkdir($structure, 0755, true)){
+				return $partial_str;
+			}else{
+				throw new Exception("Folder structure not found.\nUnable to create folder structure.");
+			}
+		}
+	}catch(Exception $e){
+		return $e->getMessage();
+	}
+}
+ 
+ 
+
+
+
+
+	private function saveImageSmart(
+    $file,
+    $destinationPath,
+    $width = null,
+    $height = null
+	) {
+		if (!$file || !$file->isValid()) {
+			throw \Illuminate\Validation\ValidationException::withMessages([
+				'image' => 'Image upload failed. Please upload again.',
+			]);
+		}
+
+		if (!is_dir($destinationPath)) {
+			if (
+				!@mkdir($destinationPath, 0755, true)
+				&& !is_dir($destinationPath)
+			) {
+				throw new \RuntimeException('Unable to create image directory.');
+			}
+		}
+
+		if (!is_writable($destinationPath)) {
+			throw new \RuntimeException('Image directory is not writable.');
+		}
+
+		$filename = bin2hex(random_bytes(16));
+		$extension = strtolower($file->getClientOriginalExtension());
+		$imagePath = $file->getPathname();
+
+		// Preserve your existing SVG upload behavior.
+		// SVG files must be validated/sanitized before calling this method.
+		if ($extension === 'svg') {
+			$finalName = $filename . '.svg';
+			$file->move($destinationPath, $finalName);
+
+			return $finalName;
+		}
+
+		if (
+			!extension_loaded('gd')
+			|| !function_exists('imagewebp')
+			|| !(imagetypes() & IMG_WEBP)
+		) {
+			throw new \RuntimeException(
+				'PHP GD with WebP support is required.'
+			);
+		}
+
+		// Detect actual image type instead of relying on the extension.
+		$imageInfo = @getimagesize($imagePath);
+
+		if ($imageInfo === false) {
+			throw \Illuminate\Validation\ValidationException::withMessages([
+				'image' => 'Invalid or corrupted image. Please upload a valid JPG, PNG or WebP.',
+			]);
+		}
+
+		$src = false;
+		$dst = null;
+		$outputPath = null;
+
+		try {
+			switch ($imageInfo[2]) {
+				case IMAGETYPE_JPEG:
+					$src = @imagecreatefromjpeg($imagePath);
+					break;
+
+				case IMAGETYPE_PNG:
+					$src = @imagecreatefrompng($imagePath);
+					break;
+
+				case IMAGETYPE_WEBP:
+					$src = @imagecreatefromwebp($imagePath);
+					break;
+
+				default:
+					throw \Illuminate\Validation\ValidationException::withMessages([
+						'image' => 'Only JPG, PNG and WebP images are supported.',
+					]);
+			}
+
+			// IMPORTANT: check before calling imagesx()/imagesy().
+			if ($src === false) {
+				throw \Illuminate\Validation\ValidationException::withMessages([
+					'image' => 'This image could not be decoded. It may be corrupted or unsupported by GD. Re-export it as JPG or PNG and try again.',
+				]);
+			}
+
+			imagepalettetotruecolor($src);
+			imagesavealpha($src, true);
+
+			$originalWidth = imagesx($src);
+			$originalHeight = imagesy($src);
+
+			if ($width !== null) {
+				$width = filter_var(
+					$width,
+					FILTER_VALIDATE_INT,
+					['options' => ['min_range' => 1]]
+				);
+
+				if ($width === false) {
+					throw new \InvalidArgumentException('Width must be a positive integer.');
+				}
+			}
+
+			if ($height !== null) {
+				$height = filter_var(
+					$height,
+					FILTER_VALIDATE_INT,
+					['options' => ['min_range' => 1]]
+				);
+
+				if ($height === false) {
+					throw new \InvalidArgumentException('Height must be a positive integer.');
+				}
+			}
+
+			// Preserve aspect ratio when only one dimension is supplied.
+			if ($width === null && $height === null) {
+				$width = $originalWidth;
+				$height = $originalHeight;
+			} elseif ($height === null) {
+				$height = max(
+					1,
+					(int) round($originalHeight * $width / $originalWidth)
+				);
+			} elseif ($width === null) {
+				$width = max(
+					1,
+					(int) round($originalWidth * $height / $originalHeight)
+				);
+			}
+
+			$dst = imagecreatetruecolor($width, $height);
+
+			if ($dst === false) {
+				throw new \RuntimeException('Unable to create resized image.');
+			}
+
+			imagealphablending($dst, false);
+			imagesavealpha($dst, true);
+
+			$transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+			imagefill($dst, 0, 0, $transparent);
+
+			if (!imagecopyresampled(
+				$dst,
+				$src,
+				0,
+				0,
+				0,
+				0,
+				$width,
+				$height,
+				$originalWidth,
+				$originalHeight
+			)) {
+				throw new \RuntimeException('Unable to resize image.');
+			}
+
+			$finalName = $filename . '.webp';
+
+			$outputPath = rtrim($destinationPath, '/\\')
+				. DIRECTORY_SEPARATOR
+				. $finalName;
+
+			if (
+				!imagewebp($dst, $outputPath, 80)
+				|| !is_file($outputPath)
+				|| filesize($outputPath) === 0
+			) {
+				throw new \RuntimeException('Unable to save WebP image.');
+			}
+
+			return $finalName;
+		} catch (\Throwable $exception) {
+			if ($outputPath && is_file($outputPath)) {
+				@unlink($outputPath);
+			}
+
+			throw $exception;
+		} finally {
+			if ($src instanceof \GdImage) {
+				imagedestroy($src);
+			}
+
+			if ($dst instanceof \GdImage) {
+				imagedestroy($dst);
+			}
+		}
+	} 
+
+}

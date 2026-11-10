@@ -86,8 +86,50 @@ class HomeController extends Controller
 
         $testimonials = Testimonial::where('status', true)->orderBy('id')->get();
 
-        $whatsappChats = WhatsappChat::orderBy('id')->get();
-        $proofs = Proof::orderBy('id')->get();
+       
+
+       $whatsappChats = WhatsappChat::orderBy('id')
+       ->whereNotNull('image_data')
+    ->whereRaw("TRIM(image_data) != ''")
+    ->get()
+    ->map(function ($chat) {
+        $image = is_string($chat->image_data)
+            ? json_decode($chat->image_data, true)
+            : $chat->image_data;
+
+        $src = data_get($image, 'image_data.src');
+
+        return (object) [
+            'image_data' => is_string($src) && trim($src) !== ''
+                ? asset(trim($src))
+                : '',
+            'caption' => $chat->caption,
+        ];
+    });
+
+$proofs = Proof::orderBy('id')
+->whereNotNull('image_data')
+    ->whereRaw("TRIM(image_data) != ''")
+    ->get()
+   ->map(function ($chat) {
+        $image = is_string($chat->image_data)
+            ? json_decode($chat->image_data, true)
+            : $chat->image_data;
+
+        $src = data_get($image, 'image_data.src');
+
+        return (object) [
+            'image_data' => is_string($src) && trim($src) !== ''
+                ? asset(trim($src))
+                : '',
+            'caption' => $chat->caption,
+        ];
+    });
+
+
+
+
+
         $videoStories = VideoStory::orderBy('sort_order')->orderBy('id')->get();
  
         $featuredCourses = $allCourses->where('featured', true)->values();

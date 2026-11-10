@@ -418,6 +418,38 @@ Route::get('/reviews/del_icon/{id}',[App\Http\Controllers\Admin\ReviewsControlle
  
  
  
+ //whatschats
+Route::get('whatschats',[App\Http\Controllers\Admin\WhatschatsController::class, 'index'])->middleware('auth');
+Route::get('whatschats/add',[App\Http\Controllers\Admin\WhatschatsController::class, 'create']);
+Route::post('whatschats/save',[App\Http\Controllers\Admin\WhatschatsController::class, 'saveWhatschats']); 
+Route::get('/whatschats/edit/{id}',[App\Http\Controllers\Admin\WhatschatsController::class, 'edit']);
+Route::post('/whatschats/editSaveWhatschats/{id}',[App\Http\Controllers\Admin\WhatschatsController::class, 'editSaveWhatschats']);
+Route::get('/whatschats/delete/{id}',[App\Http\Controllers\Admin\WhatschatsController::class, 'delete']);
+Route::get('/whatschats/get-whatschats',[App\Http\Controllers\Admin\WhatschatsController::class, 'getWhatschatsPagination']);
+Route::get('/whatschats/del_icon/{id}',[App\Http\Controllers\Admin\WhatschatsController::class, 'del_icon']);
+ Route::get('/whatschats/status/{id}/{val}',[App\Http\Controllers\Admin\WhatschatsController::class, 'status']);
+ 
+ 
+ 
+ 
+ 
+ //placementproof
+Route::get('placementproof',[App\Http\Controllers\Admin\PlacementproofController::class, 'index'])->middleware('auth');
+Route::get('placementproof/add',[App\Http\Controllers\Admin\PlacementproofController::class, 'create']);
+Route::post('placementproof/save',[App\Http\Controllers\Admin\PlacementproofController::class, 'savePlacementproof']); 
+Route::get('/placementproof/edit/{id}',[App\Http\Controllers\Admin\PlacementproofController::class, 'edit']);
+Route::post('/placementproof/editSavePlacementproof/{id}',[App\Http\Controllers\Admin\PlacementproofController::class, 'editSavePlacementproof']);
+Route::get('/placementproof/delete/{id}',[App\Http\Controllers\Admin\PlacementproofController::class, 'delete']);
+Route::get('/placementproof/get-placementproof',[App\Http\Controllers\Admin\PlacementproofController::class, 'getPlacementproofPagination']);
+Route::get('/placementproof/del_icon/{id}',[App\Http\Controllers\Admin\PlacementproofController::class, 'del_icon']);
+Route::get('/placementproof/status/{id}/{val}',[App\Http\Controllers\Admin\PlacementproofController::class, 'status']);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  //testimonial
 Route::get('testimonial',[App\Http\Controllers\Admin\TestimonialController::class, 'index'])->middleware('auth');
 Route::get('testimonial/add',[App\Http\Controllers\Admin\TestimonialController::class, 'create']);

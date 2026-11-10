@@ -77,6 +77,7 @@
         'oracle'             => ['from' => '#ef4444', 'to' => '#f97316', 'shadow' => 'rgba(239,68,68,0.28)', 'dot' => '#ef4444'],
         'salesforce'             => ['from' => '#831c1c', 'to' => '#915429', 'shadow' => 'rgba(136, 32, 32, 0.28)', 'dot' => '#ee0808'],
         'professional-programs'             => ['from' => '#831c1c', 'to' => '#915429', 'shadow' => 'rgba(136, 32, 32, 0.28)', 'dot' => '#ee0808'],
+        'artificial-intelligence'             => ['from' => '#db3c3c', 'to' => '#f06908', 'shadow' => 'rgba(247, 8, 8, 0.28)', 'dot' => '#ee0808'],
     ];
     $defaultCol = ['from' => '#3b82f6', 'to' => '#0609a7', 'shadow' => 'rgba(6, 10, 247, 0.28)', 'dot' => '#2a2c8b'];
     $getCol = fn ($slug) => $catColors[$slug] ?? $defaultCol;
@@ -576,38 +577,231 @@
 <section class="py-10 bg-white border-b border-gray-100 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 pointer-events-none"></div>
     <div class="px-4 md:px-6 relative z-10">
-        <div class="grid grid-cols-2 gap-y-8 md:flex md:flex-wrap md:justify-center md:divide-x md:divide-gray-100 text-center">
-            @php
-                $statCards = [
-                    ['icon' => 'grad', 'value' => number_format($stats['careersTransformed'] / 1000, 0) . 'k+', 'label' => t('home.careersTransformed'), 'color' => 'text-blue-600', 'bg' => 'bg-blue-50'],
-                    ['icon' => 'users', 'value' => number_format($stats['expertTrainers']) . '+', 'label' => t('home.industryExperts'), 'color' => 'text-violet-600', 'bg' => 'bg-violet-50'],
-                    ['icon' => 'award', 'value' => '45+', 'label' => t('home.specializedPrograms'), 'color' => 'text-amber-600', 'bg' => 'bg-amber-50'],
-                    ['icon' => 'star', 'value' => number_format($stats['averageRating'], 1), 'label' => t('home.averageRating'), 'color' => 'text-emerald-600', 'bg' => 'bg-emerald-50'],
-                ];
-            @endphp
-            @foreach ($statCards as $s)
-                <div class="flex flex-col items-center gap-3 px-4 md:px-10 py-2 md:first:pl-0 md:last:pr-0">
-                    <div class="w-11 h-11 rounded-2xl {{ $s['bg'] }} flex items-center justify-center">
-                        @switch($s['icon'])
-                            @case('grad')
-                                <svg class="w-5 h-5 {{ $s['color'] }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-                                @break
-                            @case('users')
-                                <svg class="w-5 h-5 {{ $s['color'] }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                @break
-                            @case('award')
-                                <svg class="w-5 h-5 {{ $s['color'] }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-                                @break
-                            @default
-                                <svg class="w-5 h-5 {{ $s['color'] }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        @endswitch
-                    </div>
-                    <div class="text-3xl md:text-4xl font-extrabold {{ $s['color'] }} leading-none">{{ $s['value'] }}</div>
-                    <div class="text-sm text-gray-500 font-medium">{{ $s['label'] }}</div>
-                </div>
-            @endforeach
+    @php
+     
+
+    $statCards = [
+        [
+            'icon' => 'grad',
+            'value' => (float) ($stats['careersTransformed'] ?? 0),
+            'suffix' => '+',
+            'decimals' => 0,
+            'animate' => true,
+            'label' => t('home.careersTransformed'),
+            'color' => 'text-blue-600',
+            'bg' => 'bg-blue-50',
+        ],
+        [
+            'icon' => 'users',
+            'value' => (int) ($stats['expertTrainers'] ?? 0),
+            'suffix' => '+',
+            'decimals' => 0,
+            'animate' => true,
+            'label' => t('home.industryExperts'),
+            'color' => 'text-violet-600',
+            'bg' => 'bg-violet-50',
+        ],
+        [
+            'icon' => 'award',
+            'value' => 45,
+            'suffix' => '+',
+            'decimals' => 0,
+            'animate' => false,
+            'label' => t('home.specializedPrograms'),
+            'color' => 'text-amber-600',
+            'bg' => 'bg-amber-50',
+        ],
+        [
+            'icon' => 'star',
+            'value' => (float) ($stats['averageRating'] ?? 0),
+            'suffix' => '',
+            'decimals' => 1,
+            'animate' => false,
+            'label' => t('home.averageRating'),
+            'color' => 'text-emerald-600',
+            'bg' => 'bg-emerald-50',
+        ],
+    ];
+@endphp
+
+<div class="grid grid-cols-2 gap-y-8 text-center md:flex md:flex-wrap md:justify-center md:divide-x md:divide-gray-100">
+    @foreach ($statCards as $s)
+        <div class="flex flex-col items-center gap-3 px-4 py-2 md:px-10 md:first:pl-0 md:last:pr-0">
+
+            <div class="flex h-11 w-11 items-center justify-center rounded-2xl {{ $s['bg'] }}">
+                <svg
+                    class="h-5 w-5 {{ $s['color'] }}"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    @switch($s['icon'])
+                        @case('grad')
+                            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+                            <path d="M22 10v6"/>
+                            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+                            @break
+
+                        @case('users')
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            @break
+
+                        @case('award')
+                            <circle cx="12" cy="8" r="6"/>
+                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                            @break
+
+                        @default
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    @endswitch
+                </svg>
+            </div>
+
+            <div class="text-3xl font-extrabold leading-none tabular-nums md:text-4xl {{ $s['color'] }}">
+                {{-- Static text remains accessible during animation. --}}
+                <span class="sr-only">
+                    {{ number_format($s['value'], $s['decimals']) }}{{ $s['suffix'] }}
+                </span>
+
+                <span
+                    aria-hidden="true"
+                    @if($s['animate'])
+                        data-stat-counter
+                        data-target="{{ $s['value'] }}"
+                        data-decimals="{{ $s['decimals'] }}"
+                        data-suffix="{{ $s['suffix'] }}"
+                    @endif
+                >{{ number_format($s['value'], $s['decimals']) }}{{ $s['suffix'] }}</span>
+            </div>
+
+            <div class="text-sm font-medium text-gray-500">
+                {{ $s['label'] }}
+            </div>
         </div>
-    </div>
+    @endforeach
+</div>
+
+@once
+    <script>
+        (() => {
+            function initializeStatCounters() {
+                const counters = document.querySelectorAll(
+                    '[data-stat-counter]:not([data-counter-ready])'
+                );
+
+                if (!counters.length) return;
+
+                const reducedMotion = window.matchMedia(
+                    '(prefers-reduced-motion: reduce)'
+                ).matches;
+
+                function animateCounter(element) {
+                    const target = Number(element.dataset.target);
+                    const decimals = Number(element.dataset.decimals || 0);
+                    const suffix = element.dataset.suffix || '';
+
+                    if (!Number.isFinite(target)) return;
+
+                    const formatter = new Intl.NumberFormat('en-US', {
+                        minimumFractionDigits: decimals,
+                        maximumFractionDigits: decimals,
+                    });
+
+                    function render(value) {
+                        const displayedValue = decimals === 0
+                            ? Math.round(value)
+                            : value;
+
+                        element.textContent =
+                            formatter.format(displayedValue) + suffix;
+                    }
+
+                    if (reducedMotion || target <= 0) {
+                        render(target);
+                        return;
+                    }
+
+                    const duration = 1800;
+                    let startTime = null;
+
+                    render(0);
+
+                    function update(timestamp) {
+                        if (startTime === null) {
+                            startTime = timestamp;
+                        }
+
+                        const progress = Math.min(
+                            (timestamp - startTime) / duration,
+                            1
+                        );
+
+                        // Ease out: start quickly, then slow down.
+                        const easedProgress =
+                            1 - Math.pow(1 - progress, 3);
+
+                        render(target * easedProgress);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(update);
+                        } else {
+                            render(target);
+                        }
+                    }
+
+                    requestAnimationFrame(update);
+                }
+
+                const observer = 'IntersectionObserver' in window
+                    ? new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+
+                            observer.unobserve(entry.target);
+                            animateCounter(entry.target);
+                        });
+                    }, {
+                        threshold: 0.3,
+                    })
+                    : null;
+
+                counters.forEach(element => {
+                    element.dataset.counterReady = 'true';
+
+                    if (observer) {
+                        observer.observe(element);
+                    } else {
+                        animateCounter(element);
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener(
+                    'DOMContentLoaded',
+                    initializeStatCounters,
+                    { once: true }
+                );
+            } else {
+                initializeStatCounters();
+            }
+        })();
+    </script>
+@endonce
+
+
+
+
+    
+       </div>
 </section>
 
 @include('partials.home.global-impact')
@@ -677,6 +871,16 @@
                         
                         $col = $getCol($course->category_slug);
                        
+                        $imagePath = '';                   
+                        $imageUrl="";
+
+                   
+                     if($course->categoryData?->category_icons){
+                        $imagePath = unserialize($course->categoryData?->category_icons);
+                        if($imagePath['category_icons']['src']){
+                        $imageUrl= $imagePath['category_icons']['src'];
+                        }
+                    } 
                          @endphp
                         <div class="h-full">
                             <a href="{{ route('courses.show',$course->slug) }}" class="block h-full">
@@ -684,8 +888,20 @@
                                     <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500" style="box-shadow: 0 12px 40px {{ $col['shadow'] }}"></div>
                                     <div class="relative h-36 overflow-hidden shrink-0">
                                         <div class="absolute top-0 inset-x-0 h-[3px] z-10" style="background: linear-gradient(90deg, {{ $col['from'] }}, {{ $col['to'] }})"></div>
-                                        @if ($course->image_url)
-                                            <img loading="lazy" decoding="async" src="{{ $course->image_url }}" alt="{{ $tDyn($course->title) }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-600 ease-out">
+                                        @if ($imageUrl)
+                                             
+
+                                            <div class="flex h-48 items-center justify-center bg-gradient-to-br p-5 pb-20 " style="background: linear-gradient(90deg, {{ $col['from'] }}, {{ $col['to'] }})">
+                            <img
+                                src="{{ $imageUrl }}"
+                                alt="{{ $tDyn($course->title) }}"
+                                loading="lazy"
+                                decoding="async"
+                                width="100"
+                                height="100"
+                                class=""
+                            >
+                            </div>
                                         @else
                                             <div class="absolute inset-0 flex items-center justify-center group-hover:scale-[1.06] transition-transform duration-600" style="background: linear-gradient(135deg, {{ $col['from'] }}, {{ $col['to'] }})">
                                                 <svg class="h-12 w-12 opacity-30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
@@ -809,33 +1025,56 @@ document.addEventListener('DOMContentLoaded', function () {
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
         </div>
+                     
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             @foreach ($featuredCourses->take(6) as $course)
 
                     @php                                 
 
                     $col = $getCol($course->category_slug);
+                        $imageFetuPath = '';                   
+                        $imageFeturUrl="";
 
+                   
+                     if($course->categoryData?->category_icons){
+                        $imageFetuPath = unserialize($course->categoryData?->category_icons);
+                        if($imageFetuPath['category_icons']['src']){
+                        $imageFeturUrl= $imageFetuPath['category_icons']['src'];
+                        }
+                    } 
+
+                  
                     @endphp
 
                 <div class="h-full">
                     <a href="{{ route('courses.show',$course->slug) }}">
                         <div class="h-full hover:shadow-2xl transition-all duration-500 border border-white/60 bg-white/60 backdrop-blur-md hover:border-primary/40 cursor-pointer overflow-hidden group flex flex-col rounded-2xl shadow-sm" >
-                            <div class="h-48 bg-muted relative overflow-hidden">
-                                @if ($course->image_url)
-                                    <img loading="lazy" decoding="async" src="{{ $course->image_url }}" alt="{{ $tDyn($course->title) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="h-36 bg-muted relative overflow-hidden">
+                                @if ($imageFeturUrl)
+                                    
+                                     <div class="flex h-48 items-center justify-center bg-gradient-to-br p-5 pb-20 " style="background: linear-gradient(90deg, {{ $col['from'] }}, {{ $col['to'] }})">
+                            <img
+                                src="{{ $imageFeturUrl }}"
+                                alt="{{ $tDyn($course->title) }}"
+                                loading="lazy"
+                                decoding="async"
+                                width="100"
+                                height="100"
+                                class=""
+                            >
+                            </div>
                                 @else
                                     <div class="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-700" style="background: linear-gradient(90deg, {{ $col['from'] }}, {{ $col['to'] }})">
                                         <svg class="h-12 w-12 text-primary/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
                                     </div>
                                 @endif
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                <span class="absolute top-4 left-4 inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold bg-white/90 backdrop-blur-md text-foreground border border-white/50 shadow-sm">{{ $tCategory($course->category_name) }}</span>
+                                <span class="absolute top-4 left-4 inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold bg-white/90 backdrop-blur-md text-foreground border border-white/50 shadow-sm">{{ $tLevel($course->level) }}</span>
                             </div>
                             <div class="flex flex-col space-y-1.5 p-6 flex-1 bg-transparent">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold bg-primary/10 text-primary border-none">{{ $tLevel($course->level) }}</span>
+                                    <span class="inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold bg-primary/10 text-primary border-none">{{ $tCategory($course->category_name) }}</span>
                                 </div>
                                 <h3 class="line-clamp-2 text-lg font-display leading-tight font-semibold">{{ $tDyn($course->title) }}</h3>
                                 <p class="line-clamp-2 mt-2 text-sm text-muted-foreground">{{ $tDyn($course->summary) }}</p>
@@ -917,22 +1156,22 @@ document.addEventListener('DOMContentLoaded', function () {
             @php
     $facultySlides = [
         [
-            'label' => 'Workday',
-            'name'  => 'Dr. Anjali Mehta',
+            'label' => 'SAP-FICO',
+            'name'  => 'Aaranv Sharma',
             'title' => 'Industry Mentor',
-            'image' => asset('images/hero/learner-1.webp'),
+            'image' => asset('images/hero/Aaranv-SAP-FICO.png'),
         ],
         [
-            'label' => 'Workday',
-            'name'  => 'Rahul Singh',
-            'title' => 'Data Science Professional',
-            'image' => asset('images/hero/learner-2.webp'),
+            'label' => 'Python',
+            'name'  => 'Aditya Kumar',
+            'title' => 'Python Developer',
+            'image' => asset('images/hero/Aditya-Kumar-Python-Developer.png'),
         ],
         [
-            'label' => 'Workday',
-            'name'  => 'Priya Verma',
+            'label' => 'AI Engineer',
+            'name'  => 'Akash Tiwari',
             'title' => 'Machine Learning Mentor',
-            'image' => asset('images/hero/learner-1.webp'),
+            'image' => asset('images/hero/Akash-Tiwari-AI-Engineer.png'),
         ],
     ];
 @endphp
@@ -974,7 +1213,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         width="280"
                         height="360"
                         loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
-                        class="h-full w-full object-cover object-top"
+                        class="h-full w-full object-fil object-top"
                     >
 
                     {{-- Image overlay --}}
