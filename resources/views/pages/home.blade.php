@@ -1168,10 +1168,10 @@ document.addEventListener('DOMContentLoaded', function () {
             'image' => asset('images/hero/Aditya-Kumar-Python-Developer.png'),
         ],
         [
-            'label' => 'AI Engineer',
-            'name'  => 'Akash Tiwari',
-            'title' => 'Machine Learning Mentor',
-            'image' => asset('images/hero/Akash-Tiwari-AI-Engineer.png'),
+            'label' => 'Software Engineer',
+            'name'  => 'Mohit-Bansal',
+            'title' => 'Backend Developer',
+            'image' => asset('images/hero/Mohit-Bansal.png'),
         ],
     ];
 @endphp
