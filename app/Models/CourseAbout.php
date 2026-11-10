@@ -31,5 +31,18 @@ class CourseAbout extends Authenticatable
     'description5',
     'heading6',
     'description6',
+
+     'heading7',
+    'description7',
+     'heading8',
+    'description8',
+
+     'heading9',
+    'description9',
+
+     'heading10',
+    'description10',
+
+     
 ];
 }

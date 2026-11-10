@@ -274,7 +274,7 @@ class CourseController extends Controller implements HasMiddleware
 	 public function editSaveCourseContent(Request $request, $id)
 {
     $rules = [];
-    foreach (range(1, 6) as $i) {
+    foreach (range(1, 10) as $i) {
         $rules["heading{$i}"]     = 'nullable|string|max:255';
         $rules["description{$i}"] = 'nullable|string';
     }
@@ -290,7 +290,7 @@ class CourseController extends Controller implements HasMiddleware
 
     try {
         $data = $request->only(array_keys($rules));
-
+// dd($data);
         // ONE query: insert if missing, update if it exists
         CourseAbout::updateOrCreate(['course_id' => $id], $data);
 
@@ -311,91 +311,7 @@ class CourseController extends Controller implements HasMiddleware
     }
 }
 
-    public function editSaveCourseContent_old(Request $request,$id)
-    {	  
-	 
-		  $validator = Validator::make($request->all(),[				 
-				'heading1'=>'nullable|string',
-				'description1'=>'nullable|string',		 				 				
-			 				 				
-			]);
-			
-			if($validator->fails()){
-				$errorsBag = $validator->getMessageBag()->toArray();
-				return response()->json(['status'=>1,'errors'=>$errorsBag],400);
-			}
-				  
-				  
-			$courseAbout = 	  CourseAbout::where('course_id',$id)->first();
- 
-			
-			if(!empty($courseAbout)){
-			$updatelearn =array(
-			 				
-			'heading1'=>$request->input('heading1'),	
-			'description1'=>$request->input('description1'),	
-			'heading2'=>$request->input('heading2'),	
-			'description2'=>$request->input('description2'),	
-			'heading3'=>$request->input('heading3'),	
-			'description3'=>$request->input('description3'),	
-			'heading4'=>$request->input('heading4'),	
-			'description4'=>$request->input('description4'),	
-			'heading5'=>$request->input('heading5'),	
-			'description5'=>$request->input('description5'),	
-			'heading6'=>$request->input('heading6'),	
-			'description6'=>$request->input('description6'),	
-	 	
-                );
-
-				 
-			$checkupdate  = CourseAbout::where('course_id',$id)->update($updatelearn);	
-				if($checkupdate){
-				$status=1;							 
-				$msg="Course About submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course About could not be submitted!";	
-			}
-			
-			}else{
-			    	$courseAboutHeading  = New CourseAbout;
-			    	
-					$courseAboutHeading->course_id = $id;				 
-					$courseAboutHeading->heading1 = $request->input('heading1');
-					$courseAboutHeading->description1 = $request->input('description1');
-					$courseAboutHeading->heading2 = $request->input('heading2');
-					$courseAboutHeading->description2 = $request->input('description2');
-					$courseAboutHeading->heading3 = $request->input('heading3');
-					$courseAboutHeading->description3 = $request->input('description3');
-					$courseAboutHeading->heading4 = $request->input('heading4');
-					$courseAboutHeading->description4 = $request->input('description4');
-					$courseAboutHeading->heading5 = $request->input('heading5');
-					$courseAboutHeading->description5 = $request->input('description5');
-					$courseAboutHeading->heading6 = $request->input('heading6');
-					$courseAboutHeading->description6 = $request->input('description6');
- 
- 
-			    
-			    	if($courseAboutHeading->save()){
-				$status=1;							 
-				$msg="Course About submitted successfully !";		
-				
-			}else{
-				$status=0;							 
-				$msg="Course About could not be submitted!";	
-			}
-			}
-		
-		
-			 return response()->json(['status'=>$status,'msg'=>$msg],200); 
-			
-		
-	
- 
-	 
-   } 
-	
+     
 
 	
   /*
@@ -1325,7 +1241,7 @@ public function editSaveCourseRelated(Request $request, $id)
 	   $tools_list = ToolsCovered::get();
     	//$coursecurriculum =CourseCurriculumExcel::where('course_id',base64_decode($id))->get();	
 		
-		
+	
  
 $rows = CourseCurriculumExcel::where('course_id', base64_decode($id))
     ->orderBy('id', 'asc')

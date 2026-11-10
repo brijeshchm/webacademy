@@ -748,7 +748,7 @@ Edit Course
 				
 				data-section-name="editSaveCourseContent"  data-ajax-autosave>
 @csrf
-                @for($i = 1; $i <= 6; $i++)
+                @for($i = 1; $i <= 10; $i++)
                     @php
                         $headingField = 'heading' . $i;
                         $descriptionField = 'description' . $i;

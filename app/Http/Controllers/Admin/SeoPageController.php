@@ -554,6 +554,8 @@ class SeoPageController extends Controller
 			'description5'=>$request->input('description5'),	
 			'heading6'=>$request->input('heading6'),	
 			'description6'=>$request->input('description6'),	
+			'heading7'=>$request->input('heading7'),	
+			'description7'=>$request->input('description7'),	
 	 	
                 );
 
@@ -586,6 +588,8 @@ class SeoPageController extends Controller
 					$courseAboutHeading->description5 = $request->input('description5');
 					$courseAboutHeading->heading6 = $request->input('heading6');
 					$courseAboutHeading->description6 = $request->input('description6');
+					$courseAboutHeading->heading7 = $request->input('heading7');
+					$courseAboutHeading->description7 = $request->input('description7');
 
  
 			    
