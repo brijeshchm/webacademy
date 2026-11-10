@@ -8,24 +8,15 @@
         ->values();
 
     // Dummy slides with fallback data
-    $dummyReviews = collect([
-        (object)[
-            'image_data' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=80',
-            'caption'    => 'Student Review 1'
-        ],
-        (object)[
-            'image_data' => 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=900&q=80',
-            'caption'    => 'Student Review 2'
-        ],
-    ]);
+    
 
     $dummyProofs = collect([
         (object)[
-            'image_data' => 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80',
+            'image_data' => 'images/Professional-Resume-Building.png',
             'caption'    => 'Placement Proof 1'
         ],
         (object)[
-            'image_data' => 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80',
+            'image_data' => 'images/Mock-interviews.png',
             'caption'    => 'Placement Proof 2'
         ],
     ]);
