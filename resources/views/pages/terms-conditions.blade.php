@@ -1,24 +1,9 @@
   @extends('layouts.app')
 @section('title')
-@if(!empty($coursesdetails->title))	 
- {{$coursesdetails->title}}; 
-@else
-	Institute- Best IT Training Institute in Noida | Delhi | Gurgaon
-@endif
+Terms & Conditions | Corporates Academy
 @endsection 
-@section('keyword')
-@if(!empty($coursesdetails->meta_keyword))
-	{{$coursesdetails->meta_keywords}};
-@else
-	Institute: Best IT Training Institute in Noida | Delhi | Gurgaon
-@endif
-@endsection
 @section('description')
-@if(!empty($coursesdetails->meta_description))
-{{$coursesdetails->meta_description}};
-@else
-	Institute Best IT Training Institute in Noida | Delhi | Gurgaon for Industrial Training. We conducts IT Software, Hardware, Network &amp; Security Courses training. Corporate Trainer commands all training program. Week Days, Weekend, 6 Week, 6 Months Industrial Training are available
-@endif
+Review the terms and conditions for using Corporates Academy’s website and training services, including enrolment, payments, and learner responsibilities.
 @endsection
 @section('content')
 <div>

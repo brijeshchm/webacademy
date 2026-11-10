@@ -1,12 +1,9 @@
 @extends('layouts.app')
 @section('title')
-Cancellation & Refund
+Cancellation & Refund Policy | Corporates Academy
 @endsection 
-@section('keyword')
-Cancellation & Refund
-@endsection
 @section('description')
- Cancellation & Refund
+Read Corporates Academy’s cancellation and refund policy for training courses, including eligibility, refund requests, and applicable terms.
 @endsection
 @section('content')
 <div>

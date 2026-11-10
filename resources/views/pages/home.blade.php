@@ -405,13 +405,13 @@
                         $imageUrl="";
 
                    $gradientColor = $gradientsTop[$loop->index];
-                    /*
+                    
                      if($bannerC->categoryData?->category_icons){
                         $imagePath = unserialize($bannerC->categoryData?->category_icons);
                         if($imagePath['category_icons']['src']){
                         $imageUrl= $imagePath['category_icons']['src'];
                         }
-                    } */
+                    } 
                 @endphp
 
                 {{-- Animate wrapper separately from hover effect --}}
@@ -424,7 +424,7 @@
                         class="group relative block aspect-[3/4] overflow-hidden rounded-3xl border-4 border-white bg-white shadow-xl shadow-blue-950/10 transition duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
                     >
                         @if($imageUrl)
-                            <div class="flex h-48 items-center justify-center bg-gradient-to-br p-5 pb-18 {{ $gradientColor }}">
+                            <div class="flex h-48 items-center justify-center bg-gradient-to-br p-5 pb-20 {{ $gradientColor }}">
                             <img
                                 src="{{ $imageUrl }}"
                                 alt="{{ $courseName }}"
@@ -432,7 +432,7 @@
                                 decoding="async"
                                 width="100"
                                 height="100"
-                                class="h-24 w-24 max-h-full w-full max-w-[140px] object-contain transition-transform duration-500 group-hover:scale-110"
+                                class=""
                             >
                             </div>
                         @else

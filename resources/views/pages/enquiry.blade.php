@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+@section('title')
+Enquire Now | Corporates Academy
+@endsection 
+@section('description')
+Tell us your learning goals and our certified training consultants will design the right programme for you or your team. Group pricing available for 5 or more. Response within 24 hours.
+@endsection
 @php
 
     $origin = rtrim(config('services.site.origin'), '/');
