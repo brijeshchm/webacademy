@@ -1695,6 +1695,263 @@ document.addEventListener('DOMContentLoaded', function () {
 
                  -->
 
+
+ 
+@php
+    $careerSteps = [
+        [
+            'step' => 'Step 1: Learn with experts',
+            'title' => 'Build a strong foundation with guided training',
+            'description' => 'Understand essential concepts through structured lessons, live demonstrations and guidance from experienced trainers.',
+            'points' => [
+                'Learn through clear explanations and practical examples.',
+                'Ask questions and receive guidance during live sessions.',
+            ],
+            'button' => 'Explore Courses',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-1.webp',
+            'background' => '#020617',
+            'accent' => 'text-cyan-300',
+            'badge' => 'bg-cyan-400/10 text-cyan-200 border-cyan-400/30',
+            'buttonClass' => 'bg-cyan-300 text-slate-950 hover:bg-cyan-200',
+            'decoration' => 'bg-cyan-400/10',
+            'style' => 'sticky top-[130px] z-[27]',
+        ],
+        [
+            'step' => 'Step 2: Put learning into practice',
+            'title' => 'Develop practical skills through hands-on projects',
+            'description' => 'Apply your knowledge to assignments and projects that help you understand workplace tasks and solve practical problems.',
+            'points' => [
+                'Practise with assignments based on realistic scenarios.',
+                'Build projects that demonstrate your technical skills.',
+            ],
+            'button' => 'Explore Training',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-2.webp',
+            'background' => '#4c0519',
+            'accent' => 'text-rose-300',
+            'badge' => 'bg-rose-400/10 text-rose-200 border-rose-400/30',
+            'buttonClass' => 'bg-rose-200 text-rose-950 hover:bg-rose-100',
+            'decoration' => 'bg-rose-400/10',
+            'style' => 'sticky top-[130px]',
+        ],
+        [
+            'step' => 'Step 3: Strengthen your knowledge',
+            'title' => 'Review your progress and improve with feedback',
+            'description' => 'Identify areas for improvement through practice assessments, trainer feedback and regular revision of important concepts.',
+            'points' => [
+                'Check your understanding through practice assessments.',
+                'Use trainer feedback to address gaps in your knowledge.',
+            ],
+            'button' => 'Explore Career Training',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-3.png',
+            'background' => '#172554',
+            'accent' => 'text-blue-300',
+            'badge' => 'bg-blue-400/10 text-blue-200 border-blue-400/30',
+            'buttonClass' => 'bg-blue-200 text-blue-950 hover:bg-blue-100',
+            'decoration' => 'bg-blue-400/10',
+            'style' => 'sticky top-[130px]',
+        ],
+        [
+            'step' => 'Step 4: Present your experience',
+            'title' => 'Create a resume that highlights your strengths',
+            'description' => 'Organise your skills, projects and experience into a clear professional resume with guidance from our career support team.',
+            'points' => [
+                'Write clear summaries of your skills and achievements.',
+                'Highlight projects relevant to your target roles.',
+            ],
+            'button' => 'Find Your Course',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-4.png',
+            'background' => '#11cf21',
+            'accent' => 'text-emerald-300',
+            'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
+            'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
+            'decoration' => 'bg-emerald-400/10',
+            'style' => 'sticky top-[130px]',
+        ],
+        [
+            'step' => 'Step 5: Prepare for interviews',
+            'title' => 'Build confidence through mock interview practice',
+            'description' => 'Practise answering technical and HR questions, explain your projects and receive feedback on your interview performance.',
+            'points' => [
+                'Prepare structured answers to common interview questions.',
+                'Improve your responses through personalised feedback.',
+            ],
+            'button' => 'Find Your Course',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-5.png',
+            'background' => '#9911e7',
+            'accent' => 'text-emerald-300',
+            'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
+            'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
+            'decoration' => 'bg-emerald-400/10',
+            'style' => 'sticky top-[130px]',
+        ],
+        [
+            'step' => 'Step 6: Improve your professional presence',
+            'title' => 'Communicate your skills with clarity and confidence',
+            'description' => 'Learn to introduce yourself professionally, discuss your experience and present your work clearly to recruiters and interviewers.',
+            'points' => [
+                'Practise your introduction and project explanations.',
+                'Present your skills consistently across your resume and profile.',
+            ],
+            'button' => 'Find Your Course',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-6.png',
+            'background' => '#2c0202',
+            'accent' => 'text-emerald-300',
+            'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
+            'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
+            'decoration' => 'bg-emerald-400/10',
+            'style' => 'sticky top-[130px]',
+        ],
+        [
+            'step' => 'Step 7: Take your next career step',
+            'title' => 'Approach relevant opportunities with better preparation',
+            'description' => 'Bring together your training, projects, resume and interview practice to prepare applications for roles aligned with your skills.',
+            'points' => [
+                'Identify opportunities that match your skills and interests.',
+                'Tailor your applications to the requirements of each role.',
+            ],
+            'button' => 'Find Your Course',
+            'url' => url('/courses'),
+            'image' => 'images/Image-section-7.png',
+            'background' => '#eeab1b',
+            'accent' => 'text-emerald-300',
+            'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
+            'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
+            'decoration' => 'bg-emerald-400/10',
+            'style' => 'sticky top-[130px]',
+        ],
+    ];
+@endphp
+ <section id="career-edge" class="relative bg-white py-12">
+
+    <div class="mx-auto max-w-7xl px-4 pb-10 text-center">
+        <p class="text-sm font-medium text-slate-600">
+            Your Path to Career Success Starts with Corporates Academy
+        </p>
+
+        <h2 class="mt-3 text-3xl font-bold text-slate-900 md:text-5xl">
+            What gives us an
+            <span class="text-cyan-600">edge?</span>
+        </h2>
+    </div>
+
+    {{-- Shared parent allows the boxes to stack while scrolling. --}}
+    <div class="isolate mx-auto max-w-7xl px-4">
+
+        @foreach ($careerSteps as $step)
+            <article
+                class="mb-8 w-full rounded-3xl
+                       text-white shadow-2xl last:mb-0 {{ $step['style'] }}"
+                style="
+                    background-color: {{ $step['background'] }};
+                    z-index: {{ $loop->iteration }};
+                "
+            >
+                <div class="relative overflow-hidden rounded-3xl">
+
+                    <!-- <div
+                        aria-hidden="true"
+                        class="pointer-events-none absolute -right-24 top-12
+                               h-96 w-96 rounded-full
+                               border-[32px] border-white/10"
+                    ></div> -->
+
+                    <div
+                        class="relative grid items-center gap-8
+                               px-6 py-8 md:min-h-[560px]
+                               md:grid-cols-2 md:gap-12 md:px-10"
+                    >
+                        <div class="min-w-0">
+                            <span
+                                class="inline-block rounded-lg border
+                                       border-white/20 bg-white/10
+                                       px-3 py-2 text-xs font-semibold"
+                            >
+                                {{ $step['step'] }}
+                            </span>
+
+                            <h3
+                                class="mt-5 text-3xl font-bold
+                                       leading-tight text-white md:text-4xl"
+                            >
+                                {{ $step['title'] }}
+                            </h3>
+
+                            <p class="mt-4 text-sm leading-7 text-white/80 md:text-base">
+                                {{ $step['description'] }}
+                            </p>
+
+                            <ul class="mt-6 space-y-3">
+                                @foreach ($step['points'] as $point)
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            aria-hidden="true"
+                                            class="flex h-6 w-6 shrink-0
+                                                   items-center justify-center
+                                                   rounded-full bg-white/10
+                                                   text-cyan-200"
+                                        >
+                                            ✓
+                                        </span>
+
+                                        <span class="text-sm leading-6 text-white/90">
+                                            {{ $point }}
+                                        </span>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <a
+                                href="{{ $step['url'] }}"
+                                class="mt-8 inline-flex min-h-[44px]
+                                       items-center justify-center gap-3
+                                       rounded-lg bg-white px-6 py-3
+                                       text-sm font-bold text-slate-900
+                                       hover:bg-cyan-100
+                                       focus-visible:outline-none
+                                       focus-visible:ring-4
+                                       focus-visible:ring-cyan-300"
+                            >
+                                {{ $step['button'] }}
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
+
+                        <div class="mx-auto w-full ">
+                            <img
+                                src="{{ $step['image'] }}"
+                                alt="{{ $step['title'] }}"
+                                width="840"
+                                height="840"
+                                loading="lazy"
+                                decoding="async"
+                                class="aspect-square w-full rounded-2xl object-contain"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </article>
+        @endforeach
+
+    </div>
+</section>
+
+
+
+
+
+
+
+ 
+
+
+
+
 {{-- ── FAQ ─────────────────────────────────────────────────── --}}
 @if (count($faqs))
 <section class="py-16 md:py-20 bg-white">
