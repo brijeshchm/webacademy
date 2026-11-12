@@ -1888,7 +1888,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-cyan-400/10 text-cyan-200 border-cyan-400/30',
             'buttonClass' => 'bg-cyan-300 text-slate-950 hover:bg-cyan-200',
             'decoration' => 'bg-cyan-400/10',
-            'style' => 'sticky top-[130px] z-[27]',
+            'style' => 'sticky top-0 z-[27]',
         ],
         [
             'step' => 'Step 2: Put learning into practice',
@@ -1906,7 +1906,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-rose-400/10 text-rose-200 border-rose-400/30',
             'buttonClass' => 'bg-rose-200 text-rose-950 hover:bg-rose-100',
             'decoration' => 'bg-rose-400/10',
-            'style' => 'sticky top-[130px]',
+            'style' => 'sticky top-0',
         ],
         [
             'step' => 'Step 3: Strengthen your knowledge',
@@ -1924,7 +1924,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-blue-400/10 text-blue-200 border-blue-400/30',
             'buttonClass' => 'bg-blue-200 text-blue-950 hover:bg-blue-100',
             'decoration' => 'bg-blue-400/10',
-            'style' => 'sticky top-[130px]',
+            'style' => 'sticky top-0',
         ],
         [
             'step' => 'Step 4: Present your experience',
@@ -1942,7 +1942,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
             'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
             'decoration' => 'bg-emerald-400/10',
-            'style' => 'sticky top-[130px]',
+            'style' => 'sticky top-0',
         ],
         [
             'step' => 'Step 5: Prepare for interviews',
@@ -1960,7 +1960,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
             'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
             'decoration' => 'bg-emerald-400/10',
-            'style' => 'sticky top-[130px]',
+            'style' => 'sticky top-0',
         ],
         [
             'step' => 'Step 6: Improve your professional presence',
@@ -1978,7 +1978,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
             'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
             'decoration' => 'bg-emerald-400/10',
-            'style' => 'sticky top-[130px]',
+            'style' => 'sticky top-0',
         ],
         [
             'step' => 'Step 7: Take your next career step',
@@ -1996,7 +1996,7 @@ $pathImg = json_decode($slideImg->placement_image)
             'badge' => 'bg-emerald-400/10 text-emerald-200 border-emerald-400/30',
             'buttonClass' => 'bg-emerald-200 text-emerald-950 hover:bg-emerald-100',
             'decoration' => 'bg-emerald-400/10',
-            'style' => 'sticky top-[130px]',
+            'style' => 'sticky top-0',
         ],
     ];
 @endphp
