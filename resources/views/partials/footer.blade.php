@@ -93,6 +93,108 @@
                 </ul>
             </div>
         </div>
+
+
+@php
+    $coursesMenuList = \App\Models\Course::query()
+        ->where(function ($query) {
+            $query->whereNull('city')
+                ->orWhere('city', '');
+        })
+        ->with('categoryIcon')
+        ->where('show_top_menu', '1')
+        ->select(
+            'id',
+            'slug',
+            'title',
+            'course_name',
+            'category',
+            'category_name',
+            'category_slug'
+        )
+        ->orderByRaw(
+            'CASE category_slug
+                WHEN ? THEN 1
+                WHEN ? THEN 2
+                WHEN ? THEN 3
+                ELSE 4
+            END',
+            [
+                'workday',
+                'data-science-ai',
+                'amazon-web-services(aws)',
+            ]
+        )
+        ->orderBy('category_slug')
+        ->orderBy('course_name')
+        ->get();
+
+    $menuCategories = $coursesMenuList
+        ->filter(function ($course) {
+            return trim((string) $course->category) !== '';
+        })
+        ->groupBy('category')
+        ->map(function ($courses, $categoryId) {
+            $categoryName = $courses
+                ->pluck('category_name')
+                ->first(function ($name) {
+                    return trim((string) $name) !== '';
+                });
+
+            return [
+                'category'     => $categoryId,
+                'categoryName' => $categoryName ?: 'Other Courses',
+                'courses'      => $courses->values(),
+                'categoryIcon' => $courses->first()?->categoryIcon,
+            ];
+        })
+        ->values();
+@endphp
+
+
+
+@if($menuCategories->isNotEmpty())
+
+ @foreach ($menuCategories as $index => $category)
+<div class="border-t border-primary/10 pt-8 mb-8">
+<h4 class="text-sm font-bold mb-4 uppercase tracking-wide text-foreground flex items-center gap-2">
+<svg
+class="h-5 w-5 text-emerald-600"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+aria-hidden="true"
+>
+<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+<path d="M22 10v6"/>
+<path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+ {{ $category['categoryName'] }}
+</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+
+
+@if($menuCategories)
+ @foreach ($menuCategories as $index => $category)
+ @foreach ($category['courses'] as $course)
+<a href="{{ route('courses.show', ['slug' => $course->slug]) }}" class="hover:text-primary transition-colors"> {{ trim((string) $course->course_name) !== ''
+                                            ? $course->course_name
+                                            : $course->title }}</a> I
+@endforeach
+@endforeach
+@endif
+
+</div>
+</div>
+@endforeach
+@endif
+
+
+
+
 @php
 $courses = App\Models\Course::where(function ($query) {
     $query->whereNull('city')
@@ -104,7 +206,20 @@ $courses = App\Models\Course::where(function ($query) {
 @if($courses->isNotEmpty())
 <div class="border-t border-primary/10 pt-8 mb-8">
 <h4 class="text-sm font-bold mb-4 uppercase tracking-wide text-foreground flex items-center gap-2">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 text-primary" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<svg
+class="h-5 w-5 text-emerald-600"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+aria-hidden="true"
+>
+<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+<path d="M22 10v6"/>
+<path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
 Trending Courses 
 </h4>
 <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
@@ -120,6 +235,8 @@ Trending Courses
 </div>
 </div>
 @endif
+
+
 
 
 

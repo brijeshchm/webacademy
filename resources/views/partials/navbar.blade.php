@@ -41,7 +41,7 @@
 
                 {{-- Courses (dropdown) --}}
 
-  @php
+  <!-- @php
     $coursesMenuList = \App\Models\Course::query()
     ->where(function ($query) {
         $query->whereNull('city')
@@ -82,8 +82,64 @@ $menuCategories = $coursesMenuList
     ->sortBy('categoryName', SORT_NATURAL | SORT_FLAG_CASE)
     ->values();
         
-@endphp
+@endphp -->
 
+
+@php
+    $coursesMenuList = \App\Models\Course::query()
+        ->where(function ($query) {
+            $query->whereNull('city')
+                ->orWhere('city', '');
+        })
+        ->with('categoryIcon')
+        ->where('show_top_menu', '1')
+        ->select(
+            'id',
+            'slug',
+            'title',
+            'course_name',
+            'category',
+            'category_name',
+            'category_slug'
+        )
+        ->orderByRaw(
+            'CASE category_slug
+                WHEN ? THEN 1
+                WHEN ? THEN 2
+                WHEN ? THEN 3
+                ELSE 4
+            END',
+            [
+                'workday',
+                'data-science-ai',
+                'amazon-web-services(aws)',
+            ]
+        )
+        ->orderBy('category_slug')
+        ->orderBy('course_name')
+        ->get();
+
+    $menuCategories = $coursesMenuList
+        ->filter(function ($course) {
+            return trim((string) $course->category) !== '';
+        })
+        ->groupBy('category')
+        ->map(function ($courses, $categoryId) {
+            $categoryName = $courses
+                ->pluck('category_name')
+                ->first(function ($name) {
+                    return trim((string) $name) !== '';
+                });
+
+            return [
+                'category'     => $categoryId,
+                'categoryName' => $categoryName ?: 'Other Courses',
+                'courses'      => $courses->values(),
+                'categoryIcon' => $courses->first()?->categoryIcon,
+            ];
+        })
+        ->values();
+@endphp
 
 <div class="ca-course-menu" data-ca-course-menu>
     <button

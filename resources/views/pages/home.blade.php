@@ -1123,17 +1123,17 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="mt-6 flex flex-wrap justify-center gap-3">
             <span class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
                 <span aria-hidden="true" class="text-sky-600">✓</span>
-                Live recruiter sessions
+                Live recruiter
             </span>
 
             <span class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
                 <span aria-hidden="true" class="text-sky-600">✓</span>
-                Skilling Masterclasses
+                Skilling 
             </span>
 
             <span class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
                 <span aria-hidden="true" class="text-sky-600">✓</span>
-                Free to attend
+                Free to assistant jobs
             </span>
         </div>
 
