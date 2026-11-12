@@ -41,48 +41,7 @@
 
                 {{-- Courses (dropdown) --}}
 
-  <!-- @php
-    $coursesMenuList = \App\Models\Course::query()
-    ->where(function ($query) {
-        $query->whereNull('city')
-              ->orWhere('city', '');
-    })
-    ->with('categoryIcon')
-    ->where('show_top_menu', '1')
-    ->select(
-        'id',
-        'slug',
-        'title',
-        'course_name',
-        'category',
-        'category_name'
-    )
-    ->orderBy('course_name')
-    ->get();
-
-$menuCategories = $coursesMenuList
-    ->filter(function ($course) {
-        return trim((string) $course->category) !== '';
-    })
-    ->groupBy('category')
-    ->map(function ($courses, $categoryId) {
-        $categoryName = $courses
-            ->pluck('category_name')
-            ->first(function ($name) {
-                return trim((string) $name) !== '';
-            });
-
-        return [
-            'category'     => $categoryId,
-            'categoryName' => $categoryName ?: 'Other Courses',
-            'courses'      => $courses->values(),
-            'categoryIcon' => $courses->first()?->categoryIcon,
-        ];
-    })
-    ->sortBy('categoryName', SORT_NATURAL | SORT_FLAG_CASE)
-    ->values();
-        
-@endphp -->
+  
 
 
 @php
@@ -92,7 +51,7 @@ $menuCategories = $coursesMenuList
                 ->orWhere('city', '');
         })
         ->with('categoryIcon')
-        ->where('show_top_menu', '1')
+        // ->where('show_top_menu', '1')
         ->select(
             'id',
             'slug',

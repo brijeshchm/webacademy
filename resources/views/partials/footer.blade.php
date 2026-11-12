@@ -94,7 +94,7 @@
             </div>
         </div>
 
-<!-- 
+
 @php
     $coursesMenuList = \App\Models\Course::query()
         ->where(function ($query) {
@@ -102,7 +102,7 @@
                 ->orWhere('city', '');
         })
         ->with('categoryIcon')
-        ->where('show_top_menu', '1')
+       
         ->select(
             'id',
             'slug',
@@ -190,7 +190,7 @@
             @endforeach
         </div>
     </div>
-@endforeach -->
+@endforeach 
 
 
 
