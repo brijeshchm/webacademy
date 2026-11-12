@@ -47,7 +47,7 @@
                             <svg class="w-4 h-4 {{ $i < $r->rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200 fill-gray-200' }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         @endfor
                     </div>
-                    <p class="text-sm text-gray-600 leading-relaxed flex-1">{{ $quote }}</p>
+                    <p class="text-sm text-gray-600 leading-relaxed flex-1">{!! $quote !!}</p>
                     <hr class="border-gray-100">
                     <div class="flex items-center gap-3">
                         @if ($r->avatar_url)
