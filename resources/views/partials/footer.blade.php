@@ -193,7 +193,7 @@ aria-hidden="true"
 @endif
 
 
-
+<!-- 
 
 @php
 $courses = App\Models\Course::where(function ($query) {
@@ -234,7 +234,7 @@ Trending Courses
 
 </div>
 </div>
-@endif
+@endif -->
 
 
 
