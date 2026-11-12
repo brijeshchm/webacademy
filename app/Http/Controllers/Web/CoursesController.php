@@ -191,6 +191,14 @@ class CoursesController extends Controller
 
             $placementStories = Placement::where('course', $course->course_clone_id)->where('status','1')->get();
         }
+      $placementImage = collect();
+
+        if (!empty($course->id) && !$course->course_clone_id) {
+            $placementImage = Placement::whereNotNull('placement_image')->where('course', $course->id)->where('status','1')->get();
+        }elseif(!empty($course->course_clone_id)){
+
+            $placementImage = Placement::whereNotNull('placement_image')->where('course', $course->course_clone_id)->where('status','1')->get();
+        }
 
 
     
@@ -351,6 +359,7 @@ class CoursesController extends Controller
             'placementStories'  => $placementStories,
             'curriculum'        => $coursecurriculum,
             'courseModules'        => $courseModules,
+            'placementImage'        => $placementImage,
             'aboutHeading'        => $aboutHeading,
             'faqs'               => $FAQs,
             'skills'            => $skills,
@@ -373,6 +382,7 @@ class CoursesController extends Controller
             'course'            => $course,
             'curriculum'        => $coursecurriculum,
             'placementStories'        => $placementStories,
+            'placementImage'        => $placementImage,
             'aboutHeading'        => $aboutHeading,
             'faqs'               => $FAQs,
             'skills'            => $skills,
@@ -395,6 +405,7 @@ class CoursesController extends Controller
             'course'            => $course,
             'curriculum'        => $coursecurriculum,
             'placementStories'        => $placementStories,
+            'placementImage'        => $placementImage,
             'aboutHeading'        => $aboutHeading,
             'faqs'               => $FAQs,
             'skills'            => $skills,

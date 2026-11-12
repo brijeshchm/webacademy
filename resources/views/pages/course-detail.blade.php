@@ -1860,6 +1860,304 @@ margin-bottom: .5rem !important;
     }
 </style>
 
+@if($placementImage->isNotEmpty())
+
+<section class="py-8 md:py-10 relative overflow-hidden bg-gradient-to-br from-[hsl(217_45%_11%)] via-[hsl(220_40%_10%)] to-[hsl(224_50%_8%)] text-white">
+    <div class="absolute -top-24 left-1/4 w-[360px] h-[360px] bg-primary/20 rounded-full blur-3xl pointer-events-none ca-float"></div>
+    <div class="absolute bottom-0 right-0 w-[360px] h-[360px] bg-secondary/15 rounded-full blur-3xl pointer-events-none ca-float-slow"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(255,255,255,0.07),transparent_60%)] pointer-events-none"></div>
+    <div class="px-4 md:px-6 relative z-10">
+        <div class="grid lg:grid-cols-1 gap-6 lg:gap-12 items-center">
+    @php
+    $facultySlides = [
+        [
+            'label' => 'SAP-FICO',
+            'name'  => 'Aaranv Sharma',
+            'title' => 'Industry Mentor',
+            'image' => asset('images/hero/Aaranv-SAP-FICO.png'),
+        ],
+        [
+            'label' => 'Python',
+            'name'  => 'Aditya Kumar',
+            'title' => 'Python Developer',
+            'image' => asset('images/hero/Aditya-Kumar-Python-Developer.png'),
+        ],
+        [
+            'label' => 'Software Engineer',
+            'name'  => 'Mohit-Bansal',
+            'title' => 'Backend Developer',
+            'image' => asset('images/hero/Mohit-Bansal.png'),
+        ],
+    ];
+@endphp
+
+@if($placementImage->isNotEmpty())
+
+<div class="flex flex-col items-center" data-faculty-slider>
+
+    
+    <div class="relative mx-auto w-full max-w-[280px]">
+
+        {{-- Decorative stacked cards --}}
+        <div aria-hidden="true"
+             class="absolute inset-0 rotate-6 rounded-2xl border
+                    border-white/10 bg-indigo-500/30"></div>
+
+        <div aria-hidden="true"
+             class="absolute inset-0 -rotate-3 rounded-2xl border
+                    border-white/10 bg-orange-500/20"></div>
+
+        {{-- Slider --}}
+        <div class="relative h-[360px] overflow-hidden rounded-2xl
+                    border border-white/20 bg-slate-800 shadow-2xl"
+             role="region"
+             aria-roledescription="carousel"
+             aria-label="Faculty feedback">
+
+            @foreach($placementImage as $i => $slide)
+ @if($slide->placement_image)
+            @php
+
+            $placeImg = json_decode($slide->placement_image);
+
+            @endphp
+                <div
+                    data-faculty-slide
+                    class="absolute inset-0 duration-500 ease-in-out"
+                    style="opacity: {{ $i === 0 ? '1' : '0' }};
+                           z-index: {{ $i === 0 ? '1' : '0' }};
+                           pointer-events: {{ $i === 0 ? 'auto' : 'none' }};"
+                    aria-hidden="{{ $i === 0 ? 'false' : 'true' }}"
+                >
+                    {{-- Image --}}
+                    <img
+                        src="{{ asset($placeImg->placement_image->src) }}"
+                        alt="{{ $slide->name }}"
+                        width="280"
+                        height="360"
+                        loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
+                        class="h-full w-full object-fil object-top"
+                    >
+
+                    {{-- Image overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t
+                                from-black via-black/10 to-black/20"></div>
+
+                    {{-- Label --}}
+                    <div class="absolute left-4 right-4 top-4">
+                        <span class="inline-block rounded-full border
+                                     border-white/20 bg-black/30 px-3 py-1.5
+                                     text-[10px] font-bold text-black backdrop-blur-md">
+                            {{ $slide->coursename }}
+                        </span>
+                    </div>
+
+                    {{-- Details --}}
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                       
+                        <h3 class="text-lg font-bold text-black">
+                            {{ $slide->name }}
+                        </h3>
+
+                        <p class="mt-1 text-xs leading-relaxed text-black">
+                            {{ $slide->designation }}
+                        </p>
+                    </div>
+                </div>
+                @endif
+            @endforeach
+
+            {{-- Previous --}}
+            <button
+                type="button"
+                data-faculty-prev
+                aria-label="Previous feedback"
+                class="absolute left-2 top-1/2 z-10 flex h-9 w-9
+                       -translate-y-1/2 items-center justify-center rounded-full
+                       border border-white/20 bg-black/30 text-xl text-white
+                       backdrop-blur-md transition hover:bg-black/60
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                ‹
+            </button>
+
+            {{-- Next --}}
+            <button
+                type="button"
+                data-faculty-next
+                aria-label="Next feedback"
+                class="absolute right-2 top-1/2 z-10 flex h-9 w-9
+                       -translate-y-1/2 items-center justify-center rounded-full
+                       border border-white/20 bg-black/30 text-xl text-white
+                       backdrop-blur-md transition hover:bg-black/60
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                ›
+            </button>
+        </div>
+    </div>
+
+    {{-- Dots --}}
+    <div class="mt-6 flex items-center gap-1">
+        @foreach($placementImage as $i => $slide)
+            <button
+                type="button"
+                data-faculty-dot="{{ $i }}"
+                aria-label="Show feedback {{ $i + 1 }}"
+                aria-current="{{ $i === 0 ? 'true' : 'false' }}"
+                class="flex h-8 w-8 items-center justify-center rounded-full
+                       focus-visible:outline focus-visible:outline-2
+                       focus-visible:outline-white"
+            >
+                <span
+                    data-faculty-dot-indicator
+                    class="block h-2 rounded-full transition-all duration-300"
+                    style="width: {{ $i === 0 ? '24px' : '8px' }};
+                           background-color: {{ $i === 0 ? '#ffffff' : '#64748b' }};"
+                ></span>
+            </button>
+        @endforeach
+    </div>
+</div>
+
+<script>
+(() => {
+    function initializeFacultySliders() {
+        document.querySelectorAll('[data-faculty-slider]').forEach(root => {
+            // Prevent duplicate initialization.
+            if (root.dataset.initialized === 'true') return;
+            root.dataset.initialized = 'true';
+
+            const slides = [...root.querySelectorAll('[data-faculty-slide]')];
+            const dots = [...root.querySelectorAll('[data-faculty-dot]')];
+            const previous = root.querySelector('[data-faculty-prev]');
+            const next = root.querySelector('[data-faculty-next]');
+
+            if (!slides.length) return;
+
+            let current = 0;
+            let timer = null;
+            let hovered = false;
+            const reducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            );
+
+            function showSlide(index) {
+                current = (index + slides.length) % slides.length;
+
+                slides.forEach((slide, i) => {
+                    const active = i === current;
+
+                    slide.style.opacity = active ? '1' : '0';
+                    slide.style.zIndex = active ? '1' : '0';
+                    slide.style.pointerEvents = active ? 'auto' : 'none';
+                    slide.setAttribute('aria-hidden', String(!active));
+                });
+
+                dots.forEach((dot, i) => {
+                    const active = i === current;
+                    const indicator = dot.querySelector(
+                        '[data-faculty-dot-indicator]'
+                    );
+
+                    dot.setAttribute('aria-current', String(active));
+
+                    if (indicator) {
+                        indicator.style.width = active ? '24px' : '8px';
+                        indicator.style.backgroundColor =
+                            active ? '#ffffff' : '#64748b';
+                    }
+                });
+            }
+
+            function stopAutoplay() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+
+                if (
+                    slides.length < 2 ||
+                    document.hidden ||
+                    hovered ||
+                    root.contains(document.activeElement) ||
+                    reducedMotion.matches
+                ) return;
+
+                timer = setInterval(() => {
+                    showSlide(current + 1);
+                }, 5000);
+            }
+
+            previous?.addEventListener('click', () => {
+                showSlide(current - 1);
+                startAutoplay();
+            });
+
+            next?.addEventListener('click', () => {
+                showSlide(current + 1);
+                startAutoplay();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    startAutoplay();
+                });
+            });
+
+            root.addEventListener('mouseenter', () => {
+                hovered = true;
+                stopAutoplay();
+            });
+
+            root.addEventListener('mouseleave', () => {
+                hovered = false;
+                startAutoplay();
+            });
+
+            root.addEventListener('focusin', stopAutoplay);
+
+            root.addEventListener('focusout', () => {
+                setTimeout(startAutoplay, 0);
+            });
+
+            document.addEventListener('visibilitychange', startAutoplay);
+            reducedMotion.addEventListener('change', startAutoplay);
+
+            previous.hidden = slides.length < 2;
+            next.hidden = slides.length < 2;
+
+            showSlide(0);
+            startAutoplay();
+        });
+    }
+
+    // Works whether the script runs before or after DOMContentLoaded.
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initializeFacultySliders,
+            { once: true }
+        );
+    } else {
+        initializeFacultySliders();
+    }
+})();
+</script>
+  
+ @endif
+            
+
+            
+        </div>
+    </div>
+</section>
+@endif
  
 <section id="hiring-partners" class="scroll-mt-36 bg-white rounded-3xl border border-blue-900/40 shadow-xl p-4 sm:p-6 md:p-8 text-black">
     <div class="bg-white rounded-2xl p-6 md:p-8">
@@ -1944,6 +2242,7 @@ margin-bottom: .5rem !important;
 
     </div>
 </section>
+
 
 
 
@@ -2040,9 +2339,12 @@ margin-bottom: .5rem !important;
                 </section>
 
 
+
+
+
  
 
-               @if(!empty($related_courses->isNotEmpty()))
+    @if(!empty($related_courses->isNotEmpty()))
           <section id="related-course" class="scroll-mt-36 bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8">
   <div class="flex items-center gap-3 mb-6">
                         <div class="h-8 w-1 rounded-full bg-gradient-to-b from-pink-500 to-violet-500"></div>

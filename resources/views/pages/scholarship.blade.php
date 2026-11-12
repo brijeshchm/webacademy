@@ -455,11 +455,11 @@
                             <div class="grid sm:grid-cols-2 gap-3">
                                 <div class="space-y-1">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.fullName') }} <span class="text-red-400">*</span></label>
-                                    <input name="name" value="{{ old('name') }}" placeholder="{{ t('scholarshipPage.form.fullNamePlaceholder') }}" class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
+                                    <input name="name" value="{{ old('name') }}" placeholder="Enter Name" class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.email') }} <span class="text-red-400">*</span></label>
-                                    <input type="email" name="email" value="{{ old('email') }}" placeholder="you@email.com" class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
+                                    <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter Email" class="w-full h-10 rounded-lg text-sm border border-input bg-background px-3 outline-none focus:ring-2 focus:ring-primary/30">
                                 </div>
                                 <div class="space-y-1 sm:col-span-2">
                                     <label class="text-xs font-semibold text-foreground/60">{{ t('scholarshipPage.form.phone') }} <span class="text-red-400">*</span></label>
