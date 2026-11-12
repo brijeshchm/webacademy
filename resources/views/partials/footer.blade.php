@@ -151,47 +151,46 @@
         ->values();
 @endphp
 
+@foreach ($menuCategories as $category)
+    <div class="mb-8 border-t border-primary/10 pt-8">
+        <h4 class="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-foreground">
+            <svg
+                class="h-5 w-5 shrink-0 text-emerald-600"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="m2 9 10-5 10 5-10 5L2 9Z"/>
+                <path d="M6 11v6c3 3 9 3 12 0v-6"/>
+                <path d="M22 9v6"/>
+            </svg>
 
+            {{ $category['categoryName'] }}
+        </h4>
 
-@if($menuCategories->isNotEmpty())
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+            @foreach ($category['courses'] as $course)
+                <a
+                    href="{{ route('courses.show', ['slug' => $course->slug]) }}"
+                    class="break-words transition-colors hover:text-primary"
+                >
+                    {{ trim((string) $course->course_name) !== ''
+                        ? $course->course_name
+                        : $course->title }}
+                </a>
 
- @foreach ($menuCategories as $index => $category)
-<div class="border-t border-primary/10 pt-8 mb-8">
-<h4 class="text-sm font-bold mb-4 uppercase tracking-wide text-foreground flex items-center gap-2">
-<svg
-class="h-5 w-5 text-emerald-600"
-xmlns="http://www.w3.org/2000/svg"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round"
-aria-hidden="true"
->
-<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
-<path d="M22 10v6"/>
-<path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
- {{ $category['categoryName'] }}
-</h4>
-<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-
-
-@if($menuCategories)
- @foreach ($menuCategories as $index => $category)
- @foreach ($category['courses'] as $course)
-<a href="{{ route('courses.show', ['slug' => $course->slug]) }}" class="hover:text-primary transition-colors"> {{ trim((string) $course->course_name) !== ''
-                                            ? $course->course_name
-                                            : $course->title }}</a> I
+                @unless ($loop->last)
+                    <span aria-hidden="true" class="text-gray-300">|</span>
+                @endunless
+            @endforeach
+        </div>
+    </div>
 @endforeach
-@endforeach
-@endif
-
-</div>
-</div>
-@endforeach
-@endif
-
 
 <!-- 
 
