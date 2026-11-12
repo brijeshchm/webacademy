@@ -94,7 +94,7 @@
             </div>
         </div>
 
-
+<!-- 
 @php
     $coursesMenuList = \App\Models\Course::query()
         ->where(function ($query) {
@@ -190,9 +190,11 @@
             @endforeach
         </div>
     </div>
-@endforeach
+@endforeach -->
 
-<!-- 
+
+
+ 
 
 @php
 $courses = App\Models\Course::where(function ($query) {
@@ -221,19 +223,25 @@ aria-hidden="true"
 <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
 Trending Courses 
 </h4>
-<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+<div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
 
 
 @if($courses)
 @foreach($courses as $course)
 
-<a href="{{ route('courses.show',$course->slug) }}" class="hover:text-primary transition-colors">{{ $course->course_name }}</a> I
+<a href="{{ route('courses.show',$course->slug) }}" class="break-words transition-colors hover:text-primary hover:text-primary transition-colors">{{ $course->course_name }}</a>
+
+@unless ($loop->last)
+<span aria-hidden="true" class="text-black p-2"> | </span>
+@endunless
+
+
 @endforeach
 @endif
 
 </div>
 </div>
-@endif -->
+@endif 
 
 
 
