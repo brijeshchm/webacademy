@@ -918,9 +918,9 @@
                                                 <svg class="w-3 h-3 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                                 {{ $course->duration_hours }}h
                                             </span>
-                                            <span class="flex items-center gap-1">
+                                            <span class="flex items-center gap-1" title="Students">
                                                 <svg class="w-3 h-3 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                                {{ number_format($course->enrolled) }}
+                                                {{ number_format($course->enrolled) }} Std
                                             </span>
                                             @if ($course->rating > 0)
                                                 <span class="flex items-center gap-1 ms-auto">
@@ -1088,9 +1088,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                                     {{ number_format($course->rating, 1) }}
                                 </div>
-                                <div class="flex items-center gap-1">
+                                <div class="flex items-center gap-1" title="Students">
                                     <svg class="w-4 h-4 text-primary/60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                    {{ number_format($course->enrolled) }}
+                                    {{ number_format($course->enrolled) }} Std
                                 </div>
                             </div>
                         </div>
