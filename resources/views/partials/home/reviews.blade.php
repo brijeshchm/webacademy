@@ -1,9 +1,7 @@
 {{-- ReviewsSection — port of src/components/ReviewsSection.tsx.
      Tabs filter by platform; without JS the "all" set (first 6) renders. --}}
 @php
-    // Dynamic testimonial strings are pre-translated in HomeController and
-    // passed as a single "original => translated" lookup map. No per-row
-    // translation queries here — just array lookups.
+
     $tDyn = fn ($v) => $translations[$v] ?? $v;
 @endphp
 <section class="py-20 bg-gray-50 relative overflow-hidden">
@@ -30,14 +28,15 @@
                 </button>
             </div>
         </div>
-
+       
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" data-review-grid>
             @foreach ($testimonials->take(6) as $r)
                 @php
-                    $quote = $tDyn($r->quote);
-                    $role = $tDyn($r->role);
-                    $company = $tDyn($r->company);
-                    $title = trim(preg_split('/[.!?]/', $quote)[0] ?? '');
+                    $quote = $r->comment;
+                    $role = $r->designation;
+                    $company = $r->company_name;
+                    $title = $r->coursename;
+                    
                     $initials = strtoupper(implode('', array_map(fn ($n) => mb_substr($n, 0, 1), array_slice(preg_split('/\s+/', $r->name), 0, 2))));
                 @endphp
                 <div data-review-card data-review-source="{{ $r->source }}" class="bg-white rounded-2xl border border-gray-100 shadow-md shadow-gray-100/80 p-6 flex flex-col gap-4 hover:shadow-lg hover:shadow-gray-200/60 transition-shadow duration-300">

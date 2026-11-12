@@ -10,6 +10,7 @@ use App\Models\Proof;
 use App\Models\Testimonial;
 use App\Models\VideoStory;
 use App\Models\WhatsappChat;
+use App\Models\Reviews;
 use App\Services\ServerTranslator;
 use App\Models\ToolsCovered;
 use App\Models\Blog;
@@ -85,7 +86,12 @@ class HomeController extends Controller
     ->get();
 
 
-        $testimonials = Testimonial::where('status', true)->orderBy('id')->get();
+        $testimonials = Placement::whereNotNull('comment')
+    ->whereRaw("
+        CHAR_LENGTH(TRIM(comment))
+        - CHAR_LENGTH(REPLACE(TRIM(comment), ' ', ''))
+        + 1 > 10
+    ")->where('status', true)->orderBy('id')->get();
 
        
 

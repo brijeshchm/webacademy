@@ -465,7 +465,7 @@ Route::get('/testimonial/status/{id}/{val}', [App\Http\Controllers\Admin\Testimo
  
  //placement
 Route::get('placement',[App\Http\Controllers\Admin\PlacementController::class, 'index'])->middleware('auth');
-Route::get('placement/add',[App\Http\Controllers\Admin\PlacementController::class, 'create']);
+Route::get('placement/add',[App\Http\Controllers\Admin\PlacementController::class, 'create'])->middleware('auth');
 Route::post('placement/save',[App\Http\Controllers\Admin\PlacementController::class, 'savePlacement']); 
 Route::get('/placement/edit/{id}',[App\Http\Controllers\Admin\PlacementController::class, 'edit']);
 Route::post('/placement/editSavePlacement/{id}',[App\Http\Controllers\Admin\PlacementController::class, 'editSavePlacement']);
