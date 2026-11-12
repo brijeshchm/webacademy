@@ -185,7 +185,7 @@
                 </a>
 
                 @unless ($loop->last)
-                    <span aria-hidden="true" class="text-gray-300">|</span>
+                    <span aria-hidden="true" class="text-black p-2"> | </span>
                 @endunless
             @endforeach
         </div>
