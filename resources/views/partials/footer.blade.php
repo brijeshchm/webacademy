@@ -94,7 +94,7 @@
             </div>
         </div>
 
-
+<!-- 
 @php
     $coursesMenuList = \App\Models\Course::query()
         ->where(function ($query) {
@@ -190,7 +190,7 @@
             @endforeach
         </div>
     </div>
-@endforeach 
+@endforeach  -->
 
 
 
