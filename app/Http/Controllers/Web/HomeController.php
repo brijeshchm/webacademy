@@ -13,6 +13,7 @@ use App\Models\WhatsappChat;
 use App\Services\ServerTranslator;
 use App\Models\ToolsCovered;
 use App\Models\Blog;
+use App\Models\Placement;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use DateTime;
@@ -170,10 +171,18 @@ $proofs = Proof::orderBy('id')
             'answer'   => $tr($f['answer']),
         ], $faqSource);
 
+
+         $placementImage = collect();
+
+        
+            $placementImage = Placement::whereNotNull('placement_image')->where('status','1')->get();
+        
+
+
         // English JSON-LD (SEO) uses the untranslated FAQ source.
         $faqsEn = Faqs::HOME;
           $blogPageList       = $this->getBlogList();
-    //   dd($bannerCourses);
+    
         return view('pages.home', [
             'allCourses'      => $allCourses,
             'blogPageList'      => $blogPageList,
@@ -187,6 +196,7 @@ $proofs = Proof::orderBy('id')
             'stats'           => $stats,
             'faqs'            => $faqs,
             'faqsEn'          => $faqsEn,
+            'placementImage'          => $placementImage,
           
             // Single shared translation lookup map used by every view/partial.
             'translations'    => $translations,

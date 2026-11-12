@@ -1109,9 +1109,178 @@ document.addEventListener('DOMContentLoaded', function () {
   
   
 
+ <section class="bg-sky-50 py-12 md:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h3 class="text-3xl font-bold text-slate-900 md:text-4xl">
+                Student Placement: Growth
+            </h3>
+            <p class="mt-3 text-base text-slate-600 md:text-lg">
+                Insights and skills that get you hired
+            </p>
+        </div>
 
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
+                <span aria-hidden="true" class="text-sky-600">✓</span>
+                Live recruiter sessions
+            </span>
 
+            <span class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
+                <span aria-hidden="true" class="text-sky-600">✓</span>
+                Skilling Masterclasses
+            </span>
 
+            <span class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
+                <span aria-hidden="true" class="text-sky-600">✓</span>
+                Free to attend
+            </span>
+        </div>
+
+        <div data-webinar-slider class="mt-8">
+            <div
+                data-webinar-track
+                tabindex="0"
+                aria-label="Webinar videos"
+                class="flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain rounded-2xl pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+                @if($placementImage)
+@foreach($placementImage as $slideImg)
+@if($slideImg->placement_image)
+@php
+
+$pathImg = json_decode($slideImg->placement_image)
+@endphp
+                    <img
+                        src="{{ asset($pathImg->placement_image->src) }}"
+                        alt="Live recruiter webinar"
+                        loading="lazy"
+                        decoding="async"
+                        class="block h-auto w-full"
+                    >
+                    @endif
+                    @endforeach
+                @endif
+
+                
+                   
+                
+            </div>
+
+            <div class="mx-auto mt-5 flex max-w-xl items-center gap-4">
+                <button
+                    data-webinar-prev
+                    type="button"
+                    aria-label="Previous webinar"
+                    disabled
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-white text-sky-700 transition hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                        <path d="m15 18-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+
+                <input
+                    data-webinar-progress
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    value="0"
+                    aria-label="Scroll through webinars"
+                    class="h-2 min-w-0 flex-1 cursor-pointer accent-sky-600"
+                >
+
+                <button
+                    data-webinar-next
+                    type="button"
+                    aria-label="Next webinar"
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-white text-sky-700 transition hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                        <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(() => {
+    function initializeWebinarSliders() {
+        document.querySelectorAll('[data-webinar-slider]').forEach((slider) => {
+            if (slider.dataset.initialized === 'true') return;
+            slider.dataset.initialized = 'true';
+
+            const track = slider.querySelector('[data-webinar-track]');
+            const previous = slider.querySelector('[data-webinar-prev]');
+            const next = slider.querySelector('[data-webinar-next]');
+            const progress = slider.querySelector('[data-webinar-progress]');
+            const reducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            );
+
+            function updateControls() {
+                const maximum = Math.max(0, track.scrollWidth - track.clientWidth);
+                const position = Math.max(0, Math.min(track.scrollLeft, maximum));
+
+                previous.disabled = position <= 2;
+                next.disabled = maximum <= 2 || position >= maximum - 2;
+                progress.disabled = maximum <= 2;
+                progress.value = maximum > 0 ? (position / maximum) * 100 : 0;
+            }
+
+            function move(direction) {
+                const firstCard = track.firstElementChild;
+                if (!firstCard) return;
+
+                const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+
+                track.scrollBy({
+                    left: direction * (firstCard.getBoundingClientRect().width + gap),
+                    behavior: reducedMotion.matches ? 'auto' : 'smooth'
+                });
+            }
+
+            previous.addEventListener('click', () => move(-1));
+            next.addEventListener('click', () => move(1));
+
+            progress.addEventListener('input', () => {
+                const maximum = Math.max(0, track.scrollWidth - track.clientWidth);
+
+                track.scrollLeft = (Number(progress.value) / 100) * maximum;
+            });
+
+            track.addEventListener('scroll', updateControls, { passive: true });
+
+            track.addEventListener('keydown', (event) => {
+                if (event.target !== track) return;
+
+                if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    move(event.key === 'ArrowRight' ? 1 : -1);
+                }
+            });
+
+            if ('ResizeObserver' in window) {
+                const observer = new ResizeObserver(updateControls);
+                observer.observe(track);
+            } else {
+                window.addEventListener('resize', updateControls);
+            }
+
+            updateControls();
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeWebinarSliders);
+    } else {
+        initializeWebinarSliders();
+    }
+})();
+</script>
 
 
 
@@ -1156,22 +1325,28 @@ document.addEventListener('DOMContentLoaded', function () {
             @php
     $facultySlides = [
         [
-            'label' => 'SAP-FICO',
+            'label' => 'Learn from expert trainers',
             'name'  => 'Aaranv Sharma',
             'title' => 'Industry Mentor',
-            'image' => asset('images/hero/Aaranv-SAP-FICO.png'),
+            'image' => asset('images/hero/Expert-training.png'),
         ],
         [
             'label' => 'Python',
             'name'  => 'Aditya Kumar',
             'title' => 'Python Developer',
-            'image' => asset('images/hero/Aditya-Kumar-Python-Developer.png'),
+            'image' => asset('images/hero/Tech-Skills.png'),
         ],
         [
             'label' => 'Software Engineer',
             'name'  => 'Mohit-Bansal',
             'title' => 'Backend Developer',
-            'image' => asset('images/hero/Mohit-Bansal.png'),
+            'image' => asset('images/hero/Practical-learning.png'),
+        ],
+         [
+            'label' => 'Software Engineer',
+            'name'  => 'Mohit-Bansal',
+            'title' => 'Backend Developer',
+            'image' => asset('images/hero/Career-guidance.png'),
         ],
     ];
 @endphp
@@ -1221,16 +1396,16 @@ document.addEventListener('DOMContentLoaded', function () {
                                 from-black via-black/10 to-black/20"></div>
 
                     {{-- Label --}}
-                    <div class="absolute left-4 right-4 top-4">
+                    <!-- <div class="absolute left-4 right-4 top-4">
                         <span class="inline-block rounded-full border
                                      border-white/20 bg-black/30 px-3 py-1.5
                                      text-[10px] font-bold text-black backdrop-blur-md">
                             {{ $slide['label'] }}
                         </span>
-                    </div>
+                    </div> -->
 
                     {{-- Details --}}
-                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                    <!-- <div class="absolute bottom-0 left-0 right-0 p-5">
                        
                         <h3 class="text-lg font-bold text-black">
                             {{ $slide['name'] }}
@@ -1239,7 +1414,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p class="mt-1 text-xs leading-relaxed text-black">
                             {{ $slide['title'] }}
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             @endforeach
 
